@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">HelpVeg</string>
+    <string name="login">Login</string>
+    <string name="senha">Senha</string>
+    <string name="btnLogin">Entrar</string>
+    <string name="btnCadastroLogin">Cadastrar-se</string>
+</resources>
