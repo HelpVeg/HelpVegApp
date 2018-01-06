@@ -2,6 +2,11 @@
     <string name="app_name">HelpVeg</string>
     <string name="login">Login</string>
     <string name="senha">Senha</string>
-    <string name="btnLogin">Entrar</string>
+    <string name="nome">Nome</string>
+    <string name="email">Email</string>
+
+    <string name="btnCadastro">Cadastrar</string>
     <string name="btnCadastroLogin">Cadastrar-se</string>
+    <string name="btnLogin">Entrar</string>
+    <string name="navLogin">Já possui cadastro? Faça o login aqui!</string>
 </resources>
