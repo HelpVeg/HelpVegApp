@@ -7,35 +7,28 @@
     android:layout_height="match_parent"
     tools:context="mpoo.bsi.ufrpe.helpvegapp.user.gui.LoginActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/login"
-        android:layout_marginTop="235dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:textSize="20sp"
-        android:textColor="@color/colorTextSecond" />
+
 
     <EditText
+        android:id="@+id/loginEmail"
+        android:inputType="textEmailAddress"
+        android:hint="@string/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
-        android:layout_marginRight="20dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/senha"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:textSize="20sp"
-        android:textColor="@color/colorTextSecond"/>
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="350dp" />
+
     <EditText
+        android:id="@+id/loginPassword"
+        android:inputType="textPassword"
+        android:hint="@string/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"/>
     <Button
+        android:id="@+id/loginBtnEnter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/colorTextPrimary"
@@ -45,10 +38,12 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="70dp"
         android:layout_marginRight="70dp"/>
+
     <Button
+        android:id="@+id/loginBtnRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btnCadastroLogin"
+        android:text="@string/btnRegisterLogin"
         android:textColor="@color/colorTextPrimary"
         android:background="@color/colorPrimary"
         android:layout_gravity="center"
