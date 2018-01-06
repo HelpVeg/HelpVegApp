@@ -31,11 +31,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         int id = view.getId();
         if (id == R.id.loginBtnEnter){
-            Intent intent = new Intent(this,RegisterActivity.class);
+            Intent intent = new Intent(this,ProfileActivity.class);
             startActivity(intent);
         }
         if (id == R.id.loginBtnRegister){
-            Intent intent = new Intent(this,ProfileActivity.class);
+            Intent intent = new Intent(this,RegisterActivity.class);
             startActivity(intent);
         }
     }
