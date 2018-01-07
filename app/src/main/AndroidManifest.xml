@@ -16,11 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".user.gui.RegisterActivity"></activity>
-
-        <activity android:name=".user.gui.ProfileActivity"></activity>
-
+        <activity android:name=".user.gui.RegisterActivity" />
+        <activity android:name=".user.gui.ProfileActivity" />
+        <activity android:name=".user.gui.EditProfileActivity"></activity>
     </application>
 
 </manifest>

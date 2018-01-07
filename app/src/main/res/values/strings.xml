@@ -8,4 +8,9 @@
     <string name="btnRegisterLogin">Cadastrar-se</string>
     <string name="btnLogin">Entrar</string>
     <string name="navLogin">Já possui cadastro? Faça o login aqui!</string>
+    <string name="btnEditProfile">Editar Perfil</string>
+    <string name="btnLogout">Sair</string>
+    <string name="btnSave">Salvar</string>
+    <string name="btnCancel">Cancelar</string>
+
 </resources>
