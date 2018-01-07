@@ -7,7 +7,12 @@
     android:layout_height="match_parent"
     tools:context="mpoo.bsi.ufrpe.helpvegapp.user.gui.LoginActivity">
 
-
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="270dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/name_logo" />
 
     <EditText
         android:id="@+id/loginEmail"
@@ -17,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="350dp" />
+        android:layout_marginTop="40dp"/>
 
     <EditText
         android:id="@+id/loginPassword"
