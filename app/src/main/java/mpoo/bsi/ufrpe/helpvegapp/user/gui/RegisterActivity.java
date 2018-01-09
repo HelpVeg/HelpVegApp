@@ -1,4 +1,5 @@
 package mpoo.bsi.ufrpe.helpvegapp.user.gui;
+import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,8 @@ import android.widget.TextView;
 import mpoo.bsi.ufrpe.helpvegapp.R;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
+
+    private final User user = new User(this);
 
     private ViewHolder mViewHolder = new ViewHolder();
 
@@ -26,6 +29,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         this.mViewHolder.navToLogin = findViewById(R.id.registerNavLogin);
 
         this.mViewHolder.btnRegister.setOnClickListener(this);
+
+
     }
 
     @Override
