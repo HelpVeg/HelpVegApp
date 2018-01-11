@@ -1,12 +1,12 @@
-package mpoo.bsi.ufrpe.helpvegapp.user.business;
+/*package mpoo.bsi.ufrpe.helpvegapp.user.business;
 
-import mpoo.bsi.ufrpe.helpvegapp.user.persistence.UserDAO;
+import mpoo.bsi.ufrpe.helpvegapp.user.persistence.DbHelper;
 
 public class UserBusiness {
-    private UserDAO userDAO = new UserDAO();
+    private DbHelper dbHelper = new DbHelper();
 
-    public UserDAO getUserDAO(){
-        return userDAO;
+    public DbHelper getDbHelper(){
+        return DbHelper;
     }
 
-}
+}*/

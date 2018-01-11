@@ -12,5 +12,6 @@
     <string name="btnLogout">Sair</string>
     <string name="btnSave">Salvar</string>
     <string name="btnCancel">Cancelar</string>
-
+    
+    <string name="required">Obrigatório</string>
 </resources>
