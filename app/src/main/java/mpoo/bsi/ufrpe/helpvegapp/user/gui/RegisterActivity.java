@@ -14,6 +14,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private ViewHolder mViewHolder = new ViewHolder();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -17,18 +17,13 @@ public class UserController  extends DbHelper{
         super(context);
     }
 
-    public boolean create (User user){
+    public void create (User user){
         ContentValues values = new ContentValues();
         values.put("name",user.getUserName());
         values.put("email",user.getUserEmail());
         values.put("password",user.getUserPassword());
 
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        boolean isCreate = db.insert("user",null,values) > 0;
-        db.close();
-
-        return isCreate;
+        getWritableDatabase().insert("user",null,values);
     }
     //0 de registro ja criados
     public int totalContacts(){
