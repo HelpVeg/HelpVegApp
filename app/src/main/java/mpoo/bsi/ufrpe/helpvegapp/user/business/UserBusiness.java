@@ -8,5 +8,4 @@ public class UserBusiness {
     public UserDAO getUserDAO(){
         return userDAO;
     }
-
 }

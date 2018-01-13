@@ -13,7 +13,7 @@ import mpoo.bsi.ufrpe.helpvegapp.R;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private final User user = new User(this);
+    private final User user = new User();
 
     private ViewHolder mViewHolder = new ViewHolder();
 

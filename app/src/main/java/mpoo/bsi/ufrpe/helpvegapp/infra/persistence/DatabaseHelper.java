@@ -22,6 +22,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     // ------------------------- User Logged table and columns -------------------------
     private static final String TABLE_USER_LOGGED = "user_logged";
     private static final String COLUMN_USER_LOGGED_ID = "user_id";
+    private static final String COLUMN_USER_IS_LOGGED = "user_is_logged";
 
     // ----------------------------- User getters and setters -----------------------------
     public static String getTableUser() {
@@ -56,6 +57,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static String getColumnUserLoggedId() {
         return COLUMN_USER_LOGGED_ID;
     }
+
+    public static String getColumnUserIsLogged() { return COLUMN_USER_IS_LOGGED; }
 
     //---------------------------------------------------------------------------------------
 
