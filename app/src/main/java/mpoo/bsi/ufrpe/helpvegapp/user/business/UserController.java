@@ -71,7 +71,7 @@ public class UserController  extends DbHelper{
         return users;
     }
     //busca pelo id
-    public User SearchForId(int userId){
+    public User SearchUserForId(int userId){
         User user = new User();
 
         SQLiteDatabase db = this.getReadableDatabase();

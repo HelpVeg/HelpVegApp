@@ -12,6 +12,10 @@
     <string name="btnLogout">Sair</string>
     <string name="btnSave">Salvar</string>
     <string name="btnCancel">Cancelar</string>
+
+    <string name="errorFieldName">Campo de nome vazio</string>
+    <string name="errorFieldEmail">Campo de email vazio</string>
+    <string name="errorFieldPassword">Campo de senha vazio</string>
     
     <string name="required">Obrigatório</string>
 </resources>
