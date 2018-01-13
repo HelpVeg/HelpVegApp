@@ -1,32 +1,27 @@
 package mpoo.bsi.ufrpe.helpvegapp.user.persistence;
 
+import android.content.ContentValues;
 import android.content.Context;
-import android.database.sqlite.SQLiteOpenHelper;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-public class UserDAO extends SQLiteOpenHelper{
+import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
+import mpoo.bsi.ufrpe.helpvegapp.infra.persistence.DatabaseHelper;
+import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
 
-    private static final String NAME_D = "DBUser.db";
-    private static final int VERSION = 1;
+public class UserDAO{
 
-    public UserDAO(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
-    }
+   private SQLiteDatabase db;
+   private DatabaseHelper database = Session.getActuallyDb();
 
-    @Override
-    public void onCreate(SQLiteDatabase db){
-        db.execSQL(
-                "CREATE TABLE [DBUser] (\n"+
-                "[id] INTEGER  NOT NULL PRIMARY KEY AUTOINCREMENT, \n" +
-                "[name] VARCHAR(60)  NOT NULL, \n" +
-                "[email] VARCHAR(60)  NOT NULL, \n" +
-                "[password] VARCHAR(60)  NOT NULL \n" +
-                ")"
-        );
-    }
+   public void registerUser(User user){
+      db = database.getWritableDatabase();
+      ContentValues values = new ContentValues();
+      values.put(DatabaseHelper.getColumnUserName(), user.getUserName());
+      values.put(DatabaseHelper.getColumnUserEmail(), user.getUserEmail());
+      values.put(DatabaseHelper.getColumnUserPass(), user.getUserPassword());
+      db.insert(DatabaseHelper.getTableUser(), null, values);
+      db.close();
+   }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
-    }
 }
