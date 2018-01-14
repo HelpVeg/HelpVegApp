@@ -1,4 +1,5 @@
 package mpoo.bsi.ufrpe.helpvegapp.user.gui;
+import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
 
 import android.content.Intent;
@@ -13,8 +14,7 @@ import mpoo.bsi.ufrpe.helpvegapp.R;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private final User user = new User();
-
+    private UserBusiness mUserBusiness;
     private ViewHolder mViewHolder = new ViewHolder();
 
     @Override
@@ -37,9 +37,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
         int id = view.getId();
         if(id == R.id.registerBtnRegister){
+            registerAccount();
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
+    }
+
+    public void registerAccount(){
+        User user = new User();
+        user.setUserName(mViewHolder.editName.getText().toString());
+        user.setUserEmail(mViewHolder.editEmail.getText().toString());
+        user.setUserEmail(mViewHolder.editPass.getText().toString());
+        mUserBusiness.getUserDAO().registerUser(user);
     }
 
     public void navLogin(View view){

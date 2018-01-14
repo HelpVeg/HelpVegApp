@@ -67,15 +67,15 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     @Override
-    public void onCreate(SQLiteDatabase database) {
-        database.execSQL(QueriesSQL.sqlCreateTableUser());
-        database.execSQL(QueriesSQL.sqlUserLogged());
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL(QueriesSQL.sqlCreateTableUser());
+        db.execSQL(QueriesSQL.sqlUserLogged());
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {
-        database.execSQL(QueriesSQL.sqlDropTableUser());
-        database.execSQL(QueriesSQL.sqlDropTableUserLogged());
-        this.onCreate(database);
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL(QueriesSQL.sqlDropTableUser());
+        db.execSQL(QueriesSQL.sqlDropTableUserLogged());
+        this.onCreate(db);
     }
 }

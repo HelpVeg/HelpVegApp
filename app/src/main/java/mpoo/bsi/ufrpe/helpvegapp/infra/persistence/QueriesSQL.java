@@ -8,7 +8,6 @@ public class QueriesSQL {
                 DatabaseHelper.getColumnUserName() + " text not null, " +
                 DatabaseHelper.getColumnUserEmail() + " text unique not null, " +
                 DatabaseHelper.getColumnUserPass() + " text not null"
-                //DatabaseHelper.getColumnUserImg() + " blob";
                 + ");";
         return sqlCreateTableUser;
     }
