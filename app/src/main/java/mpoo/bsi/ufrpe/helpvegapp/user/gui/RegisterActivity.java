@@ -21,9 +21,12 @@ import android.widget.TextView;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
+    private User user = new User();
     private Resources resources;
     private Md5 criptoMd5;
     private UserBusiness userBusiness;
+    private ViewHolder mViewHolder = new ViewHolder();
+
 
     private static class ViewHolder{
         private EditText editName;
@@ -33,9 +36,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         private TextView navToLogin;
 
     }
-
-    private ViewHolder mViewHolder = new ViewHolder();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

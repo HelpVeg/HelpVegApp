@@ -6,9 +6,7 @@ public class User {
     private String userName;
     private String userEmail;
     private String userPassword;
-    private byte[] userImage;
-
-    public User(){}
+    //private byte[] userImage;
 
     public int getUserId(){
         return userId;
@@ -45,7 +43,7 @@ public class User {
         this.userPassword = userPassword;
     }
 
-
+    /*
     public byte[] getUserImage() {
         return userImage;
     }
@@ -53,6 +51,6 @@ public class User {
     public void setUserImage(byte[] userImage) {
         this.userImage = userImage;
     }
-
+    */
 
 }

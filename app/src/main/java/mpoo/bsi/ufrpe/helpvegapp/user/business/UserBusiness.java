@@ -8,14 +8,14 @@ import mpoo.bsi.ufrpe.helpvegapp.user.persistence.UserDAO;
 
 public class UserBusiness {
 
-    private UserController userController = new UserController(Context);
+    private UserDAO userDAO = new UserDAO();
 
-    public UserController getUserController(){
+    public UserDAO getUserController() {
 
-        return userController;
-    }
-    public void validateRegister(User user){
-        userController.create(user);
+        return userDAO;
     }
 
+    public void validateRegister(User user) {
+        userDAO.create(user);
+    }
 }
