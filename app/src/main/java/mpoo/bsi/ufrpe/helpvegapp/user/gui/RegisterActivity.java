@@ -2,6 +2,7 @@ package mpoo.bsi.ufrpe.helpvegapp.user.gui;
 
 import mpoo.bsi.ufrpe.helpvegapp.user.business.Md5;
 import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
+import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
 
 import mpoo.bsi.ufrpe.helpvegapp.R;
 
@@ -22,6 +23,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     private Resources resources;
     private Md5 criptoMd5;
+    private UserBusiness userBusiness;
 
     private static class ViewHolder{
         private EditText editName;
@@ -54,6 +56,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         register();
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
     public void initViews(){
         resources = getResources();
@@ -111,12 +115,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             criptoMd5 = new Md5();
 
             User user = new User();
+
             user.setUserName(this.mViewHolder.editName.getText().toString());
             user.setUserEmail(this.mViewHolder.editEmail.getText().toString());
             String newPassword = criptoMd5.encrypt(this.mViewHolder.editPass.getText().toString());
             user.setUserPassword(newPassword);
 
-            //falta a parte do cadastro junto com o banco
+            userBusiness.validateRegister(user);
         }
     }
     public void navLogin(View view){
