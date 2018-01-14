@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "675281519089",
+    "firebase_url": "https://helpveg-f0bd3.firebaseio.com",
+    "project_id": "helpveg-f0bd3",
+    "storage_bucket": "helpveg-f0bd3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:675281519089:android:d8495174ffb72391",
+        "android_client_info": {
+          "package_name": "mpoo.bsi.ufrpe.helpvegapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "675281519089-b2a6vi0uuc547b7mpubn4r98ucjmdn68.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mpoo.bsi.ufrpe.helpvegapp",
+            "certificate_hash": "60a3c8da5d502aea8bb9146e9011bb0a87e7514b"
+          }
+        },
+        {
+          "client_id": "675281519089-lufukhtkcqftlnvsc7urfob2hr1qlma3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnjf9az_dJvJqylV3CCO-vVO-eYLIEYYc"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "675281519089-lufukhtkcqftlnvsc7urfob2hr1qlma3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

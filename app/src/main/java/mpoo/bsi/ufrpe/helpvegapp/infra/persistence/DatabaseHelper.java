@@ -1,15 +1,8 @@
 package mpoo.bsi.ufrpe.helpvegapp.infra.persistence;
 
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
+public class DatabaseHelper{
 
-public class DatabaseHelper extends SQLiteOpenHelper{
 
-    private SQLiteDatabase database;
-
-    private static final String DATABASE_NAME = "helpveg.db";
-    private static final int DATABASE_VERSION = 1;
 
     // ----------------------------- User table and columns -----------------------------
     private static final String TABLE_USER = "user";
@@ -61,21 +54,4 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static String getColumnUserIsLogged() { return COLUMN_USER_IS_LOGGED; }
 
     //---------------------------------------------------------------------------------------
-
-    public DatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-    }
-
-    @Override
-    public void onCreate(SQLiteDatabase database) {
-        database.execSQL(QueriesSQL.sqlCreateTableUser());
-        database.execSQL(QueriesSQL.sqlUserLogged());
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {
-        database.execSQL(QueriesSQL.sqlDropTableUser());
-        database.execSQL(QueriesSQL.sqlDropTableUserLogged());
-        this.onCreate(database);
-    }
 }
