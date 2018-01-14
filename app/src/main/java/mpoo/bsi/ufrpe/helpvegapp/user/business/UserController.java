@@ -8,10 +8,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
-import mpoo.bsi.ufrpe.helpvegapp.user.persistence.DbHelper;
+import mpoo.bsi.ufrpe.helpvegapp.user.persistence.UserDAO;
 
 
-public class UserController  extends DbHelper{
+public class UserController  extends UserDAO {
 
     public UserController(Context context){
         super(context);

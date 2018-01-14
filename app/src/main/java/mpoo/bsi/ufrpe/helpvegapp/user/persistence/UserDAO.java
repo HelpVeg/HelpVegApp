@@ -4,12 +4,12 @@ import android.content.Context;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteDatabase;
 
-public class DbHelper extends SQLiteOpenHelper{
+public class UserDAO extends SQLiteOpenHelper{
 
     private static final String USER_DB = "DBUser.db";
     private static final int VERSION = 1;
 
-    public DbHelper(Context context) {
+    public UserDAO(Context context) {
         super(context, USER_DB,null,VERSION);
     }
     //criar o banco de dados
