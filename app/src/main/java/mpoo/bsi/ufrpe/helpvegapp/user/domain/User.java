@@ -1,21 +1,10 @@
 package mpoo.bsi.ufrpe.helpvegapp.user.domain;
 
-
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteStatement;
-
-import java.util.ArrayList;
-
-import mpoo.bsi.ufrpe.helpvegapp.user.persistence.UserDAO;
-
 public class User {
     private int userId;
     private String userName;
     private String userEmail;
     private String userPassword;
-    //private byte[] userImage;
 
     public int getUserId(){
         return userId;
@@ -45,12 +34,6 @@ public class User {
         this.userPassword = userPassword;
     }
 
-    /*
-    public byte[] getUserImage() {
-        return userImage;
+    public User() {
     }
-    public void setUserImage(byte[] userImage) {
-        this.userImage = userImage;
-    }
-    */
 }

@@ -10,10 +10,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import mpoo.bsi.ufrpe.helpvegapp.R;
+import mpoo.bsi.ufrpe.helpvegapp.user.persistence.UserDAO;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
-
-    private final User user = new User();
 
     private ViewHolder mViewHolder = new ViewHolder();
 
@@ -30,16 +29,26 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         this.mViewHolder.btnRegister.setOnClickListener(this);
 
-
     }
 
     @Override
     public void onClick(View view) {
         int id = view.getId();
         if(id == R.id.registerBtnRegister){
+            UserDAO userDAO = new UserDAO();
+            userDAO.insertUser(registerUser());
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
+    }
+
+    public User registerUser(){
+        User user = new User();
+        user.setUserId(5);
+        user.setUserName(mViewHolder.editName.getText().toString());
+        user.setUserEmail(mViewHolder.editEmail.getText().toString());
+        user.setUserPassword(mViewHolder.editPass.getText().toString());
+        return user;
     }
 
     public void navLogin(View view){
