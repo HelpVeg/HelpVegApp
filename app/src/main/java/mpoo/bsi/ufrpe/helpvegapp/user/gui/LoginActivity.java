@@ -47,35 +47,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-    public void SignIn(){
-        String email = this.mViewHolder.editEmail.getText().toString();
-        String password = this.mViewHolder.editPassword.getText().toString();
+    public void onStart(){
+        super.onStart();
 
-        firebaseAuth.signInWithEmailAndPassword(email,password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                        } else {
-                           boolean value = false;
-                        }
-                    }
-                });
     }
 
     @Override
     public void onClick(View view) {
         int id = view.getId();
-        if (id == R.id.loginBtnEnter){
-                Intent intent = new Intent(this, ProfileActivity.class);
-                startActivity(intent);
-        }
+
         if (id == R.id.loginBtnRegister){
             Intent intent = new Intent(this,RegisterActivity.class);
             startActivity(intent);
         }
+
     }
-
-
-
 }
