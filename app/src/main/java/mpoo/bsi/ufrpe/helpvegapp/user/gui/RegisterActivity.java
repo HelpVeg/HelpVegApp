@@ -9,12 +9,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import mpoo.bsi.ufrpe.helpvegapp.R;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private UserBusiness mUserBusiness;
     private ViewHolder mViewHolder = new ViewHolder();
 
     @Override
@@ -38,6 +40,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         int id = view.getId();
         if(id == R.id.registerBtnRegister){
             registerAccount();
+            viewUsers();
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         }
@@ -47,8 +50,26 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         User user = new User();
         user.setUserName(mViewHolder.editName.getText().toString());
         user.setUserEmail(mViewHolder.editEmail.getText().toString());
-        user.setUserEmail(mViewHolder.editPass.getText().toString());
-        mUserBusiness.getUserDAO().registerUser(user);
+        user.setUserPassword(mViewHolder.editPass.getText().toString());
+
+        if (new UserBusiness().getUserDAO().registerUser(user)) {
+            Toast.makeText(this, "Usuário cadastrado com sucesso!", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Erro ao cadastrar usuário", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void viewUsers() {
+
+
+        ArrayList<User> users = new UserBusiness().getUserDAO().getAllUsers();
+
+        for (int i = 0; i < users.size(); i++) {
+            User us = users.get(i);
+            System.out.println("#" + i + " ID: " + us.getUserId() + " Nome: " + us.getUserName() + ", Email: " + us.getUserEmail() + ", Senha: " + us.getUserPassword());
+        }
+
+        if (users.size() == 0) System.out.println("# Não existem registros.");
     }
 
     public void navLogin(View view){

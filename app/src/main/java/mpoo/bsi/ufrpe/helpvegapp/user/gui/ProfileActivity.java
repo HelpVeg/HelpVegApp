@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.view.View;
 import android.content.Intent;
+import android.widget.TextView;
 
 import mpoo.bsi.ufrpe.helpvegapp.R;
+import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
+import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -17,6 +20,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+        this.mViewHolder.textNameProfile = findViewById(R.id.textNameProfile);
+        this.mViewHolder.textEmailProfile = findViewById(R.id.textEmailProfile);
         this.mViewHolder.btnEditProfile = findViewById(R.id.profileBtnEdit);
         this.mViewHolder.btnLogout = findViewById(R.id.profileBtnLogout);
 
@@ -34,9 +39,13 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         if (id == R.id.profileBtnLogout){
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
+            finish();
         }
     }
+
     private static class ViewHolder{
+        private TextView textNameProfile;
+        private TextView textEmailProfile;
         private Button btnEditProfile;
         private Button btnLogout;
     }

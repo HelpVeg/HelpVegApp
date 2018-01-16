@@ -6,8 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import mpoo.bsi.ufrpe.helpvegapp.R;
+import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
+import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -31,14 +36,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         int id = view.getId();
         if (id == R.id.loginBtnEnter){
-            Intent intent = new Intent(this,ProfileActivity.class);
-            startActivity(intent);
+
+            String email = mViewHolder.editEmail.getText().toString();
+            String pass = mViewHolder.editPassword.getText().toString();
+
+            if(new UserBusiness().getUserDAO().validateLogin(email, pass)){
+                Toast.makeText(this, "Login efetuado com sucesso!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this,ProfileActivity.class);
+                startActivity(intent);
+            }
+            else{
+                Toast.makeText(this, "Usuário não encontrado", Toast.LENGTH_SHORT).show();
+            }
         }
         if (id == R.id.loginBtnRegister){
             Intent intent = new Intent(this,RegisterActivity.class);
             startActivity(intent);
         }
     }
+
 
     private static class ViewHolder{
         EditText editEmail;

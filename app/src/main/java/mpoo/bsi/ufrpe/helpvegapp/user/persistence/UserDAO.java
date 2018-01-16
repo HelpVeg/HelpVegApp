@@ -4,21 +4,15 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
+import java.util.ArrayList;
+
 import mpoo.bsi.ufrpe.helpvegapp.infra.persistence.DatabaseHelper;
 import mpoo.bsi.ufrpe.helpvegapp.infra.persistence.QueriesSQL;
 import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
 
 public class UserDAO{
-   private SQLiteDatabase db;
-   private DatabaseHelper database = Session.getActuallyDb();
 
-   /**
-   *<h1>UserDAO</h1>
-   *
-   *
-    */
-
+    /*
    //Criar usuário
    public User createUser(Cursor cursor){
        User user = new User();
@@ -28,8 +22,10 @@ public class UserDAO{
        user.setUserPassword(cursor.getString(3));
        return user;
    }
+   */
 
-   //Registra usuário
+   /*
+   //Registrar usuário
    public void registerUser(User user){
       db = database.getWritableDatabase();
       ContentValues values = new ContentValues();
@@ -39,47 +35,114 @@ public class UserDAO{
       db.insert(DatabaseHelper.getTableUser(), null, values);
       db.close();
    }
+   */
 
-   // Busca usuário por e-mail
-   public User searchUserForEmail(String email){
-       db = database.getReadableDatabase();
+    public boolean registerUser(User user) {
 
-       User user = null;
-       Cursor cursor = db.rawQuery(QueriesSQL.sqlUserFromEmail(), new String[] {email});
+        SQLiteDatabase db = DatabaseHelper.getDb().getWritableDatabase();
+        ContentValues values = new ContentValues();
 
-       if(cursor.moveToFirst()){
-           user = createUser(cursor);
-       }
-       db.close();
-       cursor.close();
-       return user;
-   }
+        values.put(DatabaseHelper.getColumnUserName(), user.getUserName());
+        values.put(DatabaseHelper.getColumnUserEmail(), user.getUserEmail());
+        values.put(DatabaseHelper.getColumnUserPass(), user.getUserPassword());
 
-   //Busca usuário por id
-   public User searchUserForId(int userId){
+        Boolean response = db.insert(DatabaseHelper.getTableUser(), null, values) != -1;
+        db.close();
+        return response;
 
-       db = database.getReadableDatabase();
+    }
 
-       User user = null;
-       Cursor cursor = db.rawQuery(QueriesSQL.sqlUserFromId(), new String[]{Integer.toString(userId)});
+    public boolean updateUser(User user) {
 
-       if(cursor.moveToFirst()) {
-           user = createUser(cursor);
-       }
-       cursor.close();
-       db.close();
-       return user;
-   }
+        SQLiteDatabase db = DatabaseHelper.getDb().getWritableDatabase();
+        ContentValues values = new ContentValues();
 
-   //Validar se usuário está cadastrado
-    public boolean userValidateLogin(String email, String password){
-       db = database.getReadableDatabase();
-       boolean validate = false;
-       Cursor cursor = db.rawQuery(QueriesSQL.sqlUserFromEmailAndPass() , new String[] {email, password});
-       if (cursor.moveToFirst()){
-           validate = true;
-       }
-       return validate;
+        values.put(DatabaseHelper.getColumnUserId(), user.getUserId());
+        values.put(DatabaseHelper.getColumnUserName(), user.getUserName());
+        values.put(DatabaseHelper.getColumnUserEmail(), user.getUserEmail());
+        values.put(DatabaseHelper.getColumnUserPass(), user.getUserPassword());
+
+        Boolean response = db.update(DatabaseHelper.getTableUser(), values, QueriesSQL.sqlUserFromId(), null) > 0;
+        db.close();
+        return response;
+
+    }
+
+    public ArrayList<User> getAllUsers() {
+
+        SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
+        ArrayList<User> users = new ArrayList<>();
+        Cursor cursor = db.rawQuery(QueriesSQL.sqlGetAllUsers(), null);
+
+        if (cursor.moveToFirst()) {
+
+            do {
+                User user = new User();
+                user.setUserId(Integer.parseInt(cursor.getString(0)));
+                user.setUserName(cursor.getString(1));
+                user.setUserEmail(cursor.getString(2));
+                user.setUserPassword(cursor.getString(3));
+                users.add(user);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return users;
+    }
+
+    public User getSingleUser(String user_id) {
+
+        SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
+        User user = null;
+        Cursor cursor = db.rawQuery(QueriesSQL.sqlUserFromId(), new String[] {user_id});
+
+        if (cursor.moveToFirst()) {
+
+            user = new User();
+            user.setUserId(Integer.parseInt(cursor.getString(0)));
+            user.setUserName(cursor.getString(1));
+            user.setUserEmail(cursor.getString(2));
+            user.setUserPassword(cursor.getString(3));
+        }
+
+        cursor.close();
+        db.close();
+        return user;
+    }
+
+    public User getLoginUser(String email, String pass){
+
+        SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
+
+        User user = null;
+        Cursor cursor = db.rawQuery(QueriesSQL.sqlUserFromEmailAndPass(), new String[] {email, pass});
+
+        if(cursor.moveToFirst()){
+            user = new User();
+            user.setUserId(Integer.parseInt(cursor.getString(0)));
+            user.setUserName(cursor.getString(1));
+            user.setUserEmail(cursor.getString(2));
+            user.setUserPassword(cursor.getString(3));
+        }
+        cursor.close();
+        db.close();
+        return user;
+    }
+
+    public Boolean validateLogin(String email, String pass){
+
+        SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
+
+        Boolean validate = false;
+        Cursor cursor = db.rawQuery(QueriesSQL.sqlUserFromEmailAndPass(), new String[] {email, pass});
+
+        if(cursor.moveToFirst()){
+            validate = true;
+        }
+        cursor.close();
+        db.close();
+        return validate;
     }
 
 }
