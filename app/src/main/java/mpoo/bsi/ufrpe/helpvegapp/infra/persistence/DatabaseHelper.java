@@ -39,7 +39,9 @@ public class DatabaseHelper{
         return COLUMN_USER_LOGGED_ID;
     }
 
-    public static String getColumnUserIsLogged() { return COLUMN_USER_IS_LOGGED; }
+    public static String getColumnUserIsLogged() {
+        return COLUMN_USER_IS_LOGGED;
+    }
 
     //---------------------------------------------------------------------------------------
 
