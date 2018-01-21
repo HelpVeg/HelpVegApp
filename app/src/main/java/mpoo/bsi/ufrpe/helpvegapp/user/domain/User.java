@@ -1,15 +1,5 @@
 package mpoo.bsi.ufrpe.helpvegapp.user.domain;
 
-
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteStatement;
-
-import java.util.ArrayList;
-
-import mpoo.bsi.ufrpe.helpvegapp.user.persistence.UserDAO;
-
 public class User {
     private int userId;
     private String userName;

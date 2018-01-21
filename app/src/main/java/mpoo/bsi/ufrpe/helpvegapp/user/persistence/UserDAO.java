@@ -12,32 +12,7 @@ import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
 
 public class UserDAO{
 
-    /*
-   //Criar usuário
-   public User createUser(Cursor cursor){
-       User user = new User();
-       user.setUserId(cursor.getInt(0));
-       user.setUserName(cursor.getString(1));
-       user.setUserEmail(cursor.getString(2));
-       user.setUserPassword(cursor.getString(3));
-       return user;
-   }
-   */
-
-   /*
-   //Registrar usuário
-   public void registerUser(User user){
-      db = database.getWritableDatabase();
-      ContentValues values = new ContentValues();
-      values.put(DatabaseHelper.getColumnUserName(), user.getUserName());
-      values.put(DatabaseHelper.getColumnUserEmail(), user.getUserEmail());
-      values.put(DatabaseHelper.getColumnUserPass(), user.getUserPassword());
-      db.insert(DatabaseHelper.getTableUser(), null, values);
-      db.close();
-   }
-   */
-
-    public boolean registerUser(User user) {
+    public boolean createUser(User user) {
 
         SQLiteDatabase db = DatabaseHelper.getDb().getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -130,7 +105,7 @@ public class UserDAO{
         return user;
     }
 
-    public Boolean validateLogin(String email, String pass){
+    public Boolean getLogin(String email, String pass){
 
         SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
 

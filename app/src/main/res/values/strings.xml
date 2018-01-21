@@ -12,5 +12,10 @@
     <string name="btnLogout">Sair</string>
     <string name="btnSave">Salvar</string>
     <string name="btnCancel">Cancelar</string>
+    
+    <string name="toastRegisterSuccessful">Cadastrado realizado com sucesso!</string>
+    <string name="toastRegisterFailed">Erro! E-mail já cadastrado!</string>
+    <string name="toastLoginSuccessful">Login efetuado com sucesso!</string>
+    <string name="toastLoginFailed">Não foi possível efetuar o login!</string>
 
 </resources>

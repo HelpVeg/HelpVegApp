@@ -1,18 +1,14 @@
 package mpoo.bsi.ufrpe.helpvegapp.user.gui;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-
 import mpoo.bsi.ufrpe.helpvegapp.R;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
-import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -40,13 +36,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             String email = mViewHolder.editEmail.getText().toString();
             String pass = mViewHolder.editPassword.getText().toString();
 
-            if(new UserBusiness().getUserDAO().validateLogin(email, pass)){
-                Toast.makeText(this, "Login efetuado com sucesso!", Toast.LENGTH_SHORT).show();
+            if(new UserBusiness().validateLogin(email, pass)){
+                Toast.makeText(this, R.string.toastLoginSuccessful, Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this,ProfileActivity.class);
                 startActivity(intent);
             }
             else{
-                Toast.makeText(this, "Usuário não encontrado", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.toastLoginFailed, Toast.LENGTH_SHORT).show();
             }
         }
         if (id == R.id.loginBtnRegister){
