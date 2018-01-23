@@ -17,5 +17,9 @@
     <string name="toastRegisterFailed">Erro! E-mail já cadastrado!</string>
     <string name="toastLoginSuccessful">Login efetuado com sucesso!</string>
     <string name="toastLoginFailed">Não foi possível efetuar o login!</string>
+    <string name="toastBlankFieldName">Campo NOME em branco!</string>
+    <string name="toastBlankFieldEmail">Campo EMAIL em branco!</string>
+    <string name="toastBlankFieldPassword">Campo SENHA em branco!</string>
+
 
 </resources>

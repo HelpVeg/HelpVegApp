@@ -27,7 +27,7 @@ public class Md5 {
         return hexOutput;
     }
 
-    public static String encrypt(String pwd) {
+    public String encrypt(String pwd) {
         if (md != null) {
             return new String(hexCodes(md.digest(pwd.getBytes())));
         }

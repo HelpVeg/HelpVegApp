@@ -1,6 +1,8 @@
 package mpoo.bsi.ufrpe.helpvegapp.user.business;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
 import mpoo.bsi.ufrpe.helpvegapp.user.persistence.UserDAO;
@@ -19,10 +21,16 @@ public class UserBusiness {
     public boolean validateLogin(String email, String pass){
         return getUserDAO().getLogin(email, pass);
     }
+    public boolean regexEmail(String email){
+        String regex ="^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        Matcher matcher = Pattern.compile(regex).matcher(email);
+        if (matcher.matches()){
+            return true;
+        }
+        return false;
+    }
 
     public void viewUsers() {
-
-
         ArrayList<User> users = getUserDAO().getAllUsers();
 
         for (int i = 0; i < users.size(); i++) {
