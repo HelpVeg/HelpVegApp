@@ -11,6 +11,7 @@ import android.widget.Toast;
 import mpoo.bsi.ufrpe.helpvegapp.R;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.Md5;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
+import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -21,6 +22,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        checkSession();
 
         this.mViewHolder.editEmail = findViewById(R.id.loginEmail);
         this.mViewHolder.editPassword = findViewById(R.id.loginPassword);
@@ -31,12 +33,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         this.mViewHolder.btnRegister.setOnClickListener(this);
     }
 
+    public void checkSession(){
+        UserBusiness userBusiness = new UserBusiness();
+        if (userBusiness.recoverSession()){
+            Intent intent = new Intent(this,MapsActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
     @Override
     public void onClick(View view) {
         int id = view.getId();
         if (id == R.id.loginBtnEnter){
             if (login()){
-                Intent intent = new Intent(this,ProfileActivity.class);
+                Intent intent = new Intent(this,MapsActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -52,8 +63,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (validateFields()){
             String email = mViewHolder.editEmail.getText().toString().trim();
             String pass = md5.encrypt(mViewHolder.editPassword.getText().toString().trim());
-
-            if(new UserBusiness().validateLogin(email, pass)){
+            User user = new UserBusiness().validateLogin(email,pass);
+            if(user != null){
                 Toast.makeText(this, R.string.toastLoginSuccessful, Toast.LENGTH_SHORT).show();
                 loginFiedls = true;
             }
@@ -68,18 +79,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     public boolean validateFields(){
         String email = mViewHolder.editEmail.getText().toString();
-        String passowrd = mViewHolder.editPassword.getText().toString();
+        String password = mViewHolder.editPassword.getText().toString();
 
         boolean blankValidate = true;
 
         if (TextUtils.isEmpty(email)){
             mViewHolder.editEmail.setError("campo email invalido");
-            return blankValidate = false;
-
+            blankValidate = false;
         }
-        else if (TextUtils.isEmpty(passowrd)){
+
+        else if (TextUtils.isEmpty(password)){
             mViewHolder.editPassword.setError("campo senha inválido");
-            return blankValidate = false;
+            blankValidate = false;
         }
         return blankValidate;
     }

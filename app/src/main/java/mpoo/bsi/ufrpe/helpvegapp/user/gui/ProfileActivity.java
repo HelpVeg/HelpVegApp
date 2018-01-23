@@ -10,6 +10,7 @@ import android.widget.TextView;
 import mpoo.bsi.ufrpe.helpvegapp.R;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
+import mpoo.bsi.ufrpe.helpvegapp.user.persistence.Session;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -27,8 +28,15 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         this.mViewHolder.btnEditProfile.setOnClickListener(this);
         this.mViewHolder.btnLogout.setOnClickListener(this);
+        showUserLoggedData();
     }
 
+
+    //mostra os dados do usuario nos TextView
+    public void showUserLoggedData(){
+        this.mViewHolder.textEmailProfile.setText(Session.getUserIn().getUserEmail());
+        this.mViewHolder.textNameProfile.setText(Session.getUserIn().getUserName());
+    }
 
     public void onClick(View view){
         int id = view.getId();
@@ -37,6 +45,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             startActivity(intent);
         }
         if (id == R.id.profileBtnLogout){
+            UserBusiness userBusiness = new UserBusiness();
+            userBusiness.endSession();
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             finish();

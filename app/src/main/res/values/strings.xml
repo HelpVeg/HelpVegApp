@@ -12,7 +12,7 @@
     <string name="btnLogout">Sair</string>
     <string name="btnSave">Salvar</string>
     <string name="btnCancel">Cancelar</string>
-    
+
     <string name="toastRegisterSuccessful">Cadastrado realizado com sucesso!</string>
     <string name="toastRegisterFailed">Erro! E-mail já cadastrado!</string>
     <string name="toastLoginSuccessful">Login efetuado com sucesso!</string>
@@ -20,6 +20,7 @@
     <string name="toastBlankFieldName">Campo NOME em branco!</string>
     <string name="toastBlankFieldEmail">Campo EMAIL em branco!</string>
     <string name="toastBlankFieldPassword">Campo SENHA em branco!</string>
+    <string name="title_activity_maps">Map</string>
 
 
 </resources>

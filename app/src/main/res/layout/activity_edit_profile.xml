@@ -13,6 +13,45 @@
         android:layout_height="386dp"
         android:orientation="vertical">
 
+        <EditText
+            android:id="@+id/EditProfileName"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:ems="10"
+            android:hint="Nome"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/EditProfileEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/EditProfileOldPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Senha antiga"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/EditProfileNewPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Nova senha"
+            android:inputType="textPassword" />
+
+        <EditText
+            android:id="@+id/EditProfileConfirmPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Confirmação de senha"
+            android:inputType="numberPassword" />
     </LinearLayout>
 
     <LinearLayout

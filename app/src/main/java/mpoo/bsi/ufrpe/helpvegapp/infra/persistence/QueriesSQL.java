@@ -14,7 +14,7 @@ public class QueriesSQL {
 
     public static String sqlUserLogged(){
         String sqlUserLogged = "CREATE TABLE IF NOT EXISTS " + DatabaseHelper.getTableUserLogged() + "(" +
-                DatabaseHelper.getColumnUserLoggedId() + " integer primary key autoincrement unique not null , "
+                DatabaseHelper.getColumnUserLoggedId() + " integer primary key autoincrement unique not null, "
                 + "foreign key ( " + DatabaseHelper.getColumnUserLoggedId() + " ) references " + DatabaseHelper.getTableUser() + " ( " + DatabaseHelper.getColumnUserId() + " )"
                 + ")";
         return (sqlUserLogged);
@@ -31,12 +31,12 @@ public class QueriesSQL {
     }
 
     public static String sqlUserFromEmail(){
-        String sqlUserFromEmail = "SELECT * " + DatabaseHelper.getTableUser() + " WHERE " + DatabaseHelper.getColumnUserEmail() + " =?;";
+        String sqlUserFromEmail = "SELECT * FROM " + DatabaseHelper.getTableUser() + " WHERE " + DatabaseHelper.getColumnUserEmail() + " =?;";
         return (sqlUserFromEmail);
     }
 
     public static String sqlUserFromId(){
-        String sqlUserFromId =  "SELECT * " + DatabaseHelper.getTableUser() + " WHERE " + DatabaseHelper.getColumnUserId() + " =?;";
+        String sqlUserFromId =  "SELECT * FROM " + DatabaseHelper.getTableUser() + " WHERE " + DatabaseHelper.getColumnUserId() + " =?;";
         return (sqlUserFromId);
     }
 

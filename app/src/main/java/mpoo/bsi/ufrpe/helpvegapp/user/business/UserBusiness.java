@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
+import mpoo.bsi.ufrpe.helpvegapp.user.persistence.Session;
 import mpoo.bsi.ufrpe.helpvegapp.user.persistence.UserDAO;
 
 public class UserBusiness {
@@ -18,9 +19,31 @@ public class UserBusiness {
         return getUserDAO().createUser(user);
     }
 
-    public boolean validateLogin(String email, String pass){
-        return getUserDAO().getLogin(email, pass);
+
+
+    public User validateLogin(String email, String pass){
+        User userIn = getUserDAO().getLoginUser(email,pass);
+        if (userIn !=null){
+            userDAO.insertLoggedUser(userIn);
+            Session.setUserIn(userIn);
+        }
+        return userIn;
     }
+
+    public boolean recoverSession(){
+        User loggedUser = userDAO.getLoggedUser();
+        if (loggedUser!=null){
+            Session.setUserIn(loggedUser);
+            return true;
+        }
+        return false;
+    }
+
+    public void endSession(){
+        userDAO.removeLoggedUser();
+    }
+
+
     public boolean regexEmail(String email){
         String regex ="^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
         Matcher matcher = Pattern.compile(regex).matcher(email);
