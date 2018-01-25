@@ -10,8 +10,8 @@
     tools:context="mpoo.bsi.ufrpe.helpvegapp.user.gui.RegisterActivity">
 
     <ImageView
-        android:layout_width="300dp"
-        android:layout_height="270dp"
+        android:layout_width="233dp"
+        android:layout_height="222dp"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
         android:background="@drawable/name_logo" />

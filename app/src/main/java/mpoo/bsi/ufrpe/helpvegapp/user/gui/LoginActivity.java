@@ -7,6 +7,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import mpoo.bsi.ufrpe.helpvegapp.R;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.Md5;
@@ -27,10 +28,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         this.mViewHolder.editEmail = findViewById(R.id.loginEmail);
         this.mViewHolder.editPassword = findViewById(R.id.loginPassword);
         this.mViewHolder.btnEnter = findViewById(R.id.loginBtnEnter);
-        this.mViewHolder.btnRegister = findViewById(R.id.loginBtnRegister);
+        this.mViewHolder.navToRegister = findViewById(R.id.loginNavRegister);
 
         this.mViewHolder.btnEnter.setOnClickListener(this);
-        this.mViewHolder.btnRegister.setOnClickListener(this);
+        this.mViewHolder.navToRegister.setOnClickListener(this);
     }
 
     public void checkSession(){
@@ -52,12 +53,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 finish();
             }
         }
-        if (id == R.id.loginBtnRegister){
-            Intent intent = new Intent(this,RegisterActivity.class);
+        if (id == R.id.loginNavRegister){
+            Intent intent = new Intent(this, RegisterActivity.class);
             startActivity(intent);
             finish();
         }
     }
+
     public boolean login(){
         boolean loginFiedls = false;
         if (validateFields()){
@@ -95,12 +97,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         return blankValidate;
     }
 
-
     private static class ViewHolder{
         EditText editEmail;
         EditText editPassword;
         Button btnEnter;
-        Button btnRegister;
+        TextView navToRegister;
     }
 
 }

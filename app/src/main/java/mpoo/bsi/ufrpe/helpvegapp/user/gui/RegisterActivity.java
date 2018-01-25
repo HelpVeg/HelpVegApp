@@ -32,8 +32,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         this.mViewHolder.btnRegister = findViewById(R.id.registerBtnRegister);
         this.mViewHolder.navToLogin = findViewById(R.id.registerNavLogin);
         this.mViewHolder.btnRegister.setOnClickListener(this);
-
-
+        this.mViewHolder.navToLogin.setOnClickListener(this);
     }
 
     @Override
@@ -47,6 +46,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 finish();
             }
             new UserBusiness().viewUsers();
+        }
+        if (id == R.id.registerNavLogin){
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 
@@ -97,11 +101,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         return blankValidate;
     }
 
-    public void navLogin(View view){
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-        finish();
-    }
 
     private static class ViewHolder{
         private EditText editName;

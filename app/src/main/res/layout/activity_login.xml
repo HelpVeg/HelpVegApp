@@ -8,8 +8,8 @@
     tools:context="mpoo.bsi.ufrpe.helpvegapp.user.gui.LoginActivity">
 
     <ImageView
-        android:layout_width="300dp"
-        android:layout_height="270dp"
+        android:layout_width="245dp"
+        android:layout_height="206dp"
         android:layout_gravity="center"
         android:layout_marginTop="35dp"
         android:background="@drawable/name_logo" />
@@ -45,7 +45,7 @@
         android:layout_marginLeft="70dp"
         android:layout_marginRight="70dp"/>
 
-    <Button
+    <!-- <Button
         android:id="@+id/loginBtnRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -55,6 +55,18 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="90dp"
-        android:layout_marginRight="90dp" />
+        android:layout_marginRight="90dp" />-->
+
+    <TextView
+        android:id="@+id/loginNavRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_gravity="center"
+        android:text="@string/navRegister"
+        android:layout_marginTop="15dp"
+        android:textSize="16sp"
+        android:onClick="navRegister"/>
 
 </LinearLayout>
