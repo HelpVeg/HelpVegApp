@@ -20,6 +20,7 @@
     <string name="toastBlankFieldName">Campo NOME em branco!</string>
     <string name="toastBlankFieldEmail">Campo EMAIL em branco!</string>
     <string name="toastBlankFieldPassword">Campo SENHA em branco!</string>
+
     <string name="title_activity_maps">Map</string>
 
 
