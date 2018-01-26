@@ -110,4 +110,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         private Button btnRegister;
         private TextView navToLogin;
     }
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        Intent intent = new Intent(this,LoginActivity.class);
+        startActivity(intent);
+    }
 }
