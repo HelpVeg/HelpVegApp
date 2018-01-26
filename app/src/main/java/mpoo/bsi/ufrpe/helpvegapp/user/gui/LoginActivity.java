@@ -31,6 +31,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         this.mViewHolder.btnEnter.setOnClickListener(this);
         this.mViewHolder.btnRegister.setOnClickListener(this);
+
+        new UserBusiness().viewUsers();
     }
 
     public void checkSession(){
@@ -84,12 +86,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         boolean blankValidate = true;
 
         if (TextUtils.isEmpty(email)){
-            mViewHolder.editEmail.setError("campo email invalido");
+            mViewHolder.editEmail.setError("Campo email invalido");
             blankValidate = false;
         }
 
         else if (TextUtils.isEmpty(password)){
-            mViewHolder.editPassword.setError("campo senha inválido");
+            mViewHolder.editPassword.setError("Campo senha inválido");
             blankValidate = false;
         }
         return blankValidate;

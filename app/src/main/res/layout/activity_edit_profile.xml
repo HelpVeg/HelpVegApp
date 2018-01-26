@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Confirmação de senha"
-            android:inputType="numberPassword" />
+            android:inputType="textPassword" />
     </LinearLayout>
 
     <LinearLayout

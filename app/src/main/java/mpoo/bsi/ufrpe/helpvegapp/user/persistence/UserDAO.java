@@ -12,6 +12,15 @@ import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
 
 public class UserDAO{
 
+    public User generateUser(Cursor cursor) {
+        User user = new User();
+        user.setUserId(Integer.parseInt(cursor.getString(0)));
+        user.setUserName(cursor.getString(1));
+        user.setUserEmail(cursor.getString(2));
+        user.setUserPassword(cursor.getString(3));
+        return user;
+    }
+
     public boolean createUser(User user) {
 
         SQLiteDatabase db = DatabaseHelper.getDb().getWritableDatabase();
@@ -26,18 +35,19 @@ public class UserDAO{
         return response;
     }
 
-    public boolean updateUser(User user) {
+    public void updateUser(User user) {
         SQLiteDatabase db = DatabaseHelper.getDb().getWritableDatabase();
+        String where = QueriesSQL.sqlUserFromId() + " = " + Integer.toString(Session.getUserIn().getUserId());
         ContentValues values = new ContentValues();
 
-        values.put(DatabaseHelper.getColumnUserId(), user.getUserId());
         values.put(DatabaseHelper.getColumnUserName(), user.getUserName());
         values.put(DatabaseHelper.getColumnUserEmail(), user.getUserEmail());
         values.put(DatabaseHelper.getColumnUserPass(), user.getUserPassword());
 
-        Boolean response = db.update(DatabaseHelper.getTableUser(), values, QueriesSQL.sqlUserFromId(), null) > 0;
+        db.update(DatabaseHelper.getTableUser(), values, where, null);
         db.close();
-        return response;
+        removeLoggedUser();
+        insertLoggedUser(user);
     }
 
     public ArrayList<User> getAllUsers() {
@@ -49,11 +59,7 @@ public class UserDAO{
         if (cursor.moveToFirst()) {
 
             do {
-                User user = new User();
-                user.setUserId(Integer.parseInt(cursor.getString(0)));
-                user.setUserName(cursor.getString(1));
-                user.setUserEmail(cursor.getString(2));
-                user.setUserPassword(cursor.getString(3));
+                User user = generateUser(cursor);
                 users.add(user);
             } while (cursor.moveToNext());
         }
@@ -69,11 +75,7 @@ public class UserDAO{
         Cursor cursor = db.rawQuery(QueriesSQL.sqlUserFromId(), new String[] {Integer.toString(user_id)});
 
         if (cursor.moveToFirst()) {
-            user = new User();
-            user.setUserId(Integer.parseInt(cursor.getString(0)));
-            user.setUserName(cursor.getString(1));
-            user.setUserEmail(cursor.getString(2));
-            user.setUserPassword(cursor.getString(3));
+            user = generateUser(cursor);
         }
         cursor.close();
         db.close();
@@ -88,11 +90,7 @@ public class UserDAO{
         Cursor cursor = db.rawQuery(QueriesSQL.sqlUserFromEmailAndPass(), new String[] {email, pass});
 
         if(cursor.moveToFirst()){
-            user = new User();
-            user.setUserId(Integer.parseInt(cursor.getString(0)));
-            user.setUserName(cursor.getString(1));
-            user.setUserEmail(cursor.getString(2));
-            user.setUserPassword(cursor.getString(3));
+            user = generateUser(cursor);
         }
         cursor.close();
         db.close();
@@ -129,21 +127,6 @@ public class UserDAO{
         db.delete(DatabaseHelper.getTableUserLogged(), null, null);
         db.close();
 
-    }
-
-    public Boolean getLogin(String email, String pass){
-
-        SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
-
-        Boolean validate = false;
-        Cursor cursor = db.rawQuery(QueriesSQL.sqlUserFromEmailAndPass(), new String[] {email, pass});
-
-        if(cursor.moveToFirst()){
-            validate = true;
-        }
-        cursor.close();
-        db.close();
-        return validate;
     }
 
 }

@@ -22,9 +22,9 @@ public class UserBusiness {
 
 
     public User validateLogin(String email, String pass){
-        User userIn = getUserDAO().getLoginUser(email,pass);
+        User userIn = userDAO.getLoginUser(email,pass);
         if (userIn !=null){
-            userDAO.insertLoggedUser(userIn);
+            getUserDAO().insertLoggedUser(userIn);
             Session.setUserIn(userIn);
         }
         return userIn;
@@ -63,4 +63,9 @@ public class UserBusiness {
 
         if (users.size() == 0) System.out.println("# Não existem registros.");
     }
+
+    public void updateUser(User user){
+        getUserDAO().updateUser(user);
+    }
+
 }
