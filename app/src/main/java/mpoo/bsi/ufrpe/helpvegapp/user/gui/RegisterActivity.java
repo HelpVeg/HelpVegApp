@@ -31,6 +31,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         this.mViewHolder.editPass = findViewById(R.id.registerPass);
         this.mViewHolder.btnRegister = findViewById(R.id.registerBtnRegister);
         this.mViewHolder.navToLogin = findViewById(R.id.registerNavLogin);
+
         this.mViewHolder.btnRegister.setOnClickListener(this);
         this.mViewHolder.navToLogin.setOnClickListener(this);
     }
