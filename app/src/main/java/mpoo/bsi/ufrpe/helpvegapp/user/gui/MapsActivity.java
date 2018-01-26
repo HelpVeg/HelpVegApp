@@ -50,7 +50,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     public void chamaMenu(){
         Toolbar toolbar =  findViewById(R.id.toolbar);
-        toolbar.setTitle("");
+
         setSupportActionBar(toolbar);
         DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -161,11 +161,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         userBusiness.endSession();
         Intent intent = new Intent(this,LoginActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void navigationProfile(){
         Intent intent = new Intent(this,ProfileActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

@@ -21,9 +21,11 @@
     <string name="toastRegisterFailed">Erro! E-mail já cadastrado!</string>
     <string name="toastLoginSuccessful">Login efetuado com sucesso!</string>
     <string name="toastLoginFailed">Não foi possível efetuar o login!</string>
-    <string name="toastBlankFieldName">Campo NOME em branco!</string>
-    <string name="toastBlankFieldEmail">Campo EMAIL em branco!</string>
-    <string name="toastBlankFieldPassword">Campo SENHA em branco!</string>
+    <string name="toastBlankFieldName">Nome inválido</string>
+    <string name="toastBlankFieldEmail">Email inválido</string>
+    <string name="toastBlankFieldPassword">Senha inválida</string>
+    <string name="toastWrongFieldPassword">Senha não coincidem</string>
+
 
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_main">MainActivity</string>

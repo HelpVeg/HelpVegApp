@@ -41,6 +41,7 @@ public class UserBusiness {
 
     public void endSession(){
         userDAO.removeLoggedUser();
+        Session.setUserIn(null);
     }
 
 
@@ -62,5 +63,13 @@ public class UserBusiness {
         }
 
         if (users.size() == 0) System.out.println("# Não existem registros.");
+    }
+
+    public boolean updateUser(User user){
+        if (userDAO.getSingleUser(user.getUserEmail())==null){
+            getUserDAO().updateUser(user);
+            return true;
+        }
+        return false;
     }
 }

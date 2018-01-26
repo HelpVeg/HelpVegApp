@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Confirmação de senha"
-            android:inputType="numberPassword" />
+            android:inputType="textPassword" />
     </LinearLayout>
 
     <LinearLayout
@@ -66,7 +66,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/EditProfileBtnSave"
+            android:id="@+id/EditProfileBtnCancel"
             android:text="@string/btnCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
             android:layout_marginRight="10dp"/>
 
         <Button
-            android:id="@+id/EditProfileBtnCancel"
+            android:id="@+id/EditProfileBtnSave"
             android:text="@string/btnSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
