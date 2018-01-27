@@ -3,10 +3,10 @@ package mpoo.bsi.ufrpe.helpvegapp.user.persistence;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.provider.ContactsContract;
 
 import java.util.ArrayList;
 
+import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 import mpoo.bsi.ufrpe.helpvegapp.infra.persistence.DatabaseHelper;
 import mpoo.bsi.ufrpe.helpvegapp.infra.persistence.QueriesSQL;
 import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
@@ -47,8 +47,6 @@ public class UserDAO{
 
         db.update(DatabaseHelper.getTableUser(), values, where, null);
         db.close();
-        removeLoggedUser();
-        insertLoggedUser(user);
     }
 
     public ArrayList<User> getAllUsers() {
@@ -146,21 +144,6 @@ public class UserDAO{
         db.delete(DatabaseHelper.getTableUserLogged(), null, null);
         db.close();
 
-    }
-
-    public Boolean getLogin(String email, String pass){
-
-        SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
-
-        Boolean validate = false;
-        Cursor cursor = db.rawQuery(QueriesSQL.sqlUserFromEmailAndPass(), new String[] {email, pass});
-
-        if(cursor.moveToFirst()){
-            validate = true;
-        }
-        cursor.close();
-        db.close();
-        return validate;
     }
 
 }

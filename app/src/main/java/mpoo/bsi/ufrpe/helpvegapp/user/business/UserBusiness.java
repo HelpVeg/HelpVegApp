@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
-import mpoo.bsi.ufrpe.helpvegapp.user.persistence.Session;
+import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 import mpoo.bsi.ufrpe.helpvegapp.user.persistence.UserDAO;
 
 public class UserBusiness {
@@ -68,6 +68,7 @@ public class UserBusiness {
     public boolean updateUser(User user){
         if (userDAO.getSingleUser(user.getUserEmail())==null){
             getUserDAO().updateUser(user);
+            Session.setUserIn(user);
             return true;
         }
         return false;

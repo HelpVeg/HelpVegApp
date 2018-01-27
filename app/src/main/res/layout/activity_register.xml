@@ -38,6 +38,13 @@
         android:layout_height="wrap_content"
         android:hint="@string/password"/>
 
+    <EditText
+        android:inputType="textPassword"
+        android:id="@+id/registerConfirmPass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/confirmPassword"/>
+
     <Button
         android:id="@+id/registerBtnRegister"
         android:layout_width="match_parent"

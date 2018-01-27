@@ -1,4 +1,4 @@
-package mpoo.bsi.ufrpe.helpvegapp.user.persistence;
+package mpoo.bsi.ufrpe.helpvegapp.infra;
 
 import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
 

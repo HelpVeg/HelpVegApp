@@ -8,9 +8,7 @@ import android.content.Intent;
 import android.widget.TextView;
 
 import mpoo.bsi.ufrpe.helpvegapp.R;
-import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
-import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
-import mpoo.bsi.ufrpe.helpvegapp.user.persistence.Session;
+import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
 

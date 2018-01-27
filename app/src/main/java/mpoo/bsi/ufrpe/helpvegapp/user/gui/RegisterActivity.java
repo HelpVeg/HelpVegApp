@@ -29,6 +29,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         this.mViewHolder.editName = findViewById(R.id.registerName);
         this.mViewHolder.editEmail = findViewById(R.id.registerEmail);
         this.mViewHolder.editPass = findViewById(R.id.registerPass);
+        this.mViewHolder.editConfirmPass = findViewById(R.id.registerConfirmPass);
+
         this.mViewHolder.btnRegister = findViewById(R.id.registerBtnRegister);
         this.mViewHolder.navToLogin = findViewById(R.id.registerNavLogin);
 
@@ -83,20 +85,25 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public boolean validateFields(){
         String name = mViewHolder.editName.getText().toString().trim();
         String email = mViewHolder.editEmail.getText().toString().trim();
-        String passowrd = mViewHolder.editPass.getText().toString().trim();
+        String password = mViewHolder.editPass.getText().toString().trim();
+        String confirmPassword = mViewHolder.editConfirmPass.getText().toString().trim();
 
         boolean blankValidate = true;
 
         if (TextUtils.isEmpty(name) || name.length() < 4){
-            mViewHolder.editName.setError("campo em branco ou nome com menos de 4 caracteres ");
+            mViewHolder.editName.setError("O nome deve conter 4 ou mais caracteres");
             blankValidate = false;
         }
-        else if (TextUtils.isEmpty(email) || !validateRegexEmail(email)){
-            mViewHolder.editEmail.setError("campo em branco ou email inválido");
+        if (TextUtils.isEmpty(email) || !validateRegexEmail(email)){
+            mViewHolder.editEmail.setError("Email inválido");
             blankValidate = false;
         }
-        else if (TextUtils.isEmpty(passowrd) || passowrd.length() < 5){
-            mViewHolder.editPass.setError("campo em branco ou senha com menos de 5 caracteres");
+        if (!password.equals(confirmPassword)){
+            mViewHolder.editPass.setError("Senha e confirmação não coincidem");
+            mViewHolder.editConfirmPass.setError("Senha e confirmação não coincidem");
+            blankValidate = false;
+        } else if (TextUtils.isEmpty(password) || password.length() < 5){
+            mViewHolder.editPass.setError("A senha deve conter 5 ou mais caracteres");
             blankValidate = false;
         }
         return blankValidate;
@@ -107,6 +114,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         private EditText editName;
         private EditText editEmail;
         private EditText editPass;
+        private EditText editConfirmPass;
         private Button btnRegister;
         private TextView navToLogin;
     }

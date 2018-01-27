@@ -29,7 +29,7 @@ import com.google.android.gms.maps.model.LatLng;
 
 import mpoo.bsi.ufrpe.helpvegapp.R;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
-import mpoo.bsi.ufrpe.helpvegapp.user.persistence.Session;
+import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
 
@@ -50,7 +50,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     public void chamaMenu(){
         Toolbar toolbar =  findViewById(R.id.toolbar);
-
+        toolbar.setTitle("");
         setSupportActionBar(toolbar);
         DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
