@@ -33,15 +33,15 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String TABLE_RESTAURANTS = "restaurants";
     private static final String COLUMN_RESTAURANT_ID = "restaurant_id";
     private static final String COLUMN_RESTAURANT_NAME = "restaurant_name";
-    private static final String COLUMN_RESTAURANT_IMAGE = "restaurant_image";
+    //private static final String COLUMN_RESTAURANT_IMAGE = "restaurant_image";
     private static final String COLUMN_RESTAURANT_LAT = "restaurant_lat";
     private static final String COLUMN_RESTAURANT_LONG = "restaurant_long";
     private static final String COLUMN_RESTAURANT_TYPE = "restaurant_type";
-    private static final String COLUMN_RESTAURANT_RATE_GENERAL = "restaurant_rate_general";
+    /*private static final String COLUMN_RESTAURANT_RATE_GENERAL = "restaurant_rate_general";
     private static final String COLUMN_RESTAURANT_RATE_SERVICE = "restaurant_rate_service";
     private static final String COLUMN_RESTAURANT_RATE_FOOD = "restaurant_rate_food";
     private static final String COLUMN_RESTAURANT_RATE_PRICE = "restaurant_rate_price";
-    private static final String COLUMN_RESTAURANT_RATE_ENVIRONMENT = "restaurant_rate_environment";
+    private static final String COLUMN_RESTAURANT_RATE_ENVIRONMENT = "restaurant_rate_environment";*/
 
     // ------------------------ Comment table ---------------------------------------
     private static final String TABLE_COMMENTS = "comments";
@@ -99,9 +99,9 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return COLUMN_RESTAURANT_NAME;
     }
 
-    public static String getColumnRestaurantImage() {
+    /*public static String getColumnRestaurantImage() {
         return COLUMN_RESTAURANT_IMAGE;
-    }
+    }*/
 
     public static String getColumnRestaurantLat() {
         return COLUMN_RESTAURANT_LAT;
@@ -115,7 +115,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return COLUMN_RESTAURANT_TYPE;
     }
 
-    public static String getColumnRestaurantRateGeneral() {
+    /*public static String getColumnRestaurantRateGeneral() {
         return COLUMN_RESTAURANT_RATE_GENERAL;
     }
 
@@ -133,7 +133,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     public static String getColumnRestaurantRateEnvironment() {
         return COLUMN_RESTAURANT_RATE_ENVIRONMENT;
-    }
+    }*/
 
     //--------------------------  Comment getters  -------------------------------------
     public static String getTableComments() {
@@ -167,7 +167,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.execSQL(QueriesSQL.sqlUserLogged());
         db.execSQL(QueriesSQL.sqlCreateTableRestaurant());
         db.execSQL(QueriesSQL.sqlCreateTableComments());
-        //Script.populateRestaurantTable(db);
+        Script.populateRestaurantTable(db);
     }
 
     @Override

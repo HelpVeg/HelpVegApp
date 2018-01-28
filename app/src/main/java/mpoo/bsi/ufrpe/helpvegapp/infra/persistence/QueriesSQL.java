@@ -26,15 +26,10 @@ public class QueriesSQL {
         String sqlCreateTableRestaurant = "CREATE TABLE IF NOT EXISTS " + DatabaseHelper.getTableRestaurants() + "("
                 + DatabaseHelper.getColumnRestaurantId() + " integer primary key autoincrement unique not null, "
                 + DatabaseHelper.getColumnRestaurantName() + " text not null, "
-                + DatabaseHelper.getColumnRestaurantImage() + " blob, "
+                //+ DatabaseHelper.getColumnRestaurantImage() + " blob, "
                 + DatabaseHelper.getColumnRestaurantLat() + " integer not null, "
                 + DatabaseHelper.getColumnRestaurantLong() + " integer not null, "
                 + DatabaseHelper.getColumnRestaurantType() + " text not null, "
-                + DatabaseHelper.getColumnRestaurantRateGeneral() + " integer, "
-                + DatabaseHelper.getColumnRestaurantRateService() + " integer, "
-                + DatabaseHelper.getColumnRestaurantRateFood() + " integer, "
-                + DatabaseHelper.getColumnRestaurantRatePrice() + " integer, "
-                + DatabaseHelper.getColumnRestaurantRateEnvironment() + " integer"
                 + ");";
         return sqlCreateTableRestaurant;
     }
@@ -92,5 +87,10 @@ public class QueriesSQL {
     public static String sqlGetAllUsers(){
         String sqlGetAllUsers = "SELECT * FROM " + DatabaseHelper.getTableUser();
         return sqlGetAllUsers;
+    }
+
+    public static String getAllRestaurants(){
+        String sqlGetAllRestaurants = "SELECT * FROM " + DatabaseHelper.getTableRestaurants();
+        return sqlGetAllRestaurants;
     }
 }
