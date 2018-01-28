@@ -6,7 +6,6 @@ public final class Script {
     public Script(){}
 
     private static String insertRestaurant = "INSERT INTO " + DatabaseHelper.getTableRestaurants() +"("
-            +DatabaseHelper.getColumnRestaurantId() + " , "
             +DatabaseHelper.getColumnRestaurantName() + " , "
             +DatabaseHelper.getColumnRestaurantImage() + " , "
             +DatabaseHelper.getColumnRestaurantLat() + " , "

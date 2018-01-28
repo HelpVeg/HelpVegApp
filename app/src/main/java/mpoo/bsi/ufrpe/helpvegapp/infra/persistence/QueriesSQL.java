@@ -1,5 +1,6 @@
 package mpoo.bsi.ufrpe.helpvegapp.infra.persistence;
 
+
 public class QueriesSQL {
 
     public static String sqlCreateTableUser(){
@@ -37,6 +38,17 @@ public class QueriesSQL {
                 + ");";
         return sqlCreateTableRestaurant;
     }
+
+    public static String sqlCreateTableComments(){
+        String sqlCreateTableComment = "CREATE TABLE IF NOT EXISTS " + DatabaseHelper.getTableComments() + "("
+                + DatabaseHelper.getColumnCommentId() + " integer primary key autoincrement unique not null, "
+                + DatabaseHelper.getColumnCommentUserId() + " integer not null, "
+                + DatabaseHelper.getColumnCommentRestaurantsId() + " integer not null, "
+                + DatabaseHelper.getColumnCommentText() + "text not null"
+                + ");";
+        return sqlCreateTableComment;
+    }
+
 
     public static String sqlDropTableUser(){
         String sqlDropTableUser = "DROP TABLE IF EXISTS " + DatabaseHelper.getTableUser();

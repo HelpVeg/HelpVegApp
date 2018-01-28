@@ -20,7 +20,7 @@
     <string name="btnCancel">Cancelar</string>
 
     <string name="toastUpdateSuccessful">Cadastro alterado com sucesso</string>
-    <string name="toastUpdatePasswordSuccessful">Cadastro alterado com sucesso</string>
+    <string name="toastUpdatePasswordSuccessful">Senha alterada com sucesso</string>
     <string name="toastRegisterSuccessful">Cadastro realizado com sucesso</string>
     <string name="toastRegisterFailed">E-mail já cadastrado</string>
     <string name="toastLoginSuccessful">Login efetuado com sucesso</string>

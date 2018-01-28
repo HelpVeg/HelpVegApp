@@ -43,6 +43,13 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String COLUMN_RESTAURANT_RATE_PRICE = "restaurant_rate_price";
     private static final String COLUMN_RESTAURANT_RATE_ENVIRONMENT = "restaurant_rate_environment";
 
+    // ------------------------ Comment table ---------------------------------------
+    private static final String TABLE_COMMENTS = "comments";
+    private static final String COLUMN_COMMENT_ID = "comment_id";
+    private static final String COLUMN_COMMENT_USER_ID = "comment_id_user";
+    private static final String COLUMN_COMMENT_RESTAURANTS_ID = "comment_id_user";
+    private static final String COLUMN_COMMENT_TEXT= "comment_text";
+
     // ----------------------------- User getters -----------------------------
     public static String getTableUser() {
         return TABLE_USER;
@@ -128,6 +135,28 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return COLUMN_RESTAURANT_RATE_ENVIRONMENT;
     }
 
+    //--------------------------  Comment getters  -------------------------------------
+    public static String getTableComments() {
+        return TABLE_COMMENTS;
+    }
+
+    public static String getColumnCommentId() {
+        return COLUMN_COMMENT_ID;
+    }
+
+    public static String getColumnCommentUserId() {
+        return COLUMN_COMMENT_USER_ID;
+    }
+
+    public static String getColumnCommentRestaurantsId() {
+        return COLUMN_COMMENT_RESTAURANTS_ID;
+    }
+
+    public static String getColumnCommentText() {
+        return COLUMN_COMMENT_TEXT;
+    }
+
+
     private DatabaseHelper() {
         super(MyApp.getContext(), DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -137,6 +166,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.execSQL(QueriesSQL.sqlCreateTableUser());
         db.execSQL(QueriesSQL.sqlUserLogged());
         db.execSQL(QueriesSQL.sqlCreateTableRestaurant());
+        db.execSQL(QueriesSQL.sqlCreateTableComments());
         //Script.populateRestaurantTable(db);
     }
 
