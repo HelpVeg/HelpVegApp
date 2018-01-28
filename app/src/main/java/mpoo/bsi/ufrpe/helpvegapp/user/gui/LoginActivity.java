@@ -7,11 +7,13 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import mpoo.bsi.ufrpe.helpvegapp.R;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.Md5;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
+import mpoo.bsi.ufrpe.helpvegapp.user.persistence.UserDAO;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -24,15 +26,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
         checkSession();
 
+
+        UserDAO dao = new UserDAO();
+        User user = new User();
+        user.setUserName("toni");
+        user.setUserEmail("toni@gmail.com");
+        user.setUserPassword(new Md5().encrypt("123456"));
+        dao.createUser(user);
+        user.setUserName("toni2");
+        user.setUserEmail("toni2@gmail.com");
+        user.setUserPassword(new Md5().encrypt("123456"));
+        dao.createUser(user);
+
         this.mViewHolder.editEmail = findViewById(R.id.loginEmail);
         this.mViewHolder.editPassword = findViewById(R.id.loginPassword);
         this.mViewHolder.btnEnter = findViewById(R.id.loginBtnEnter);
-        this.mViewHolder.btnRegister = findViewById(R.id.loginBtnRegister);
+        this.mViewHolder.navToRegister = findViewById(R.id.loginNavRegister);
 
         this.mViewHolder.btnEnter.setOnClickListener(this);
-        this.mViewHolder.btnRegister.setOnClickListener(this);
-
-        new UserBusiness().viewUsers();
+        this.mViewHolder.navToRegister.setOnClickListener(this);
     }
 
     public void checkSession(){
@@ -54,12 +66,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 finish();
             }
         }
-        if (id == R.id.loginBtnRegister){
-            Intent intent = new Intent(this,RegisterActivity.class);
+        if (id == R.id.loginNavRegister){
+            Intent intent = new Intent(this, RegisterActivity.class);
             startActivity(intent);
             finish();
         }
     }
+
     public boolean login(){
         boolean loginFiedls = false;
         if (validateFields()){
@@ -86,23 +99,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         boolean blankValidate = true;
 
         if (TextUtils.isEmpty(email)){
-            mViewHolder.editEmail.setError("Campo email invalido");
+            mViewHolder.editEmail.setError("campo email invalido");
             blankValidate = false;
         }
 
         else if (TextUtils.isEmpty(password)){
-            mViewHolder.editPassword.setError("Campo senha inválido");
+            mViewHolder.editPassword.setError("campo senha inválido");
             blankValidate = false;
         }
         return blankValidate;
     }
 
-
     private static class ViewHolder{
         EditText editEmail;
         EditText editPassword;
         Button btnEnter;
-        Button btnRegister;
+        TextView navToRegister;
     }
+
 
 }

@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
-import mpoo.bsi.ufrpe.helpvegapp.user.persistence.Session;
+import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 import mpoo.bsi.ufrpe.helpvegapp.user.persistence.UserDAO;
 
 public class UserBusiness {
@@ -41,6 +41,7 @@ public class UserBusiness {
 
     public void endSession(){
         userDAO.removeLoggedUser();
+        Session.setUserIn(null);
     }
 
 
@@ -64,8 +65,12 @@ public class UserBusiness {
         if (users.size() == 0) System.out.println("# Não existem registros.");
     }
 
-    public void updateUser(User user){
-        getUserDAO().updateUser(user);
+    public boolean updateUser(User user){
+        if (userDAO.getSingleUser(user.getUserEmail())==null){
+            getUserDAO().updateUser(user);
+            Session.setUserIn(user);
+            return true;
+        }
+        return false;
     }
-
 }

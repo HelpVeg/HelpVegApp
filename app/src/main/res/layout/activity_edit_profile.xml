@@ -13,6 +13,14 @@
         android:layout_height="386dp"
         android:orientation="vertical">
 
+        <ImageView
+            android:id="@+id/ImgProfile"
+            android:layout_width="117dp"
+            android:layout_height="114dp"
+            android:layout_marginLeft="125dp"
+            app:srcCompat="@drawable/ic_person_black_24dp"
+            tools:ignore="VectorDrawableCompat" />
+
         <EditText
             android:id="@+id/EditProfileName"
             android:layout_width="match_parent"
@@ -56,29 +64,30 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="121dp"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/EditProfileBtnSave"
-            android:text="@string/btnCancel"
+            android:id="@+id/EditProfileBtnCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:background="@color/colorPrimary"
-            android:textColor="@color/colorTextPrimary"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="10dp"/>
+            android:text="@string/btnCancel"
+            android:textColor="@color/colorTextPrimary" />
 
         <Button
-            android:id="@+id/EditProfileBtnCancel"
-            android:text="@string/btnSave"
+            android:id="@+id/EditProfileBtnSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="40dp"
             android:layout_weight="1"
             android:background="@color/colorPrimary"
-            android:textColor="@color/colorTextPrimary"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="40dp"/>
+            android:text="@string/btnSave"
+            android:textColor="@color/colorTextPrimary" />
     </LinearLayout>
 </LinearLayout>

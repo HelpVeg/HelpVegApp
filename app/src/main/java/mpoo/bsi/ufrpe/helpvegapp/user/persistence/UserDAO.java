@@ -3,23 +3,19 @@ package mpoo.bsi.ufrpe.helpvegapp.user.persistence;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.provider.ContactsContract;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
+import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 import mpoo.bsi.ufrpe.helpvegapp.infra.persistence.DatabaseHelper;
 import mpoo.bsi.ufrpe.helpvegapp.infra.persistence.QueriesSQL;
 import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
 
 public class UserDAO{
-
-    public User generateUser(Cursor cursor) {
-        User user = new User();
-        user.setUserId(Integer.parseInt(cursor.getString(0)));
-        user.setUserName(cursor.getString(1));
-        user.setUserEmail(cursor.getString(2));
-        user.setUserPassword(cursor.getString(3));
-        return user;
-    }
 
     public boolean createUser(User user) {
 
@@ -35,20 +31,40 @@ public class UserDAO{
         return response;
     }
 
+    public User generateUser(Cursor cursor) {
+        User user = new User();
+        user.setUserId(Integer.parseInt(cursor.getString(0)));
+        user.setUserName(cursor.getString(1));
+        user.setUserEmail(cursor.getString(2));
+        user.setUserPassword(cursor.getString(3));
+        byte[] byteArray = cursor.getBlob(4);
+        if(byteArray != null){
+            Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray , 0, byteArray.length);
+            user.setUserPhoto(bitmap);
+        }
+        return user;
+    }
+
     public void updateUser(User user) {
         SQLiteDatabase db = DatabaseHelper.getDb().getWritableDatabase();
-        String where = QueriesSQL.sqlUserFromId() + " = " + Integer.toString(Session.getUserIn().getUserId());
+        String where = DatabaseHelper.getColumnUserId() + " = " + Integer.toString(Session.getUserIn().getUserId()) + ";";
         ContentValues values = new ContentValues();
+
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        user.getUserPhoto().compress(Bitmap.CompressFormat.JPEG, 70, stream);
+        byte[] byteArray = stream.toByteArray();
 
         values.put(DatabaseHelper.getColumnUserName(), user.getUserName());
         values.put(DatabaseHelper.getColumnUserEmail(), user.getUserEmail());
         values.put(DatabaseHelper.getColumnUserPass(), user.getUserPassword());
+        values.put(DatabaseHelper.getColumnUserPhoto(), byteArray);
 
         db.update(DatabaseHelper.getTableUser(), values, where, null);
         db.close();
-        removeLoggedUser();
-        insertLoggedUser(user);
     }
+
+
+
 
     public ArrayList<User> getAllUsers() {
 
@@ -59,7 +75,12 @@ public class UserDAO{
         if (cursor.moveToFirst()) {
 
             do {
-                User user = generateUser(cursor);
+                User user = new User();
+                user.setUserId(cursor.getInt(0));
+                user.setUserName(cursor.getString(1));
+                user.setUserEmail(cursor.getString(2));
+                user.setUserPassword(cursor.getString(3));
+                //user.setUserPhoto()
                 users.add(user);
             } while (cursor.moveToNext());
         }
@@ -68,6 +89,8 @@ public class UserDAO{
         db.close();
         return users;
     }
+
+
 
     public User getSingleUser(int user_id) {
         SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
@@ -81,6 +104,20 @@ public class UserDAO{
         db.close();
         return user;
     }
+
+    public User getSingleUser(String email){
+        SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
+        User user = null;
+        Cursor cursor = db.rawQuery(QueriesSQL.sqlUserFromEmail(), new String[] {email});
+
+        if (cursor.moveToFirst()) {
+            user = generateUser(cursor);
+        }
+        cursor.close();
+        db.close();
+        return user;
+    }
+
 
     public User getLoginUser(String email, String pass){
 

@@ -1,13 +1,25 @@
 package mpoo.bsi.ufrpe.helpvegapp.user.gui;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.support.annotation.NonNull;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -17,12 +29,14 @@ import com.google.android.gms.maps.model.LatLng;
 
 
 import mpoo.bsi.ufrpe.helpvegapp.R;
+import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
+import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
 
     private GoogleMap mMap;
-    boolean local = true;
-    LocationManager locationManager;
+    private LocationManager locationManager;
+    private static final int REQUEST_FINE_LOCATION = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,14 +45,43 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
-                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission
-                (this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
+        createMenu();
+    }
 
+
+    public void createMenu(){
+        Toolbar toolbar =  findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigationDrawerOpen, R.string.navigationDrawerClose);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+    }
+
+
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        goToCurrentLocation();
+    }
+
+    public void goToCurrentLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_FINE_LOCATION);
+        }
         if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED /*&& ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED*/) {
+                return;
+            }
+            mMap.setMyLocationEnabled(true);
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, new LocationListener() {
                 @Override
                 public void onLocationChanged(Location location) {
@@ -65,6 +108,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             });
 
         } else if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            mMap.setMyLocationEnabled(true);
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, new LocationListener() {
                 @Override
                 public void onLocationChanged(Location location) {
@@ -89,41 +133,59 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                 }
             });
-
-
         }
-
-
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_FINE_LOCATION: {
+                goToCurrentLocation();
+            }
         }
-        mMap.setMyLocationEnabled(true);
-
-        // Add a marker in Sydney and move the camera
- ///       LatLng sydney = new LatLng(-34, 151);
-////        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-////        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,10.2f));
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.activity_main_drawer,menu);
+        ImageView photo = findViewById(R.id.navPhoto);
+        TextView email = findViewById(R.id.navEmail);
+        TextView name = findViewById(R.id.navName);
+        photo.setImageBitmap(Session.getUserIn().getUserPhoto());
+        name.setText(Session.getUserIn().getUserName());
+        email.setText(Session.getUserIn().getUserEmail());
+
+        return true;
+    }
+
+    public void navigationLogout(){
+        UserBusiness userBusiness = new UserBusiness();
+        userBusiness.endSession();
+        Intent intent = new Intent(this,LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void navigationProfile(){
+        Intent intent = new Intent(this,ProfileActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        switch (item.getItemId()){
+            case R.id.navLogout: {
+                navigationLogout();
+                break;
+            }
+            case R.id.navProfile: {
+                navigationProfile();
+                break;
+            }
+        }
+        return true;
+    }
 }

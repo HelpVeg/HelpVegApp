@@ -8,9 +8,7 @@ import android.content.Intent;
 import android.widget.TextView;
 
 import mpoo.bsi.ufrpe.helpvegapp.R;
-import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
-import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
-import mpoo.bsi.ufrpe.helpvegapp.user.persistence.Session;
+import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -24,10 +22,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         this.mViewHolder.textNameProfile = findViewById(R.id.textNameProfile);
         this.mViewHolder.textEmailProfile = findViewById(R.id.textEmailProfile);
         this.mViewHolder.btnEditProfile = findViewById(R.id.profileBtnEdit);
-        this.mViewHolder.btnLogout = findViewById(R.id.profileBtnLogout);
 
         this.mViewHolder.btnEditProfile.setOnClickListener(this);
-        this.mViewHolder.btnLogout.setOnClickListener(this);
         showUserLoggedData();
     }
 
@@ -44,19 +40,18 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             Intent intent = new Intent(this, EditProfileActivity.class);
             startActivity(intent);
         }
-        if (id == R.id.profileBtnLogout){
-            UserBusiness userBusiness = new UserBusiness();
-            userBusiness.endSession();
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-        }
     }
 
     private static class ViewHolder{
         private TextView textNameProfile;
         private TextView textEmailProfile;
         private Button btnEditProfile;
-        private Button btnLogout;
+    }
+    @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        Intent intent = new Intent(this,MapsActivity.class);
+        startActivity(intent);
     }
 }
