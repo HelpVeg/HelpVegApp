@@ -21,6 +21,23 @@ public class QueriesSQL {
         return (sqlUserLogged);
     }
 
+    public static String sqlCreateTableRestaurant(){
+        String sqlCreateTableRestaurant = "CREATE TABLE IF NOT EXISTS " + DatabaseHelper.getTableRestaurants() + "("
+                + DatabaseHelper.getColumnRestaurantId() + " integer primary key autoincrement unique not null, "
+                + DatabaseHelper.getColumnRestaurantName() + " text not null, "
+                + DatabaseHelper.getColumnRestaurantImage() + " blob, "
+                + DatabaseHelper.getColumnRestaurantLat() + " integer not null, "
+                + DatabaseHelper.getColumnRestaurantLong() + " integer not null, "
+                + DatabaseHelper.getColumnRestaurantType() + " text not null, "
+                + DatabaseHelper.getColumnRestaurantRateGeneral() + " integer, "
+                + DatabaseHelper.getColumnRestaurantRateService() + " integer, "
+                + DatabaseHelper.getColumnRestaurantRateFood() + " integer, "
+                + DatabaseHelper.getColumnRestaurantRatePrice() + " integer, "
+                + DatabaseHelper.getColumnRestaurantRateEnvironment() + " integer"
+                + ");";
+        return sqlCreateTableRestaurant;
+    }
+
     public static String sqlDropTableUser(){
         String sqlDropTableUser = "DROP TABLE IF EXISTS " + DatabaseHelper.getTableUser();
         return (sqlDropTableUser);
@@ -29,6 +46,11 @@ public class QueriesSQL {
     public static String sqlDropTableUserLogged(){
         String sqlDropTableUserLogged = "DROP TABLE IF EXISTS " + DatabaseHelper.getTableUserLogged();
         return (sqlDropTableUserLogged);
+    }
+
+    public static String sqlDropTableRestaurants(){
+        String sqlDropTableRestaurants = "DROP TABLE IF EXISTS " + DatabaseHelper.getTableRestaurants();
+        return sqlDropTableRestaurants;
     }
 
     public static String sqlUserFromEmail(){
