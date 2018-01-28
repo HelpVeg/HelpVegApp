@@ -1,10 +1,13 @@
 package mpoo.bsi.ufrpe.helpvegapp.user.domain;
 
+import android.graphics.Bitmap;
+
 public class User {
     private int userId;
     private String userName;
     private String userEmail;
     private String userPassword;
+    private Bitmap userPhoto;
 
     public int getUserId(){
         return userId;
@@ -32,6 +35,13 @@ public class User {
     }
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
+    }
+
+    public Bitmap getUserPhoto(){
+        return userPhoto;
+    }
+    public void setUserPhoto(Bitmap userPhoto){
+        this.userPhoto = userPhoto;
     }
 
 }

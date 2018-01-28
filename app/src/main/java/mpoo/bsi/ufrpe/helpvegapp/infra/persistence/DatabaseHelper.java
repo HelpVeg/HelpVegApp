@@ -23,6 +23,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String COLUMN_USER_NAME = "user_name";
     private static final String COLUMN_USER_EMAIL = "user_email";
     private static final String COLUMN_USER_PASS = "user_pass";
+    private static final String COLUMN_USER_PHOTO = "user_photo";
 
     // ------------------------- User Logged table and columns -------------------------
     private static final String TABLE_USER_LOGGED = "user_logged";
@@ -47,6 +48,10 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     public static String getColumnUserPass() {
         return COLUMN_USER_PASS;
+    }
+
+    public static String getColumnUserPhoto() {
+        return COLUMN_USER_PHOTO;
     }
 
     // ------------------------ User Logged getters and setters --------------------------

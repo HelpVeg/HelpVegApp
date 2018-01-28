@@ -13,6 +13,7 @@ import mpoo.bsi.ufrpe.helpvegapp.R;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.Md5;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
+import mpoo.bsi.ufrpe.helpvegapp.user.persistence.UserDAO;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -24,6 +25,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         checkSession();
+
+
+        UserDAO dao = new UserDAO();
+        User user = new User();
+        user.setUserName("toni");
+        user.setUserEmail("toni@gmail.com");
+        user.setUserPassword(new Md5().encrypt("123456"));
+        dao.createUser(user);
+        user.setUserName("toni2");
+        user.setUserEmail("toni2@gmail.com");
+        user.setUserPassword(new Md5().encrypt("123456"));
+        dao.createUser(user);
 
         this.mViewHolder.editEmail = findViewById(R.id.loginEmail);
         this.mViewHolder.editPassword = findViewById(R.id.loginPassword);

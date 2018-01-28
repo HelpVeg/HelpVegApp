@@ -12,6 +12,7 @@
     <string name="btnRegister">Cadastrar</string>
     <string name="btnRegisterLogin">Cadastrar-se</string>
     <string name="btnLogin">Entrar</string>
+    <string name="btnEditPassword">Alterar Senha</string>
     <string name="navLogin">Já possui cadastro? Faça o login aqui</string>
     <string name="navRegister">Não possui conta? Cadastre-se</string>
     <string name="btnEditProfile">Editar perfil</string>
@@ -19,9 +20,10 @@
     <string name="btnSave">Salvar</string>
     <string name="btnCancel">Cancelar</string>
 
-    <string name="toastUpdateSuccessful">Cadastrado realizado com sucesso</string>
-    <string name="toastRegisterSuccessful">Cadastrado realizado com sucesso</string>
-    <string name="toastRegisterFailed">Erro! E-mail já cadastrado</string>
+    <string name="toastUpdateSuccessful">Cadastro alterado com sucesso</string>
+    <string name="toastUpdatePasswordSuccessful">Cadastro alterado com sucesso</string>
+    <string name="toastRegisterSuccessful">Cadastro realizado com sucesso</string>
+    <string name="toastRegisterFailed">E-mail já cadastrado</string>
     <string name="toastLoginSuccessful">Login efetuado com sucesso</string>
     <string name="toastLoginFailed">Não foi possível efetuar o login</string>
     <string name="toastBlankFieldName">Nome inválido</string>

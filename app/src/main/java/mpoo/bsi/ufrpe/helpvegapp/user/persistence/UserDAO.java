@@ -3,7 +3,11 @@ package mpoo.bsi.ufrpe.helpvegapp.user.persistence;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.provider.ContactsContract;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
@@ -33,6 +37,11 @@ public class UserDAO{
         user.setUserName(cursor.getString(1));
         user.setUserEmail(cursor.getString(2));
         user.setUserPassword(cursor.getString(3));
+        byte[] byteArray = cursor.getBlob(4);
+        if(byteArray != null){
+            Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray , 0, byteArray.length);
+            user.setUserPhoto(bitmap);
+        }
         return user;
     }
 
@@ -41,13 +50,21 @@ public class UserDAO{
         String where = DatabaseHelper.getColumnUserId() + " = " + Integer.toString(Session.getUserIn().getUserId()) + ";";
         ContentValues values = new ContentValues();
 
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        user.getUserPhoto().compress(Bitmap.CompressFormat.JPEG, 70, stream);
+        byte[] byteArray = stream.toByteArray();
+
         values.put(DatabaseHelper.getColumnUserName(), user.getUserName());
         values.put(DatabaseHelper.getColumnUserEmail(), user.getUserEmail());
         values.put(DatabaseHelper.getColumnUserPass(), user.getUserPassword());
+        values.put(DatabaseHelper.getColumnUserPhoto(), byteArray);
 
         db.update(DatabaseHelper.getTableUser(), values, where, null);
         db.close();
     }
+
+
+
 
     public ArrayList<User> getAllUsers() {
 
@@ -59,10 +76,11 @@ public class UserDAO{
 
             do {
                 User user = new User();
-                user.setUserId(Integer.parseInt(cursor.getString(0)));
+                user.setUserId(cursor.getInt(0));
                 user.setUserName(cursor.getString(1));
                 user.setUserEmail(cursor.getString(2));
                 user.setUserPassword(cursor.getString(3));
+                //user.setUserPhoto()
                 users.add(user);
             } while (cursor.moveToNext());
         }
@@ -71,6 +89,8 @@ public class UserDAO{
         db.close();
         return users;
     }
+
+
 
     public User getSingleUser(int user_id) {
         SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();

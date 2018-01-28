@@ -18,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -44,11 +45,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        chamaMenu();
+        createMenu();
     }
 
 
-    public void chamaMenu(){
+    public void createMenu(){
         Toolbar toolbar =  findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
@@ -148,9 +149,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.activity_main_drawer,menu);
-        TextView name = findViewById(R.id.navName);
-        name.setText(Session.getUserIn().getUserName());
+        ImageView photo = findViewById(R.id.navPhoto);
         TextView email = findViewById(R.id.navEmail);
+        TextView name = findViewById(R.id.navName);
+        photo.setImageBitmap(Session.getUserIn().getUserPhoto());
+        name.setText(Session.getUserIn().getUserName());
         email.setText(Session.getUserIn().getUserEmail());
 
         return true;

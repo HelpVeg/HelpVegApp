@@ -7,10 +7,13 @@ public class QueriesSQL {
                 DatabaseHelper.getColumnUserId() + " integer primary key autoincrement unique not null, " +
                 DatabaseHelper.getColumnUserName() + " text not null, " +
                 DatabaseHelper.getColumnUserEmail() + " text unique not null, " +
-                DatabaseHelper.getColumnUserPass() + " text not null"
+                DatabaseHelper.getColumnUserPass() + " text not null, " +
+                DatabaseHelper.getColumnUserPhoto() + " blob"
                 + ");";
         return (sqlCreateTableUser);
     }
+
+
 
     public static String sqlUserLogged(){
         String sqlUserLogged = "CREATE TABLE IF NOT EXISTS " + DatabaseHelper.getTableUserLogged() + "(" +

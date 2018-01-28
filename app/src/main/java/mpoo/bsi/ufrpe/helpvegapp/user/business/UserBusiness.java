@@ -1,5 +1,8 @@
 package mpoo.bsi.ufrpe.helpvegapp.user.business;
 
+import android.graphics.Bitmap;
+
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -65,12 +68,38 @@ public class UserBusiness {
         if (users.size() == 0) System.out.println("# Não existem registros.");
     }
 
-    public boolean updateUser(User user){
-        if (userDAO.getSingleUser(user.getUserEmail())==null){
-            getUserDAO().updateUser(user);
-            Session.setUserIn(user);
+    public boolean updateUserPassword(String password){
+        Session.getUserIn().setUserPassword(password);
+        getUserDAO().updateUser(Session.getUserIn());
+        viewUsers();
+        return true;
+    }
+
+    public boolean updateUserName(String name){
+        Session.getUserIn().setUserName(name);
+        getUserDAO().updateUser(Session.getUserIn());
+        viewUsers();
+        return true;
+    }
+
+    public void updateUserPhoto(Bitmap bitmap){
+        Session.getUserIn().setUserPhoto(bitmap);
+        getUserDAO().updateUser(Session.getUserIn());
+    }
+
+    public boolean updateUserEmail(String email){
+        if (Session.getUserIn().getUserEmail().equals(email)){
+            viewUsers();
             return true;
         }
-        return false;
+        if(userDAO.getSingleUser(email)!=null){
+            viewUsers();
+            return false;
+        }
+        Session.getUserIn().setUserEmail(email);
+        getUserDAO().updateUser(Session.getUserIn());
+        viewUsers();
+        return true;
     }
+
 }
