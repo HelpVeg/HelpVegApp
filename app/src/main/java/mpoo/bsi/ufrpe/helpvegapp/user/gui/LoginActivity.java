@@ -26,18 +26,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
         checkSession();
 
-
-        UserDAO dao = new UserDAO();
-        User user = new User();
-        user.setUserName("toni");
-        user.setUserEmail("toni@gmail.com");
-        user.setUserPassword(new Md5().encrypt("123456"));
-        dao.createUser(user);
-        user.setUserName("toni2");
-        user.setUserEmail("toni2@gmail.com");
-        user.setUserPassword(new Md5().encrypt("123456"));
-        dao.createUser(user);
-
         this.mViewHolder.editEmail = findViewById(R.id.loginEmail);
         this.mViewHolder.editPassword = findViewById(R.id.loginPassword);
         this.mViewHolder.btnEnter = findViewById(R.id.loginBtnEnter);

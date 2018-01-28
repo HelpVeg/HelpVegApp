@@ -27,11 +27,15 @@ public class EditPasswordActivity extends AppCompatActivity implements View.OnCl
         this.mViewHolder.edtOldPassword = findViewById(R.id.EditProfileOldPassword);
         this.mViewHolder.edtNewPassword = findViewById(R.id.EditProfileNewPassword);
         this.mViewHolder.edtConfirmPassword = findViewById(R.id.EditProfileConfirmPassword);
-
         this.mViewHolder.btnSave = findViewById(R.id.EditPasswordBtnSave);
-
         this.mViewHolder.btnSave.setOnClickListener(this);
+        checkSession();
+    }
 
+    public void checkSession(){
+        if (Session.getUserIn() == null){
+            new UserBusiness().recoverSession();
+        }
     }
 
     public void onClick(View view){

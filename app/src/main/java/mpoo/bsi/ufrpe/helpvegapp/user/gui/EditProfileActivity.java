@@ -20,8 +20,10 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
     private ViewHolder mViewHolder = new ViewHolder();
     private UserBusiness userBusiness = new UserBusiness();
+    private Bitmap selectedImage;
     private static final int REQUEST_GALERY = 0;
     private static final int REQUEST_CROP = 1;
+
 
 
     @Override
@@ -34,16 +36,26 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         this.mViewHolder.edtName = findViewById(R.id.EditProfileName);
         this.mViewHolder.imgProfile.setOnClickListener(this);
         this.mViewHolder.btnSave.setOnClickListener(this);
+        checkSession();
         showUserLoggedData();
     }
 
+    public void checkSession(){
+        if (Session.getUserIn() == null){
+            new UserBusiness().recoverSession();
+        }
+    }
+
     public void showUserLoggedData(){
+
         this.mViewHolder.edtName.setText(Session.getUserIn().getUserName());
         this.mViewHolder.edtEmail.setText(Session.getUserIn().getUserEmail());
         if (Session.getUserIn().getUserPhoto()!=null){
             this.mViewHolder.imgProfile.setImageBitmap(Session.getUserIn().getUserPhoto());
+            selectedImage = Session.getUserIn().getUserPhoto();
         }
     }
+
 
     public void onClick(View view){
         int id = view.getId();
@@ -79,13 +91,9 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         } else if (requestCode == REQUEST_CROP && resultCode == RESULT_OK){
             Bundle extras = data.getExtras();
             Bitmap bitmap = extras.getParcelable("data");
-            saveProfileImage(bitmap);
+            selectedImage = bitmap;
             mViewHolder.imgProfile.setImageBitmap(bitmap);
         }
-    }
-
-    public void saveProfileImage(Bitmap bitmap){
-        userBusiness.updateUserPhoto(bitmap);
     }
 
     public boolean verifyEdition(){
@@ -96,6 +104,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 this.mViewHolder.edtEmail.setError("Email já cadastrado");
                 return false;
             } else{
+                userBusiness.updateUserPhoto(selectedImage);
                 userBusiness.updateUserName(name);
                 return true;
             }
@@ -134,4 +143,11 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         finish();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        UserBusiness userBusiness = new UserBusiness();
+        userBusiness.recoverSession();
+    }
 }
+

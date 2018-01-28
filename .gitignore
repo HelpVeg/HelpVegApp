@@ -10,4 +10,6 @@
 /.idea/dictionaries/
 /.idea/inspectionProfiles/
 /.idea/checkstyle-idea.xml
-/.idea\modules.xml
+/.idea/sonarlint/
+/.idea/modules.xml
+/.idea/misc.xml

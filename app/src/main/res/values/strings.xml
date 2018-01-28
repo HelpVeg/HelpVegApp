@@ -5,7 +5,6 @@
     <string name="email">Email</string>
     <string name="confirmPassword">Confirmação de senha</string>
 
-
     <string name="profile">Perfil</string>
     <string name="logout">Logout</string>
 
@@ -30,7 +29,6 @@
     <string name="toastBlankFieldEmail">Email inválido</string>
     <string name="toastBlankFieldPassword">Senha inválida</string>
     <string name="toastWrongFieldPassword">Senhas não coincidem</string>
-
 
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_main">MainActivity</string>

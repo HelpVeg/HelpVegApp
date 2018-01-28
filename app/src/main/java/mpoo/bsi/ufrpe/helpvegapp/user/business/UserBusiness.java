@@ -2,7 +2,6 @@ package mpoo.bsi.ufrpe.helpvegapp.user.business;
 
 import android.graphics.Bitmap;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -25,9 +24,9 @@ public class UserBusiness {
 
 
     public User validateLogin(String email, String pass){
-        User userIn = getUserDAO().getLoginUser(email,pass);
+        User userIn = userDAO.getLoginUser(email,pass);
         if (userIn !=null){
-            userDAO.insertLoggedUser(userIn);
+            getUserDAO().insertLoggedUser(userIn);
             Session.setUserIn(userIn);
         }
         return userIn;
@@ -59,26 +58,22 @@ public class UserBusiness {
 
     public void viewUsers() {
         ArrayList<User> users = getUserDAO().getAllUsers();
-
         for (int i = 0; i < users.size(); i++) {
             User us = users.get(i);
             System.out.println("#" + i + " ID: " + us.getUserId() + " Nome: " + us.getUserName() + ", Email: " + us.getUserEmail() + ", Senha: " + us.getUserPassword());
         }
-
         if (users.size() == 0) System.out.println("# Não existem registros.");
     }
 
     public boolean updateUserPassword(String password){
         Session.getUserIn().setUserPassword(password);
         getUserDAO().updateUser(Session.getUserIn());
-        viewUsers();
         return true;
     }
 
     public boolean updateUserName(String name){
         Session.getUserIn().setUserName(name);
         getUserDAO().updateUser(Session.getUserIn());
-        viewUsers();
         return true;
     }
 
@@ -89,16 +84,13 @@ public class UserBusiness {
 
     public boolean updateUserEmail(String email){
         if (Session.getUserIn().getUserEmail().equals(email)){
-            viewUsers();
             return true;
         }
         if(userDAO.getSingleUser(email)!=null){
-            viewUsers();
             return false;
         }
         Session.getUserIn().setUserEmail(email);
         getUserDAO().updateUser(Session.getUserIn());
-        viewUsers();
         return true;
     }
 

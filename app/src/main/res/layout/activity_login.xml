@@ -16,8 +16,8 @@
 
     <EditText
         android:id="@+id/loginEmail"
-        android:layout_width="322dp"
-        android:layout_height="44dp"
+        android:layout_width="317dp"
+        android:layout_height="56dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_marginTop="40dp"
@@ -26,8 +26,8 @@
 
     <EditText
         android:id="@+id/loginPassword"
-        android:layout_width="322dp"
-        android:layout_height="44dp"
+        android:layout_width="317dp"
+        android:layout_height="56dp"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:hint="@string/password"
@@ -37,13 +37,13 @@
         android:id="@+id/loginBtnEnter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/colorTextPrimary"
-        android:text="@string/btnLogin"
-        android:background="@color/colorPrimary"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="70dp"
-        android:layout_marginRight="70dp"/>
+        android:layout_marginRight="70dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorPrimary"
+        android:text="@string/btnLogin"
+        android:textColor="@color/colorTextPrimary" />
 
     <!-- <Button
         android:id="@+id/loginBtnRegister"

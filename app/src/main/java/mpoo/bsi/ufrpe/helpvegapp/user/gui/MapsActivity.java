@@ -45,9 +45,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        checkSession();
         createMenu();
     }
 
+    public void checkSession(){
+        if (Session.getUserIn() == null){
+            new UserBusiness().recoverSession();
+        }
+    }
 
     public void createMenu(){
         Toolbar toolbar =  findViewById(R.id.toolbar);
@@ -187,5 +193,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         }
         return true;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        UserBusiness userBusiness = new UserBusiness();
+        userBusiness.recoverSession();
     }
 }

@@ -6,10 +6,12 @@ import android.widget.Button;
 import android.view.View;
 import android.content.Intent;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import mpoo.bsi.ufrpe.helpvegapp.R;
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
+import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -29,12 +31,20 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         this.mViewHolder.btnEditPassword.setOnClickListener(this);
         this.mViewHolder.btnEditProfile.setOnClickListener(this);
+        checkSession();
         showUserLoggedData();
     }
 
 
+    public void checkSession(){
+        if (Session.getUserIn() == null){
+            new UserBusiness().recoverSession();
+        }
+    }
+
     
     public void showUserLoggedData(){
+
         this.mViewHolder.textEmailProfile.setText(Session.getUserIn().getUserEmail());
         this.mViewHolder.textNameProfile.setText(Session.getUserIn().getUserName());
         if (Session.getUserIn().getUserPhoto()!=null){
@@ -65,9 +75,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         Intent intent = new Intent(this,MapsActivity.class);
         startActivity(intent);
         finish();
     }
+
 }

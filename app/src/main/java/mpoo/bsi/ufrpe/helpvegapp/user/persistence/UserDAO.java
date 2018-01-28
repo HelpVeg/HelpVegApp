@@ -18,7 +18,6 @@ import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
 public class UserDAO{
 
     public boolean createUser(User user) {
-
         SQLiteDatabase db = DatabaseHelper.getDb().getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -33,37 +32,31 @@ public class UserDAO{
 
     public User generateUser(Cursor cursor) {
         User user = new User();
-        user.setUserId(Integer.parseInt(cursor.getString(0)));
+        user.setUserId(cursor.getInt(0));
         user.setUserName(cursor.getString(1));
         user.setUserEmail(cursor.getString(2));
         user.setUserPassword(cursor.getString(3));
         byte[] byteArray = cursor.getBlob(4);
-        if(byteArray != null){
-            Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray , 0, byteArray.length);
-            user.setUserPhoto(bitmap);
-        }
+        user.setUserPhoto(byteToBitmap(byteArray));
+
         return user;
     }
+
 
     public void updateUser(User user) {
         SQLiteDatabase db = DatabaseHelper.getDb().getWritableDatabase();
         String where = DatabaseHelper.getColumnUserId() + " = " + Integer.toString(Session.getUserIn().getUserId()) + ";";
         ContentValues values = new ContentValues();
 
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        user.getUserPhoto().compress(Bitmap.CompressFormat.JPEG, 70, stream);
-        byte[] byteArray = stream.toByteArray();
 
         values.put(DatabaseHelper.getColumnUserName(), user.getUserName());
         values.put(DatabaseHelper.getColumnUserEmail(), user.getUserEmail());
         values.put(DatabaseHelper.getColumnUserPass(), user.getUserPassword());
-        values.put(DatabaseHelper.getColumnUserPhoto(), byteArray);
+        values.put(DatabaseHelper.getColumnUserPhoto(), bitmapToByte(user.getUserPhoto()));
 
         db.update(DatabaseHelper.getTableUser(), values, where, null);
         db.close();
     }
-
-
 
 
     public ArrayList<User> getAllUsers() {
@@ -89,7 +82,6 @@ public class UserDAO{
         db.close();
         return users;
     }
-
 
 
     public User getSingleUser(int user_id) {
@@ -163,7 +155,23 @@ public class UserDAO{
         SQLiteDatabase db = DatabaseHelper.getDb().getWritableDatabase();
         db.delete(DatabaseHelper.getTableUserLogged(), null, null);
         db.close();
-
     }
 
+    public Bitmap byteToBitmap(byte[] byteArray){
+        if(byteArray != null){
+            Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray , 0, byteArray.length);
+            return bitmap;
+        }
+        return null;
+    }
+
+    public byte[] bitmapToByte(Bitmap bitmap){
+        if (bitmap!=null){
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
+            byte[] byteArray = stream.toByteArray();
+            return byteArray;
+        }
+        return null;
+    }
 }
