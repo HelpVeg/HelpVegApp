@@ -47,7 +47,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String TABLE_COMMENTS = "comments";
     private static final String COLUMN_COMMENT_ID = "comment_id";
     private static final String COLUMN_COMMENT_USER_ID = "comment_id_user";
-    private static final String COLUMN_COMMENT_RESTAURANTS_ID = "comment_id_user";
+    private static final String COLUMN_COMMENT_RESTAURANTS_ID = "comment_id_restaurant";
     private static final String COLUMN_COMMENT_TEXT= "comment_text";
 
     // ----------------------------- User getters -----------------------------

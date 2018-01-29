@@ -29,7 +29,7 @@ public class QueriesSQL {
                 //+ DatabaseHelper.getColumnRestaurantImage() + " blob, "
                 + DatabaseHelper.getColumnRestaurantLat() + " integer not null, "
                 + DatabaseHelper.getColumnRestaurantLong() + " integer not null, "
-                + DatabaseHelper.getColumnRestaurantType() + " text not null, "
+                + DatabaseHelper.getColumnRestaurantType() + " text not null"
                 + ");";
         return sqlCreateTableRestaurant;
     }

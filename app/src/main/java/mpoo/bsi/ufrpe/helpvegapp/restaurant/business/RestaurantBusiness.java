@@ -14,6 +14,7 @@ public class RestaurantBusiness {
     public ArrayList<Restaurant> getAllRestaurants(){
         return restaurantDAO.getAllRestaurants();
     }
+
     public void viewRestaurants() {
         ArrayList<Restaurant> restaurants = restaurantDAO.getAllRestaurants();
         for (int i = 0; i < restaurants.size(); i++) {

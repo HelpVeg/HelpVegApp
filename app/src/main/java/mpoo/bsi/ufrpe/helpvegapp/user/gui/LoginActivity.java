@@ -25,7 +25,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        new RestaurantBusiness().getAllRestaurants();
+        new RestaurantBusiness().viewRestaurants();
         checkSession();
 
         this.mViewHolder.editEmail = findViewById(R.id.loginEmail);

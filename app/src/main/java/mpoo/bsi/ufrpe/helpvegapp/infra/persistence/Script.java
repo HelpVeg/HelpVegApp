@@ -11,7 +11,7 @@ public final class Script {
             //+DatabaseHelper.getColumnRestaurantImage() + " , "
             +DatabaseHelper.getColumnRestaurantLat() + " , "
             +DatabaseHelper.getColumnRestaurantLong() + " , "
-            +DatabaseHelper.getColumnRestaurantType() + " , "
+            +DatabaseHelper.getColumnRestaurantType()
             + ") VALUES ";
 
     public static void populateRestaurantTable(SQLiteDatabase db){
