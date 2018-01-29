@@ -155,13 +155,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.activity_main_drawer,menu);
+
         ImageView photo = findViewById(R.id.navPhoto);
         TextView email = findViewById(R.id.navEmail);
         TextView name = findViewById(R.id.navName);
-        photo.setImageBitmap(Session.getUserIn().getUserPhoto());
+        if (Session.getUserIn().getUserPhoto()!=null){
+            photo.setImageBitmap(Session.getUserIn().getUserPhoto());
+        }
         name.setText(Session.getUserIn().getUserName());
         email.setText(Session.getUserIn().getUserEmail());
-
         return true;
     }
 
