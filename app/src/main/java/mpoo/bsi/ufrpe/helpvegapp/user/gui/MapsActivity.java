@@ -26,9 +26,15 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 
+
+import java.util.ArrayList;
 
 import mpoo.bsi.ufrpe.helpvegapp.R;
+import mpoo.bsi.ufrpe.helpvegapp.restaurant.business.RestaurantBusiness;
+import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Restaurant;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 
@@ -37,6 +43,9 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private GoogleMap mMap;
     private LocationManager locationManager;
     private static final int REQUEST_FINE_LOCATION = 1;
+    private RestaurantBusiness restaurantBusiness = new RestaurantBusiness();
+    Marker marker;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +56,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapFragment.getMapAsync(this);
         checkSession();
         createMenu();
+        createMarkers();
     }
 
     public void checkSession(){
@@ -144,13 +154,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
-        //switch (requestCode) {
-        //    case REQUEST_FINE_LOCATION: {
-        //        goToCurrentLocation();
-        //    }
-        //}
-        if(requestCode == REQUEST_FINE_LOCATION){
-            goToCurrentLocation();
+        switch (requestCode) {
+            case REQUEST_FINE_LOCATION: {
+                goToCurrentLocation();
+            }
         }
     }
 
@@ -187,7 +194,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        /*switch (item.getItemId()){
+        switch (item.getItemId()){
             case R.id.navLogout: {
                 navigationLogout();
                 break;
@@ -196,12 +203,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 navigationProfile();
                 break;
             }
-        }*/
-        if(item.getItemId() == R.id.navLogout){
-            navigationLogout();
-        }
-        else if(item.getItemId() == R.id.navProfile){
-            navigationProfile();
         }
         return true;
     }
@@ -211,5 +212,16 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onResume();
         UserBusiness userBusiness = new UserBusiness();
         userBusiness.recoverSession();
+    }
+
+    public void createMarkers(){
+        ArrayList<Restaurant> restaurantMaps = restaurantBusiness.getAllRestaurants();
+        for (int i = 0; i < restaurantMaps.size(); i++){
+            Restaurant restMaps = restaurantMaps.get(i);
+            marker = mMap.addMarker(new MarkerOptions()
+                    .position(restMaps.getLatLgn())
+                    .title(restMaps.getRestaurantName()));
+        }
+
     }
 }
