@@ -20,6 +20,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -38,13 +39,15 @@ import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Restaurant;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
     private LocationManager locationManager;
     private static final int REQUEST_FINE_LOCATION = 1;
     private RestaurantBusiness restaurantBusiness = new RestaurantBusiness();
-    Marker marker;
+    private UserBusiness userBusiness = new UserBusiness();
+    private ViewHolder mViewHolder = new ViewHolder();
+
 
 
     @Override
@@ -54,58 +57,86 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+
+        mViewHolder.drawer = findViewById(R.id.drawer_layout);
+        mViewHolder.toolbar = findViewById(R.id.toolbar);
+        mViewHolder.navigationView = findViewById(R.id.nav_view);
+
         checkSession();
         createMenu();
+
     }
+
 
     public void checkSession(){
         if (Session.getUserIn() == null){
-            new UserBusiness().recoverSession();
+            userBusiness.recoverSession();
+        }
+    }
+
+    private void checkPermission() {
+        boolean permissionFineLocation = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED;
+        boolean permissionCoarseLocation = ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED;
+
+        if (permissionFineLocation && permissionCoarseLocation) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQUEST_FINE_LOCATION);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_FINE_LOCATION: {
+                updateLocation();
+            }
         }
     }
 
     public void createMenu(){
-        Toolbar toolbar =  findViewById(R.id.toolbar);
-        toolbar.setTitle("");
-        setSupportActionBar(toolbar);
-        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
+        mViewHolder.toolbar.setTitle("");
+        setSupportActionBar(mViewHolder.toolbar);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigationDrawerOpen, R.string.navigationDrawerClose);
-        drawer.setDrawerListener(toggle);
+                this, mViewHolder.drawer, mViewHolder.toolbar, R.string.navigationDrawerOpen, R.string.navigationDrawerClose);
+        mViewHolder.drawer.setDrawerListener(toggle);
         toggle.syncState();
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
+        mViewHolder.navigationView.setNavigationItemSelectedListener(this);
     }
-
-
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        goToCurrentLocation();
+        mMap.setOnMarkerClickListener(this);
+        updateLocation();
         createMarkers();
-
     }
 
-    public void goToCurrentLocation() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_FINE_LOCATION);
+    public void createMarkers(){
+        ArrayList<Restaurant> restaurants = restaurantBusiness.getAllRestaurants();
+        for (int i = 0; i < restaurants.size(); i++){
+            Restaurant restaurant = restaurants.get(i);
+            Marker marker = mMap.addMarker(new MarkerOptions()
+                    .position(restaurant.getLatLgn())
+                    .title(restaurant.getRestaurantName()));
+            marker.setTag(restaurant);
         }
+    }
+
+
+    public void updateLocation() {
+        checkPermission();
         if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
             if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED /*&& ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED*/) {
                 return;
             }
             mMap.setMyLocationEnabled(true);
+            goToCurrentLocation(locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER));
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, new LocationListener() {
                 @Override
                 public void onLocationChanged(Location location) {
-                    double latitude = location.getLatitude();
-                    double longitude = location.getLongitude();
-                    LatLng latLng = new LatLng(latitude, longitude);
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
                 }
 
                 @Override
@@ -126,13 +157,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         } else if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             mMap.setMyLocationEnabled(true);
+            goToCurrentLocation(locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER));
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, new LocationListener() {
                 @Override
                 public void onLocationChanged(Location location) {
-                    double latitude = location.getLatitude();
-                    double longitude = location.getLongitude();
-                    LatLng latLng = new LatLng(latitude, longitude);
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
                 }
 
                 @Override
@@ -153,14 +181,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_FINE_LOCATION: {
-                goToCurrentLocation();
-            }
-        }
+    public void goToCurrentLocation(Location location){
+        double latitude = location.getLatitude();
+        double longitude = location.getLongitude();
+        LatLng latLng = new LatLng(latitude, longitude);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14.0f));
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -178,6 +206,22 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         return true;
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        mViewHolder.drawer.closeDrawer(GravityCompat.START);
+        switch (item.getItemId()){
+            case R.id.navLogout: {
+                navigationLogout();
+                break;
+            }
+            case R.id.navProfile: {
+                navigationProfile();
+                break;
+            }
+        }
+        return true;
+    }
+
     public void navigationLogout(){
         UserBusiness userBusiness = new UserBusiness();
         userBusiness.endSession();
@@ -192,37 +236,24 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         finish();
     }
 
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        switch (item.getItemId()){
-            case R.id.navLogout: {
-                navigationLogout();
-                break;
-            }
-            case R.id.navProfile: {
-                navigationProfile();
-                break;
-            }
-        }
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        //Aqui fica o codigo a ser executado ao clicar em um marcador
         return true;
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        UserBusiness userBusiness = new UserBusiness();
-        userBusiness.recoverSession();
+    public void onBackPressed() {
+        if (mViewHolder.drawer.isDrawerOpen(GravityCompat.START)) {
+            mViewHolder.drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 
-    public void createMarkers(){
-        ArrayList<Restaurant> restaurantMaps = restaurantBusiness.getAllRestaurants();
-        for (int i = 0; i < restaurantMaps.size(); i++){
-            Restaurant restMaps = restaurantMaps.get(i);
-            marker = mMap.addMarker(new MarkerOptions()
-                    .position(restMaps.getLatLgn())
-                    .title(restMaps.getRestaurantName()));
-        }
-
+    private static class ViewHolder{
+        private DrawerLayout drawer;
+        private Toolbar toolbar;
+        private NavigationView navigationView;
     }
 }
