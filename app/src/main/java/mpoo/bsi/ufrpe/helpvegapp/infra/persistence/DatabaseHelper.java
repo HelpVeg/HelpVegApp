@@ -9,8 +9,10 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     private static DatabaseHelper db;
 
-    public static DatabaseHelper getDb(){
-        if(db == null) db = new DatabaseHelper();
+    public synchronized static DatabaseHelper getDb(){
+        if(db == null){
+            db = new DatabaseHelper();
+        }
         return db;
     }
 

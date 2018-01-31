@@ -1,5 +1,6 @@
 package mpoo.bsi.ufrpe.helpvegapp.user.business;
 
+import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -29,7 +30,7 @@ public class Md5 {
 
     public String encrypt(String pwd) {
         if (md != null) {
-            return new String(hexCodes(md.digest(pwd.getBytes())));
+            return new String(hexCodes(md.digest(pwd.getBytes(Charset.forName("UTF-8")))));
         }
         return null;
     }

@@ -144,10 +144,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_FINE_LOCATION: {
-                goToCurrentLocation();
-            }
+        //switch (requestCode) {
+        //    case REQUEST_FINE_LOCATION: {
+        //        goToCurrentLocation();
+        //    }
+        //}
+        if(requestCode == REQUEST_FINE_LOCATION){
+            goToCurrentLocation();
         }
     }
 
@@ -184,7 +187,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        switch (item.getItemId()){
+        /*switch (item.getItemId()){
             case R.id.navLogout: {
                 navigationLogout();
                 break;
@@ -193,6 +196,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 navigationProfile();
                 break;
             }
+        }*/
+        if(item.getItemId() == R.id.navLogout){
+            navigationLogout();
+        }
+        else if(item.getItemId() == R.id.navProfile){
+            navigationProfile();
         }
         return true;
     }
