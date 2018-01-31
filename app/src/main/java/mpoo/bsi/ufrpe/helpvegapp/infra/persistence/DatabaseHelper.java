@@ -17,7 +17,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     private static final String DATABASE_NAME = "helpveg.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     // ----------------------------- User table and columns -----------------------------
     private static final String TABLE_USER = "user";
@@ -177,6 +177,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.execSQL(QueriesSQL.sqlDropTableUser());
         db.execSQL(QueriesSQL.sqlDropTableUserLogged());
         db.execSQL(QueriesSQL.sqlDropTableRestaurants());
+        db.execSQL(QueriesSQL.sqlDropTableComments());
         this.onCreate(db);
     }
 

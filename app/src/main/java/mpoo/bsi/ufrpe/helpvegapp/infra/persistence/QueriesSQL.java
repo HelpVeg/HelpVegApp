@@ -60,6 +60,11 @@ public class QueriesSQL {
         return sqlDropTableRestaurants;
     }
 
+    public static String sqlDropTableComments(){
+        String sqlDropTableComments = "DROP TABLE IF EXISTS " + DatabaseHelper.getTableComments();
+        return sqlDropTableComments;
+    }
+
     public static String sqlUserFromEmail(){
         String sqlUserFromEmail = "SELECT * FROM " + DatabaseHelper.getTableUser() + " WHERE " + DatabaseHelper.getColumnUserEmail() + " =?;";
         return (sqlUserFromEmail);
