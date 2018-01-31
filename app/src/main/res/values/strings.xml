@@ -36,5 +36,6 @@
     <string name="navigationDrawerOpen">Open navigation drawer</string>
     <string name="navigationDrawerClose">Close navigation drawer</string>
 
-
+    <string name="nameRestaurant">Nome do restaurante</string>
+    <string name="typeRestaurant">Tipo do restaunrate</string>
 </resources>
