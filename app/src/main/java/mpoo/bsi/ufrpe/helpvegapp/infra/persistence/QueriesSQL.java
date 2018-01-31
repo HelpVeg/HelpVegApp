@@ -27,8 +27,8 @@ public class QueriesSQL {
                 + DatabaseHelper.getColumnRestaurantId() + " integer primary key autoincrement unique not null, "
                 + DatabaseHelper.getColumnRestaurantName() + " text not null, "
                 //+ DatabaseHelper.getColumnRestaurantImage() + " blob, "
-                + DatabaseHelper.getColumnRestaurantLat() + " integer not null, "
-                + DatabaseHelper.getColumnRestaurantLong() + " integer not null, "
+                + DatabaseHelper.getColumnRestaurantLat() + " real not null, "
+                + DatabaseHelper.getColumnRestaurantLong() + " real not null, "
                 + DatabaseHelper.getColumnRestaurantType() + " text not null"
                 + ");";
         return sqlCreateTableRestaurant;
@@ -94,7 +94,7 @@ public class QueriesSQL {
         return sqlGetAllUsers;
     }
 
-    public static String getAllRestaurants(){
+    public static String sqlGetAllRestaurants(){
         String sqlGetAllRestaurants = "SELECT * FROM " + DatabaseHelper.getTableRestaurants();
         return sqlGetAllRestaurants;
     }

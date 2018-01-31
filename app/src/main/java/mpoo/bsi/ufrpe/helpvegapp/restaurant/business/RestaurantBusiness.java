@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Restaurant;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.persistence.RestaurantDAO;
-import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
 
 public class RestaurantBusiness {
 
@@ -16,7 +15,7 @@ public class RestaurantBusiness {
     }
 
     public void viewRestaurants() {
-        ArrayList<Restaurant> restaurants = restaurantDAO.getAllRestaurants();
+        ArrayList<Restaurant> restaurants = getAllRestaurants();
         for (int i = 0; i < restaurants.size(); i++) {
             Restaurant res = restaurants.get(i);
             System.out.println("#" + i + " ID: " + res.getRestauranteId() + " Name: " + res.getRestaurantName() + ", Type: " + res.getRestaurantType());
