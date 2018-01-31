@@ -56,7 +56,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapFragment.getMapAsync(this);
         checkSession();
         createMenu();
-        createMarkers();
     }
 
     public void checkSession(){
@@ -86,6 +85,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap = googleMap;
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         goToCurrentLocation();
+        createMarkers();
+
     }
 
     public void goToCurrentLocation() {
@@ -104,7 +105,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     double latitude = location.getLatitude();
                     double longitude = location.getLongitude();
                     LatLng latLng = new LatLng(latitude, longitude);
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18.2f));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
                 }
 
                 @Override
@@ -131,7 +132,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     double latitude = location.getLatitude();
                     double longitude = location.getLongitude();
                     LatLng latLng = new LatLng(latitude, longitude);
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18.2f));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10.2f));
                 }
 
                 @Override
