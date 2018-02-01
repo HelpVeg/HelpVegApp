@@ -47,8 +47,8 @@ public class RestaurantActivity extends AppCompatActivity implements View.OnClic
     public void onClick(View view){
         int id = view.getId();
         if (id == R.id.btnComments){
-            Intent intent = new Intent(this,CommentActivity.class);
-            startActivity(intent);
+            //Intent intent = new Intent(this,CommentActivity.class);
+            //startActivity(intent);
             finish();
         }
     }

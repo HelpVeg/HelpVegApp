@@ -7,6 +7,7 @@
 
     <string name="profile">Perfil</string>
     <string name="logout">Logout</string>
+    <string name="MarkerLegend">Legenda dos marcadores do mapa</string>
 
     <string name="btnRegister">Cadastrar</string>
     <string name="btnRegisterLogin">Cadastrar-se</string>
@@ -44,4 +45,6 @@
     <string name="service">Serviço </string>
     <string name="place">Ambiente </string>
     <string name="price">Preço </string>
+
+
 </resources>
