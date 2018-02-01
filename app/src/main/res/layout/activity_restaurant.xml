@@ -11,14 +11,15 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageRestaurant"
-        android:layout_width="249dp"
+        android:layout_width="183dp"
         android:layout_height="152dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:src="@mipmap/ic_restaurant_default"/>
 
     <TextView
         android:id="@+id/nameProfileRestaurant"
@@ -41,7 +42,7 @@
         android:layout_gravity="center"
         android:text="@string/typeRestaurant"
         android:textAllCaps="true"
-        android:textSize="18sp"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"

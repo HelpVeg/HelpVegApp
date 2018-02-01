@@ -25,6 +25,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -47,8 +48,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private RestaurantBusiness restaurantBusiness = new RestaurantBusiness();
     private UserBusiness userBusiness = new UserBusiness();
     private ViewHolder mViewHolder = new ViewHolder();
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,13 +121,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             Marker marker = mMap.addMarker(new MarkerOptions()
                     .position(restaurant.getLatLgn())
                     .title(restaurant.getRestaurantName()));
-            /*if (restaurant.getRestaurantType().equals("vegano")){
-                marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.marker_vegano));
+
+            if (restaurant.getRestaurantType().equals("vegano")){
+                marker.setIcon(BitmapDescriptorFactory.defaultMarker(120.0f));
             } else if (restaurant.getRestaurantType().equals("vegetariano e vegano")){
-                marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.marker_vegetariano_e_vegano));
+                marker.setIcon(BitmapDescriptorFactory.defaultMarker(210.0f));
             } else {
-                marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.marker_comum));
-            }*/
+                marker.setIcon(BitmapDescriptorFactory.defaultMarker(350.0f));
+            }
             marker.setTag(restaurant);
         }
     }
@@ -200,7 +200,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.activity_main_drawer,menu);
-
         ImageView photo = findViewById(R.id.navPhoto);
         TextView email = findViewById(R.id.navEmail);
         TextView name = findViewById(R.id.navName);
@@ -229,7 +228,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     public void navigationLogout(){
-        UserBusiness userBusiness = new UserBusiness();
         userBusiness.endSession();
         Intent intent = new Intent(this,LoginActivity.class);
         startActivity(intent);
@@ -251,18 +249,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     @Override
     public void onInfoWindowClick(Marker marker) {
         Restaurant restaurant = (Restaurant) marker.getTag();
-        goToRestaurantPage(restaurant);
-    }
-
-
-
-    public void goToRestaurantPage(Restaurant restaurant){
+        restaurantBusiness.selectRestaurant(restaurant);
         Intent intent = new Intent(this,RestaurantActivity.class);
-        intent.putExtra("id", restaurant.getRestaurantId());
-        intent.putExtra("name", restaurant.getRestaurantName());
-        intent.putExtra("type", restaurant.getRestaurantType());
-        intent.putExtra("lat", restaurant.getLatLgn().latitude);
-        intent.putExtra("long", restaurant.getLatLgn().longitude);
         startActivity(intent);
         finish();
     }

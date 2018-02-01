@@ -26,7 +26,7 @@ public class QueriesSQL {
         String sqlCreateTableRestaurant = "CREATE TABLE IF NOT EXISTS " + DatabaseHelper.getTableRestaurants() + "("
                 + DatabaseHelper.getColumnRestaurantId() + " integer primary key autoincrement unique not null, "
                 + DatabaseHelper.getColumnRestaurantName() + " text not null, "
-                //+ DatabaseHelper.getColumnRestaurantImage() + " blob, "
+                + DatabaseHelper.getColumnRestaurantImage() + " blob, "
                 + DatabaseHelper.getColumnRestaurantLat() + " integer not null, "
                 + DatabaseHelper.getColumnRestaurantLong() + " integer not null, "
                 + DatabaseHelper.getColumnRestaurantType() + " text not null"

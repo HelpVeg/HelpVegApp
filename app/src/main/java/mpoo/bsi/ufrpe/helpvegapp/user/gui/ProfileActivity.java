@@ -43,7 +43,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     
     public void showUserLoggedData(){
-
         this.mViewHolder.textEmailProfile.setText(Session.getUserIn().getUserEmail());
         this.mViewHolder.textNameProfile.setText(Session.getUserIn().getUserName());
         if (Session.getUserIn().getUserPhoto()!=null){

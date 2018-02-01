@@ -17,7 +17,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     private static final String DATABASE_NAME = "helpveg.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     // ----------------------------- User table and columns -----------------------------
     private static final String TABLE_USER = "user";
@@ -35,7 +35,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String TABLE_RESTAURANTS = "restaurants";
     private static final String COLUMN_RESTAURANT_ID = "restaurant_id";
     private static final String COLUMN_RESTAURANT_NAME = "restaurant_name";
-    //private static final String COLUMN_RESTAURANT_IMAGE = "restaurant_image";
+    private static final String COLUMN_RESTAURANT_IMAGE = "restaurant_image";
     private static final String COLUMN_RESTAURANT_LAT = "restaurant_lat";
     private static final String COLUMN_RESTAURANT_LONG = "restaurant_long";
     private static final String COLUMN_RESTAURANT_TYPE = "restaurant_type";
@@ -101,9 +101,9 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return COLUMN_RESTAURANT_NAME;
     }
 
-    /*public static String getColumnRestaurantImage() {
+    public static String getColumnRestaurantImage() {
         return COLUMN_RESTAURANT_IMAGE;
-    }*/
+    }
 
     public static String getColumnRestaurantLat() {
         return COLUMN_RESTAURANT_LAT;
