@@ -20,7 +20,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -30,16 +29,17 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-
 import java.util.ArrayList;
 
 import mpoo.bsi.ufrpe.helpvegapp.R;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.business.RestaurantBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Restaurant;
+import mpoo.bsi.ufrpe.helpvegapp.restaurant.gui.RestaurantActivity;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener, GoogleMap.OnMarkerClickListener {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener,
+        GoogleMap.OnMarkerClickListener, GoogleMap.OnInfoWindowClickListener {
 
     private GoogleMap mMap;
     private LocationManager locationManager;
@@ -110,6 +110,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap = googleMap;
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         mMap.setOnMarkerClickListener(this);
+        mMap.setOnInfoWindowClickListener(this);
         updateLocation();
         createMarkers();
     }
@@ -121,6 +122,13 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             Marker marker = mMap.addMarker(new MarkerOptions()
                     .position(restaurant.getLatLgn())
                     .title(restaurant.getRestaurantName()));
+            /*if (restaurant.getRestaurantType().equals("vegano")){
+                marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.marker_vegano));
+            } else if (restaurant.getRestaurantType().equals("vegetariano e vegano")){
+                marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.marker_vegetariano_e_vegano));
+            } else {
+                marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.marker_comum));
+            }*/
             marker.setTag(restaurant);
         }
     }
@@ -188,8 +196,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14.0f));
     }
 
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -238,8 +244,27 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        //Aqui fica o codigo a ser executado ao clicar em um marcador
+        marker.showInfoWindow();
         return true;
+    }
+
+    @Override
+    public void onInfoWindowClick(Marker marker) {
+        Restaurant restaurant = (Restaurant) marker.getTag();
+        goToRestaurantPage(restaurant);
+    }
+
+
+
+    public void goToRestaurantPage(Restaurant restaurant){
+        Intent intent = new Intent(this,RestaurantActivity.class);
+        intent.putExtra("id", restaurant.getRestaurantId());
+        intent.putExtra("name", restaurant.getRestaurantName());
+        intent.putExtra("type", restaurant.getRestaurantType());
+        intent.putExtra("lat", restaurant.getLatLgn().latitude);
+        intent.putExtra("long", restaurant.getLatLgn().longitude);
+        startActivity(intent);
+        finish();
     }
 
     @Override

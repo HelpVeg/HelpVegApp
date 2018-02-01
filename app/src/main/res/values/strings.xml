@@ -18,6 +18,7 @@
     <string name="btnLogout">Sair</string>
     <string name="btnSave">Salvar</string>
     <string name="btnCancel">Cancelar</string>
+    <string name="btnComments">Visualizar comentarios</string>
 
     <string name="toastUpdateSuccessful">Cadastro alterado com sucesso</string>
     <string name="toastUpdatePasswordSuccessful">Senha alterada com sucesso</string>
@@ -37,5 +38,10 @@
     <string name="navigationDrawerClose">Close navigation drawer</string>
 
     <string name="nameRestaurant">Nome do restaurante</string>
-    <string name="typeRestaurant">Tipo do restaunrate</string>
+    <string name="typeRestaurant">Tipo do restaurante</string>
+
+    <string name="food">Comida </string>
+    <string name="service">Serviço </string>
+    <string name="place">Ambiente </string>
+    <string name="price">Preço </string>
 </resources>

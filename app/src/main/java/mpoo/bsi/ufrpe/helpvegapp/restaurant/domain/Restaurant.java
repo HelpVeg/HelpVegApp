@@ -3,17 +3,17 @@ package mpoo.bsi.ufrpe.helpvegapp.restaurant.domain;
 import com.google.android.gms.maps.model.LatLng;
 
 public class Restaurant {
-    private int restauranteId;
+    private int restaurantId;
     private String restaurantName;
     private LatLng latLgn;
     private String restaurantType;
 
-    public int getRestauranteId() {
-        return restauranteId;
+    public int getRestaurantId() {
+        return restaurantId;
     }
 
-    public void setRestauranteId(int restauranteId) {
-        this.restauranteId = restauranteId;
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
     }
 
     public String getRestaurantName() {

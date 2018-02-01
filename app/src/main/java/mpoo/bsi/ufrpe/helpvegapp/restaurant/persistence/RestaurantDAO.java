@@ -23,7 +23,7 @@ public class RestaurantDAO {
 
             do {
                 Restaurant restaurant = new Restaurant();
-                restaurant.setRestauranteId(cursor.getInt(0));
+                restaurant.setRestaurantId(cursor.getInt(0));
                 restaurant.setRestaurantName(cursor.getString(1));
                 double lat = cursor.getDouble(2);
                 double lng = cursor.getDouble(3);

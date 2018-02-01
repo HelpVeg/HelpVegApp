@@ -6,7 +6,6 @@ import android.widget.Button;
 import android.view.View;
 import android.content.Intent;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import mpoo.bsi.ufrpe.helpvegapp.R;

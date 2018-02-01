@@ -17,12 +17,12 @@ public final class Script {
     public static void populateRestaurantTable(SQLiteDatabase db){
         db.execSQL(insertRestaurant +"('Restaurante Da Chita', '-8.048148', '-34.954484', 'vegano');");
         db.execSQL(insertRestaurant +"('Vida Longa', '-8.059153', '-34.882352','vegano');");
-        db.execSQL(insertRestaurant +"('Dhuzati Coletiva Vegetariana Artesanal', '8.002701', '-34.964109', 'vegano');");
+        db.execSQL(insertRestaurant +"('Dhuzati Coletiva Vegetariana Artesanal', '-8.002701', '-34.964109', 'vegano');");
 
 
-        db.execSQL(insertRestaurant +"('O Vegetariano', '-8.052149 ', '-34.888927', 'vegg');");
-        db.execSQL(insertRestaurant +"('Cantina Vegetariana', '-8.064793', '-34.929533', 'vegg');");
-        db.execSQL(insertRestaurant +"('Govinda', '-8.054950', '-34.885912', 'vegg');");
+        db.execSQL(insertRestaurant +"('O Vegetariano', '-8.052149 ', '-34.888927', 'vegetariano e vegano');");
+        db.execSQL(insertRestaurant +"('Cantina Vegetariana', '-8.064793', '-34.929533', 'vegetariano e vegano');");
+        db.execSQL(insertRestaurant +"('Govinda', '-8.054950', '-34.885912', 'vegetariano e vegano');");
 
 
         db.execSQL(insertRestaurant +"('Papaya Verde', '-8.045085', '-34.892816' ,'comum');");
