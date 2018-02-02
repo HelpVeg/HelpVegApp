@@ -1,4 +1,4 @@
-package mpoo.bsi.ufrpe.helpvegapp.restaurant.gui;
+package mpoo.bsi.ufrpe.helpvegapp.avaliacao.gui;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,9 +18,9 @@ import java.util.List;
 import mpoo.bsi.ufrpe.helpvegapp.R;
 import mpoo.bsi.ufrpe.helpvegapp.infra.MyApp;
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
-import mpoo.bsi.ufrpe.helpvegapp.restaurant.business.CommentBusiness;
-import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Comment;
-import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.ItemClickListener;
+import mpoo.bsi.ufrpe.helpvegapp.avaliacao.business.CommentBusiness;
+import mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain.Comment;
+import mpoo.bsi.ufrpe.helpvegapp.restaurant.gui.RestaurantActivity;
 
 public class CommentActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -78,7 +78,8 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
         builder.setTitle("Adicione um comentário");
         builder.setPositiveButton("Adicionar comentário", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                confirmComment(comment.getText().toString());
+                commentBusiness.registerComment(comment.getText().toString());
+                commentAdapter.insertItem(commentBusiness.generateComment(comment.getText().toString()));
             }
         });
         builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -89,10 +90,6 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
         builder.setView(view);
         AlertDialog dialog = builder.create();
         dialog.show();
-    }
-
-    public void confirmComment(String comment){
-        commentBusiness.registerComment(comment);
     }
 
     private static class ViewHolder{

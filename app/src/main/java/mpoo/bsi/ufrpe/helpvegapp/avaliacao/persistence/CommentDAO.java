@@ -1,4 +1,4 @@
-package mpoo.bsi.ufrpe.helpvegapp.restaurant.persistence;
+package mpoo.bsi.ufrpe.helpvegapp.avaliacao.persistence;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import mpoo.bsi.ufrpe.helpvegapp.infra.persistence.DatabaseHelper;
 import mpoo.bsi.ufrpe.helpvegapp.infra.persistence.QueriesSQL;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.business.RestaurantBusiness;
-import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Comment;
+import mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain.Comment;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
 
 public class CommentDAO {

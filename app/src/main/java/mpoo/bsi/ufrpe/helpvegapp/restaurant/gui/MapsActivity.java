@@ -1,4 +1,4 @@
-package mpoo.bsi.ufrpe.helpvegapp.user.gui;
+package mpoo.bsi.ufrpe.helpvegapp.restaurant.gui;
 
 import android.Manifest;
 import android.content.Intent;
@@ -39,6 +39,8 @@ import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Restaurant;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.gui.RestaurantActivity;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
+import mpoo.bsi.ufrpe.helpvegapp.user.gui.LoginActivity;
+import mpoo.bsi.ufrpe.helpvegapp.user.gui.ProfileActivity;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, NavigationView.OnNavigationItemSelectedListener,
         GoogleMap.OnMarkerClickListener, GoogleMap.OnInfoWindowClickListener {

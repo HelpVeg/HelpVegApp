@@ -1,4 +1,4 @@
-package mpoo.bsi.ufrpe.helpvegapp.restaurant.domain;
+package mpoo.bsi.ufrpe.helpvegapp.avaliacao.gui;
 
 import android.view.View;
 

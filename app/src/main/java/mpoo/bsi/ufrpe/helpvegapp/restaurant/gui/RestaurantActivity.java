@@ -9,9 +9,9 @@ import android.widget.TextView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import mpoo.bsi.ufrpe.helpvegapp.R;
+import mpoo.bsi.ufrpe.helpvegapp.avaliacao.gui.CommentActivity;
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Restaurant;
-import mpoo.bsi.ufrpe.helpvegapp.user.gui.MapsActivity;
 
 public class RestaurantActivity extends AppCompatActivity implements View.OnClickListener {
 

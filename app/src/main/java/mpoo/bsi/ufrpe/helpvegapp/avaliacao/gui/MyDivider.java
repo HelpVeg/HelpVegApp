@@ -1,8 +1,6 @@
-package mpoo.bsi.ufrpe.helpvegapp.restaurant.gui;
-
+package mpoo.bsi.ufrpe.helpvegapp.avaliacao.gui;
 
 import android.support.v7.widget.RecyclerView;
-
 
 import android.content.Context;
 import android.content.res.Resources;

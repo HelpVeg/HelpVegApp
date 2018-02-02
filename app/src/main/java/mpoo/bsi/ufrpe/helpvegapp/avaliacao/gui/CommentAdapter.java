@@ -1,4 +1,4 @@
-package mpoo.bsi.ufrpe.helpvegapp.restaurant.gui;
+package mpoo.bsi.ufrpe.helpvegapp.avaliacao.gui;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -12,8 +12,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import mpoo.bsi.ufrpe.helpvegapp.R;
-import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Comment;
-import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.ItemClickListener;
+import mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain.Comment;
 
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder>  {
@@ -78,5 +77,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         return comments.size();
     }
 
-
+    public void insertItem(Comment comment) {
+        comments.add(comment);
+        notifyItemInserted(getItemCount());
+    }
 }

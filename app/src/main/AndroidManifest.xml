@@ -32,9 +32,9 @@
         <activity android:name=".user.gui.ProfileActivity" />
         <activity android:name=".user.gui.EditProfileActivity" />
         <activity android:name=".restaurant.gui.RestaurantActivity" />
-        <activity android:name=".user.gui.MapsActivity" />
+        <activity android:name=".restaurant.gui.MapsActivity" />
         <activity android:name=".user.gui.EditPasswordActivity" />
-        <activity android:name=".restaurant.gui.CommentActivity" />
+        <activity android:name=".avaliacao.gui.CommentActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

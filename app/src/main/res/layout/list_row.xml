@@ -21,7 +21,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/imageProfileCard"
-        android:layout_marginStart="11dp"
         android:layout_marginTop="13dp"
         android:layout_toEndOf="@+id/imageProfileCard"
         android:text="name"
@@ -35,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/nameProfileCard"
         android:layout_below="@+id/nameProfileCard"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="10dp"
         android:text="comment" />
 
 </RelativeLayout>

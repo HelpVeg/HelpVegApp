@@ -25,7 +25,7 @@
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context="mpoo.bsi.ufrpe.helpvegapp.user.gui.MapsActivity" />
+            tools:context="mpoo.bsi.ufrpe.helpvegapp.restaurant.gui.MapsActivity" />
 
     </android.support.design.widget.AppBarLayout>
 

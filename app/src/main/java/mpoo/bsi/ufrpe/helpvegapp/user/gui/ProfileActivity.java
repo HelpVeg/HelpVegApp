@@ -10,6 +10,7 @@ import android.widget.TextView;
 import de.hdodenhof.circleimageview.CircleImageView;
 import mpoo.bsi.ufrpe.helpvegapp.R;
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
+import mpoo.bsi.ufrpe.helpvegapp.restaurant.gui.MapsActivity;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{

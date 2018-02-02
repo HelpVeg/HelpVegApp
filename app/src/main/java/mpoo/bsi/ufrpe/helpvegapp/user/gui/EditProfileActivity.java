@@ -47,7 +47,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     }
 
     public void showUserLoggedData(){
-
         this.mViewHolder.edtName.setText(Session.getUserIn().getUserName());
         this.mViewHolder.edtEmail.setText(Session.getUserIn().getUserEmail());
         if (Session.getUserIn().getUserPhoto()!=null){
