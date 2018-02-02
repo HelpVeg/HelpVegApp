@@ -1,7 +1,7 @@
 package mpoo.bsi.ufrpe.helpvegapp.restaurant.gui;
 
 import android.content.DialogInterface;
-import android.support.annotation.NonNull;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -11,23 +11,22 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import mpoo.bsi.ufrpe.helpvegapp.R;
 import mpoo.bsi.ufrpe.helpvegapp.infra.MyApp;
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
+import mpoo.bsi.ufrpe.helpvegapp.restaurant.business.CommentBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Comment;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.ItemClickListener;
 
 public class CommentActivity extends AppCompatActivity implements View.OnClickListener {
-    ViewHolder mViewHolder = new ViewHolder();
-    private List<Comment> listComments = new ArrayList<Comment>();
+
+    private ViewHolder mViewHolder = new ViewHolder();
+    private List<Comment> listComments;
+    private CommentBusiness commentBusiness = new CommentBusiness();
     private CommentAdapter commentAdapter;
 
 
@@ -45,6 +44,7 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     public void createAdapter(){
+        listComments = commentBusiness.getAllCommentsFromRestautant(Session.getCurrentRestaurant().getRestaurantId());
         commentAdapter = new CommentAdapter(MyApp.getContext(), listComments, new ItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
@@ -73,10 +73,11 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater layoutInflater = getLayoutInflater();
         View view = layoutInflater.inflate(R.layout.insert_comentario, null);
+        final TextView comment = view.findViewById(R.id.comment);
         builder.setTitle("Adicione um comentário");
         builder.setPositiveButton("Adicionar comentário", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-
+                confirmComment(comment.getText().toString());
             }
         });
         builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -89,10 +90,20 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
         dialog.show();
     }
 
+    public void confirmComment(String comment){
+        commentBusiness.registerComment(comment);
+    }
 
     private static class ViewHolder{
         private RecyclerView recyclerView;
         private FloatingActionButton btnAddComment;
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this,RestaurantActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 }

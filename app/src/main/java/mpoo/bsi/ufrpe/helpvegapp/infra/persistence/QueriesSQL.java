@@ -39,7 +39,7 @@ public class QueriesSQL {
                 + DatabaseHelper.getColumnCommentId() + " integer primary key autoincrement unique not null, "
                 + DatabaseHelper.getColumnCommentUserId() + " integer not null, "
                 + DatabaseHelper.getColumnCommentRestaurantsId() + " integer not null, "
-                + DatabaseHelper.getColumnCommentText() + "text not null"
+                + DatabaseHelper.getColumnCommentText() + " text not null"
                 + ");";
         return sqlCreateTableComment;
     }

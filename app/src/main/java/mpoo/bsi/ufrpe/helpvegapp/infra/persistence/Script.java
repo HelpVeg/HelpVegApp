@@ -14,6 +14,7 @@ public final class Script {
             + ") VALUES ";
 
     public static void populateRestaurantTable(SQLiteDatabase db){
+
         db.execSQL(insertRestaurant +"('Restaurante Da Chita', null, '-8.048148', '-34.954484', 'vegano');");
         db.execSQL(insertRestaurant +"('Vida Longa', null, '-8.059153', '-34.882352','vegano');");
         db.execSQL(insertRestaurant +"('Dhuzati Vegetariana Artesanal', null, '-8.002701', '-34.964109', 'vegano');");

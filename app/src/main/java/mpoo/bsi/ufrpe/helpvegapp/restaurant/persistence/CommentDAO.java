@@ -20,19 +20,16 @@ public class CommentDAO {
         ArrayList<Comment> comments = new ArrayList<>();
         Cursor cursor = db.rawQuery(QueriesSQL.sqlCommentFromRestaurant(), new String[] {Integer.toString(restaurantId)});
 
-        if (cursor.moveToFirst()) {
+        while (cursor.moveToNext()) {
+            Comment comment = new Comment();
+            comment.setId(cursor.getInt(0));
+            int userId = (cursor.getInt(1));
+            comment.setUser(new UserBusiness().getUserById(userId));
+            int restaurantsId = (cursor.getInt(2));
+            comment.setRestaurant(new RestaurantBusiness().getSingleRestaurant(restaurantsId));
+            comment.setCommentText(cursor.getString(3));
 
-            do {
-                Comment comment = new Comment();
-                comment.setId(cursor.getInt(0));
-                int userId = (cursor.getInt(1));
-                comment.setUser(new UserBusiness().getUserById(userId));
-                int restaurantsId = (cursor.getInt(2));
-                comment.setRestaurant(new RestaurantBusiness().getSingleRestaurant(restaurantsId));
-                comment.setCommentText(cursor.getString(3));
-
-                comments.add(comment);
-            } while (cursor.moveToNext());
+            comments.add(comment);
         }
 
         cursor.close();
@@ -48,7 +45,7 @@ public class CommentDAO {
         values.put(DatabaseHelper.getColumnCommentRestaurantsId(), comment.getRestaurant().getRestaurantId());
         values.put(DatabaseHelper.getColumnCommentText(), comment.getCommentText());
 
-        Boolean response = db.insert(DatabaseHelper.getTableUser(), null, values) != -1;
+        Boolean response = db.insert(DatabaseHelper.getTableComments(), null, values) != -1;
         db.close();
         return response;
     }

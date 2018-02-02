@@ -22,7 +22,8 @@ public class CommentBusiness {
         return comment;
     }
 
-    public boolean registerComment(Comment comment){
+    public boolean registerComment(String commentText){
+        Comment comment = generateComment(commentText);
         return getCommentDAO().createComment(comment);
     }
 
