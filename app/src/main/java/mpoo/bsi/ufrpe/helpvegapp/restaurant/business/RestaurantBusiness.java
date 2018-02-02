@@ -11,6 +11,10 @@ public class RestaurantBusiness {
 
     private RestaurantDAO restaurantDAO = new RestaurantDAO();
 
+    private RestaurantDAO getRestaurantDAO(){
+        return restaurantDAO;
+    }
+
     public ArrayList<Restaurant> getAllRestaurants(){
         return restaurantDAO.getAllRestaurants();
     }
@@ -26,5 +30,10 @@ public class RestaurantBusiness {
 
     public void selectRestaurant(Restaurant restaurant){
         Session.setCurrentRestaurant(restaurant);
+    }
+
+    public Restaurant getSingleRestaurant(int id){
+        Restaurant restaurant = getRestaurantDAO().getRestaurantById(id);
+        return (restaurant);
     }
 }

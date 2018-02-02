@@ -60,6 +60,11 @@ public class QueriesSQL {
         return sqlDropTableRestaurants;
     }
 
+    public static String sqlDropTableComments(){
+        String sqlDropTableComments = "DROP TABLE IF EXISTS " + DatabaseHelper.getTableComments();
+        return sqlDropTableComments;
+    }
+
     public static String sqlUserFromEmail(){
         String sqlUserFromEmail = "SELECT * FROM " + DatabaseHelper.getTableUser() + " WHERE " + DatabaseHelper.getColumnUserEmail() + " =?;";
         return (sqlUserFromEmail);
@@ -78,6 +83,32 @@ public class QueriesSQL {
         return (sqlUserFromEmailAndPass);
     }
 
+    /* -------------------------------------- Comments --------------------------------------------- */
+
+    public static String sqlCommentFromUser(){
+        String sqlCommentFromUser =
+                "SELECT * FROM " + DatabaseHelper.getTableComments() + " WHERE "
+                    + DatabaseHelper.getColumnCommentUserId() + " =?";
+        return (sqlCommentFromUser);
+    }
+
+    public static String sqlCommentFromRestaurant(){
+        String sqlCommentFromRestaurant =
+                "SELECT * FROM " + DatabaseHelper.getTableComments() + " WHERE "
+                    + DatabaseHelper.getColumnCommentRestaurantsId() + " =?";
+        return (sqlCommentFromRestaurant);
+    }
+
+    public static String sqlCommentFromUserAndRestaurant(){
+        String sqlCommentFromUserAndRestaurant =
+                "SELECT * FROM " + DatabaseHelper.getTableComments() + " WHERE "
+                    + DatabaseHelper.getColumnCommentUserId() + " =? AND "
+                    + DatabaseHelper.getColumnCommentRestaurantsId() + " =?";
+        return (sqlCommentFromUserAndRestaurant);
+    }
+
+    /* ----------------------------------------------------------------------------------------------------- */
+
     public static String sqlSearchFromLoggedUser() {
         String sqlSearchFromLoggedUser =
                 "SELECT " + DatabaseHelper.getColumnUserLoggedId() + " FROM " + DatabaseHelper.getTableUserLogged() + ";";
@@ -86,11 +117,17 @@ public class QueriesSQL {
 
     public static String sqlGetAllUsers(){
         String sqlGetAllUsers = "SELECT * FROM " + DatabaseHelper.getTableUser();
-        return sqlGetAllUsers;
+        return (sqlGetAllUsers);
     }
 
     public static String getAllRestaurants(){
         String sqlGetAllRestaurants = "SELECT * FROM " + DatabaseHelper.getTableRestaurants();
-        return sqlGetAllRestaurants;
+        return (sqlGetAllRestaurants);
+    }
+
+    public static String getRestaurantFromId(){
+        String sqlGetRestaurantById = "SELECT * FROM " + DatabaseHelper.getTableRestaurants() +
+                " WHERE " + DatabaseHelper.getColumnRestaurantId() + " =?";
+        return (sqlGetRestaurantById);
     }
 }
