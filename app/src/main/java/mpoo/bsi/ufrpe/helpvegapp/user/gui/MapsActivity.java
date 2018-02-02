@@ -113,6 +113,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         mMap.setOnMarkerClickListener(this);
         mMap.setOnInfoWindowClickListener(this);
+        updateLocation();
+        infoWindowPerso();
+        createMarkers();
+    }
+
+    public void infoWindowPerso(){
         mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
             @Override
             public View getInfoWindow(Marker marker) {
@@ -136,8 +142,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 return popup;
             }
         });
-        updateLocation();
-        createMarkers();
     }
 
     public void createMarkers(){
