@@ -57,6 +57,7 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         this.mViewHolder.recyclerView.setLayoutManager(mLayoutManager);
         this.mViewHolder.recyclerView.setItemAnimator(new DefaultItemAnimator());
+        this.mViewHolder.recyclerView.addItemDecoration(new MyDivider(this,LinearLayoutManager.VERTICAL,0));
         this.mViewHolder.recyclerView.setAdapter(commentAdapter);
     }
 
