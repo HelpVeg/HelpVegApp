@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -18,6 +19,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -45,9 +47,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private GoogleMap mMap;
     private LocationManager locationManager;
     private static final int REQUEST_FINE_LOCATION = 1;
+    static final String TYPE = "Tipo do restaurante: ";
     private RestaurantBusiness restaurantBusiness = new RestaurantBusiness();
     private UserBusiness userBusiness = new UserBusiness();
     private ViewHolder mViewHolder = new ViewHolder();
+    private View popup = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +114,29 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
         mMap.setOnMarkerClickListener(this);
         mMap.setOnInfoWindowClickListener(this);
+        mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+            @Override
+            public View getInfoWindow(Marker marker) {
+                return null;
+            }
+
+            @Override
+            public View getInfoContents(Marker marker) {
+                if (popup == null){
+                    popup = getLayoutInflater().inflate(R.layout.activity_info_window,null);
+                }
+
+                TextView textView = popup.findViewById(R.id.titleInfoWindow);
+                ImageView imageView = popup.findViewById(R.id.iconRestaurant);
+                TextView snippet = popup.findViewById(R.id.snippet);
+
+                imageView.setImageResource(R.mipmap.ic_restaurant_default);
+                textView.setText(marker.getTitle());
+                snippet.setText(TYPE + marker.getSnippet());
+
+                return popup;
+            }
+        });
         updateLocation();
         createMarkers();
     }
@@ -120,7 +147,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             Restaurant restaurant = restaurants.get(i);
             Marker marker = mMap.addMarker(new MarkerOptions()
                     .position(restaurant.getLatLgn())
-                    .title(restaurant.getRestaurantName()));
+                    .title(restaurant.getRestaurantName())
+                    .snippet(restaurant.getRestaurantType()));
 
             if (restaurant.getRestaurantType().equals("vegano")){
                 marker.setIcon(BitmapDescriptorFactory.defaultMarker(120.0f));

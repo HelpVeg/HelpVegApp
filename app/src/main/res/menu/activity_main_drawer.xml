@@ -7,12 +7,12 @@
         <item
             android:id="@+id/navProfile"
             android:icon="@drawable/ic_person_black_24dp"
-            android:title="@string/profile"/>
+            android:title="@string/profile" />
         <item
             android:id="@+id/navLogout"
             android:icon="@drawable/ic_logout"
             android:title="@string/logout"/>
 
     </group>
-
+    
 </menu>
