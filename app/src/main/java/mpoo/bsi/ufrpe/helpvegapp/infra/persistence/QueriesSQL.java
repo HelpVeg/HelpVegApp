@@ -26,9 +26,9 @@ public class QueriesSQL {
         String sqlCreateTableRestaurant = "CREATE TABLE IF NOT EXISTS " + DatabaseHelper.getTableRestaurants() + "("
                 + DatabaseHelper.getColumnRestaurantId() + " integer primary key autoincrement unique not null, "
                 + DatabaseHelper.getColumnRestaurantName() + " text not null, "
-                //+ DatabaseHelper.getColumnRestaurantImage() + " blob, "
-                + DatabaseHelper.getColumnRestaurantLat() + " real not null, "
-                + DatabaseHelper.getColumnRestaurantLong() + " real not null, "
+                + DatabaseHelper.getColumnRestaurantImage() + " blob, "
+                + DatabaseHelper.getColumnRestaurantLat() + " integer not null, "
+                + DatabaseHelper.getColumnRestaurantLong() + " integer not null, "
                 + DatabaseHelper.getColumnRestaurantType() + " text not null"
                 + ");";
         return sqlCreateTableRestaurant;
@@ -39,7 +39,7 @@ public class QueriesSQL {
                 + DatabaseHelper.getColumnCommentId() + " integer primary key autoincrement unique not null, "
                 + DatabaseHelper.getColumnCommentUserId() + " integer not null, "
                 + DatabaseHelper.getColumnCommentRestaurantsId() + " integer not null, "
-                + DatabaseHelper.getColumnCommentText() + "text not null"
+                + DatabaseHelper.getColumnCommentText() + " text not null"
                 + ");";
         return sqlCreateTableComment;
     }
@@ -83,6 +83,32 @@ public class QueriesSQL {
         return (sqlUserFromEmailAndPass);
     }
 
+    /* -------------------------------------- Comments --------------------------------------------- */
+
+    public static String sqlCommentFromUser(){
+        String sqlCommentFromUser =
+                "SELECT * FROM " + DatabaseHelper.getTableComments() + " WHERE "
+                    + DatabaseHelper.getColumnCommentUserId() + " =?";
+        return (sqlCommentFromUser);
+    }
+
+    public static String sqlCommentFromRestaurant(){
+        String sqlCommentFromRestaurant =
+                "SELECT * FROM " + DatabaseHelper.getTableComments() + " WHERE "
+                    + DatabaseHelper.getColumnCommentRestaurantsId() + " =?";
+        return (sqlCommentFromRestaurant);
+    }
+
+    public static String sqlCommentFromUserAndRestaurant(){
+        String sqlCommentFromUserAndRestaurant =
+                "SELECT * FROM " + DatabaseHelper.getTableComments() + " WHERE "
+                    + DatabaseHelper.getColumnCommentUserId() + " =? AND "
+                    + DatabaseHelper.getColumnCommentRestaurantsId() + " =?";
+        return (sqlCommentFromUserAndRestaurant);
+    }
+
+    /* ----------------------------------------------------------------------------------------------------- */
+
     public static String sqlSearchFromLoggedUser() {
         String sqlSearchFromLoggedUser =
                 "SELECT " + DatabaseHelper.getColumnUserLoggedId() + " FROM " + DatabaseHelper.getTableUserLogged() + ";";
@@ -91,11 +117,17 @@ public class QueriesSQL {
 
     public static String sqlGetAllUsers(){
         String sqlGetAllUsers = "SELECT * FROM " + DatabaseHelper.getTableUser();
-        return sqlGetAllUsers;
+        return (sqlGetAllUsers);
     }
 
     public static String sqlGetAllRestaurants(){
         String sqlGetAllRestaurants = "SELECT * FROM " + DatabaseHelper.getTableRestaurants();
-        return sqlGetAllRestaurants;
+        return (sqlGetAllRestaurants);
+    }
+
+    public static String getRestaurantFromId(){
+        String sqlGetRestaurantById = "SELECT * FROM " + DatabaseHelper.getTableRestaurants() +
+                " WHERE " + DatabaseHelper.getColumnRestaurantId() + " =?";
+        return (sqlGetRestaurantById);
     }
 }

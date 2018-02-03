@@ -30,7 +30,7 @@ public class UserDAO{
         return response;
     }
 
-    public User generateUser(Cursor cursor) {
+    private User generateUser(Cursor cursor) {
         User user = new User();
         user.setUserId(cursor.getInt(0));
         user.setUserName(cursor.getString(1));
@@ -157,7 +157,7 @@ public class UserDAO{
         db.close();
     }
 
-    public Bitmap byteToBitmap(byte[] byteArray){
+    private Bitmap byteToBitmap(byte[] byteArray){
         if(byteArray != null){
             Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray , 0, byteArray.length);
             return bitmap;
@@ -165,7 +165,7 @@ public class UserDAO{
         return null;
     }
 
-    public byte[] bitmapToByte(Bitmap bitmap){
+    private byte[] bitmapToByte(Bitmap bitmap){
         if (bitmap!=null){
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);

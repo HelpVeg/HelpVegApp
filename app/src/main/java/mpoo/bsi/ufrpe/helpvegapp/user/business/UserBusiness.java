@@ -94,4 +94,8 @@ public class UserBusiness {
         return true;
     }
 
+    public User getUserById(int id){
+        return getUserDAO().getSingleUser(id);
+    }
+
 }

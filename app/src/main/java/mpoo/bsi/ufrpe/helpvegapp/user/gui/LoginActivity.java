@@ -11,10 +11,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import mpoo.bsi.ufrpe.helpvegapp.R;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.business.RestaurantBusiness;
+import mpoo.bsi.ufrpe.helpvegapp.restaurant.gui.MapsActivity;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.Md5;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
-import mpoo.bsi.ufrpe.helpvegapp.user.persistence.UserDAO;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 

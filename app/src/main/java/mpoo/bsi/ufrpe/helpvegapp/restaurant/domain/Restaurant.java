@@ -1,19 +1,22 @@
 package mpoo.bsi.ufrpe.helpvegapp.restaurant.domain;
 
+import android.graphics.Bitmap;
+
 import com.google.android.gms.maps.model.LatLng;
 
 public class Restaurant {
-    private int restauranteId;
+    private int restaurantId;
     private String restaurantName;
+    private Bitmap restaurantImage;
     private LatLng latLgn;
     private String restaurantType;
 
-    public int getRestauranteId() {
-        return restauranteId;
+    public int getRestaurantId() {
+        return restaurantId;
     }
 
-    public void setRestauranteId(int restauranteId) {
-        this.restauranteId = restauranteId;
+    public void setRestaurantId(int restaurantId) {
+        this.restaurantId = restaurantId;
     }
 
     public String getRestaurantName() {
@@ -22,6 +25,14 @@ public class Restaurant {
 
     public void setRestaurantName(String restaurantName) {
         this.restaurantName = restaurantName;
+    }
+
+    public Bitmap getRestaurantImage() {
+        return restaurantImage;
+    }
+
+    public void setRestaurantImage(Bitmap restaurantImage) {
+        this.restaurantImage = restaurantImage;
     }
 
     public LatLng getLatLgn() {
