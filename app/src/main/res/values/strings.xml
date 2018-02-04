@@ -20,6 +20,8 @@
     <string name="btnSave">Salvar</string>
     <string name="btnCancel">Cancelar</string>
     <string name="btnComments">Visualizar comentarios</string>
+    <string name="btnHistoric">Visualizar histórico</string>
+    <string name="btnPreferences">Visualizar preferências</string>
 
     <string name="toastUpdateSuccessful">Cadastro alterado com sucesso</string>
     <string name="toastUpdatePasswordSuccessful">Senha alterada com sucesso</string>
@@ -46,5 +48,10 @@
     <string name="place">Ambiente </string>
     <string name="price">Preço </string>
 
-
+    <string name="preferenceTopText">Preferências</string>
+    <string name="preferenceGeneral">Indique a média geral para o restaurante</string>
+    <string name="preferenceFood">Comida</string>
+    <string name="preferenceService">Serviço</string>
+    <string name="preferencePlace">Ambiente</string>
+    <string name="preferencePrice">Preço</string>
 </resources>
