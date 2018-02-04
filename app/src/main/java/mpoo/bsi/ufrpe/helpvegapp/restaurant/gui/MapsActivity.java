@@ -154,15 +154,17 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     .position(restaurant.getLatLgn())
                     .title(restaurant.getRestaurantName())
                     .snippet(restaurant.getRestaurantType()));
-
-            if (restaurant.getRestaurantType().equals("vegano")){
-                marker.setIcon(BitmapDescriptorFactory.defaultMarker(120.0f));
-            } else if (restaurant.getRestaurantType().equals("vegetariano e vegano")){
-                marker.setIcon(BitmapDescriptorFactory.defaultMarker(210.0f));
-            } else {
-                marker.setIcon(BitmapDescriptorFactory.defaultMarker(350.0f));
-            }
+            separationMarkers(marker,restaurant);
             marker.setTag(restaurant);
+        }
+    }
+    public void separationMarkers(Marker marker, Restaurant restaurant){
+        if (restaurant.getRestaurantType().equals("vegano")){
+            marker.setIcon(BitmapDescriptorFactory.defaultMarker(120.0f));
+        } else if (restaurant.getRestaurantType().equals("vegetariano e vegano")){
+            marker.setIcon(BitmapDescriptorFactory.defaultMarker(210.0f));
+        } else {
+            marker.setIcon(BitmapDescriptorFactory.defaultMarker(350.0f));
         }
     }
 
