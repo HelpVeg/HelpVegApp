@@ -44,6 +44,23 @@ public class QueriesSQL {
         return sqlCreateTableComment;
     }
 
+    public static String sqlCreateTablePreferences(){
+        String sqlCreateTablePreferences = "CREATE TABLE IF NOT EXISTS " + DatabaseHelper.getTablePreferences() + "("
+                + DatabaseHelper.getColumnPreferencesId() + " integer primary key autoincrement unique not null, "
+                + DatabaseHelper.getColumnPreferencesUserId() + " integer not null, "
+                + DatabaseHelper.getColumnPreferencesFood() + " real not null, "
+                + DatabaseHelper.getColumnPreferencesPrice() + " real not null, "
+                + DatabaseHelper.getColumnPreferencesService() + " real not null, "
+                + DatabaseHelper.getColumnPreferencesAmbiance() + " real not null"
+                + ");";
+        return sqlCreateTablePreferences;
+    }
+
+    public static String sqlDropTablePreferences(){
+        String sqlDropTablePreferences = "DROP TABLE IF EXISTS " + DatabaseHelper.getTablePreferences();
+        return sqlDropTablePreferences;
+    }
+
 
     public static String sqlDropTableUser(){
         String sqlDropTableUser = "DROP TABLE IF EXISTS " + DatabaseHelper.getTableUser();
