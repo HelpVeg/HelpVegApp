@@ -31,23 +31,28 @@ public class RestaurantActivity extends AppCompatActivity implements View.OnClic
         mViewHolder.btnComments = findViewById(R.id.btnComments);
         mViewHolder.btnComments.setOnClickListener(this);
 
+        mViewHolder.imageRestaurant.setOnClickListener(this);
+
         showRestaurantInformation();
     }
 
     public void showRestaurantInformation(){
         mViewHolder.restaurantName.setText(restaurant.getRestaurantName());
         mViewHolder.restaurantType.setText(restaurant.getRestaurantType());
-        if (restaurant.getRestaurantImage()!=null){
-            mViewHolder.imageRestaurant.setImageBitmap(restaurant.getRestaurantImage());
+        if (restaurant.getRestaurantImages().size() != 0){
+            mViewHolder.imageRestaurant.setImageBitmap(restaurant.getRestaurantImages().get(0));
         }
     }
-
 
 
     public void onClick(View view){
         int id = view.getId();
         if (id == R.id.btnComments){
             Intent intent = new Intent(this,CommentActivity.class);
+            startActivity(intent);
+            finish();
+        } else if (id == R.id.imageRestaurant){
+            Intent intent = new Intent(this, GalleryActivity.class);
             startActivity(intent);
             finish();
         }

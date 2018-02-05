@@ -4,10 +4,12 @@ import android.graphics.Bitmap;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.ArrayList;
+
 public class Restaurant {
     private int restaurantId;
     private String restaurantName;
-    private Bitmap restaurantImage;
+    private ArrayList<Bitmap> restaurantImages;
     private LatLng latLgn;
     private String restaurantType;
 
@@ -27,12 +29,12 @@ public class Restaurant {
         this.restaurantName = restaurantName;
     }
 
-    public Bitmap getRestaurantImage() {
-        return restaurantImage;
+    public ArrayList<Bitmap> getRestaurantImages() {
+        return restaurantImages;
     }
 
-    public void setRestaurantImage(Bitmap restaurantImage) {
-        this.restaurantImage = restaurantImage;
+    public void setRestaurantImages(ArrayList<Bitmap> restaurantImages) {
+        this.restaurantImages = restaurantImages;
     }
 
     public LatLng getLatLgn() {

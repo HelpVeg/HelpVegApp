@@ -70,7 +70,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
             startActivityForResult(intent, REQUEST_GALERY);
         }
-
     }
 
     @Override

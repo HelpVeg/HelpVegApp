@@ -36,7 +36,6 @@ import java.util.ArrayList;
 import mpoo.bsi.ufrpe.helpvegapp.R;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.business.RestaurantBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Restaurant;
-import mpoo.bsi.ufrpe.helpvegapp.restaurant.gui.RestaurantActivity;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 import mpoo.bsi.ufrpe.helpvegapp.user.gui.LoginActivity;
@@ -52,7 +51,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private RestaurantBusiness restaurantBusiness = new RestaurantBusiness();
     private UserBusiness userBusiness = new UserBusiness();
     private ViewHolder mViewHolder = new ViewHolder();
-    private View popup = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -129,15 +127,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
             @Override
             public View getInfoContents(Marker marker) {
-                if (popup == null){
-                    popup = getLayoutInflater().inflate(R.layout.activity_info_window,null);
-                }
+                Restaurant restaurant = (Restaurant) marker.getTag();
+                View popup = getLayoutInflater().inflate(R.layout.activity_info_window,null);
 
                 TextView textView = popup.findViewById(R.id.titleInfoWindow);
                 ImageView imageView = popup.findViewById(R.id.iconRestaurant);
                 TextView snippet = popup.findViewById(R.id.snippet);
-
-                imageView.setImageResource(R.mipmap.ic_restaurant_default);
+                if (restaurant.getRestaurantImages().size()!=0){
+                    imageView.setImageBitmap(restaurant.getRestaurantImages().get(0));
+                }
                 textView.setText(marker.getTitle());
                 snippet.setText(TYPE + marker.getSnippet());
 
@@ -150,6 +148,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         ArrayList<Restaurant> restaurants = restaurantBusiness.getAllRestaurants();
         for (int i = 0; i < restaurants.size(); i++){
             Restaurant restaurant = restaurants.get(i);
+            restaurant.setRestaurantImages(restaurantBusiness.getAllImagesFromRestaurant(restaurant.getRestaurantId()));
             Marker marker = mMap.addMarker(new MarkerOptions()
                     .position(restaurant.getLatLgn())
                     .title(restaurant.getRestaurantName())

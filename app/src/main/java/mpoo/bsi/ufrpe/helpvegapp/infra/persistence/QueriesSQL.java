@@ -26,7 +26,6 @@ public class QueriesSQL {
         String sqlCreateTableRestaurant = "CREATE TABLE IF NOT EXISTS " + DatabaseHelper.getTableRestaurants() + "("
                 + DatabaseHelper.getColumnRestaurantId() + " integer primary key autoincrement unique not null, "
                 + DatabaseHelper.getColumnRestaurantName() + " text not null, "
-                + DatabaseHelper.getColumnRestaurantImage() + " blob, "
                 + DatabaseHelper.getColumnRestaurantLat() + " integer not null, "
                 + DatabaseHelper.getColumnRestaurantLong() + " integer not null, "
                 + DatabaseHelper.getColumnRestaurantType() + " text not null"
@@ -43,6 +42,16 @@ public class QueriesSQL {
                 + ");";
         return sqlCreateTableComment;
     }
+
+    public static String sqlCreateTablePhotosRestaurants(){
+        String sqlCreateTablePhotosRestaurants = "CREATE TABLE IF NOT EXISTS " + DatabaseHelper.getTableRestaurantPhotos() + "("
+                + DatabaseHelper.getColumnRestaurantPhotosId() + " integer primary key autoincrement unique not null, "
+                + DatabaseHelper.getColumnPhoto() + " blob, "
+                + DatabaseHelper.getColumnRestaurantId() + " integer not null"
+                +");";
+        return sqlCreateTablePhotosRestaurants;
+    }
+
 
     public static String sqlCreateTablePreferences(){
         String sqlCreateTablePreferences = "CREATE TABLE IF NOT EXISTS " + DatabaseHelper.getTablePreferences() + "("
@@ -81,6 +90,12 @@ public class QueriesSQL {
         String sqlDropTableComments = "DROP TABLE IF EXISTS " + DatabaseHelper.getTableComments();
         return sqlDropTableComments;
     }
+
+    public static String sqlDropTableRestaurantPhotos(){
+        String sqlDropTableRestaurantPhotos = "DROP TABLE IF EXISTS " + DatabaseHelper.getTableRestaurantPhotos();
+        return sqlDropTableRestaurantPhotos;
+    }
+
 
     public static String sqlUserFromEmail(){
         String sqlUserFromEmail = "SELECT * FROM " + DatabaseHelper.getTableUser() + " WHERE " + DatabaseHelper.getColumnUserEmail() + " =?;";
@@ -142,7 +157,13 @@ public class QueriesSQL {
         return (sqlGetAllRestaurants);
     }
 
-    public static String getRestaurantFromId(){
+    public static String sqlGetAllImagesFromRestaurants(){
+        String sqlImagesFromRestaurant = "SELECT * FROM " + DatabaseHelper.getTableRestaurantPhotos() +
+                " WHERE " + DatabaseHelper.getColumnRestaurantId() + " =?";
+        return (sqlImagesFromRestaurant);
+    }
+
+    public static String sqlGetRestaurantFromId(){
         String sqlGetRestaurantById = "SELECT * FROM " + DatabaseHelper.getTableRestaurants() +
                 " WHERE " + DatabaseHelper.getColumnRestaurantId() + " =?";
         return (sqlGetRestaurantById);

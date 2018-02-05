@@ -1,6 +1,7 @@
 package mpoo.bsi.ufrpe.helpvegapp.restaurant.persistence;
 
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
@@ -17,6 +18,36 @@ import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Restaurant;
 
 public class RestaurantDAO {
 
+
+    public ArrayList<Bitmap> getAllImagesFromRestaurant(int id){
+        SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
+        ArrayList<Bitmap> images = new ArrayList<>();
+        Cursor cursor = db.rawQuery(QueriesSQL.sqlGetAllImagesFromRestaurants(),new String[] {Integer.toString(id)});
+
+        while (cursor.moveToNext()) {
+            byte[] byteArray = cursor.getBlob(1);
+            Bitmap image = byteToBitmap(byteArray);
+            images.add(image);
+        }
+        return images;
+    }
+
+
+    public void insertRestaurantImage(Bitmap bitmap, int restaurantId){
+        byte[] byteImage = bitmapToByte(bitmap);
+
+        SQLiteDatabase db = DatabaseHelper.getDb().getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(DatabaseHelper.getColumnPhoto(), byteImage);
+        values.put(DatabaseHelper.getColumnRestaurantId(), restaurantId);
+
+        Boolean response = db.insert(DatabaseHelper.getTableRestaurantPhotos(), null, values) != -1;
+        db.close();
+        System.out.println(response.toString());
+
+    }
+
     public Restaurant generateRestaurant(Cursor cursor){
         Restaurant restaurant = new Restaurant();
         restaurant.setRestaurantId(cursor.getInt(0));
@@ -30,7 +61,6 @@ public class RestaurantDAO {
     }
 
     public ArrayList<Restaurant> getAllRestaurants() {
-
         SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
         ArrayList<Restaurant> restaurants = new ArrayList<>();
         Cursor cursor = db.rawQuery(QueriesSQL.sqlGetAllRestaurants(), null);
@@ -41,12 +71,11 @@ public class RestaurantDAO {
                 Restaurant restaurant = new Restaurant();
                 restaurant.setRestaurantId(cursor.getInt(0));
                 restaurant.setRestaurantName(cursor.getString(1));
-                Bitmap photo = byteToBitmap(cursor.getBlob(2));
-                restaurant.setRestaurantImage(photo);
-                double lat = cursor.getDouble(3);
-                double lng = cursor.getDouble(4);
+                double lat = cursor.getDouble(2);
+                double lng = cursor.getDouble(3);
                 restaurant.setLatLgn(new LatLng(lat,lng));
-                restaurant.setRestaurantType(cursor.getString(5));
+                restaurant.setRestaurantType(cursor.getString(4));
+
                 restaurants.add(restaurant);
             } while (cursor.moveToNext());
         }
@@ -58,7 +87,7 @@ public class RestaurantDAO {
 
     public Restaurant getRestaurantById(int id){
         SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
-        Cursor cursor = db.rawQuery(QueriesSQL.getRestaurantFromId(), new String[] {Integer.toString(id)});
+        Cursor cursor = db.rawQuery(QueriesSQL.sqlGetRestaurantFromId(), new String[] {Integer.toString(id)});
 
         Restaurant restaurant = null;
 
@@ -66,16 +95,14 @@ public class RestaurantDAO {
             restaurant = new Restaurant();
             restaurant.setRestaurantId(cursor.getInt(0));
             restaurant.setRestaurantName(cursor.getString(1));
-            Bitmap photo = byteToBitmap(cursor.getBlob(2));
-            restaurant.setRestaurantImage(photo);
-            double lat = cursor.getDouble(3);
-            double lng = cursor.getDouble(4);
+            double lat = cursor.getDouble(2);
+            double lng = cursor.getDouble(3);
             restaurant.setLatLgn(new LatLng(lat,lng));
-            restaurant.setRestaurantType(cursor.getString(5));
+            restaurant.setRestaurantType(cursor.getString(4));
 
         }
 
-        return (restaurant);
+        return restaurant;
 
     }
 

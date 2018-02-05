@@ -1,6 +1,9 @@
 package mpoo.bsi.ufrpe.helpvegapp.restaurant.business;
 
 
+import android.graphics.Bitmap;
+import android.widget.ArrayAdapter;
+
 import java.util.ArrayList;
 
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
@@ -29,6 +32,7 @@ public class RestaurantBusiness {
     }
 
     public void selectRestaurant(Restaurant restaurant){
+        restaurant.setRestaurantImages(getAllImagesFromRestaurant(restaurant.getRestaurantId()));
         Session.setCurrentRestaurant(restaurant);
     }
 
@@ -36,4 +40,13 @@ public class RestaurantBusiness {
         Restaurant restaurant = getRestaurantDAO().getRestaurantById(id);
         return (restaurant);
     }
+
+    public ArrayList<Bitmap> getAllImagesFromRestaurant(int restaurantId){
+        return restaurantDAO.getAllImagesFromRestaurant(restaurantId);
+    }
+
+    public void saveRestaurantImage(Bitmap bitmap){
+        restaurantDAO.insertRestaurantImage(bitmap,Session.getCurrentRestaurant().getRestaurantId());
+    }
+
 }

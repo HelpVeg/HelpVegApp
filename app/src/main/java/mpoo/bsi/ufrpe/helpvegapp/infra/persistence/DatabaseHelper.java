@@ -17,7 +17,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     private static final String DATABASE_NAME = "helpveg.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
 
     // ----------------------------- User table and columns -----------------------------
     private static final String TABLE_USER = "user";
@@ -35,15 +35,9 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String TABLE_RESTAURANTS = "restaurants";
     private static final String COLUMN_RESTAURANT_ID = "restaurant_id";
     private static final String COLUMN_RESTAURANT_NAME = "restaurant_name";
-    private static final String COLUMN_RESTAURANT_IMAGE = "restaurant_image";
     private static final String COLUMN_RESTAURANT_LAT = "restaurant_lat";
     private static final String COLUMN_RESTAURANT_LONG = "restaurant_long";
     private static final String COLUMN_RESTAURANT_TYPE = "restaurant_type";
-    /*private static final String COLUMN_RESTAURANT_RATE_GENERAL = "restaurant_rate_general";
-    private static final String COLUMN_RESTAURANT_RATE_SERVICE = "restaurant_rate_service";
-    private static final String COLUMN_RESTAURANT_RATE_FOOD = "restaurant_rate_food";
-    private static final String COLUMN_RESTAURANT_RATE_PRICE = "restaurant_rate_price";
-    private static final String COLUMN_RESTAURANT_RATE_ENVIRONMENT = "restaurant_rate_environment";*/
 
     // ------------------------ Comment table ---------------------------------------
     private static final String TABLE_COMMENTS = "comments";
@@ -51,6 +45,12 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String COLUMN_COMMENT_USER_ID = "comment_id_user";
     private static final String COLUMN_COMMENT_RESTAURANTS_ID = "comment_id_restaurant";
     private static final String COLUMN_COMMENT_TEXT= "comment_text";
+
+
+    // ------------------------ Comment table ---------------------------------------
+    private static final String TABLE_RESTAURANT_PHOTOS = "photos";
+    private static final String COLUMN_RESTAURANT_PHOTOS_ID = "photo_id";
+    private static final String COLUMN_PHOTO = "photo";
 
     // -------------------------- Preferences table -------------------------------
     private static final String TABLE_PREFERENCES = "preferences";
@@ -60,6 +60,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String COLUMN_PREFERENCES_SERVICE = "preferences_service";
     private static final String COLUMN_PREFERENCES_PRICE = "preferences_price";
     private static final String COLUMN_PREFERENCES_AMBIANCE = "preferences_ambiance";
+
 
     // ----------------------------- User getters -----------------------------
     public static String getTableUser() {
@@ -108,10 +109,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     public static String getColumnRestaurantName() {
         return COLUMN_RESTAURANT_NAME;
-    }
-
-    public static String getColumnRestaurantImage() {
-        return COLUMN_RESTAURANT_IMAGE;
     }
 
     public static String getColumnRestaurantLat() {
@@ -167,6 +164,21 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return COLUMN_COMMENT_TEXT;
     }
 
+
+    //--------------------------  Restaurant photos getters  -------------------------------------
+    public static String getTableRestaurantPhotos() {
+        return TABLE_RESTAURANT_PHOTOS;
+    }
+
+    public static String getColumnRestaurantPhotosId() {
+        return COLUMN_RESTAURANT_PHOTOS_ID;
+    }
+
+    public static String getColumnPhoto() {
+        return COLUMN_PHOTO;
+    }
+
+
     //---------------------------- Preferences getters --------------------------------
     public static String getTablePreferences() {
         return TABLE_PREFERENCES;
@@ -208,6 +220,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.execSQL(QueriesSQL.sqlUserLogged());
         db.execSQL(QueriesSQL.sqlCreateTableRestaurant());
         db.execSQL(QueriesSQL.sqlCreateTableComments());
+        db.execSQL(QueriesSQL.sqlCreateTablePhotosRestaurants());
         db.execSQL(QueriesSQL.sqlCreateTablePreferences());
         Script.populateRestaurantTable(db);
     }
@@ -218,6 +231,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.execSQL(QueriesSQL.sqlDropTableUserLogged());
         db.execSQL(QueriesSQL.sqlDropTableRestaurants());
         db.execSQL(QueriesSQL.sqlDropTableComments());
+        db.execSQL(QueriesSQL.sqlCreateTablePhotosRestaurants());
         db.execSQL(QueriesSQL.sqlDropTablePreferences());
         this.onCreate(db);
     }
