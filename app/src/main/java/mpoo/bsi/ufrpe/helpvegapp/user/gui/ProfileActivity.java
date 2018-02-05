@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import mpoo.bsi.ufrpe.helpvegapp.R;
-import mpoo.bsi.ufrpe.helpvegapp.avaliacao.gui.EditPreferencesActivity;
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.gui.MapsActivity;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
@@ -29,9 +28,13 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         this.mViewHolder.btnEditProfile = findViewById(R.id.profileBtnEdit);
         this.mViewHolder.btnEditPassword = findViewById(R.id.profileBtnEditPassword);
+        this.mViewHolder.btnPreference = findViewById(R.id.profileBtnPreference);
+
 
         this.mViewHolder.btnEditPassword.setOnClickListener(this);
         this.mViewHolder.btnEditProfile.setOnClickListener(this);
+        this.mViewHolder.btnPreference.setOnClickListener(this);
+
         checkSession();
         showUserLoggedData();
     }
@@ -63,7 +66,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             startActivity(intent);
             finish();
         }else if (id == R.id.profileBtnPreference){
-            Intent intent = new Intent(this, EditPreferencesActivity.class);
+            Intent intent = new Intent(this, PreferencesActivity.class);
             startActivity(intent);
             finish();
         }
@@ -75,6 +78,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         private CircleImageView imgProfile;
         private Button btnEditProfile;
         private Button btnEditPassword;
+        private Button btnPreference;
     }
 
     @Override

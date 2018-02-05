@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="mpoo.bsi.ufrpe.helpvegapp.avaliacao.gui.PreferencesActivity">
+    tools:context="mpoo.bsi.ufrpe.helpvegapp.user.gui.PreferencesActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -51,6 +51,7 @@
         android:layout_height="40dp"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
+        android:isIndicator="true"
         android:scaleX="0.8"
         android:scaleY="0.8"/>
 
@@ -70,7 +71,9 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:scaleX="0.8"
-        android:scaleY="0.8"/>
+        android:scaleY="0.8"
+        android:isIndicator="true"
+        />
 
     <TextView
         android:layout_width="match_parent"
@@ -88,7 +91,8 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:scaleX="0.8"
-        android:scaleY="0.8"/>
+        android:scaleY="0.8"
+        android:isIndicator="true" />
 
     <Button
         android:id="@+id/preferenceBtnConfirm"
