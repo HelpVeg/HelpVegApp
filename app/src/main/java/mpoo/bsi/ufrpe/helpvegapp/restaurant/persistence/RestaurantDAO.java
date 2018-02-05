@@ -56,6 +56,8 @@ public class RestaurantDAO {
         double lng = cursor.getDouble(3);
         restaurant.setLatLgn(new LatLng(lat, lng));
         restaurant.setRestaurantType(cursor.getString(4));
+        ArrayList<Bitmap> imageList = getAllImagesFromRestaurant(restaurant.getRestaurantId());
+        restaurant.setRestaurantImages(imageList);
 
         return restaurant;
     }
@@ -64,22 +66,10 @@ public class RestaurantDAO {
         SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
         ArrayList<Restaurant> restaurants = new ArrayList<>();
         Cursor cursor = db.rawQuery(QueriesSQL.sqlGetAllRestaurants(), null);
-
-        if (cursor.moveToFirst()) {
-
-            do {
-                Restaurant restaurant = new Restaurant();
-                restaurant.setRestaurantId(cursor.getInt(0));
-                restaurant.setRestaurantName(cursor.getString(1));
-                double lat = cursor.getDouble(2);
-                double lng = cursor.getDouble(3);
-                restaurant.setLatLgn(new LatLng(lat,lng));
-                restaurant.setRestaurantType(cursor.getString(4));
-
-                restaurants.add(restaurant);
-            } while (cursor.moveToNext());
+        while(cursor.moveToNext()){
+            Restaurant restaurant = generateRestaurant(cursor);
+            restaurants.add(restaurant);
         }
-
         cursor.close();
         db.close();
         return restaurants;
@@ -92,16 +82,8 @@ public class RestaurantDAO {
         Restaurant restaurant = null;
 
         if(cursor.moveToFirst()){
-            restaurant = new Restaurant();
-            restaurant.setRestaurantId(cursor.getInt(0));
-            restaurant.setRestaurantName(cursor.getString(1));
-            double lat = cursor.getDouble(2);
-            double lng = cursor.getDouble(3);
-            restaurant.setLatLgn(new LatLng(lat,lng));
-            restaurant.setRestaurantType(cursor.getString(4));
-
+            restaurant = generateRestaurant(cursor);
         }
-
         return restaurant;
 
     }

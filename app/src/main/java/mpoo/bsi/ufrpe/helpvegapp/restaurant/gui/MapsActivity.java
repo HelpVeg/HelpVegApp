@@ -158,6 +158,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             marker.setTag(restaurant);
         }
     }
+
     public void separationMarkers(Marker marker, Restaurant restaurant){
         if (restaurant.getRestaurantType().equals("vegano")){
             marker.setIcon(BitmapDescriptorFactory.defaultMarker(120.0f));
