@@ -1,6 +1,7 @@
 package mpoo.bsi.ufrpe.helpvegapp.restaurant.persistence;
 
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
@@ -21,7 +22,7 @@ public class RestaurantDAO {
     public ArrayList<Bitmap> getAllImagesFromRestaurant(int id){
         SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
         ArrayList<Bitmap> images = new ArrayList<>();
-        Cursor cursor = db.rawQuery(QueriesSQL.sqlGetAllImagesFromRestaurants(),null);
+        Cursor cursor = db.rawQuery(QueriesSQL.sqlGetAllImagesFromRestaurants(),new String[] {Integer.toString(id)});
 
         while (cursor.moveToNext()) {
             byte[] byteArray = cursor.getBlob(1);
@@ -32,7 +33,20 @@ public class RestaurantDAO {
     }
 
 
+    public void insertRestaurantImage(Bitmap bitmap, int restaurantId){
+        byte[] byteImage = bitmapToByte(bitmap);
 
+        SQLiteDatabase db = DatabaseHelper.getDb().getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(DatabaseHelper.getColumnPhoto(), byteImage);
+        values.put(DatabaseHelper.getColumnRestaurantId(), restaurantId);
+
+        Boolean response = db.insert(DatabaseHelper.getTableRestaurantPhotos(), null, values) != -1;
+        db.close();
+        System.out.println(response.toString());
+
+    }
 
     public Restaurant generateRestaurant(Cursor cursor){
         Restaurant restaurant = new Restaurant();
@@ -47,7 +61,6 @@ public class RestaurantDAO {
     }
 
     public ArrayList<Restaurant> getAllRestaurants() {
-
         SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
         ArrayList<Restaurant> restaurants = new ArrayList<>();
         Cursor cursor = db.rawQuery(QueriesSQL.sqlGetAllRestaurants(), null);

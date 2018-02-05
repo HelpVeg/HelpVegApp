@@ -6,14 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import mpoo.bsi.ufrpe.helpvegapp.R;
 import mpoo.bsi.ufrpe.helpvegapp.avaliacao.gui.CommentActivity;
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Restaurant;
-import mpoo.bsi.ufrpe.helpvegapp.user.gui.ProfileActivity;
 
 public class RestaurantActivity extends AppCompatActivity implements View.OnClickListener {
 

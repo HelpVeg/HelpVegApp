@@ -158,9 +158,8 @@ public class QueriesSQL {
     }
 
     public static String sqlGetAllImagesFromRestaurants(){
-        String sqlImagesFromRestaurant =
-                "SELECT * FROM " + DatabaseHelper.getTableRestaurantPhotos() + " WHERE "
-                        + DatabaseHelper.getColumnRestaurantId() + " =?";
+        String sqlImagesFromRestaurant = "SELECT * FROM " + DatabaseHelper.getTableRestaurantPhotos() +
+                " WHERE " + DatabaseHelper.getColumnRestaurantId() + " =?";
         return (sqlImagesFromRestaurant);
     }
 
