@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import mpoo.bsi.ufrpe.helpvegapp.R;
 import mpoo.bsi.ufrpe.helpvegapp.avaliacao.gui.CommentActivity;
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Restaurant;
+import mpoo.bsi.ufrpe.helpvegapp.user.gui.ProfileActivity;
 
 public class RestaurantActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -31,23 +33,28 @@ public class RestaurantActivity extends AppCompatActivity implements View.OnClic
         mViewHolder.btnComments = findViewById(R.id.btnComments);
         mViewHolder.btnComments.setOnClickListener(this);
 
+        mViewHolder.imageRestaurant.setOnClickListener(this);
+
         showRestaurantInformation();
     }
 
     public void showRestaurantInformation(){
         mViewHolder.restaurantName.setText(restaurant.getRestaurantName());
         mViewHolder.restaurantType.setText(restaurant.getRestaurantType());
-        if (restaurant.getRestaurantImage()!=null){
-            mViewHolder.imageRestaurant.setImageBitmap(restaurant.getRestaurantImage());
+        if (restaurant.getRestaurantImages().size() != 0){
+            mViewHolder.imageRestaurant.setImageBitmap(restaurant.getRestaurantImages().get(0));
         }
     }
-
 
 
     public void onClick(View view){
         int id = view.getId();
         if (id == R.id.btnComments){
             Intent intent = new Intent(this,CommentActivity.class);
+            startActivity(intent);
+            finish();
+        } else if (id == R.id.imageRestaurant){
+            Intent intent = new Intent(this, GalleryActivity.class);
             startActivity(intent);
             finish();
         }

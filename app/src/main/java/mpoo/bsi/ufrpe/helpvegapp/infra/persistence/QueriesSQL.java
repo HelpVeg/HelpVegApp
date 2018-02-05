@@ -26,7 +26,6 @@ public class QueriesSQL {
         String sqlCreateTableRestaurant = "CREATE TABLE IF NOT EXISTS " + DatabaseHelper.getTableRestaurants() + "("
                 + DatabaseHelper.getColumnRestaurantId() + " integer primary key autoincrement unique not null, "
                 + DatabaseHelper.getColumnRestaurantName() + " text not null, "
-                + DatabaseHelper.getColumnRestaurantImage() + " blob, "
                 + DatabaseHelper.getColumnRestaurantLat() + " integer not null, "
                 + DatabaseHelper.getColumnRestaurantLong() + " integer not null, "
                 + DatabaseHelper.getColumnRestaurantType() + " text not null"
@@ -42,6 +41,15 @@ public class QueriesSQL {
                 + DatabaseHelper.getColumnCommentText() + " text not null"
                 + ");";
         return sqlCreateTableComment;
+    }
+
+    public static String sqlCreateTablePhotosRestaurants(){
+        String sqlCreateTablePhotosRestaurants = "CREATE TABLE IF NOT EXISTS " + DatabaseHelper.getTableRestaurantPhotos() + "("
+                + DatabaseHelper.getColumnRestaurantPhotosId() + " integer primary key autoincrement unique not null, "
+                + DatabaseHelper.getColumnPhoto() + " blob, "
+                + DatabaseHelper.getColumnRestaurantId() + " integer not null"
+                +");";
+        return sqlCreateTablePhotosRestaurants;
     }
 
 
@@ -120,12 +128,19 @@ public class QueriesSQL {
         return (sqlGetAllUsers);
     }
 
-    public static String getAllRestaurants(){
+    public static String sqlGetAllRestaurants(){
         String sqlGetAllRestaurants = "SELECT * FROM " + DatabaseHelper.getTableRestaurants();
         return (sqlGetAllRestaurants);
     }
 
-    public static String getRestaurantFromId(){
+    public static String sqlGetAllImagesFromRestaurants(){
+        String sqlImagesFromRestaurant =
+                "SELECT * FROM " + DatabaseHelper.getTableRestaurantPhotos() + " WHERE "
+                        + DatabaseHelper.getColumnRestaurantId() + " =?";
+        return (sqlImagesFromRestaurant);
+    }
+
+    public static String sqlGetRestaurantFromId(){
         String sqlGetRestaurantById = "SELECT * FROM " + DatabaseHelper.getTableRestaurants() +
                 " WHERE " + DatabaseHelper.getColumnRestaurantId() + " =?";
         return (sqlGetRestaurantById);
