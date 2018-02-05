@@ -3,10 +3,10 @@ package mpoo.bsi.ufrpe.helpvegapp.user.domain;
 public class Preferences {
     private int id;
     private User user;
-    private double food;
-    private double price;
-    private double service;
-    private double ambiance;
+    private float food;
+    private float price;
+    private float service;
+    private float ambiance;
 
     public int getId() {
         return id;
@@ -22,31 +22,31 @@ public class Preferences {
         this.user = user;
     }
 
-    public double getFood() {
+    public float getFood() {
         return food;
     }
-    public void setFood(double food) {
+    public void setFood(float food) {
         this.food = food;
     }
 
-    public double getPrice() {
+    public float getPrice() {
         return price;
     }
-    public void setPrice(double price) {
+    public void setPrice(float price) {
         this.price = price;
     }
 
-    public double getService() {
+    public float getService() {
         return service;
     }
-    public void setService(double service) {
+    public void setService(float service) {
         this.service = service;
     }
 
-    public double getAmbiance() {
+    public float getAmbiance() {
         return ambiance;
     }
-    public void setAmbiance(double ambiance) {
+    public void setAmbiance(float ambiance) {
         this.ambiance = ambiance;
     }
 }

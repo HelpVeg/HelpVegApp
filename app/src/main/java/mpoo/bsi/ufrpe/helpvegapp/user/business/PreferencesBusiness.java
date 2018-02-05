@@ -17,8 +17,20 @@ public class PreferencesBusiness {
         return preferences;
     }
 
+    public Preferences generatePreference(float food,float service,float place, float price){
+        Preferences preferences = new Preferences();
+        preferences.setUser(Session.getUserIn());
+        preferences.setFood(food);
+        preferences.setAmbiance(place);
+        preferences.setPrice(price);
+        preferences.setService(service);
+
+        return preferences;
+    }
+
     //-------------------- Registrando as preferências do usuário logado -----------------
-    public Boolean registerPreferences(Preferences preferences){
+    public Boolean registerPreferences(float food,float service,float place, float price){
+        Preferences preferences = generatePreference(food,service,place,price);
         return getPreferencesDAO().createPreferences(preferences);
     }
 
