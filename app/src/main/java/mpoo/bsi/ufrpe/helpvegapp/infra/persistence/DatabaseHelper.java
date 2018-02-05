@@ -46,10 +46,21 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String COLUMN_COMMENT_RESTAURANTS_ID = "comment_id_restaurant";
     private static final String COLUMN_COMMENT_TEXT= "comment_text";
 
+
     // ------------------------ Comment table ---------------------------------------
     private static final String TABLE_RESTAURANT_PHOTOS = "photos";
     private static final String COLUMN_RESTAURANT_PHOTOS_ID = "photo_id";
     private static final String COLUMN_PHOTO = "photo";
+
+    // -------------------------- Preferences table -------------------------------
+    private static final String TABLE_PREFERENCES = "preferences";
+    private static final String COLUMN_PREFERENCES_ID = "preferences_id";
+    private static final String COLUMN_PREFERENCES_USER_ID = "preferences_user_id";
+    private static final String COLUMN_PREFERENCES_FOOD_ = "preferences_food";
+    private static final String COLUMN_PREFERENCES_SERVICE = "preferences_service";
+    private static final String COLUMN_PREFERENCES_PRICE = "preferences_price";
+    private static final String COLUMN_PREFERENCES_AMBIANCE = "preferences_ambiance";
+
 
     // ----------------------------- User getters -----------------------------
     public static String getTableUser() {
@@ -153,6 +164,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return COLUMN_COMMENT_TEXT;
     }
 
+
     //--------------------------  Restaurant photos getters  -------------------------------------
     public static String getTableRestaurantPhotos() {
         return TABLE_RESTAURANT_PHOTOS;
@@ -167,6 +179,37 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
 
+    //---------------------------- Preferences getters --------------------------------
+    public static String getTablePreferences() {
+        return TABLE_PREFERENCES;
+    }
+
+    public static String getColumnPreferencesId() {
+        return COLUMN_PREFERENCES_ID;
+    }
+
+    public static String getColumnPreferencesUserId() {
+        return COLUMN_PREFERENCES_USER_ID;
+    }
+
+    public static String getColumnPreferencesFood() {
+        return COLUMN_PREFERENCES_FOOD_;
+    }
+
+    public static String getColumnPreferencesService() {
+        return COLUMN_PREFERENCES_SERVICE;
+    }
+
+    public static String getColumnPreferencesPrice() {
+        return COLUMN_PREFERENCES_PRICE;
+    }
+
+    public static String getColumnPreferencesAmbiance() {
+        return COLUMN_PREFERENCES_AMBIANCE;
+    }
+
+    // ----------------------------------------------------------------------------
+
     private DatabaseHelper() {
         super(MyApp.getContext(), DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -178,6 +221,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.execSQL(QueriesSQL.sqlCreateTableRestaurant());
         db.execSQL(QueriesSQL.sqlCreateTableComments());
         db.execSQL(QueriesSQL.sqlCreateTablePhotosRestaurants());
+        db.execSQL(QueriesSQL.sqlCreateTablePreferences());
         Script.populateRestaurantTable(db);
     }
 
@@ -188,6 +232,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.execSQL(QueriesSQL.sqlDropTableRestaurants());
         db.execSQL(QueriesSQL.sqlDropTableComments());
         db.execSQL(QueriesSQL.sqlCreateTablePhotosRestaurants());
+        db.execSQL(QueriesSQL.sqlDropTablePreferences());
         this.onCreate(db);
     }
 

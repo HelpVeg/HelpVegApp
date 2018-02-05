@@ -41,7 +41,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(view.getContext(), getPosition(), Toast.LENGTH_SHORT).show();
         }
     }
 

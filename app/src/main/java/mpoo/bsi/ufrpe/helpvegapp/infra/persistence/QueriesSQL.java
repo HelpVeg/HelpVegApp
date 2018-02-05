@@ -53,6 +53,24 @@ public class QueriesSQL {
     }
 
 
+    public static String sqlCreateTablePreferences(){
+        String sqlCreateTablePreferences = "CREATE TABLE IF NOT EXISTS " + DatabaseHelper.getTablePreferences() + "("
+                + DatabaseHelper.getColumnPreferencesId() + " integer primary key autoincrement unique not null, "
+                + DatabaseHelper.getColumnPreferencesUserId() + " integer not null, "
+                + DatabaseHelper.getColumnPreferencesFood() + " real not null, "
+                + DatabaseHelper.getColumnPreferencesPrice() + " real not null, "
+                + DatabaseHelper.getColumnPreferencesService() + " real not null, "
+                + DatabaseHelper.getColumnPreferencesAmbiance() + " real not null"
+                + ");";
+        return sqlCreateTablePreferences;
+    }
+
+    public static String sqlDropTablePreferences(){
+        String sqlDropTablePreferences = "DROP TABLE IF EXISTS " + DatabaseHelper.getTablePreferences();
+        return sqlDropTablePreferences;
+    }
+
+
     public static String sqlDropTableUser(){
         String sqlDropTableUser = "DROP TABLE IF EXISTS " + DatabaseHelper.getTableUser();
         return (sqlDropTableUser);
@@ -72,6 +90,12 @@ public class QueriesSQL {
         String sqlDropTableComments = "DROP TABLE IF EXISTS " + DatabaseHelper.getTableComments();
         return sqlDropTableComments;
     }
+
+    public static String sqlDropTableRestaurantPhotos(){
+        String sqlDropTableRestaurantPhotos = "DROP TABLE IF EXISTS " + DatabaseHelper.getTableRestaurantPhotos();
+        return sqlDropTableRestaurantPhotos;
+    }
+
 
     public static String sqlUserFromEmail(){
         String sqlUserFromEmail = "SELECT * FROM " + DatabaseHelper.getTableUser() + " WHERE " + DatabaseHelper.getColumnUserEmail() + " =?;";

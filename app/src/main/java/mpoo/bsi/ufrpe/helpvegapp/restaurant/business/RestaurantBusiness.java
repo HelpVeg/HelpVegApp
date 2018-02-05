@@ -22,7 +22,7 @@ public class RestaurantBusiness {
     }
 
     public void viewRestaurants() {
-        ArrayList<Restaurant> restaurants = restaurantDAO.getAllRestaurants();
+        ArrayList<Restaurant> restaurants = getAllRestaurants();
         for (int i = 0; i < restaurants.size(); i++) {
             Restaurant res = restaurants.get(i);
             System.out.println("#" + i + " ID: " + res.getRestaurantId() + " Name: " + res.getRestaurantName() + ", Type: " + res.getRestaurantType());
