@@ -22,6 +22,7 @@
     <string name="btnComments">Visualizar comentarios</string>
     <string name="btnHistoric">Visualizar histórico</string>
     <string name="btnPreferences">Visualizar preferências</string>
+    <string name="btnEditPreferences">Editar preferências</string>
 
     <string name="toastUpdateSuccessful">Cadastro alterado com sucesso</string>
     <string name="toastUpdatePasswordSuccessful">Senha alterada com sucesso</string>

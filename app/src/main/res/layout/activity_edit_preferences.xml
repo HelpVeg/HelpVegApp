@@ -27,7 +27,7 @@
         android:textSize="25sp"/>
 
     <RatingBar
-        android:id="@+id/ratingBarFood"
+        android:id="@+id/ratingBarEditFood"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_gravity="center"
@@ -46,7 +46,7 @@
         android:textSize="25sp"/>
 
     <RatingBar
-        android:id="@+id/ratingBarPlace"
+        android:id="@+id/ratingBarEditPlace"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_gravity="center"
@@ -64,7 +64,7 @@
         android:textSize="25sp"/>
 
     <RatingBar
-        android:id="@+id/ratingBarPrice"
+        android:id="@+id/ratingBarEditPrice"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_gravity="center"
@@ -82,7 +82,7 @@
         android:textSize="25sp"/>
 
     <RatingBar
-        android:id="@+id/ratingBarService"
+        android:id="@+id/ratingBarEditService"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_gravity="center"
@@ -91,10 +91,10 @@
         android:scaleY="0.8"/>
 
     <Button
-        android:id="@+id/preferenceBtnEdit"
+        android:id="@+id/preferenceBtnConfirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btnPreferences"
+        android:text="@string/btnSave"
         android:layout_gravity="center"
         android:background="@color/colorPrimary"
         android:layout_marginTop="40dp"

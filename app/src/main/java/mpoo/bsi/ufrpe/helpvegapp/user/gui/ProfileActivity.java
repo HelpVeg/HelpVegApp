@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import mpoo.bsi.ufrpe.helpvegapp.R;
+import mpoo.bsi.ufrpe.helpvegapp.avaliacao.gui.EditPreferencesActivity;
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.gui.MapsActivity;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
@@ -59,6 +60,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             finish();
         } else if (id == R.id.profileBtnEditPassword){
             Intent intent = new Intent(this, EditPasswordActivity.class);
+            startActivity(intent);
+            finish();
+        }else if (id == R.id.profileBtnPreference){
+            Intent intent = new Intent(this, EditPreferencesActivity.class);
             startActivity(intent);
             finish();
         }
