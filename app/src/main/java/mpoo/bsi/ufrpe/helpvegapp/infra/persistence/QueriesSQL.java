@@ -168,4 +168,10 @@ public class QueriesSQL {
                 " WHERE " + DatabaseHelper.getColumnRestaurantId() + " =?";
         return (sqlGetRestaurantById);
     }
+
+    public static String getPreferencesFromUser(){
+        String sqlGetPreferencesFromUser = "SELECT * FROM " + DatabaseHelper.getTablePreferences() +
+                " WHERE " + DatabaseHelper.getColumnPreferencesUserId() + " =?";
+        return sqlGetPreferencesFromUser;
+    }
 }

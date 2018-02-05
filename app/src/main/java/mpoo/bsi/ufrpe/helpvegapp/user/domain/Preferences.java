@@ -11,11 +11,13 @@ public class Preferences {
     public int getId() {
         return id;
     }
+    public void setId(int id){
+        this.id = id;
+    }
 
     public User getUser() {
         return user;
     }
-
     public void setUser(User user) {
         this.user = user;
     }
@@ -23,7 +25,6 @@ public class Preferences {
     public double getFood() {
         return food;
     }
-
     public void setFood(double food) {
         this.food = food;
     }
@@ -31,7 +32,6 @@ public class Preferences {
     public double getPrice() {
         return price;
     }
-
     public void setPrice(double price) {
         this.price = price;
     }
@@ -39,7 +39,6 @@ public class Preferences {
     public double getService() {
         return service;
     }
-
     public void setService(double service) {
         this.service = service;
     }
@@ -47,7 +46,6 @@ public class Preferences {
     public double getAmbiance() {
         return ambiance;
     }
-
     public void setAmbiance(double ambiance) {
         this.ambiance = ambiance;
     }
