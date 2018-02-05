@@ -231,7 +231,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.execSQL(QueriesSQL.sqlDropTableUserLogged());
         db.execSQL(QueriesSQL.sqlDropTableRestaurants());
         db.execSQL(QueriesSQL.sqlDropTableComments());
-        db.execSQL(QueriesSQL.sqlCreateTablePhotosRestaurants());
+        db.execSQL(QueriesSQL.sqlDropTableRestaurantPhotos());
         db.execSQL(QueriesSQL.sqlDropTablePreferences());
         this.onCreate(db);
     }
