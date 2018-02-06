@@ -23,10 +23,11 @@ public class PreferencesDAO {
         preferences.setId(cursor.getInt(0));
         int userId = (cursor.getInt(1));
         preferences.setUser(new UserBusiness().getUserById(userId));
-        preferences.setFood(cursor.getFloat(2));
-        preferences.setPrice(cursor.getFloat(3));
-        preferences.setService(cursor.getFloat(4));
-        preferences.setAmbiance(cursor.getFloat(5));
+        preferences.setType(cursor.getString(2));
+        preferences.setFood(cursor.getFloat(3));
+        preferences.setPrice(cursor.getFloat(4));
+        preferences.setService(cursor.getFloat(5));
+        preferences.setAmbiance(cursor.getFloat(6));
         return preferences;
     }
 
@@ -68,6 +69,7 @@ public class PreferencesDAO {
         ContentValues values = new ContentValues();
 
         values.put(DatabaseHelper.getColumnPreferencesUserId(), preferences.getUser().getUserId());
+        values.put(DatabaseHelper.getColumnPreferencesType(), preferences.getType());
         values.put(DatabaseHelper.getColumnPreferencesFood(), preferences.getFood());
         values.put(DatabaseHelper.getColumnPreferencesPrice(), preferences.getPrice());
         values.put(DatabaseHelper.getColumnPreferencesService(), preferences.getService());
@@ -87,6 +89,7 @@ public class PreferencesDAO {
         ContentValues values = new ContentValues();
 
         values.put(DatabaseHelper.getColumnPreferencesUserId(), preferences.getUser().getUserId());
+        values.put(DatabaseHelper.getColumnPreferencesType(), preferences.getType());
         values.put(DatabaseHelper.getColumnPreferencesFood(), preferences.getFood());
         values.put(DatabaseHelper.getColumnPreferencesPrice(), preferences.getPrice());
         values.put(DatabaseHelper.getColumnPreferencesService(), preferences.getService());

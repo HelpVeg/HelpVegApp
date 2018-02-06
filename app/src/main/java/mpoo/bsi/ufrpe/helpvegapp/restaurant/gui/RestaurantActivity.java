@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -29,10 +30,15 @@ public class RestaurantActivity extends AppCompatActivity implements View.OnClic
         mViewHolder.restaurantName = findViewById(R.id.nameProfileRestaurant);
         mViewHolder.restaurantType = findViewById(R.id.typeProfileRestaurant);
         mViewHolder.btnComments = findViewById(R.id.btnComments);
+        mViewHolder.ratingBarGeneral = findViewById(R.id.ratingBarGeneral);
+        mViewHolder.ratingBarFood = findViewById(R.id.ratingBarComida);
+        mViewHolder.ratingBarService = findViewById(R.id.ratingBarServiço);
+        mViewHolder.ratingBarAmbiance = findViewById(R.id.ratingBarAmbiente);
+        mViewHolder.ratingBarPrice = findViewById(R.id.ratingBarPreço);
+
+
         mViewHolder.btnComments.setOnClickListener(this);
-
         mViewHolder.imageRestaurant.setOnClickListener(this);
-
         showRestaurantInformation();
     }
 
@@ -63,6 +69,12 @@ public class RestaurantActivity extends AppCompatActivity implements View.OnClic
         private TextView restaurantName;
         private TextView restaurantType;
         private Button btnComments;
+
+        private RatingBar ratingBarGeneral;
+        private RatingBar ratingBarFood;
+        private RatingBar ratingBarAmbiance;
+        private RatingBar ratingBarService;
+        private RatingBar ratingBarPrice;
     }
 
     @Override

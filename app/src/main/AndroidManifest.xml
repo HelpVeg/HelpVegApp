@@ -30,7 +30,7 @@
         <activity android:name=".restaurant.gui.MapsActivity" />
         <activity android:name=".user.gui.EditPasswordActivity" />
         <activity android:name=".avaliacao.gui.CommentActivity" />
-        <activity android:name=".restaurant.gui.GalleryActivity"/>
+        <activity android:name=".restaurant.gui.GalleryActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -40,10 +40,9 @@
             android:name="com.google.android.maps"
             android:required="true" />
 
-        <activity android:name=".user.gui.PreferencesActivity"/>
-
-        <activity android:name=".user.gui.EditPreferencesActivity"/>
-
+        <activity android:name=".user.gui.PreferencesActivity" />
+        <activity android:name=".user.gui.EditPreferencesActivity" />
+        <activity android:name=".avaliacao.gui.RatingActivity"></activity>
     </application>
 
 </manifest>

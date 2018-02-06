@@ -17,7 +17,8 @@ import mpoo.bsi.ufrpe.helpvegapp.R;
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.business.RestaurantBusiness;
 
-import static android.view.View.GONE;
+import static android.view.View.INVISIBLE;
+import static android.view.View.VISIBLE;
 
 public class GalleryActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -50,9 +51,9 @@ public class GalleryActivity extends AppCompatActivity implements View.OnClickLi
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
                 Bitmap bitmap = (Bitmap) parent.getItemAtPosition(position);
                 mViewHolder.openImage.setImageBitmap(bitmap);
-                mViewHolder.openImage.setVisibility(View.VISIBLE);
-                mViewHolder.gridView.setVisibility(GONE);
-                mViewHolder.fabAddImage.setVisibility(GONE);
+                mViewHolder.openImage.setVisibility(VISIBLE);
+                mViewHolder.gridView.setVisibility(INVISIBLE);
+                mViewHolder.fabAddImage.setVisibility(INVISIBLE);
             }
         });
     }
@@ -97,10 +98,10 @@ public class GalleryActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onBackPressed(){
-        if(mViewHolder.openImage.getVisibility() == View.VISIBLE){
-            mViewHolder.openImage.setVisibility(View.INVISIBLE);
-            mViewHolder.fabAddImage.setVisibility(View.VISIBLE);
-            mViewHolder.gridView.setVisibility(View.VISIBLE);
+        if(mViewHolder.openImage.getVisibility() == VISIBLE){
+            mViewHolder.openImage.setVisibility(INVISIBLE);
+            mViewHolder.fabAddImage.setVisibility(VISIBLE);
+            mViewHolder.gridView.setVisibility(VISIBLE);
             return;
         }
         Intent intent = new Intent(this,RestaurantActivity.class);

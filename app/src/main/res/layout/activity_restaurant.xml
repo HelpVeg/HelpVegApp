@@ -8,7 +8,6 @@
     android:orientation="vertical"
     tools:context="mpoo.bsi.ufrpe.helpvegapp.restaurant.gui.RestaurantActivity">
 
-
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageRestaurant"
         android:layout_width="183dp"
@@ -51,7 +50,7 @@
         app:layout_constraintVertical_bias="0.337" />
 
     <RatingBar
-        android:id="@+id/ratingBarGeral"
+        android:id="@+id/ratingBarGeneral"
         style="?android:attr/ratingBarStyleIndicator"
         android:layout_width="wrap_content"
         android:layout_height="45dp"

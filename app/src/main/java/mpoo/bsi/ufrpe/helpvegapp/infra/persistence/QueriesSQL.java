@@ -59,6 +59,7 @@ public class QueriesSQL {
         String sqlCreateTablePreferences = "CREATE TABLE IF NOT EXISTS " + DatabaseHelper.getTablePreferences() + "("
                 + DatabaseHelper.getColumnPreferencesId() + " integer primary key autoincrement unique not null, "
                 + DatabaseHelper.getColumnPreferencesUserId() + " integer unique not null, "
+                + DatabaseHelper.getColumnPreferencesType() + " text not null, "
                 + DatabaseHelper.getColumnPreferencesFood() + " real not null, "
                 + DatabaseHelper.getColumnPreferencesPrice() + " real not null, "
                 + DatabaseHelper.getColumnPreferencesService() + " real not null, "

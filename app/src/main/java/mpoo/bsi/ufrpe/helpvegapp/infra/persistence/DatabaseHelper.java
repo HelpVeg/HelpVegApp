@@ -17,7 +17,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     }
 
     private static final String DATABASE_NAME = "helpveg.db";
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
 
     // ----------------------------- User table and columns -----------------------------
     private static final String TABLE_USER = "user";
@@ -56,6 +56,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String TABLE_PREFERENCES = "preferences";
     private static final String COLUMN_PREFERENCES_ID = "preferences_id";
     private static final String COLUMN_PREFERENCES_USER_ID = "preferences_user_id";
+    private static final String COLUMN_PREFERENCES_TYPE = "preferences_type";
     private static final String COLUMN_PREFERENCES_FOOD_ = "preferences_food";
     private static final String COLUMN_PREFERENCES_SERVICE = "preferences_service";
     private static final String COLUMN_PREFERENCES_PRICE = "preferences_price";
@@ -180,6 +181,10 @@ public class DatabaseHelper extends SQLiteOpenHelper{
 
     public static String getColumnPreferencesUserId() {
         return COLUMN_PREFERENCES_USER_ID;
+    }
+
+    public static String getColumnPreferencesType(){
+        return COLUMN_PREFERENCES_TYPE;
     }
 
     public static String getColumnPreferencesFood() {

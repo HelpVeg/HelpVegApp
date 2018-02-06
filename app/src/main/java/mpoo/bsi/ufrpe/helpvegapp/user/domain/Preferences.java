@@ -3,6 +3,7 @@ package mpoo.bsi.ufrpe.helpvegapp.user.domain;
 public class Preferences {
     private int id;
     private User user;
+    private String type;
     private float food;
     private float price;
     private float service;
@@ -20,6 +21,14 @@ public class Preferences {
     }
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public float getFood() {

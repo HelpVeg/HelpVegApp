@@ -20,20 +20,10 @@ public class PreferencesBusiness {
         return preferences;
     }
 
-    public Preferences generatePreference(float food,float service,float place, float price){
-        Preferences preferences = new Preferences();
-        preferences.setUser(Session.getUserIn());
-        preferences.setFood(food);
-        preferences.setAmbiance(place);
-        preferences.setPrice(price);
-        preferences.setService(service);
-
-        return preferences;
-    }
 
     //-------------------- Registrando as preferências do usuário logado -----------------
-    public void registerPreferences(float food,float service,float place, float price){
-        Preferences preferences = generatePreference(food,service,place,price);
+    public void registerPreferences(Preferences preferences){
+        preferences.setUser(Session.getUserIn());
         if (getPreferencesFromUser(Session.getUserIn()) != null){
             getPreferencesDAO().updatePreferences(preferences);
         }else{

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -15,7 +14,13 @@
         android:gravity="center"
         android:text="@string/preferenceTopText"
         android:textColor="@color/colorPrimary"
-        android:textSize="25sp" />
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.001" />
 
     <TextView
         android:layout_width="match_parent"
@@ -24,7 +29,13 @@
         android:gravity="center"
         android:text="@string/preferenceFood"
         android:textColor="@color/colorPrimary"
-        android:textSize="25sp"/>
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.242" />
 
     <RatingBar
         android:id="@+id/ratingBarFood"
@@ -33,16 +44,27 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:scaleX="0.8"
-        android:scaleY="0.8" />
+        android:scaleY="0.8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.315" />
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="34dp"
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="@string/preferencePlace"
         android:textColor="@color/colorPrimary"
-        android:textSize="25sp"/>
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.418" />
 
     <RatingBar
         android:id="@+id/ratingBarPlace"
@@ -51,16 +73,27 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:scaleX="0.8"
-        android:scaleY="0.8"/>
+        android:scaleY="0.8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.489" />
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="34dp"
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="@string/preferencePrice"
         android:textColor="@color/colorPrimary"
-        android:textSize="25sp"/>
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.745" />
 
     <RatingBar
         android:id="@+id/ratingBarPrice"
@@ -69,7 +102,12 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:scaleX="0.8"
-        android:scaleY="0.8"/>
+        android:scaleY="0.8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.82" />
 
     <TextView
         android:layout_width="match_parent"
@@ -78,7 +116,13 @@
         android:gravity="center"
         android:text="@string/preferenceService"
         android:textColor="@color/colorPrimary"
-        android:textSize="25sp"/>
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.583" />
 
     <RatingBar
         android:id="@+id/ratingBarService"
@@ -87,18 +131,54 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:scaleX="0.8"
-        android:scaleY="0.8"/>
+        android:scaleY="0.8"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.649" />
 
     <Button
         android:id="@+id/preferenceBtnSave"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="274dp"
+        android:layout_height="47dp"
         android:layout_gravity="center"
-        android:layout_marginEnd="80dp"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:background="@color/colorPrimary"
         android:text="@string/btnSave"
-        android:textColor="@color/colorTextPrimary" />
+        android:textColor="@color/colorTextPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.964" />
 
-</LinearLayout>
+    <Spinner
+        android:id="@+id/spinnerType"
+        android:layout_width="230dp"
+        android:layout_height="34dp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.15" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
+
+</android.support.constraint.ConstraintLayout>
