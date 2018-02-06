@@ -49,7 +49,7 @@ public class PreferencesDAO {
     public ArrayList<Preferences> getAllPreferences() {
         SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
         ArrayList<Preferences> preferencesList = new ArrayList<Preferences>();
-        Cursor cursor = db.rawQuery(QueriesSQL.allpreferences(), null);
+        Cursor cursor = db.rawQuery(QueriesSQL.sqlGetAllPreferences(), null);
 
         while(cursor.moveToNext()) {
             Preferences preferences = generatePreferences(cursor);

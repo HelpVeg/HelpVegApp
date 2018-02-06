@@ -180,10 +180,9 @@ public class QueriesSQL {
         return (sqlGetAllRestaurants);
     }
 
-    //
-    public static String allpreferences(){
-        String sqlGetAllRestaurants = "SELECT * FROM " + DatabaseHelper.getTablePreferences();
-        return (sqlGetAllRestaurants);
+    public static String sqlGetAllPreferences(){
+        String sqlGetAllPreferences = "SELECT * FROM " + DatabaseHelper.getTablePreferences();
+        return (sqlGetAllPreferences);
     }
 
     public static String sqlGetAllImagesFromRestaurants(){
