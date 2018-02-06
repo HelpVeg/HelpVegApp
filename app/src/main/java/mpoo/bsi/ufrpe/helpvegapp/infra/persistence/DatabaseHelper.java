@@ -61,6 +61,16 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String COLUMN_PREFERENCES_PRICE = "preferences_price";
     private static final String COLUMN_PREFERENCES_AMBIANCE = "preferences_ambiance";
 
+    //---------------------------- Rating table ----------------------------------
+    private static final String TABLE_RATING = "rating";
+    private static final String COLUMN_RATING_ID = "rating_id";
+    private static final String COLUMN_RATING_USER_ID = "rating_user_id";
+    private static final String COLUMN_RATING_RESTAURANT_ID = "rating_restaurant_id";
+    private static final String COLUMN_RATING_FOOD_ = "rating_food";
+    private static final String COLUMN_RATING_SERVICE = "rating_service";
+    private static final String COLUMN_RATING_PRICE = "rating_price";
+    private static final String COLUMN_RATING_AMBIANCE = "rating_ambiance";
+
 
     // ----------------------------- User getters -----------------------------
     public static String getTableUser() {
@@ -122,26 +132,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     public static String getColumnRestaurantType() {
         return COLUMN_RESTAURANT_TYPE;
     }
-
-    /*public static String getColumnRestaurantRateGeneral() {
-        return COLUMN_RESTAURANT_RATE_GENERAL;
-    }
-
-    public static String getColumnRestaurantRateService() {
-        return COLUMN_RESTAURANT_RATE_SERVICE;
-    }
-
-    public static String getColumnRestaurantRateFood() {
-        return COLUMN_RESTAURANT_RATE_FOOD;
-    }
-
-    public static String getColumnRestaurantRatePrice() {
-        return COLUMN_RESTAURANT_RATE_PRICE;
-    }
-
-    public static String getColumnRestaurantRateEnvironment() {
-        return COLUMN_RESTAURANT_RATE_ENVIRONMENT;
-    }*/
 
     //--------------------------  Comment getters  -------------------------------------
     public static String getTableComments() {
@@ -208,6 +198,39 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return COLUMN_PREFERENCES_AMBIANCE;
     }
 
+    //-------------------------- Rating getters -------------------------------------
+    public static String getTableRating() {
+        return TABLE_RATING;
+    }
+
+    public static String getColumnRatingId() {
+        return COLUMN_RATING_ID;
+    }
+
+    public static String getColumnRatingUserId() {
+        return COLUMN_RATING_USER_ID;
+    }
+
+    public static String getColumnRatingRestaurantId() {
+        return COLUMN_RATING_RESTAURANT_ID;
+    }
+
+    public static String getColumnRatingFood() {
+        return COLUMN_RATING_FOOD_;
+    }
+
+    public static String getColumnRatingService() {
+        return COLUMN_RATING_SERVICE;
+    }
+
+    public static String getColumnRatingPrice() {
+        return COLUMN_RATING_PRICE;
+    }
+
+    public static String getColumnRatingAmbiance() {
+        return COLUMN_RATING_AMBIANCE;
+    }
+
     // ----------------------------------------------------------------------------
 
     private DatabaseHelper() {
@@ -222,6 +245,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.execSQL(QueriesSQL.sqlCreateTableComments());
         db.execSQL(QueriesSQL.sqlCreateTablePhotosRestaurants());
         db.execSQL(QueriesSQL.sqlCreateTablePreferences());
+        db.execSQL(QueriesSQL.sqlCreateTableRating());
         Script.populateRestaurantTable(db);
     }
 
@@ -233,6 +257,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.execSQL(QueriesSQL.sqlDropTableComments());
         db.execSQL(QueriesSQL.sqlDropTableRestaurantPhotos());
         db.execSQL(QueriesSQL.sqlDropTablePreferences());
+        db.execSQL(QueriesSQL.sqlDropTableRating());
         this.onCreate(db);
     }
 

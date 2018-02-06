@@ -49,4 +49,12 @@ public class RestaurantBusiness {
         restaurantDAO.insertRestaurantImage(bitmap,Session.getCurrentRestaurant().getRestaurantId());
     }
 
+    public Restaurant getRestaurantFromId(int restaurantId){
+        return getRestaurantDAO().getRestaurantById(restaurantId);
+    }
+
+    public Restaurant getRestaurantFromSession(){
+        return Session.getCurrentRestaurant();
+    }
+
 }

@@ -21,10 +21,10 @@ public class PreferencesDAO {
         preferences.setId(cursor.getInt(0));
         int userId = (cursor.getInt(1));
         preferences.setUser(new UserBusiness().getUserById(userId));
-        preferences.setFood(cursor.getFloat(3));
-        preferences.setPrice(cursor.getFloat(4));
-        preferences.setService(cursor.getFloat(5));
-        preferences.setAmbiance(cursor.getFloat(6));
+        preferences.setFood(cursor.getFloat(2));
+        preferences.setPrice(cursor.getFloat(3));
+        preferences.setService(cursor.getFloat(4));
+        preferences.setAmbiance(cursor.getFloat(5));
         return preferences;
     }
 
