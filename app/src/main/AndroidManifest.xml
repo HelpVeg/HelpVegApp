@@ -42,8 +42,6 @@
 
         <activity android:name=".user.gui.PreferencesActivity"/>
 
-        <activity android:name=".user.gui.EditPreferencesActivity"/>
-
     </application>
 
 </manifest>

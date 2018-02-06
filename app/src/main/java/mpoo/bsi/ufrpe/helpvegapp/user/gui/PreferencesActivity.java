@@ -40,22 +40,27 @@ public class PreferencesActivity extends AppCompatActivity implements View.OnCli
         this.mViewHolder.btnSave = findViewById(R.id.preferenceBtnSave);
         this.mViewHolder.btnSave.setOnClickListener(this);
 
-        showLoggedUserPreference();
-
+        if (showLoggedUserPreference()){
+            showLoggedUserPreference();
+        }
         getPreferenceFood();
         getPreferencePlace();
         getPreferencePrice();
         getPreferenceService();
     }
 
-    public void showLoggedUserPreference(){
+    public boolean showLoggedUserPreference(){
+        boolean insertedPreferences = false;
         User user = userBusiness.getUserFromSession();
         Preferences preferences = preferencesBusiness.getPreferencesFromUser(user);
-
-        this.mViewHolder.ratingFood.setRating(preferences.getFood());
-        this.mViewHolder.ratingPrice.setRating(preferences.getPrice());
-        this.mViewHolder.ratingPlace.setRating(preferences.getAmbiance());
-        this.mViewHolder.ratingService.setRating(preferences.getService());
+        if (preferences != null){
+            this.mViewHolder.ratingFood.setRating(preferences.getFood());
+            this.mViewHolder.ratingPrice.setRating(preferences.getPrice());
+            this.mViewHolder.ratingPlace.setRating(preferences.getAmbiance());
+            this.mViewHolder.ratingService.setRating(preferences.getService());
+            insertedPreferences = true;
+        }
+        return insertedPreferences;
     }
 
     public float getPreferenceService() {
