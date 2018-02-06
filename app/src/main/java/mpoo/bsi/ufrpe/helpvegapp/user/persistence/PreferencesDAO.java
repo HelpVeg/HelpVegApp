@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 import mpoo.bsi.ufrpe.helpvegapp.infra.persistence.DatabaseHelper;
 import mpoo.bsi.ufrpe.helpvegapp.infra.persistence.QueriesSQL;
@@ -21,10 +23,10 @@ public class PreferencesDAO {
         preferences.setId(cursor.getInt(0));
         int userId = (cursor.getInt(1));
         preferences.setUser(new UserBusiness().getUserById(userId));
-        preferences.setFood(cursor.getFloat(3));
-        preferences.setPrice(cursor.getFloat(4));
-        preferences.setService(cursor.getFloat(5));
-        preferences.setAmbiance(cursor.getFloat(6));
+        preferences.setFood(cursor.getFloat(2));
+        preferences.setPrice(cursor.getFloat(3));
+        preferences.setService(cursor.getFloat(4));
+        preferences.setAmbiance(cursor.getFloat(5));
         return preferences;
     }
 
@@ -42,6 +44,20 @@ public class PreferencesDAO {
         cursor.close();
         db.close();
         return preferences;
+    }
+
+    public ArrayList<Preferences> getAllPreferences() {
+        SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
+        ArrayList<Preferences> preferencesList = new ArrayList<Preferences>();
+        Cursor cursor = db.rawQuery(QueriesSQL.allpreferences(), null);
+
+        while(cursor.moveToNext()) {
+            Preferences preferences = generatePreferences(cursor);
+            preferencesList.add(preferences);
+        }
+        cursor.close();
+        db.close();
+        return preferencesList;
     }
 
     /*
@@ -73,9 +89,10 @@ public class PreferencesDAO {
         values.put(DatabaseHelper.getColumnPreferencesUserId(), preferences.getUser().getUserId());
         values.put(DatabaseHelper.getColumnPreferencesFood(), preferences.getFood());
         values.put(DatabaseHelper.getColumnPreferencesPrice(), preferences.getPrice());
+        values.put(DatabaseHelper.getColumnPreferencesService(), preferences.getService());
         values.put(DatabaseHelper.getColumnPreferencesAmbiance(), preferences.getAmbiance());
 
-        db.update(DatabaseHelper.getTableUser(), values, where, null);
+        db.update(DatabaseHelper.getTablePreferences(), values, where, null);
         db.close();
     }
 }
