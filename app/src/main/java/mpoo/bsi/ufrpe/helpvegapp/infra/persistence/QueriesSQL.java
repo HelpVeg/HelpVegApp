@@ -58,7 +58,7 @@ public class QueriesSQL {
     public static String sqlCreateTablePreferences(){
         String sqlCreateTablePreferences = "CREATE TABLE IF NOT EXISTS " + DatabaseHelper.getTablePreferences() + "("
                 + DatabaseHelper.getColumnPreferencesId() + " integer primary key autoincrement unique not null, "
-                + DatabaseHelper.getColumnPreferencesUserId() + " integer not null, "
+                + DatabaseHelper.getColumnPreferencesUserId() + " integer unique not null, "
                 + DatabaseHelper.getColumnPreferencesFood() + " real not null, "
                 + DatabaseHelper.getColumnPreferencesPrice() + " real not null, "
                 + DatabaseHelper.getColumnPreferencesService() + " real not null, "
@@ -177,6 +177,12 @@ public class QueriesSQL {
 
     public static String sqlGetAllRestaurants(){
         String sqlGetAllRestaurants = "SELECT * FROM " + DatabaseHelper.getTableRestaurants();
+        return (sqlGetAllRestaurants);
+    }
+
+    //
+    public static String allpreferences(){
+        String sqlGetAllRestaurants = "SELECT * FROM " + DatabaseHelper.getTablePreferences();
         return (sqlGetAllRestaurants);
     }
 

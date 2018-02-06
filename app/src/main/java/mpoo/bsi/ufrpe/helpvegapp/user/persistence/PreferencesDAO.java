@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 import mpoo.bsi.ufrpe.helpvegapp.infra.persistence.DatabaseHelper;
 import mpoo.bsi.ufrpe.helpvegapp.infra.persistence.QueriesSQL;
@@ -44,6 +46,20 @@ public class PreferencesDAO {
         return preferences;
     }
 
+    public ArrayList<Preferences> getAllPreferences() {
+        SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
+        ArrayList<Preferences> preferencesList = new ArrayList<Preferences>();
+        Cursor cursor = db.rawQuery(QueriesSQL.allpreferences(), null);
+
+        while(cursor.moveToNext()) {
+            Preferences preferences = generatePreferences(cursor);
+            preferencesList.add(preferences);
+        }
+        cursor.close();
+        db.close();
+        return preferencesList;
+    }
+
     /*
     * Método para criar preferências
     * */
@@ -73,9 +89,10 @@ public class PreferencesDAO {
         values.put(DatabaseHelper.getColumnPreferencesUserId(), preferences.getUser().getUserId());
         values.put(DatabaseHelper.getColumnPreferencesFood(), preferences.getFood());
         values.put(DatabaseHelper.getColumnPreferencesPrice(), preferences.getPrice());
+        values.put(DatabaseHelper.getColumnPreferencesService(), preferences.getService());
         values.put(DatabaseHelper.getColumnPreferencesAmbiance(), preferences.getAmbiance());
 
-        db.update(DatabaseHelper.getTableUser(), values, where, null);
+        db.update(DatabaseHelper.getTablePreferences(), values, where, null);
         db.close();
     }
 }
