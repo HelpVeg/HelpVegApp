@@ -74,10 +74,9 @@ public class RatingDAO {
         return rating;
     }
 
-    public Rating getRatingFromRestaurant() {
+    public Rating getRatingFromRestaurant(int restaurantId) {
         SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
-        int restaurantCurrentId = new RestaurantBusiness().getRestaurantFromSession().getRestaurantId();
-        Cursor cursor = db.rawQuery(QueriesSQL.sqlGetRatingFromRestaurant(), new String[]{Integer.toString(restaurantCurrentId)});
+        Cursor cursor = db.rawQuery(QueriesSQL.sqlGetRatingFromRestaurant(), new String[]{Integer.toString(restaurantId)});
 
         Rating rating = null;
         if (cursor.moveToFirst()) {
@@ -87,10 +86,9 @@ public class RatingDAO {
     }
 
     //Media For Food
-    public float getMediaColumnRatingFood() {
+    public float getMediaColumnRatingFood(int restaurantId) {
         SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
-        int restaurantCurrentId = new RestaurantBusiness().getRestaurantFromSession().getRestaurantId();
-        Cursor cursor = db.rawQuery(QueriesSQL.getMediaRatingFood(), new String[]{Integer.toString(restaurantCurrentId)});
+        Cursor cursor = db.rawQuery(QueriesSQL.getMediaRatingFood(), new String[]{Integer.toString(restaurantId)});
         float rate = 0;
         if (cursor.moveToFirst()) {
             rate = cursor.getFloat(0);
@@ -99,10 +97,9 @@ public class RatingDAO {
     }
 
     //Media For Price
-    public float getMediaColumnRatingPrice() {
+    public float getMediaColumnRatingPrice(int restaurantId) {
         SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
-        int restaurantCurrentId = new RestaurantBusiness().getRestaurantFromSession().getRestaurantId();
-        Cursor cursor = db.rawQuery(QueriesSQL.getMediaRatingPrice(), new String[]{Integer.toString(restaurantCurrentId)});
+        Cursor cursor = db.rawQuery(QueriesSQL.getMediaRatingPrice(), new String[]{Integer.toString(restaurantId)});
         float rate = 0;
         if (cursor.moveToFirst()) {
             rate = cursor.getFloat(0);
@@ -111,10 +108,9 @@ public class RatingDAO {
     }
 
     //Media For Service
-    public float getMediaColumnRatingService() {
+    public float getMediaColumnRatingService(int restaurantId) {
         SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
-        int restaurantCurrentId = new RestaurantBusiness().getRestaurantFromSession().getRestaurantId();
-        Cursor cursor = db.rawQuery(QueriesSQL.getMediaRatingService(), new String[]{Integer.toString(restaurantCurrentId)});
+        Cursor cursor = db.rawQuery(QueriesSQL.getMediaRatingService(), new String[]{Integer.toString(restaurantId)});
         float rate = 0;
         if (cursor.moveToFirst()) {
             rate = cursor.getFloat(0);
@@ -123,10 +119,9 @@ public class RatingDAO {
     }
 
     //Media For Ambiance
-    public float getMediaColumnRatingAmbiance() {
+    public float getMediaColumnRatingAmbiance(int restaurantId) {
         SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
-        int restaurantCurrentId = new RestaurantBusiness().getRestaurantFromSession().getRestaurantId();
-        Cursor cursor = db.rawQuery(QueriesSQL.getMediaRatingAmbiance(), new String[]{Integer.toString(restaurantCurrentId)});
+        Cursor cursor = db.rawQuery(QueriesSQL.getMediaRatingAmbiance(), new String[]{Integer.toString(restaurantId)});
         float rate = 0;
         if (cursor.moveToFirst()) {
             rate = cursor.getFloat(0);

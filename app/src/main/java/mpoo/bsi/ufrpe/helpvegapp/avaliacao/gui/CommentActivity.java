@@ -65,21 +65,19 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         int id = view.getId();
         if (id == R.id.btnAddComment){
-            createCommentDialog();
+            openCommentDialog();
         }
     }
 
 
-    public void createCommentDialog(){
+    public void openCommentDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater layoutInflater = getLayoutInflater();
-        View view = layoutInflater.inflate(R.layout.insert_comentario, null);
-        final TextView comment = view.findViewById(R.id.comment);
-        builder.setTitle("Adicione um comentário");
+        View view = layoutInflater.inflate(R.layout.insert_rating, null);
+
         builder.setPositiveButton("Adicionar comentário", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                commentBusiness.registerComment(comment.getText().toString());
-                commentAdapter.insertItem(commentBusiness.generateComment(comment.getText().toString()));
+
             }
         });
         builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {

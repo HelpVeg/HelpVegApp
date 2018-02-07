@@ -1,0 +1,115 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RatingBar
+        android:id="@+id/ratingBarFood"
+        style="@style/Widget.AppCompat.RatingBar.Indicator"
+        android:layout_width="177dp"
+        android:isIndicator="false"
+        android:layout_height="38dp"
+        android:layout_margin="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.952"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RatingBar
+        android:id="@+id/ratingBarService"
+        style="@style/Widget.AppCompat.RatingBar.Indicator"
+        android:layout_width="177dp"
+        android:layout_height="38dp"
+        android:layout_margin="15dp"
+        android:isIndicator="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.952"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBarFood" />
+
+    <RatingBar
+        android:id="@+id/ratingBarAmbiance"
+        style="@style/Widget.AppCompat.RatingBar.Indicator"
+        android:layout_width="177dp"
+        android:layout_height="38dp"
+        android:layout_margin="15dp"
+        android:isIndicator="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.952"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBarPrice" />
+
+    <RatingBar
+        android:id="@+id/ratingBarPrice"
+        style="@style/Widget.AppCompat.RatingBar.Indicator"
+        android:layout_width="177dp"
+        android:layout_height="38dp"
+        android:layout_margin="15dp"
+        android:isIndicator="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.952"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBarService" />
+
+    <TextView
+        android:id="@+id/textFood"
+        android:layout_width="86dp"
+        android:layout_height="29dp"
+        android:layout_margin="15dp"
+        android:layout_marginTop="24dp"
+        android:text="Comida"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/ratingBarFood"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textService"
+        android:layout_width="86dp"
+        android:layout_height="29dp"
+        android:layout_margin="15dp"
+        android:text="Serviço"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ratingBarService"
+        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textFood"
+        app:layout_constraintVertical_bias="0.048" />
+
+    <TextView
+        android:id="@+id/textAmbience"
+        android:layout_width="86dp"
+        android:layout_height="25dp"
+        android:layout_margin="15dp"
+        android:text="Ambiente"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ratingBarAmbiance"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textPrice"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textPrice"
+        android:layout_width="86dp"
+        android:layout_height="29dp"
+        android:layout_margin="15dp"
+        android:text="Preço"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ratingBarPrice"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textService"
+        app:layout_constraintVertical_bias="0.0" />
+
+</android.support.constraint.ConstraintLayout>

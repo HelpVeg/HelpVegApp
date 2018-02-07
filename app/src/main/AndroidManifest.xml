@@ -42,7 +42,6 @@
 
 
         <activity android:name=".user.gui.PreferencesActivity" />
-        <activity android:name=".avaliacao.gui.RatingActivity"></activity>
 
     </application>
 

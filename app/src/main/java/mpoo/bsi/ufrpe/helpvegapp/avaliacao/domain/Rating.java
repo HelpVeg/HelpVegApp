@@ -60,4 +60,8 @@ public class Rating {
     public void setAmbiance(float ambiance) {
         this.ambiance = ambiance;
     }
+
+    public float getGeneral(){
+        return (getAmbiance()+getFood()+getPrice()+getService()) / 4;
+    }
 }

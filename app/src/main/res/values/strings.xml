@@ -23,7 +23,7 @@
     <string name="btnHistoric">Visualizar histórico</string>
     <string name="btnPreferences">Visualizar preferências</string>
     <string name="btnEditPreference">Editar preferências</string>
-    <string name="btnAddRating">Adicionar nota</string>
+    <string name="btnAddRating">Dê a sua nota</string>
 
     <string name="toastUpdateSuccessful">Cadastro alterado com sucesso</string>
     <string name="toastUpdatePasswordSuccessful">Senha alterada com sucesso</string>
