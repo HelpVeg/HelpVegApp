@@ -217,35 +217,35 @@ public class QueriesSQL {
     }
 
     public static String getMediaRating(String columnRating){
-        String getMediaRating = "SELECT avg("+ columnRating +") FROM " + DatabaseHelper.getTableRating() + " WHERE "
+        String getMediaRating = "SELECT AVG("+ columnRating +") FROM " + DatabaseHelper.getTableRating() + " WHERE "
                 + DatabaseHelper.getColumnRatingRestaurantId() + "=?";
         return getMediaRating;
     }
 
     // Media for Food
     public static String getMediaRatingFood(){
-        String getMediaRatingFood = "SELECT avg("+ DatabaseHelper.getColumnRatingFood() +") FROM " + DatabaseHelper.getTableRating() + " WHERE "
+        String getMediaRatingFood = "SELECT AVG("+ DatabaseHelper.getColumnRatingFood() +") FROM " + DatabaseHelper.getTableRating() + " WHERE "
                 + DatabaseHelper.getColumnRatingRestaurantId() + "=?";
         return getMediaRatingFood;
     }
 
     // Media for Price
     public static String getMediaRatingPrice(){
-        String getMediaRatingPrice = "SELECT avg("+ DatabaseHelper.getColumnRatingPrice() +") FROM " + DatabaseHelper.getTableRating() + " WHERE "
+        String getMediaRatingPrice = "SELECT AVG("+ DatabaseHelper.getColumnRatingPrice() +") FROM " + DatabaseHelper.getTableRating() + " WHERE "
                 + DatabaseHelper.getColumnRatingRestaurantId() + "=?";
         return getMediaRatingPrice;
     }
 
     // Media for Service
     public static String getMediaRatingService(){
-        String getMediaRatingService = "SELECT avg("+ DatabaseHelper.getColumnRatingService() +") FROM " + DatabaseHelper.getTableRating() + " WHERE "
+        String getMediaRatingService = "SELECT AVG("+ DatabaseHelper.getColumnRatingService() +") FROM " + DatabaseHelper.getTableRating() + " WHERE "
                 + DatabaseHelper.getColumnRatingRestaurantId() + "=?";
         return getMediaRatingService;
     }
 
     // Media for Ambiance
     public static String getMediaRatingAmbiance(){
-        String getMediaRatingAmbiance = "SELECT avg("+ DatabaseHelper.getColumnRatingAmbiance() +") FROM " + DatabaseHelper.getTableRating() + " WHERE "
+        String getMediaRatingAmbiance = "SELECT AVG("+ DatabaseHelper.getColumnRatingAmbiance() +") FROM " + DatabaseHelper.getTableRating() + " WHERE "
                 + DatabaseHelper.getColumnRatingRestaurantId() + "=?";
         return getMediaRatingAmbiance;
     }

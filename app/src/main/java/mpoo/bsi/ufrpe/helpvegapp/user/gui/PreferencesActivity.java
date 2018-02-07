@@ -60,6 +60,7 @@ public class PreferencesActivity extends AppCompatActivity implements View.OnCli
         getPreferenceService();
     }
 
+
     public void createSpinner(){
         ArrayList<String> types = new ArrayList<String>();
         types.add("Comum");
