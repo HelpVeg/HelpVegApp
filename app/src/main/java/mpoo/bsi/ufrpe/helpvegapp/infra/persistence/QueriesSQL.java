@@ -123,12 +123,12 @@ public class QueriesSQL {
 
     public static String sqlUserFromEmail(){
         String sqlUserFromEmail = "SELECT * FROM " + DatabaseHelper.getTableUser() + " WHERE " + DatabaseHelper.getColumnUserEmail() + " =?;";
-        return (sqlUserFromEmail);
+        return sqlUserFromEmail;
     }
 
     public static String sqlUserFromId(){
         String sqlUserFromId =  "SELECT * FROM " + DatabaseHelper.getTableUser() + " WHERE " + DatabaseHelper.getColumnUserId() + " =?;";
-        return (sqlUserFromId);
+        return sqlUserFromId;
     }
 
     public static String sqlUserFromEmailAndPass() {
@@ -136,7 +136,7 @@ public class QueriesSQL {
                 "SELECT * FROM " + DatabaseHelper.getTableUser() + " WHERE "
                         + DatabaseHelper.getColumnUserEmail() + " =? AND "
                         + DatabaseHelper.getColumnUserPass() + " =?;";
-        return (sqlUserFromEmailAndPass);
+        return sqlUserFromEmailAndPass;
     }
 
     /* -------------------------------------- Comments --------------------------------------------- */
@@ -145,14 +145,14 @@ public class QueriesSQL {
         String sqlCommentFromUser =
                 "SELECT * FROM " + DatabaseHelper.getTableComments() + " WHERE "
                     + DatabaseHelper.getColumnCommentUserId() + " =?";
-        return (sqlCommentFromUser);
+        return sqlCommentFromUser;
     }
 
     public static String sqlCommentFromRestaurant(){
         String sqlCommentFromRestaurant =
                 "SELECT * FROM " + DatabaseHelper.getTableComments() + " WHERE "
                     + DatabaseHelper.getColumnCommentRestaurantsId() + " =?";
-        return (sqlCommentFromRestaurant);
+        return sqlCommentFromRestaurant;
     }
 
     public static String sqlCommentFromUserAndRestaurant(){
@@ -160,7 +160,7 @@ public class QueriesSQL {
                 "SELECT * FROM " + DatabaseHelper.getTableComments() + " WHERE "
                     + DatabaseHelper.getColumnCommentUserId() + " =? AND "
                     + DatabaseHelper.getColumnCommentRestaurantsId() + " =?";
-        return (sqlCommentFromUserAndRestaurant);
+        return sqlCommentFromUserAndRestaurant;
     }
 
     /* ----------------------------------------------------------------------------------------------------- */
@@ -168,34 +168,39 @@ public class QueriesSQL {
     public static String sqlSearchFromLoggedUser() {
         String sqlSearchFromLoggedUser =
                 "SELECT " + DatabaseHelper.getColumnUserLoggedId() + " FROM " + DatabaseHelper.getTableUserLogged() + ";";
-        return (sqlSearchFromLoggedUser);
+        return sqlSearchFromLoggedUser;
     }
 
     public static String sqlGetAllUsers(){
         String sqlGetAllUsers = "SELECT * FROM " + DatabaseHelper.getTableUser();
-        return (sqlGetAllUsers);
+        return sqlGetAllUsers;
     }
 
     public static String sqlGetAllRestaurants(){
         String sqlGetAllRestaurants = "SELECT * FROM " + DatabaseHelper.getTableRestaurants();
-        return (sqlGetAllRestaurants);
+        return sqlGetAllRestaurants;
     }
 
     public static String sqlGetAllPreferences(){
         String sqlGetAllPreferences = "SELECT * FROM " + DatabaseHelper.getTablePreferences();
-        return (sqlGetAllPreferences);
+        return sqlGetAllPreferences;
+    }
+
+    public static String sqlGetAllRating(){
+        String sqlGetAllPreferences = "SELECT * FROM " + DatabaseHelper.getTableRating();
+        return sqlGetAllPreferences;
     }
 
     public static String sqlGetAllImagesFromRestaurants(){
         String sqlImagesFromRestaurant = "SELECT * FROM " + DatabaseHelper.getTableRestaurantPhotos() +
                 " WHERE " + DatabaseHelper.getColumnRestaurantId() + " =?";
-        return (sqlImagesFromRestaurant);
+        return sqlImagesFromRestaurant;
     }
 
     public static String sqlGetRestaurantFromId(){
         String sqlGetRestaurantById = "SELECT * FROM " + DatabaseHelper.getTableRestaurants() +
                 " WHERE " + DatabaseHelper.getColumnRestaurantId() + " =?";
-        return (sqlGetRestaurantById);
+        return sqlGetRestaurantById;
     }
 
     public static String getPreferencesFromUser(){
@@ -204,17 +209,21 @@ public class QueriesSQL {
         return sqlGetPreferencesFromUser;
     }
 
-    public static String sqlGetRatingFromRestaurant(){
-        String getRatingFromRestaurant = "SELECT * FROM " + DatabaseHelper.getTableRating() +
-                " WHERE " + DatabaseHelper.getColumnRatingRestaurantId() + "=?";
-        return getRatingFromRestaurant;
+    public static String sqlGetRatingFromRestaurantAndUser(){
+        String getRatingFromRestaurantAndUser = "SELECT * FROM " + DatabaseHelper.getTableRating() +
+                " WHERE " + DatabaseHelper.getColumnRatingRestaurantId() +
+                "=? AND " + DatabaseHelper.getColumnRatingUserId() + "=?;";
+        return getRatingFromRestaurantAndUser;
     }
+
 
     public static String sqlGetRatingFromUser(){
         String getRatingFromUser = "SELECT * FROM " + DatabaseHelper.getTableRating() +
                 " WHERE " + DatabaseHelper.getColumnRatingUserId() + "=?";
         return getRatingFromUser;
     }
+
+
 
     public static String getMediaRating(String columnRating){
         String getMediaRating = "SELECT AVG("+ columnRating +") FROM " + DatabaseHelper.getTableRating() + " WHERE "

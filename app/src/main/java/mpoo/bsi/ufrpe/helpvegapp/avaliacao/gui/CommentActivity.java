@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.List;
@@ -73,11 +74,13 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
     public void openCommentDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater layoutInflater = getLayoutInflater();
-        View view = layoutInflater.inflate(R.layout.insert_rating, null);
-
+        View view = layoutInflater.inflate(R.layout.insert_comment, null);
+        final EditText comment = view.findViewById(R.id.comment);
+        builder.setTitle("Adicione um comentario");
         builder.setPositiveButton("Adicionar comentário", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-
+                confirmComment(comment.getText().toString());
+                commentAdapter.insertItem(commentBusiness.generateComment(comment.getText().toString()));
             }
         });
         builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -89,6 +92,11 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+    public void confirmComment(String comment){
+        commentBusiness.registerComment(comment);
+    }
+
 
     private static class ViewHolder{
         private RecyclerView recyclerView;

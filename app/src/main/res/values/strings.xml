@@ -36,6 +36,7 @@
     <string name="toastBlankFieldPassword">Senha inválida</string>
     <string name="toastWrongFieldPassword">Senhas não coincidem</string>
     <string name="toastUpdatePreferences">Suas preferencias foram atualizadas</string>
+    <string name="toastUpdateRating">Avaliação registrada</string>
 
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_main">MainActivity</string>

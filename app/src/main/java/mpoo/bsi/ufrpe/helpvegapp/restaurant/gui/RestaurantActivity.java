@@ -35,7 +35,6 @@ public class RestaurantActivity extends AppCompatActivity implements View.OnClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant);
-
         restaurant = Session.getCurrentRestaurant();
 
         mViewHolder.imageRestaurant = findViewById(R.id.imageRestaurant);
@@ -54,6 +53,8 @@ public class RestaurantActivity extends AppCompatActivity implements View.OnClic
         mViewHolder.btnComments.setOnClickListener(this);
         mViewHolder.btnRating.setOnClickListener(this);
         mViewHolder.imageRestaurant.setOnClickListener(this);
+
+        createDialogView();
         showRestaurantInformation();
         updateRating();
     }
@@ -78,7 +79,6 @@ public class RestaurantActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
-
     public void onClick(View view){
         int id = view.getId();
         if (id == R.id.btnComments){
@@ -90,23 +90,22 @@ public class RestaurantActivity extends AppCompatActivity implements View.OnClic
             startActivity(intent);
             finish();
         } else if (id == R.id.btnRating){
-            currentRating = new Rating();
+            int userId = Session.getUserIn().getUserId();
+            int restaurantId = Session.getCurrentRestaurant().getRestaurantId();
+            currentRating = ratingBusiness.getRating(userId, restaurantId);
             openRatingDialog();
         }
     }
 
     public void openRatingDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        LayoutInflater layoutInflater = getLayoutInflater();
-        View view = layoutInflater.inflate(R.layout.insert_rating, null);
-        createDialogView(view);
+        createDialogView();
         builder.setTitle("O que você acha do " + restaurant.getRestaurantName() +"?");
         builder.setPositiveButton("Avaliar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                if(ratingBusiness.registerRating(currentRating)){
-                    Toast.makeText(MyApp.getContext(),"Avaliação registrada", Toast.LENGTH_LONG).show();
-                    updateRating();
-                }
+                ratingBusiness.registerRating(currentRating);
+                Toast.makeText(MyApp.getContext(), R.string.toastUpdateRating, Toast.LENGTH_LONG).show();
+                updateRating();
             }
         });
         builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -114,41 +113,55 @@ public class RestaurantActivity extends AppCompatActivity implements View.OnClic
                 dialog.dismiss();
             }
         });
-        builder.setView(view);
+        builder.setView(mViewHolder.dialogView);
         AlertDialog dialog = builder.create();
         dialog.show();
     }
 
-    public void createDialogView(View view){
-        RatingBar ratingFood = view.findViewById(R.id.ratingBarFood);
-        RatingBar ratingService = view.findViewById(R.id.ratingBarService);
-        RatingBar ratingPrice = view.findViewById(R.id.ratingBarPrice);
-        RatingBar ratingAmbience = view.findViewById(R.id.ratingBarAmbiance);
+    public void createDialogView(){
+        LayoutInflater layoutInflater = getLayoutInflater();
+        mViewHolder.dialogView = layoutInflater.inflate(R.layout.insert_rating, null);
+        mViewHolder.dialogRatingBarFood = mViewHolder.dialogView.findViewById(R.id.ratingBarFood);
+        mViewHolder.dialogRatingBarService = mViewHolder.dialogView.findViewById(R.id.ratingBarService);
+        mViewHolder.dialogRatingBarPrice = mViewHolder.dialogView.findViewById(R.id.ratingBarPrice);
+        mViewHolder.dialogRatingBarAmbiance = mViewHolder.dialogView.findViewById(R.id.ratingBarAmbiance);
 
-        ratingFood.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+        mViewHolder.dialogRatingBarFood.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 currentRating.setFood(rating);
             }
         });
-        ratingService.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+        mViewHolder.dialogRatingBarService.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 currentRating.setService(rating);
             }
         });
-        ratingPrice.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+        mViewHolder.dialogRatingBarPrice.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 currentRating.setPrice(rating);
             }
         });
-        ratingAmbience.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+        mViewHolder.dialogRatingBarAmbiance.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 currentRating.setAmbiance(rating);
             }
         });
+        showUserRating();
+    }
+
+    public void showUserRating(){
+        if (currentRating != null){
+            mViewHolder.dialogRatingBarFood.setRating(currentRating.getFood());
+            mViewHolder.dialogRatingBarService.setRating(currentRating.getService());
+            mViewHolder.dialogRatingBarAmbiance.setRating(currentRating.getAmbiance());
+            mViewHolder.dialogRatingBarPrice.setRating(currentRating.getPrice());
+        } else {
+            currentRating = new Rating();
+        }
     }
 
     private static class ViewHolder{
@@ -163,6 +176,12 @@ public class RestaurantActivity extends AppCompatActivity implements View.OnClic
         private RatingBar ratingBarAmbiance;
         private RatingBar ratingBarService;
         private RatingBar ratingBarPrice;
+
+        private View dialogView;
+        private RatingBar dialogRatingBarFood;
+        private RatingBar dialogRatingBarAmbiance;
+        private RatingBar dialogRatingBarService;
+        private RatingBar dialogRatingBarPrice;
     }
 
     @Override

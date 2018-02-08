@@ -1,8 +1,11 @@
 package mpoo.bsi.ufrpe.helpvegapp.avaliacao.business;
 
+import java.util.ArrayList;
+
 import mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain.Rating;
 import mpoo.bsi.ufrpe.helpvegapp.avaliacao.persistence.RatingDAO;
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
+import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Restaurant;
 
 public class RatingBusiness {
     private RatingDAO ratingDAO = new RatingDAO();
@@ -48,9 +51,38 @@ public class RatingBusiness {
         return rating;
     }
 
-    public boolean registerRating(Rating rating){
+    public Rating getRating(int userId, int restaurantId){
+        return ratingDAO.getRatingFromRestaurantAndUser(restaurantId,userId);
+    }
+
+    public void print(){
+        ArrayList<Rating> ratings = ratingDAO.getAllRating();
+        for (int i = 0; i < ratings.size(); i++) {
+            Rating res = ratings.get(i);
+            System.out.println("#" + i + " ID: " + res.getRatingId() +
+                    " User: " + res.getUserRating().getUserEmail() +
+                    ", Restaurant: " + res.getRestaurantRating().getRestaurantName() +
+                    " food: " + String.valueOf(res.getFood()) +
+                    " serv: " + String.valueOf(res.getService()) +
+                    " prec: " + String.valueOf(res.getPrice()) +
+                    " ambi: " + String.valueOf(res.getAmbiance()));
+        }
+        if (ratings.size() == 0) System.out.println("# Não existem registros.");
+    }
+
+    public void registerRating(Rating rating){
         rating.setUserRating(Session.getUserIn());
         rating.setRestaurantRating(Session.getCurrentRestaurant());
-        return ratingDAO.createRating(rating);
+
+        Rating verify = getRating(rating.getUserRating().getUserId(),rating.getRestaurantRating().getRestaurantId());
+
+        if (verify!=null){
+            rating.setRatingId(verify.getRatingId());
+            ratingDAO.updateRating(rating);
+            print();
+            return;
+        }
+        ratingDAO.createRating(rating);
+        print();
     }
 }

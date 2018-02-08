@@ -3,6 +3,9 @@ package mpoo.bsi.ufrpe.helpvegapp.avaliacao.persistence;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.ArrayAdapter;
+
+import java.util.ArrayList;
 
 import mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain.Rating;
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
@@ -10,6 +13,7 @@ import mpoo.bsi.ufrpe.helpvegapp.infra.persistence.DatabaseHelper;
 import mpoo.bsi.ufrpe.helpvegapp.infra.persistence.QueriesSQL;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.business.RestaurantBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
+import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
 
 public class RatingDAO {
 
@@ -24,7 +28,6 @@ public class RatingDAO {
         rating.setPrice(cursor.getFloat(4));
         rating.setService(cursor.getFloat(5));
         rating.setAmbiance(cursor.getFloat(6));
-        cursor.close();
         return rating;
     }
 
@@ -46,11 +49,15 @@ public class RatingDAO {
 
     public void updateRating(Rating rating) {
         SQLiteDatabase db = DatabaseHelper.getDb().getWritableDatabase();
-        String where = DatabaseHelper.getColumnRatingUserId() + " = " + Integer.toString(Session.getUserIn().getUserId()) +
-                " AND " + DatabaseHelper.getColumnRatingRestaurantId() +
-                " = " + Integer.toString(Session.getCurrentRestaurant().getRestaurantId());
-        ContentValues values = new ContentValues();
 
+        int restaurantId = rating.getRestaurantRating().getRestaurantId();
+        int userId = rating.getUserRating().getUserId();
+
+        String where = DatabaseHelper.getColumnRatingUserId() + " = " + Integer.toString(userId) +
+                " AND " + DatabaseHelper.getColumnRatingRestaurantId() +
+                " = " + Integer.toString(restaurantId);
+
+        ContentValues values = new ContentValues();
         values.put(DatabaseHelper.getColumnRatingUserId(), rating.getUserRating().getUserId());
         values.put(DatabaseHelper.getColumnRatingRestaurantId(), rating.getRestaurantRating().getRestaurantId());
         values.put(DatabaseHelper.getColumnRatingFood(), rating.getFood());
@@ -74,9 +81,25 @@ public class RatingDAO {
         return rating;
     }
 
-    public Rating getRatingFromRestaurant(int restaurantId) {
+    public ArrayList<Rating> getAllRating(){
         SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
-        Cursor cursor = db.rawQuery(QueriesSQL.sqlGetRatingFromRestaurant(), new String[]{Integer.toString(restaurantId)});
+        Cursor cursor = db.rawQuery(QueriesSQL.sqlGetAllRating(), null);
+        ArrayList<Rating> ratings = new ArrayList<>();
+
+        while (cursor.moveToNext()) {
+            Rating rating = generateRating(cursor);
+            ratings.add(rating);
+        }
+        cursor.close();
+        db.close();
+        return ratings;
+    }
+
+
+    public Rating getRatingFromRestaurantAndUser(int restaurantId, int userId) {
+        SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
+        Cursor cursor = db.rawQuery(QueriesSQL.sqlGetRatingFromRestaurantAndUser(),
+                new String[]{Integer.toString(restaurantId),Integer.toString(userId)});
 
         Rating rating = null;
         if (cursor.moveToFirst()) {
