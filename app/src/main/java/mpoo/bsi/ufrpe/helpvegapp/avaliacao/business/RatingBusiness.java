@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain.Rating;
 import mpoo.bsi.ufrpe.helpvegapp.avaliacao.persistence.RatingDAO;
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
-import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Restaurant;
+import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
 
 public class RatingBusiness {
     private RatingDAO ratingDAO = new RatingDAO();
@@ -38,8 +38,8 @@ public class RatingBusiness {
         return (food + price + service + ambiance) / 4;
     }
 
-    public Rating getRatingFromUser(){
-        return getRatingDAO().getRatingFromUser();
+    public ArrayList<Rating> getAllRatingsFromUser(User user){
+        return getRatingDAO().getAllRatingsFromUser(user.getUserId());
     }
 
     public Rating getRatingFromRestaurant(int restaurantId){

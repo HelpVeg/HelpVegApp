@@ -60,6 +60,10 @@ public class UserBusiness {
         return false;
     }
 
+    public ArrayList<User> getAllUsers(){
+        return userDAO.getAllUsers();
+    }
+
     public void viewUsers() {
         ArrayList<User> users = getUserDAO().getAllUsers();
         for (int i = 0; i < users.size(); i++) {

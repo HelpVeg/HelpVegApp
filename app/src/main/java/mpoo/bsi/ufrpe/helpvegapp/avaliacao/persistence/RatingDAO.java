@@ -3,17 +3,14 @@ package mpoo.bsi.ufrpe.helpvegapp.avaliacao.persistence;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 
 import mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain.Rating;
-import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 import mpoo.bsi.ufrpe.helpvegapp.infra.persistence.DatabaseHelper;
 import mpoo.bsi.ufrpe.helpvegapp.infra.persistence.QueriesSQL;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.business.RestaurantBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
-import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
 
 public class RatingDAO {
 
@@ -64,21 +61,22 @@ public class RatingDAO {
         values.put(DatabaseHelper.getColumnRatingPrice(), rating.getPrice());
         values.put(DatabaseHelper.getColumnRatingService(), rating.getService());
         values.put(DatabaseHelper.getColumnRatingAmbiance(), rating.getAmbiance());
-
         db.update(DatabaseHelper.getTableRating(), values, where, null);
         db.close();
     }
 
-    public Rating getRatingFromUser() {
+    public ArrayList<Rating> getAllRatingsFromUser(int userId) {
         SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
-        int userLoggedId = new UserBusiness().getUserFromSession().getUserId();
-        Cursor cursor = db.rawQuery(QueriesSQL.sqlGetRatingFromUser(), new String[]{Integer.toString(userLoggedId)});
+        Cursor cursor = db.rawQuery(QueriesSQL.sqlGetAllRatingsFromUser(), new String[]{Integer.toString(userId)});
+        ArrayList<Rating> userRatings = new ArrayList<>();
 
-        Rating rating = null;
-        if (cursor.moveToFirst()) {
-            rating = generateRating(cursor);
+        while (cursor.moveToNext()) {
+            Rating rating = generateRating(cursor);
+            userRatings.add(rating);
         }
-        return rating;
+        cursor.close();
+        db.close();
+        return userRatings;
     }
 
     public ArrayList<Rating> getAllRating(){

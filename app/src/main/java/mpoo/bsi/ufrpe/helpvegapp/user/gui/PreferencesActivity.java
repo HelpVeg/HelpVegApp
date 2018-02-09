@@ -29,10 +29,10 @@ public class PreferencesActivity extends AppCompatActivity implements View.OnCli
     private static final int COMUM = 0;
     private static final int VEGANO_VEGETARIANO = 1;
     private static final int VEGANO = 2;
-    private float numService;
-    private float numFood;
-    private float numPrice;
-    private float numPlace;
+    private double numService;
+    private double numFood;
+    private double numPrice;
+    private double numPlace;
     private String restaurantType;
 
 
@@ -75,13 +75,13 @@ public class PreferencesActivity extends AppCompatActivity implements View.OnCli
         Preferences preferences = preferencesBusiness.getPreferencesFromUser(user);
         if (preferences != null){
             numFood = preferences.getFood();
-            this.mViewHolder.ratingFood.setRating(preferences.getFood());
+            this.mViewHolder.ratingFood.setRating(new Float(preferences.getFood()));
             numPrice = preferences.getPrice();
-            this.mViewHolder.ratingPrice.setRating(preferences.getPrice());
+            this.mViewHolder.ratingPrice.setRating(new Float(preferences.getPrice()));
             numPlace = preferences.getAmbiance();
-            this.mViewHolder.ratingPlace.setRating(preferences.getAmbiance());
+            this.mViewHolder.ratingPlace.setRating(new Float(preferences.getAmbiance()));
             numService = preferences.getService();
-            this.mViewHolder.ratingService.setRating(preferences.getService());
+            this.mViewHolder.ratingService.setRating(new Float(preferences.getService()));
             this.mViewHolder.spinnerType.setSelection(getCurrentTpe(preferences));
 
         }
@@ -97,7 +97,7 @@ public class PreferencesActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
-    public float getPreferenceService() {
+    public double getPreferenceService() {
         this.mViewHolder.ratingService.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
@@ -107,7 +107,7 @@ public class PreferencesActivity extends AppCompatActivity implements View.OnCli
         return numService;
     }
 
-    public float getPreferenceFood(){
+    public double getPreferenceFood(){
         this.mViewHolder.ratingFood.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
@@ -117,7 +117,7 @@ public class PreferencesActivity extends AppCompatActivity implements View.OnCli
         return numFood;
     }
 
-    public float getPreferencePlace(){
+    public double getPreferencePlace(){
         this.mViewHolder.ratingPlace.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
@@ -127,7 +127,7 @@ public class PreferencesActivity extends AppCompatActivity implements View.OnCli
         return numPlace;
     }
 
-    public float getPreferencePrice(){
+    public double getPreferencePrice(){
         this.mViewHolder.ratingPrice.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {

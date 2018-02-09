@@ -21,6 +21,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -32,8 +33,10 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import mpoo.bsi.ufrpe.helpvegapp.R;
+import mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain.SlopeOne;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.business.RestaurantBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Restaurant;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
@@ -116,7 +119,21 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         updateLocation();
         infoWindowPerso();
         createMarkers();
+
+
     }
+
+
+
+/* CHAMANDO O SLOPEONE
+1- readData() lê todas as avaliações de todos os usuarios
+2- indicationList(user) retorna uma lista de IDs dos restaurantes recomendados
+        SlopeOne slopeOne = new SlopeOne();
+        slopeOne.readData();
+        ArrayList<Integer> listaRecomendacao = slopeOne.indicationList(userBusiness.getUserFromSession());
+ */
+
+
 
     public void infoWindowPerso(){
         mMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {

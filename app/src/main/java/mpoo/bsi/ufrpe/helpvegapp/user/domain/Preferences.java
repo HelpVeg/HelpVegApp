@@ -4,10 +4,10 @@ public class Preferences {
     private int id;
     private User user;
     private String type;
-    private float food;
-    private float price;
-    private float service;
-    private float ambiance;
+    private double food;
+    private double price;
+    private double service;
+    private double ambiance;
 
     public int getId() {
         return id;
@@ -31,31 +31,31 @@ public class Preferences {
         this.type = type;
     }
 
-    public float getFood() {
+    public double getFood() {
         return food;
     }
-    public void setFood(float food) {
+    public void setFood(double food) {
         this.food = food;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public float getService() {
+    public double getService() {
         return service;
     }
-    public void setService(float service) {
+    public void setService(double service) {
         this.service = service;
     }
 
-    public float getAmbiance() {
+    public double getAmbiance() {
         return ambiance;
     }
-    public void setAmbiance(float ambiance) {
+    public void setAmbiance(double ambiance) {
         this.ambiance = ambiance;
     }
 }

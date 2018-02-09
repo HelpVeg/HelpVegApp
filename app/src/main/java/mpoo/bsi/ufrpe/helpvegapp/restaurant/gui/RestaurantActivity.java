@@ -71,11 +71,11 @@ public class RestaurantActivity extends AppCompatActivity implements View.OnClic
         int restaurantId = restaurantBusiness.getRestaurantFromSession().getRestaurantId();
         Rating rating = ratingBusiness.getRatingFromRestaurant(restaurantId);
         if (rating != null){
-            mViewHolder.ratingBarFood.setRating(rating.getFood());
-            mViewHolder.ratingBarPrice.setRating(rating.getPrice());
-            mViewHolder.ratingBarAmbiance.setRating(rating.getAmbiance());
-            mViewHolder.ratingBarService.setRating(rating.getService());
-            mViewHolder.ratingBarGeneral.setRating(rating.getGeneral());
+            mViewHolder.ratingBarFood.setRating(new Float(rating.getFood()));
+            mViewHolder.ratingBarPrice.setRating(new Float (rating.getPrice()));
+            mViewHolder.ratingBarAmbiance.setRating(new Float(rating.getAmbiance()));
+            mViewHolder.ratingBarService.setRating(new Float(rating.getService()));
+            mViewHolder.ratingBarGeneral.setRating(new Float(rating.getGeneral()));
         }
     }
 
@@ -155,10 +155,10 @@ public class RestaurantActivity extends AppCompatActivity implements View.OnClic
 
     public void showUserRating(){
         if (currentRating != null){
-            mViewHolder.dialogRatingBarFood.setRating(currentRating.getFood());
-            mViewHolder.dialogRatingBarService.setRating(currentRating.getService());
-            mViewHolder.dialogRatingBarAmbiance.setRating(currentRating.getAmbiance());
-            mViewHolder.dialogRatingBarPrice.setRating(currentRating.getPrice());
+            mViewHolder.dialogRatingBarFood.setRating(new Float(currentRating.getFood()));
+            mViewHolder.dialogRatingBarService.setRating(new Float(currentRating.getService()));
+            mViewHolder.dialogRatingBarAmbiance.setRating(new Float (currentRating.getAmbiance()));
+            mViewHolder.dialogRatingBarPrice.setRating(new Float(currentRating.getPrice()));
         } else {
             currentRating = new Rating();
         }

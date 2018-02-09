@@ -217,7 +217,7 @@ public class QueriesSQL {
     }
 
 
-    public static String sqlGetRatingFromUser(){
+    public static String sqlGetAllRatingsFromUser(){
         String getRatingFromUser = "SELECT * FROM " + DatabaseHelper.getTableRating() +
                 " WHERE " + DatabaseHelper.getColumnRatingUserId() + "=?";
         return getRatingFromUser;
