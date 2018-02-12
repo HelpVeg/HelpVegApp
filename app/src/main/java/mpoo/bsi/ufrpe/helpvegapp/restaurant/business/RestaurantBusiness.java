@@ -2,7 +2,6 @@ package mpoo.bsi.ufrpe.helpvegapp.restaurant.business;
 
 
 import android.graphics.Bitmap;
-import android.widget.ArrayAdapter;
 
 import java.util.ArrayList;
 
@@ -21,7 +20,7 @@ public class RestaurantBusiness {
     public ArrayList<Restaurant> getAllRestaurants(){
         return restaurantDAO.getAllRestaurants();
     }
-
+/*
     public void viewRestaurants() {
         ArrayList<Restaurant> restaurants = getAllRestaurants();
         for (int i = 0; i < restaurants.size(); i++) {
@@ -30,15 +29,14 @@ public class RestaurantBusiness {
         }
         if (restaurants.size() == 0) System.out.println("# Não existem registros.");
     }
-
+*/
     public void selectRestaurant(Restaurant restaurant){
         restaurant.setRestaurantImages(getAllImagesFromRestaurant(restaurant.getRestaurantId()));
         Session.setCurrentRestaurant(restaurant);
     }
 
     public Restaurant getSingleRestaurant(int id){
-        Restaurant restaurant = getRestaurantDAO().getRestaurantById(id);
-        return (restaurant);
+        return getRestaurantDAO().getRestaurantById(id);
     }
 
     public ArrayList<Bitmap> getAllImagesFromRestaurant(int restaurantId){

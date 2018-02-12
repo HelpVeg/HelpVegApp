@@ -14,7 +14,7 @@ import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
 
 public class RatingDAO {
 
-    public Rating generateRating(Cursor cursor) {
+    private Rating generateRating(Cursor cursor) {
         Rating rating = new Rating();
         rating.setRatingId(cursor.getInt(0));
         int userId = cursor.getInt(1);
@@ -28,7 +28,7 @@ public class RatingDAO {
         return rating;
     }
 
-    public boolean createRating(Rating rating) {
+    public void createRating(Rating rating) {
         SQLiteDatabase db = DatabaseHelper.getDb().getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -39,9 +39,8 @@ public class RatingDAO {
         values.put(DatabaseHelper.getColumnRatingService(), rating.getService());
         values.put(DatabaseHelper.getColumnRatingAmbiance(), rating.getAmbiance());
 
-        boolean insert = db.insert(DatabaseHelper.getTableRating(), null, values) != -1;
+        db.insert(DatabaseHelper.getTableRating(), null, values);
         db.close();
-        return insert;
     }
 
     public void updateRating(Rating rating) {
@@ -114,6 +113,7 @@ public class RatingDAO {
         if (cursor.moveToFirst()) {
             rate = cursor.getFloat(0);
         }
+        cursor.close();
         return rate;
     }
 
@@ -125,6 +125,7 @@ public class RatingDAO {
         if (cursor.moveToFirst()) {
             rate = cursor.getFloat(0);
         }
+        cursor.close();
         return rate;
     }
 
@@ -136,6 +137,7 @@ public class RatingDAO {
         if (cursor.moveToFirst()) {
             rate = cursor.getFloat(0);
         }
+        cursor.close();
         return rate;
     }
 
@@ -147,6 +149,7 @@ public class RatingDAO {
         if (cursor.moveToFirst()) {
             rate = cursor.getFloat(0);
         }
+        cursor.close();
         return rate;
     }
 }

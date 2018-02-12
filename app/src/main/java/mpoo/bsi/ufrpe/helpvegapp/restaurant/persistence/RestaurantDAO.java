@@ -29,6 +29,7 @@ public class RestaurantDAO {
             Bitmap image = byteToBitmap(byteArray);
             images.add(image);
         }
+        cursor.close();
         return images;
     }
 
@@ -42,13 +43,12 @@ public class RestaurantDAO {
         values.put(DatabaseHelper.getColumnPhoto(), byteImage);
         values.put(DatabaseHelper.getColumnRestaurantId(), restaurantId);
 
-        Boolean response = db.insert(DatabaseHelper.getTableRestaurantPhotos(), null, values) != -1;
+        db.insert(DatabaseHelper.getTableRestaurantPhotos(), null, values);
         db.close();
-        System.out.println(response.toString());
 
     }
 
-    public Restaurant generateRestaurant(Cursor cursor){
+    private Restaurant generateRestaurant(Cursor cursor){
         Restaurant restaurant = new Restaurant();
         restaurant.setRestaurantId(cursor.getInt(0));
         restaurant.setRestaurantName(cursor.getString(1));
@@ -90,8 +90,7 @@ public class RestaurantDAO {
 
     private Bitmap byteToBitmap(byte[] byteArray){
         if(byteArray != null){
-            Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray , 0, byteArray.length);
-            return bitmap;
+            return  BitmapFactory.decodeByteArray(byteArray , 0, byteArray.length);
         }
         return null;
     }
@@ -100,8 +99,7 @@ public class RestaurantDAO {
         if (bitmap!=null){
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
-            byte[] byteArray = stream.toByteArray();
-            return byteArray;
+            return stream.toByteArray();
         }
         return null;
     }

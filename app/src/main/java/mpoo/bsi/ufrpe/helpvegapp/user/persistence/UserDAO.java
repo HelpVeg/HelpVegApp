@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.provider.ContactsContract;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -73,7 +72,6 @@ public class UserDAO{
                 user.setUserName(cursor.getString(1));
                 user.setUserEmail(cursor.getString(2));
                 user.setUserPassword(cursor.getString(3));
-                //user.setUserPhoto()
                 users.add(user);
             } while (cursor.moveToNext());
         }
@@ -159,8 +157,7 @@ public class UserDAO{
 
     private Bitmap byteToBitmap(byte[] byteArray){
         if(byteArray != null){
-            Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray , 0, byteArray.length);
-            return bitmap;
+            return BitmapFactory.decodeByteArray(byteArray , 0, byteArray.length);
         }
         return null;
     }
@@ -169,8 +166,7 @@ public class UserDAO{
         if (bitmap!=null){
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
-            byte[] byteArray = stream.toByteArray();
-            return byteArray;
+            return stream.toByteArray();
         }
         return null;
     }

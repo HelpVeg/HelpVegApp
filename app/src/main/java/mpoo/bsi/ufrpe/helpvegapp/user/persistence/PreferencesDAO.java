@@ -18,7 +18,7 @@ public class PreferencesDAO {
     /*
     * Método genérico para criar preferências, caso precise instaciar mais de uma vez a classe preferência
     * */
-    public Preferences generatePreferences(Cursor cursor){
+    private Preferences generatePreferences(Cursor cursor){
         Preferences preferences = new Preferences();
         preferences.setId(cursor.getInt(0));
         int userId = (cursor.getInt(1));
@@ -49,7 +49,7 @@ public class PreferencesDAO {
 
     public ArrayList<Preferences> getAllPreferences() {
         SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
-        ArrayList<Preferences> preferencesList = new ArrayList<Preferences>();
+        ArrayList<Preferences> preferencesList = new ArrayList<>();
         Cursor cursor = db.rawQuery(QueriesSQL.sqlGetAllPreferences(), null);
 
         while(cursor.moveToNext()) {
@@ -64,7 +64,7 @@ public class PreferencesDAO {
     /*
     * Método para criar preferências
     * */
-    public boolean createPreferences(Preferences preferences){
+    public void createPreferences(Preferences preferences){
         SQLiteDatabase db = DatabaseHelper.getDb().getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -75,9 +75,8 @@ public class PreferencesDAO {
         values.put(DatabaseHelper.getColumnPreferencesService(), preferences.getService());
         values.put(DatabaseHelper.getColumnPreferencesAmbiance(), preferences.getAmbiance());
 
-        Boolean response = db.insert(DatabaseHelper.getTablePreferences(), null, values) != -1;
+        db.insert(DatabaseHelper.getTablePreferences(), null, values);
         db.close();
-        return response;
     }
 
     /*

@@ -83,6 +83,5 @@ public class RatingBusiness {
             return;
         }
         ratingDAO.createRating(rating);
-        print();
     }
 }

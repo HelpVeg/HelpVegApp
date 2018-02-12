@@ -84,16 +84,19 @@ public class GalleryActivity extends AppCompatActivity implements View.OnClickLi
             startActivityForResult(intent, REQUEST_CROP);
         } else if (requestCode == REQUEST_CROP && resultCode == RESULT_OK){
             Bundle extras = data.getExtras();
-            Bitmap bitmap = extras.getParcelable("data");
-            restaurantBusiness.saveRestaurantImage(bitmap);
-            imageAdapter.insertItem(bitmap);
+            if (extras != null) {
+                Bitmap bitmap = extras.getParcelable("data");
+                restaurantBusiness.saveRestaurantImage(bitmap);
+                imageAdapter.insertItem(bitmap);
+            }
+
         }
     }
 
     private static class ViewHolder{
-        public FloatingActionButton fabAddImage;
-        public GridView gridView;
-        public ImageView openImage;
+        private FloatingActionButton fabAddImage;
+        private GridView gridView;
+        private ImageView openImage;
     }
 
     @Override

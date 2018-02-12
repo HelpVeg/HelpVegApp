@@ -9,7 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;;
+import android.widget.Toast;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import mpoo.bsi.ufrpe.helpvegapp.R;
@@ -31,7 +31,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
         this.mViewHolder.btnSave = findViewById(R.id.EditProfileBtnSave);
-        this.mViewHolder.imgProfile = (CircleImageView) findViewById(R.id.ImgProfile);
+        this.mViewHolder.imgProfile = findViewById(R.id.ImgProfile);
         this.mViewHolder.edtEmail = findViewById(R.id.EditProfileEmail);
         this.mViewHolder.edtName = findViewById(R.id.EditProfileName);
         this.mViewHolder.imgProfile.setOnClickListener(this);
@@ -88,9 +88,12 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
             startActivityForResult(intent, REQUEST_CROP);
         } else if (requestCode == REQUEST_CROP && resultCode == RESULT_OK){
             Bundle extras = data.getExtras();
-            Bitmap bitmap = extras.getParcelable("data");
-            selectedImage = bitmap;
-            mViewHolder.imgProfile.setImageBitmap(bitmap);
+            if (extras!=null){
+                Bitmap bitmap = extras.getParcelable("data");
+                selectedImage = bitmap;
+                mViewHolder.imgProfile.setImageBitmap(bitmap);
+            }
+
         }
     }
 

@@ -62,11 +62,11 @@ public class PreferencesActivity extends AppCompatActivity implements View.OnCli
 
 
     public void createSpinner(){
-        ArrayList<String> types = new ArrayList<String>();
+        ArrayList<String> types = new ArrayList<>();
         types.add("Comum");
         types.add("Vegetariano e vegano");
         types.add("Vegano");
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this,R.layout.layout_spinner,types);
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this,R.layout.layout_spinner,types);
         this.mViewHolder.spinnerType.setAdapter(spinnerAdapter);
     }
 
@@ -75,15 +75,14 @@ public class PreferencesActivity extends AppCompatActivity implements View.OnCli
         Preferences preferences = preferencesBusiness.getPreferencesFromUser(user);
         if (preferences != null){
             numFood = preferences.getFood();
-            this.mViewHolder.ratingFood.setRating(new Float(preferences.getFood()));
+            this.mViewHolder.ratingFood.setRating((float) preferences.getFood());
             numPrice = preferences.getPrice();
-            this.mViewHolder.ratingPrice.setRating(new Float(preferences.getPrice()));
+            this.mViewHolder.ratingPrice.setRating((float) preferences.getPrice());
             numPlace = preferences.getAmbiance();
-            this.mViewHolder.ratingPlace.setRating(new Float(preferences.getAmbiance()));
+            this.mViewHolder.ratingPlace.setRating((float)(preferences.getAmbiance()));
             numService = preferences.getService();
-            this.mViewHolder.ratingService.setRating(new Float(preferences.getService()));
+            this.mViewHolder.ratingService.setRating((float)(preferences.getService()));
             this.mViewHolder.spinnerType.setSelection(getCurrentTpe(preferences));
-
         }
     }
 

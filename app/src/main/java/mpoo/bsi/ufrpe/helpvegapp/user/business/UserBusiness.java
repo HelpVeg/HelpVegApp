@@ -13,7 +13,7 @@ import mpoo.bsi.ufrpe.helpvegapp.user.persistence.UserDAO;
 public class UserBusiness {
     private UserDAO userDAO = new UserDAO();
 
-    public UserDAO getUserDAO() {
+    private UserDAO getUserDAO() {
         return userDAO;
     }
 
@@ -47,17 +47,13 @@ public class UserBusiness {
     }
 
     public User getUserFromSession(){
-        User user = getUserById(Session.getUserIn().getUserId());
-        return user;
+        return getUserById(Session.getUserIn().getUserId());
     }
 
     public boolean regexEmail(String email){
         String regex ="^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
         Matcher matcher = Pattern.compile(regex).matcher(email);
-        if (matcher.matches()){
-            return true;
-        }
-        return false;
+        return matcher.matches();
     }
 
     public ArrayList<User> getAllUsers(){

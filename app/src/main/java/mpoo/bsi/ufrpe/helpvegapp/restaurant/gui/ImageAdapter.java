@@ -1,8 +1,8 @@
 package mpoo.bsi.ufrpe.helpvegapp.restaurant.gui;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,17 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mpoo.bsi.ufrpe.helpvegapp.R;
-import mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain.Comment;
 
 public class ImageAdapter extends ArrayAdapter {
     private List<Bitmap> images;
-    private int layoutResourceId;
-    private Context context;
 
-    public ImageAdapter(Context context, int layoutResourceId, ArrayList imageList) {
+    ImageAdapter(Context context, int layoutResourceId, ArrayList imageList) {
         super(context, layoutResourceId, imageList);
-        this.layoutResourceId = layoutResourceId;
-        this.context = context;
         this.images = imageList;
     }
 
@@ -45,8 +40,9 @@ public class ImageAdapter extends ArrayAdapter {
 
 
 
+    @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, @NonNull ViewGroup parent) {
         Bitmap bitmap = images.get(position);
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.image_row, parent, false);

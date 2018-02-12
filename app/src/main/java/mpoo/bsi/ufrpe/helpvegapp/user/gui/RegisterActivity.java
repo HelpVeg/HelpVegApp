@@ -76,10 +76,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         return false;
     }
     public boolean validateRegexEmail(String email){
-        if (new UserBusiness().regexEmail(email)){
-            return true;
-        }
-        return false;
+        return new UserBusiness().regexEmail(email);
     }
 
     public boolean validateFields(){

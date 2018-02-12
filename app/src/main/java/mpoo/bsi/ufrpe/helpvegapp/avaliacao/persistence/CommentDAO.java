@@ -15,7 +15,6 @@ import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
 public class CommentDAO {
 
     public ArrayList<Comment> getAllCommentsFromRestaurant(int restaurantId) {
-
         SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
         ArrayList<Comment> comments = new ArrayList<>();
         Cursor cursor = db.rawQuery(QueriesSQL.sqlCommentFromRestaurant(), new String[] {Integer.toString(restaurantId)});

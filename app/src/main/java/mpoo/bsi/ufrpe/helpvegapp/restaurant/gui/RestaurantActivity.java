@@ -71,11 +71,11 @@ public class RestaurantActivity extends AppCompatActivity implements View.OnClic
         int restaurantId = restaurantBusiness.getRestaurantFromSession().getRestaurantId();
         Rating rating = ratingBusiness.getRatingFromRestaurant(restaurantId);
         if (rating != null){
-            mViewHolder.ratingBarFood.setRating(new Float(rating.getFood()));
-            mViewHolder.ratingBarPrice.setRating(new Float (rating.getPrice()));
-            mViewHolder.ratingBarAmbiance.setRating(new Float(rating.getAmbiance()));
-            mViewHolder.ratingBarService.setRating(new Float(rating.getService()));
-            mViewHolder.ratingBarGeneral.setRating(new Float(rating.getGeneral()));
+            mViewHolder.ratingBarFood.setRating((float)rating.getFood());
+            mViewHolder.ratingBarPrice.setRating((float) rating.getPrice());
+            mViewHolder.ratingBarAmbiance.setRating((float) rating.getAmbiance());
+            mViewHolder.ratingBarService.setRating((float) rating.getService());
+            mViewHolder.ratingBarGeneral.setRating((float) rating.getGeneral());
         }
     }
 
@@ -155,10 +155,10 @@ public class RestaurantActivity extends AppCompatActivity implements View.OnClic
 
     public void showUserRating(){
         if (currentRating != null){
-            mViewHolder.dialogRatingBarFood.setRating(new Float(currentRating.getFood()));
-            mViewHolder.dialogRatingBarService.setRating(new Float(currentRating.getService()));
-            mViewHolder.dialogRatingBarAmbiance.setRating(new Float (currentRating.getAmbiance()));
-            mViewHolder.dialogRatingBarPrice.setRating(new Float(currentRating.getPrice()));
+            mViewHolder.dialogRatingBarFood.setRating((float)currentRating.getFood());
+            mViewHolder.dialogRatingBarService.setRating((float) currentRating.getService());
+            mViewHolder.dialogRatingBarAmbiance.setRating((float) currentRating.getAmbiance());
+            mViewHolder.dialogRatingBarPrice.setRating((float) currentRating.getPrice());
         } else {
             currentRating = new Rating();
         }

@@ -18,16 +18,16 @@ public class MyDivider extends RecyclerView.ItemDecoration {
             android.R.attr.listDivider
     };
 
-    public static final int HORIZONTAL_LIST = LinearLayoutManager.HORIZONTAL;
+    private static final int HORIZONTAL_LIST = LinearLayoutManager.HORIZONTAL;
 
-    public static final int VERTICAL_LIST = LinearLayoutManager.VERTICAL;
+    private static final int VERTICAL_LIST = LinearLayoutManager.VERTICAL;
 
     private Drawable mDivider;
     private int mOrientation;
     private Context context;
     private int margin;
 
-    public MyDivider(Context context, int orientation, int margin) {
+    MyDivider(Context context, int orientation, int margin) {
         this.context = context;
         this.margin = margin;
         final TypedArray a = context.obtainStyledAttributes(ATTRS);
@@ -52,7 +52,7 @@ public class MyDivider extends RecyclerView.ItemDecoration {
         }
     }
 
-    public void drawVertical(Canvas c, RecyclerView parent) {
+    private void drawVertical(Canvas c, RecyclerView parent) {
         final int left = parent.getPaddingLeft();
         final int right = parent.getWidth() - parent.getPaddingRight();
 
@@ -68,7 +68,7 @@ public class MyDivider extends RecyclerView.ItemDecoration {
         }
     }
 
-    public void drawHorizontal(Canvas c, RecyclerView parent) {
+    private void drawHorizontal(Canvas c, RecyclerView parent) {
         final int top = parent.getPaddingTop();
         final int bottom = parent.getHeight() - parent.getPaddingBottom();
 

@@ -7,7 +7,9 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import mpoo.bsi.ufrpe.helpvegapp.avaliacao.business.RatingBusiness;
+import mpoo.bsi.ufrpe.helpvegapp.user.business.PreferencesBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
+import mpoo.bsi.ufrpe.helpvegapp.user.domain.Preferences;
 import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
 
 
@@ -15,7 +17,7 @@ public class SlopeOne {
 
     private RatingBusiness ratingBusiness = new RatingBusiness();
     private UserBusiness userBusiness = new UserBusiness();
-
+    private PreferencesBusiness preferencesBusiness = new PreferencesBusiness();
     private Map<Integer, HashMap<Integer, Double>> data = new HashMap<Integer, HashMap<Integer, Double>>();
     private Map<Integer, Map<Integer, Double>> variationMatrix;
     private Map<Integer, Map<Integer, Integer>> frequencyMatrix;
@@ -30,7 +32,13 @@ public class SlopeOne {
 
             ArrayList<Rating> restaurantsRated = ratingBusiness.getAllRatingsFromUser(user);
             for (Rating rating : restaurantsRated){
-                ratingsUser.put(rating.getRestaurantRating().getRestaurantId(),rating.getGeneral());
+                Preferences preference = preferencesBusiness.getPreferencesFromUser(user);
+
+                if (preference == null){
+                    preference = new Preferences();
+                }
+                double weightedAverage = rating.getWeightedAverage(preference);
+                ratingsUser.put(rating.getRestaurantRating().getRestaurantId(), weightedAverage);
             }
             data.put(user.getUserId(), ratingsUser);
         }

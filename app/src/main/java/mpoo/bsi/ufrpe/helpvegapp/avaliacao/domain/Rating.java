@@ -1,6 +1,7 @@
 package mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain;
 
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Restaurant;
+import mpoo.bsi.ufrpe.helpvegapp.user.domain.Preferences;
 import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
 
 public class Rating {
@@ -63,5 +64,15 @@ public class Rating {
 
     public double getGeneral(){
         return (getAmbiance()+getFood()+getPrice()+getService()) / 4;
+    }
+
+    public double getWeightedAverage(Preferences preferences){
+        double food = preferences.getFood() * this.getFood();
+        double service = preferences.getService() * this.getService();
+        double ambience = preferences.getAmbiance() * this.getAmbiance();
+        double price = preferences.getPrice() * this.getPrice();
+        double weights = preferences.getAmbiance() + preferences.getFood()
+                + preferences.getService() + preferences.getPrice();
+        return (food+service+ambience+price)/weights;
     }
 }
