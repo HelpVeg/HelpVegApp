@@ -3,6 +3,10 @@ package mpoo.bsi.ufrpe.helpvegapp.user.business;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+/**
+ * <h1>Md5</h1>
+ * Classe responsavel pelas implementacao do algoritmo de criptografia.
+ */
 
 public class Md5 {
 
