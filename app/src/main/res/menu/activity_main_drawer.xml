@@ -9,6 +9,10 @@
             android:icon="@drawable/ic_person_black_24dp"
             android:title="@string/profile" />
         <item
+            android:id="@+id/navIndications"
+            android:icon="@drawable/ic_star_black_24dp"
+            android:title="@string/indications"/>
+        <item
             android:id="@+id/navLogout"
             android:icon="@drawable/ic_logout"
             android:title="@string/logout"/>

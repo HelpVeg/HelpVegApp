@@ -31,6 +31,7 @@
         <activity android:name=".user.gui.EditPasswordActivity" />
         <activity android:name=".avaliacao.gui.CommentActivity" />
         <activity android:name=".restaurant.gui.GalleryActivity" />
+        <activity android:name=".avaliacao.gui.IndicationsActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

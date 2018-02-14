@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:onClick="moveToRestaurantActivity">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageRestaurantCard"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_margin="8dp"
+        android:src="@mipmap/ic_restaurant_default"
+        android:padding="8dp" />
+
+    <TextView
+        android:id="@+id/nameRestaurantCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageRestaurantCard"
+        android:layout_marginTop="13dp"
+        android:layout_toEndOf="@+id/imageRestaurantCard"
+        android:text="@string/nameRestaurant"
+        android:textAllCaps="true"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+        android:textStyle="bold" />
+
+    <RatingBar
+        android:id="@+id/ratingBarGeneralCard"
+        style="?android:attr/ratingBarStyleIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_alignBottom="@+id/imageRestaurantCard"
+        android:layout_toEndOf="@+id/imageRestaurantCard"
+        android:backgroundTint="@color/colorAccent"
+        android:isIndicator="true" />
+
+</RelativeLayout>
+
+

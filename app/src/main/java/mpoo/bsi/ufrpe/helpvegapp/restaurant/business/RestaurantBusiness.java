@@ -5,9 +5,11 @@ import android.graphics.Bitmap;
 
 import java.util.ArrayList;
 
+import mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain.SlopeOne;
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Restaurant;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.persistence.RestaurantDAO;
+import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
 
 public class RestaurantBusiness {
 
@@ -35,10 +37,6 @@ public class RestaurantBusiness {
         Session.setCurrentRestaurant(restaurant);
     }
 
-    public Restaurant getSingleRestaurant(int id){
-        return getRestaurantDAO().getRestaurantById(id);
-    }
-
     public ArrayList<Bitmap> getAllImagesFromRestaurant(int restaurantId){
         return restaurantDAO.getAllImagesFromRestaurant(restaurantId);
     }
@@ -53,6 +51,21 @@ public class RestaurantBusiness {
 
     public Restaurant getRestaurantFromSession(){
         return Session.getCurrentRestaurant();
+    }
+
+    public ArrayList<Restaurant> getAllRestaurantsIndications(){
+        //Criar array com inteiros com id dos restaurantes
+        //ArrayList<Integer> indications = new SlopeOne().indicationList(new UserBusiness().getUserFromSession());
+        ArrayList<Integer> indications = new ArrayList<>();
+        indications.add(1);
+        indications.add(2);
+        ArrayList<Restaurant> listRestaurants = new ArrayList<>();
+
+        for (int i=0; i < indications.size(); i++){
+            listRestaurants.add(getRestaurantFromId(indications.get(i)));
+        }
+
+        return listRestaurants;
     }
 
 }
