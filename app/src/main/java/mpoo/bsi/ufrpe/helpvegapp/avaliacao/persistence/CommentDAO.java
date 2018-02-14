@@ -11,6 +11,7 @@ import mpoo.bsi.ufrpe.helpvegapp.infra.persistence.DatabaseHelper;
 import mpoo.bsi.ufrpe.helpvegapp.infra.persistence.QueriesSQL;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.business.RestaurantBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain.Comment;
+import mpoo.bsi.ufrpe.helpvegapp.restaurant.persistence.RestaurantDAO;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
 
 public class CommentDAO {
@@ -26,7 +27,7 @@ public class CommentDAO {
             int userId = (cursor.getInt(1));
             comment.setUser(new UserBusiness().getUserById(userId));
             int restaurantsId = (cursor.getInt(2));
-            comment.setRestaurant(new RestaurantBusiness().getSingleRestaurant(restaurantsId));
+            comment.setRestaurant(new RestaurantDAO().getRestaurantById(restaurantsId));
             comment.setCommentText(cursor.getString(3));
 
             comments.add(comment);

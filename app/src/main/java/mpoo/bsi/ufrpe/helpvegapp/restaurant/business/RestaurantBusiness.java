@@ -55,12 +55,13 @@ public class RestaurantBusiness {
 
     public ArrayList<Restaurant> getAllRestaurantsIndications(){
         //Criar array com inteiros com id dos restaurantes
-        //ArrayList<Integer> indications = new SlopeOne().indicationList(new UserBusiness().getUserFromSession());
-        ArrayList<Integer> indications = new ArrayList<>();
+        SlopeOne slopeOne = new SlopeOne();
+        slopeOne.readData();
+        ArrayList<Integer> indications = slopeOne.indicationList(Session.getUserIn());
+        /*ArrayList<Integer> indications = new ArrayList<>();
         indications.add(1);
-        indications.add(2);
+        indications.add(2);*/
         ArrayList<Restaurant> listRestaurants = new ArrayList<>();
-
         for (int i=0; i < indications.size(); i++){
             listRestaurants.add(getRestaurantFromId(indications.get(i)));
         }

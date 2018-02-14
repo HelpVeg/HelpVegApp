@@ -70,7 +70,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         new RatingBusiness().print();
         checkSession();
         createMenu();
-        slopeOne();
     }
 
 
@@ -122,7 +121,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         createMarkers();
     }
 
-    public void slopeOne(){
+    /*public void slopeOne(){
         SlopeOne slopeOne = new SlopeOne();
         slopeOne.readData(userBusiness.getUserFromSession().getUserId());
         ArrayList<Integer> listaRecomendacao = slopeOne.getIndicationList();
@@ -137,7 +136,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
         System.out.println(" ");
 
-    }
+    }*/
 
 
     public void infoWindowPerso(){
