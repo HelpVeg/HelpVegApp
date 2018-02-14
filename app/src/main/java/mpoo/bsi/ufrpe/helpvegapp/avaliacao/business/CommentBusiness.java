@@ -31,7 +31,11 @@ public class CommentBusiness {
         return getCommentDAO().getAllCommentsFromRestaurant(restaurantId);
     }
 
-    public Comment getCommentByUser(){
-        return getCommentDAO().getCommentFromUser();
+    public ArrayList<Comment> getCommentsByUser(){
+        return getCommentDAO().getCommentsFromUser();
+    }
+
+    public Comment getCommentByUserAndRestaurant(){
+        return getCommentDAO().getCommentFromUserAndRestaurant();
     }
 }

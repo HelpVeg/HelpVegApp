@@ -50,16 +50,36 @@ public class CommentDAO {
         return response;
     }
 
-    public Comment getCommentFromUser(){
+    public ArrayList<Comment> getCommentsFromUser(){
+        SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
+        ArrayList<Comment> comments = new ArrayList<>();
+        Cursor cursor = db.rawQuery(QueriesSQL.sqlCommentFromUser(), new String[] {Integer.toString(Session.getUserIn().getUserId())});
+        if (cursor.moveToFirst()){
+            Comment comment = new Comment();
+            comment.setId(cursor.getInt(0));
+            comment.setUser(new UserBusiness().getUserById(cursor.getInt(1)));
+            comment.setRestaurant(new RestaurantBusiness().getRestaurantFromId(cursor.getInt(2)));
+            comment.setCommentText(cursor.getString(3));
+
+            comments.add(comment);
+        }
+        return comments;
+    }
+
+    public Comment getCommentFromUserAndRestaurant(){
         SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
         Comment comment = null;
-        Cursor cursor = db.rawQuery(QueriesSQL.sqlCommentFromUser(), new String[] {Integer.toString(Session.getUserIn().getUserId())});
+        String restaurantId = Integer.toString(Session.getCurrentRestaurant().getRestaurantId());
+        String userId = Integer.toString(Session.getUserIn().getUserId());
+        Cursor cursor = db.rawQuery(QueriesSQL.sqlCommentFromUserAndRestaurant(), new String[] {restaurantId, userId});
+
         if (cursor.moveToFirst()){
             comment.setId(cursor.getInt(0));
             comment.setUser(new UserBusiness().getUserById(cursor.getInt(1)));
             comment.setRestaurant(new RestaurantBusiness().getRestaurantFromId(cursor.getInt(2)));
             comment.setCommentText(cursor.getString(3));
         }
+
         return comment;
     }
 
