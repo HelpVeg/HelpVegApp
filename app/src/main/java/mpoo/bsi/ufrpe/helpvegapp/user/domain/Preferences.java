@@ -1,9 +1,11 @@
 package mpoo.bsi.ufrpe.helpvegapp.user.domain;
 
+import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.EnumRestaurantType;
+
 public class Preferences {
     private int id;
     private User user;
-    private String type;
+    private EnumRestaurantType type;
     private double food;
     private double price;
     private double service;
@@ -23,11 +25,10 @@ public class Preferences {
         this.user = user;
     }
 
-    public String getType() {
+    public EnumRestaurantType getType() {
         return type;
     }
-
-    public void setType(String type) {
+    public void setType(EnumRestaurantType  type) {
         this.type = type;
     }
 

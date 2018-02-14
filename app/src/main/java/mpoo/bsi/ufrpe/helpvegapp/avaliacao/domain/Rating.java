@@ -67,12 +67,22 @@ public class Rating {
     }
 
     public double getWeightedAverage(Preferences preferences){
+
+        System.out.println(String.valueOf(preferences.getFood()) + " "
+                + String.valueOf(preferences.getPrice()) + " "
+                + String.valueOf(preferences.getService()) + " "
+                + String.valueOf(preferences.getAmbiance()) + " ");
+        System.out.print(String.valueOf(getFood()) + " "
+                + String.valueOf(getPrice()) + " "
+                + String.valueOf(getService()) + " "
+                + String.valueOf(getAmbiance()) + " ");
         double food = preferences.getFood() * this.getFood();
         double service = preferences.getService() * this.getService();
         double ambience = preferences.getAmbiance() * this.getAmbiance();
         double price = preferences.getPrice() * this.getPrice();
         double weights = preferences.getAmbiance() + preferences.getFood()
                 + preferences.getService() + preferences.getPrice();
+        System.out.println((food+service+ambience+price)/weights);
         return (food+service+ambience+price)/weights;
     }
 }

@@ -84,31 +84,32 @@
         app:layout_constraintVertical_bias="0.479" />
 
     <RatingBar
-        android:id="@+id/ratingBarAmbiente"
+        android:id="@+id/ratingBarServiço"
         style="?android:attr/ratingBarStyleIndicator"
-        android:isIndicator="true"
         android:layout_width="176dp"
         android:layout_height="36dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:isIndicator="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.755"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.559" />
+
     <RatingBar
-        android:id="@+id/ratingBarPreço"
+        android:id="@+id/ratingBarAmbiente"
         style="?android:attr/ratingBarStyleIndicator"
         android:layout_width="176dp"
         android:layout_height="36dp"
-        android:isIndicator="true"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:isIndicator="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.755"
@@ -117,15 +118,15 @@
         app:layout_constraintVertical_bias="0.719" />
 
     <RatingBar
-        android:id="@+id/ratingBarServiço"
+        android:id="@+id/ratingBarPreço"
         style="?android:attr/ratingBarStyleIndicator"
         android:layout_width="176dp"
         android:layout_height="36dp"
-        android:isIndicator="true"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:isIndicator="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.755"
@@ -149,20 +150,6 @@
         app:layout_constraintVertical_bias="0.479"/>
 
     <TextView
-        android:id="@+id/ratingAmbiente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/place"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.144"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.559" />
-
-    <TextView
         android:id="@+id/ratingServiço"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -171,10 +158,10 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.185"
+        app:layout_constraintHorizontal_bias="0.183"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.639" />
+        app:layout_constraintVertical_bias="0.564" />
 
     <TextView
         android:id="@+id/ratingPreço"
@@ -185,10 +172,24 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.231"
+        app:layout_constraintHorizontal_bias="0.185"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.719" />
+        app:layout_constraintVertical_bias="0.639" />
+
+    <TextView
+        android:id="@+id/ratingAmbiente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/place"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.135"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.716" />
 
     <Button
         android:id="@+id/btnRating"

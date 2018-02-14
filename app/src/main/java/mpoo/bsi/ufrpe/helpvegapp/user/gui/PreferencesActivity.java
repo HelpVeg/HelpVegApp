@@ -13,8 +13,11 @@ import android.widget.Toast;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import mpoo.bsi.ufrpe.helpvegapp.R;
+import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.EnumRestaurantType;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.PreferencesBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.user.domain.Preferences;
@@ -26,14 +29,12 @@ public class PreferencesActivity extends AppCompatActivity implements View.OnCli
     private ViewHolder mViewHolder = new ViewHolder();
     private PreferencesBusiness preferencesBusiness = new PreferencesBusiness();
     private UserBusiness userBusiness = new UserBusiness();
-    private static final int COMUM = 0;
-    private static final int VEGANO_VEGETARIANO = 1;
-    private static final int VEGANO = 2;
     private double numService;
     private double numFood;
     private double numPrice;
     private double numPlace;
-    private String restaurantType;
+    private EnumRestaurantType spinnerType;
+    ArrayList<String> types = new ArrayList<>();
 
 
     @Override
@@ -62,10 +63,10 @@ public class PreferencesActivity extends AppCompatActivity implements View.OnCli
 
 
     public void createSpinner(){
-        ArrayList<String> types = new ArrayList<>();
-        types.add("Comum");
-        types.add("Vegetariano e vegano");
-        types.add("Vegano");
+        List<EnumRestaurantType> enumList = Arrays.asList(EnumRestaurantType.values());
+        for (EnumRestaurantType enumType: enumList){
+            types.add(enumType.getDescription());
+        }
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this,R.layout.layout_spinner,types);
         this.mViewHolder.spinnerType.setAdapter(spinnerAdapter);
     }
@@ -82,18 +83,12 @@ public class PreferencesActivity extends AppCompatActivity implements View.OnCli
             this.mViewHolder.ratingPlace.setRating((float)(preferences.getAmbiance()));
             numService = preferences.getService();
             this.mViewHolder.ratingService.setRating((float)(preferences.getService()));
-            this.mViewHolder.spinnerType.setSelection(getCurrentTpe(preferences));
+            this.mViewHolder.spinnerType.setSelection(getCurrentType(preferences));
         }
     }
 
-    public int getCurrentTpe(Preferences preference){
-        if (preference.getType().equals("Comum")){
-            return COMUM;
-        } if (preference.getType().equals("Vegetariano e vegano")){
-            return VEGANO_VEGETARIANO;
-        } else {
-            return VEGANO;
-        }
+    public int getCurrentType(Preferences preference){
+        return types.indexOf(preference.getType().getDescription());
     }
 
     public double getPreferenceService() {
@@ -150,7 +145,7 @@ public class PreferencesActivity extends AppCompatActivity implements View.OnCli
         preference.setFood(getPreferenceFood());
         preference.setPrice(getPreferencePrice());
         preference.setAmbiance(getPreferencePlace());
-        preference.setType(restaurantType);
+        preference.setType(spinnerType);
 
         preferencesBusiness.registerPreferences(preference);
         Toast.makeText(this, R.string.toastUpdatePreferences, Toast.LENGTH_SHORT).show();
@@ -165,7 +160,7 @@ public class PreferencesActivity extends AppCompatActivity implements View.OnCli
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        restaurantType = (String) parent.getItemAtPosition(position);
+        spinnerType = EnumRestaurantType.values()[position];
     }
 
     @Override

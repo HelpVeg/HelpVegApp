@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 import mpoo.bsi.ufrpe.helpvegapp.infra.persistence.DatabaseHelper;
 import mpoo.bsi.ufrpe.helpvegapp.infra.persistence.QueriesSQL;
+import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.EnumRestaurantType;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Restaurant;
 
 public class RestaurantDAO {
@@ -54,8 +55,10 @@ public class RestaurantDAO {
         restaurant.setRestaurantName(cursor.getString(1));
         double lat = cursor.getDouble(2);
         double lng = cursor.getDouble(3);
+        String type = cursor.getString(4);
+
         restaurant.setLatLgn(new LatLng(lat, lng));
-        restaurant.setRestaurantType(cursor.getString(4));
+        restaurant.setRestaurantType(EnumRestaurantType.valueOf(type));
         ArrayList<Bitmap> imageList = getAllImagesFromRestaurant(restaurant.getRestaurantId());
         restaurant.setRestaurantImages(imageList);
 

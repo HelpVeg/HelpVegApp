@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 import mpoo.bsi.ufrpe.helpvegapp.infra.persistence.DatabaseHelper;
 import mpoo.bsi.ufrpe.helpvegapp.infra.persistence.QueriesSQL;
+import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.EnumRestaurantType;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.user.domain.Preferences;
 
@@ -23,7 +24,7 @@ public class PreferencesDAO {
         preferences.setId(cursor.getInt(0));
         int userId = (cursor.getInt(1));
         preferences.setUser(new UserBusiness().getUserById(userId));
-        preferences.setType(cursor.getString(2));
+        preferences.setType(EnumRestaurantType.valueOf(cursor.getString(2)));
         preferences.setFood(cursor.getFloat(3));
         preferences.setPrice(cursor.getFloat(4));
         preferences.setService(cursor.getFloat(5));
@@ -69,7 +70,7 @@ public class PreferencesDAO {
         ContentValues values = new ContentValues();
 
         values.put(DatabaseHelper.getColumnPreferencesUserId(), preferences.getUser().getUserId());
-        values.put(DatabaseHelper.getColumnPreferencesType(), preferences.getType());
+        values.put(DatabaseHelper.getColumnPreferencesType(), preferences.getType().name());
         values.put(DatabaseHelper.getColumnPreferencesFood(), preferences.getFood());
         values.put(DatabaseHelper.getColumnPreferencesPrice(), preferences.getPrice());
         values.put(DatabaseHelper.getColumnPreferencesService(), preferences.getService());
@@ -88,7 +89,7 @@ public class PreferencesDAO {
         ContentValues values = new ContentValues();
 
         values.put(DatabaseHelper.getColumnPreferencesUserId(), preferences.getUser().getUserId());
-        values.put(DatabaseHelper.getColumnPreferencesType(), preferences.getType());
+        values.put(DatabaseHelper.getColumnPreferencesType(), preferences.getType().name());
         values.put(DatabaseHelper.getColumnPreferencesFood(), preferences.getFood());
         values.put(DatabaseHelper.getColumnPreferencesPrice(), preferences.getPrice());
         values.put(DatabaseHelper.getColumnPreferencesService(), preferences.getService());

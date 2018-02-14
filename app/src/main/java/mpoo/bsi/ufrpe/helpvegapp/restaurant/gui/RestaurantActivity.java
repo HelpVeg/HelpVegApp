@@ -61,7 +61,7 @@ public class RestaurantActivity extends AppCompatActivity implements View.OnClic
 
     public void showRestaurantInformation(){
         mViewHolder.restaurantName.setText(restaurant.getRestaurantName());
-        mViewHolder.restaurantType.setText(restaurant.getRestaurantType());
+        mViewHolder.restaurantType.setText(restaurant.getRestaurantType().getDescription());
         if (restaurant.getRestaurantImages().size() != 0){
             mViewHolder.imageRestaurant.setImageBitmap(restaurant.getRestaurantImages().get(0));
         }

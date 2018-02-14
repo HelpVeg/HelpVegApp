@@ -35,8 +35,8 @@ import java.util.ArrayList;
 import mpoo.bsi.ufrpe.helpvegapp.R;
 import mpoo.bsi.ufrpe.helpvegapp.avaliacao.business.RatingBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain.SlopeOne;
-import mpoo.bsi.ufrpe.helpvegapp.avaliacao.persistence.RatingDAO;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.business.RestaurantBusiness;
+import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.EnumRestaurantType;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Restaurant;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
@@ -122,8 +122,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     public void slopeOne(){
         SlopeOne slopeOne = new SlopeOne();
-        slopeOne.readData();
-        ArrayList<Integer> listaRecomendacao = slopeOne.indicationList(userBusiness.getUserFromSession());
+        slopeOne.readData(userBusiness.getUserFromSession().getUserId());
+        ArrayList<Integer> listaRecomendacao = slopeOne.getIndicationList();
 
         int i = 0;
         while (i != listaRecomendacao.size()){
@@ -148,7 +148,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public View getInfoContents(Marker marker) {
                 Restaurant restaurant = (Restaurant) marker.getTag();
-                View popup = getLayoutInflater().inflate(R.layout.activity_info_window,null);
+                View popup = getLayoutInflater().inflate(R.layout.info_window,null);
 
                 TextView textView = popup.findViewById(R.id.titleInfoWindow);
                 ImageView imageView = popup.findViewById(R.id.iconRestaurant);
@@ -156,8 +156,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 if (restaurant.getRestaurantImages().size()!=0){
                     imageView.setImageBitmap(restaurant.getRestaurantImages().get(0));
                 }
-                textView.setText(marker.getTitle());
-                snippet.setText(TYPE + marker.getSnippet());
+                textView.setText(restaurant.getRestaurantName());
+                snippet.setText(TYPE + restaurant.getRestaurantType().getDescription());
 
                 return popup;
             }
@@ -170,18 +170,16 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             Restaurant restaurant = restaurants.get(i);
             restaurant.setRestaurantImages(restaurantBusiness.getAllImagesFromRestaurant(restaurant.getRestaurantId()));
             Marker marker = mMap.addMarker(new MarkerOptions()
-                    .position(restaurant.getLatLgn())
-                    .title(restaurant.getRestaurantName())
-                    .snippet(restaurant.getRestaurantType()));
+                    .position(restaurant.getLatLgn()));
             separationMarkers(marker,restaurant);
             marker.setTag(restaurant);
         }
     }
 
     public void separationMarkers(Marker marker, Restaurant restaurant){
-        if (restaurant.getRestaurantType().equals("vegano")){
+        if (restaurant.getRestaurantType().equals(EnumRestaurantType.VEGANO)){
             marker.setIcon(BitmapDescriptorFactory.defaultMarker(120.0f));
-        } else if (restaurant.getRestaurantType().equals("vegetariano e vegano")){
+        } else if (restaurant.getRestaurantType().equals(EnumRestaurantType.VEGETARIANO_E_VEGANO)){
             marker.setIcon(BitmapDescriptorFactory.defaultMarker(210.0f));
         } else {
             marker.setIcon(BitmapDescriptorFactory.defaultMarker(350.0f));

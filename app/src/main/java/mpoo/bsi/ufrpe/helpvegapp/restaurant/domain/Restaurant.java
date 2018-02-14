@@ -11,7 +11,7 @@ public class Restaurant {
     private String restaurantName;
     private ArrayList<Bitmap> restaurantImages;
     private LatLng latLgn;
-    private String restaurantType;
+    private EnumRestaurantType restaurantType;
 
     public int getRestaurantId() {
         return restaurantId;
@@ -45,11 +45,11 @@ public class Restaurant {
         this.latLgn = latLgn;
     }
 
-    public String getRestaurantType() {
+    public EnumRestaurantType getRestaurantType() {
         return restaurantType;
     }
 
-    public void setRestaurantType(String restaurantType) {
+    public void setRestaurantType(EnumRestaurantType restaurantType) {
         this.restaurantType = restaurantType;
     }
 }
