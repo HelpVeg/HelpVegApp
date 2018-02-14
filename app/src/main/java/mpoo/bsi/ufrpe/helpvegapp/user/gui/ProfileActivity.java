@@ -13,10 +13,22 @@ import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.gui.MapsActivity;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
 
+/**
+ * <h1>ProfileActivity</h1>
+ * Activity responsavel pela tela de login.
+ */
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
 
     private ViewHolder mViewHolder = new ViewHolder();
-
+    /**
+     * O metodo onCreate() seta o layout: activity_profile e setar os
+     * EditTexts, Buttons e CircleImageView do layout para cada atributo da classe e
+     * chamar o metodo checkSession() e showUserLoggedData() da mesma
+     * classe.
+     * @see ProfileActivity#checkSession()
+     * @see ProfileActivity#showUserLoggedData()
+     * @param savedInstanceState Um objeto da classe Bundle que contem o estado anterior da activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,14 +51,18 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         showUserLoggedData();
     }
 
-
+    /**
+     *O metodo checkSession() recupera o usuario da sessao
+     */
     public void checkSession(){
         if (Session.getUserIn() == null){
             new UserBusiness().recoverSession();
         }
     }
 
-    
+    /**
+     * O metodo showUserLoggedData() mostra na tela o email,nome e foto do usuario, recuperado pela sessao
+     */
     public void showUserLoggedData(){
         this.mViewHolder.textEmailProfile.setText(Session.getUserIn().getUserEmail());
         this.mViewHolder.textNameProfile.setText(Session.getUserIn().getUserName());
@@ -55,6 +71,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+    /**
+     * O metodo onClick() recebe o id da view e compara, se o id for igual ao do btnEdit ele direciona pra a
+     * editProfileActivity, se for igual ao profileBtnEditPassword, direciona a EditPasswordActivity e se
+     * for igual a profileBtnPreference direciona a PreferencesActivity.
+     * @param view Recebe o que foi observado na view
+     */
     public void onClick(View view){
         int id = view.getId();
         if (id == R.id.profileBtnEdit){
@@ -80,7 +102,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         private Button btnEditPassword;
         private Button btnPreference;
     }
-
+    /**
+     * Metodo utiliza o intent para ir para a MapsActivity
+     */
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this,MapsActivity.class);
