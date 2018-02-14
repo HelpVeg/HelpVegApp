@@ -139,6 +139,11 @@ public class QueriesSQL {
             + DatabaseHelper.getColumnCommentRestaurantsId() + " =?";
     }
 
+    public static String sqlDeleteComment(String userId, String restaurantId){
+        return DatabaseHelper.getColumnCommentUserId() + " = " + userId + " AND "
+                + DatabaseHelper.getColumnCommentRestaurantsId() + " = " + restaurantId + ";";
+    }
+
     /* ----------------------------------------------------------------------------------------------------- */
 
     public static String sqlSearchFromLoggedUser() {

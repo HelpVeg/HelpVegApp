@@ -38,4 +38,16 @@ public class CommentBusiness {
     public Comment getCommentByUserAndRestaurant(){
         return getCommentDAO().getCommentFromUserAndRestaurant();
     }
+
+    public void updateCommentText(String commentText){
+        Comment comment = new Comment();
+        comment.setUser(Session.getUserIn());
+        comment.setRestaurant(Session.getCurrentRestaurant());
+        comment.setCommentText(commentText);
+        getCommentDAO().updateComment(comment);
+    }
+
+    public void deleteCurrentComment(){
+        getCommentDAO().deleteComment();
+    }
 }
