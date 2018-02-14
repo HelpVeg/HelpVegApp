@@ -30,4 +30,8 @@ public class CommentBusiness {
     public ArrayList<Comment> getAllCommentsFromRestautant(int restaurantId){
         return getCommentDAO().getAllCommentsFromRestaurant(restaurantId);
     }
+
+    public Comment getCommentByUser(){
+        return getCommentDAO().getCommentFromUser();
+    }
 }

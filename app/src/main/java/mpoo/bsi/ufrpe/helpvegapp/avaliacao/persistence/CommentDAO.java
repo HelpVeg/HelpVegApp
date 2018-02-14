@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
+import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 import mpoo.bsi.ufrpe.helpvegapp.infra.persistence.DatabaseHelper;
 import mpoo.bsi.ufrpe.helpvegapp.infra.persistence.QueriesSQL;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.business.RestaurantBusiness;
@@ -47,6 +48,19 @@ public class CommentDAO {
         Boolean response = db.insert(DatabaseHelper.getTableComments(), null, values) != -1;
         db.close();
         return response;
+    }
+
+    public Comment getCommentFromUser(){
+        SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
+        Comment comment = null;
+        Cursor cursor = db.rawQuery(QueriesSQL.sqlCommentFromUser(), new String[] {Integer.toString(Session.getUserIn().getUserId())});
+        if (cursor.moveToFirst()){
+            comment.setId(cursor.getInt(0));
+            comment.setUser(new UserBusiness().getUserById(cursor.getInt(1)));
+            comment.setRestaurant(new RestaurantBusiness().getRestaurantFromId(cursor.getInt(2)));
+            comment.setCommentText(cursor.getString(3));
+        }
+        return comment;
     }
 
 }
