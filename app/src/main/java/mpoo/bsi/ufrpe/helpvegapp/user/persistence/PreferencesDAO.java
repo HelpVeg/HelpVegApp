@@ -13,10 +13,13 @@ import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.EnumRestaurantType;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.user.domain.Preferences;
 
-
+/**
+ * <h1>PreferencesDAO</h1>
+ * Classe responsavel pelas preferencias do usuario
+ */
 public class PreferencesDAO {
 
-    /*
+    /**
     * Método genérico para criar preferências, caso precise instaciar mais de uma vez a classe preferência
     * */
     private Preferences generatePreferences(Cursor cursor){
@@ -32,8 +35,9 @@ public class PreferencesDAO {
         return preferences;
     }
 
-    /*
-    * Retorna a preferência pelo id usuário
+    /**
+    * Metodo a preferência pelo id usuário
+    * @return
     * */
     public Preferences getPreferencesFromUser(int user_id) {
         SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
@@ -47,6 +51,11 @@ public class PreferencesDAO {
         db.close();
         return preferences;
     }
+
+    /**
+     * Cria uma lista com todas as preferencias
+     * @return lista de preferencias
+     */
 
     public ArrayList<Preferences> getAllPreferences() {
         SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
@@ -62,9 +71,10 @@ public class PreferencesDAO {
         return preferencesList;
     }
 
-    /*
-    * Método para criar preferências
-    * */
+    /**
+     * Método createPreferences serve para criar as preferências
+     * @param preferences
+     */
     public void createPreferences(Preferences preferences){
         SQLiteDatabase db = DatabaseHelper.getDb().getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -80,7 +90,7 @@ public class PreferencesDAO {
         db.close();
     }
 
-    /*
+    /**
     * Método para atualizar preferências
     * */
     public void updatePreferences(Preferences preferences) {

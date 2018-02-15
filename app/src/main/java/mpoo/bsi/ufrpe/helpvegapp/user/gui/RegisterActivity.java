@@ -15,12 +15,20 @@ import android.widget.Toast;
 
 
 import mpoo.bsi.ufrpe.helpvegapp.R;
+/**
+ * <h1>RegisterActivity</h1>
+ * Acitvity responsavel por implementar a funcionalidade registrar usuario.
+ */
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener{
 
     private ViewHolder mViewHolder = new ViewHolder();
     Md5 md5 = new Md5();
-
+    /**
+     * O metodo onCreate() seta o layout: activity_edit_profile e setar os
+     * EditTexts e Buttons do layout para cada atributo da classe
+     * @param savedInstanceState Um objeto da classe Bundle que contem o estado anterior da activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +45,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         this.mViewHolder.btnRegister.setOnClickListener(this);
         this.mViewHolder.navToLogin.setOnClickListener(this);
     }
+    /**
+     * O metodo onClick() recebe o id recebido pela view e compara com o id do botao registrar e do
+     * botao navLogin, caso o id seja igual ao do botao registrar ele mostra um toast
+     * e direciona para a tela de login, enquanto o botao NavLogin apenas direciona para a pagina de login
+     * @param view Recebe o que foi observado na view
+     */
 
     @Override
     public void onClick(View view) {
@@ -57,6 +71,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    /**
+     * O metodo registerAccount() serve para registrar conta do usuario, caso o retorno do metodo validateFields()
+     * seja true, é setado o nome, email e senha. A senha  criptografada com o metodo do encrypt da classe
+     * Md5, se o for cadastrado for registrado com sucesso ele retorna true, caso nao retorna falso.
+     * @return Retorna true se o usuario for cadastrado com sucesso, e falso se o usuario nao for cadastrado
+     * com sucesso
+     */
     public boolean registerAccount(){
         User user = new User();
         if (validateFields()) {
@@ -75,10 +96,23 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         }
         return false;
     }
+
+    /**
+     * O metodo validateRegexEmail() utiliza o metodo regexEmail() da classe User Business para validar
+     * o formato do email
+     * @param email email inserido pelo usuario
+     * @return
+     */
     public boolean validateRegexEmail(String email){
         return new UserBusiness().regexEmail(email);
     }
 
+    /**
+     * O metodo validateFields() valida os campos de email,senha,nome e confirmacao de senha. É feita a
+     * verificacao para campos vazio, email regex e tamanho do nome
+     * @return Retorna true caso dos os campos tenham sido preenchidos corretamente, se nao tiver sido
+     * preenchido corretamente, retorna falso
+     */
     public boolean validateFields(){
         String name = mViewHolder.editName.getText().toString().trim();
         String email = mViewHolder.editEmail.getText().toString().trim();
@@ -115,6 +149,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         private Button btnRegister;
         private TextView navToLogin;
     }
+    /**
+     * Metodo utiliza o intent para ir para a LoginActivity
+     */
     @Override
     public void onBackPressed() {
         super.onBackPressed();

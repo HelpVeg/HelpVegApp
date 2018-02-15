@@ -1,7 +1,10 @@
 package mpoo.bsi.ufrpe.helpvegapp.user.domain;
 
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.EnumRestaurantType;
-
+/**
+ * <h1>Preferences</h1>
+ * Classe responsavel pela criacao dos objetos Preferences com seus gets e sets.
+ */
 public class Preferences {
     private int id;
     private User user;

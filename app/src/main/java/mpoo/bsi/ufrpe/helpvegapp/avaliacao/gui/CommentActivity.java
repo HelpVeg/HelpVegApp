@@ -12,11 +12,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
+
+import com.github.clans.fab.FloatingActionMenu;
 
 import java.util.List;
 
 import mpoo.bsi.ufrpe.helpvegapp.R;
+import mpoo.bsi.ufrpe.helpvegapp.avaliacao.persistence.CommentDAO;
 import mpoo.bsi.ufrpe.helpvegapp.infra.MyApp;
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 import mpoo.bsi.ufrpe.helpvegapp.avaliacao.business.CommentBusiness;
@@ -30,18 +34,22 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
     private CommentBusiness commentBusiness = new CommentBusiness();
     private CommentAdapter commentAdapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
 
         this.mViewHolder.recyclerView =  findViewById(R.id.commentList);
-        this.mViewHolder.btnAddComment = findViewById(R.id.btnAddComment);
-        this.mViewHolder.btnAddComment.setOnClickListener(this);
+        this.mViewHolder.floatingActionMenu = findViewById(R.id.floatingMenu);
+        this.mViewHolder.floatingActionButtonAdd = findViewById(R.id.btnAddComment);
+        this.mViewHolder.floatingActionButtonRemove = findViewById(R.id.btnRemoveComment);
+        this.mViewHolder.floatingActionButtonEdit = findViewById(R.id.btnEditComment);
+
+        this.mViewHolder.floatingActionButtonAdd.setOnClickListener(this);
 
         createAdapter();
         createCommentList();
+
     }
 
     public void createAdapter(){
@@ -52,6 +60,7 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
 
             }
         });
+
     }
 
     public void createCommentList(){
@@ -69,6 +78,7 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
             openCommentDialog();
         }
     }
+
 
 
     public void openCommentDialog(){
@@ -100,7 +110,10 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
 
     private static class ViewHolder{
         private RecyclerView recyclerView;
-        private FloatingActionButton btnAddComment;
+        private FloatingActionMenu floatingActionMenu;
+        private com.github.clans.fab.FloatingActionButton floatingActionButtonAdd;
+        private com.github.clans.fab.FloatingActionButton floatingActionButtonRemove;
+        private com.github.clans.fab.FloatingActionButton floatingActionButtonEdit;
     }
 
     @Override

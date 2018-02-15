@@ -1,7 +1,10 @@
 package mpoo.bsi.ufrpe.helpvegapp.user.domain;
 
 import android.graphics.Bitmap;
-
+/**
+ * <h1>User</h1>
+ * Classe responsavel pela criacao dos objetos User com seus gets e sets.
+ */
 public class User {
     private int userId;
     private String userName;

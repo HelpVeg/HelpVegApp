@@ -13,12 +13,22 @@ import mpoo.bsi.ufrpe.helpvegapp.R;
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.Md5;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
-
+/**
+ * <h1>EditPasswordActivity</h1>
+ * Acitvity responsavel por implementar a funcionalidade editar senha.
+ */
 public class EditPasswordActivity extends AppCompatActivity implements View.OnClickListener{
 
     private ViewHolder mViewHolder = new ViewHolder();
     private Md5 md5 = new Md5();
 
+    /**
+     * O metodo onCreate() seta o layout: activity_edit_password e setar os
+     * EditTexts e Buttons do layout para cada atributo da classe e chamar o metodo checkSession() da mesma
+     * classe.
+     * @see EditPasswordActivity#checkSession()
+     * @param savedInstanceState Um objeto da classe Bundle que contem o estado anterior da activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,12 +42,20 @@ public class EditPasswordActivity extends AppCompatActivity implements View.OnCl
         checkSession();
     }
 
+    /**
+     *O metodo checkSession() recupera o usuario da sessao
+     */
     public void checkSession(){
         if (Session.getUserIn() == null){
             new UserBusiness().recoverSession();
         }
     }
 
+    /**
+     * O metodo onClick() verifica se o id do botao clicado foi igual ao do botao salvar e leva a outra
+     * activity
+     * @param view Recebe o que foi observado na view
+     */
     public void onClick(View view){
         int id = view.getId();
         if (id == R.id.EditPasswordBtnSave){
@@ -50,7 +68,12 @@ public class EditPasswordActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
-
+    /**
+     * O metodo verifyEdition() verifica se o campo está preenchido e criptografa a senha com o metodo encrypt()
+     * da classe Md5
+     * @return Retorna a nova senha criptografada caso a operacao seja concluida com sucesso e falso, caso esta
+     * nao seja concluida.
+     */
     public boolean verifyEdition(){
         if (validateFields()){
             String newPass = md5.encrypt(this.mViewHolder.edtNewPassword.getText().toString().trim());
@@ -59,6 +82,12 @@ public class EditPasswordActivity extends AppCompatActivity implements View.OnCl
         }
         return false;
     }
+
+    /**
+     * O metodo validateFields() verifica se a senha esta igual a senha anterior, confirma se as duas senhas
+     * digitadas nos campos coincidem e se o campo nao esta vazio
+     * @return Retorna se os campos se atendem as exigencias do campo
+     */
 
     public boolean validateFields(){
         String oldPass = md5.encrypt(this.mViewHolder.edtOldPassword.getText().toString().trim());
@@ -83,6 +112,8 @@ public class EditPasswordActivity extends AppCompatActivity implements View.OnCl
         return validate;
     }
 
+
+
     private static class ViewHolder{
         private Button btnSave;
 
@@ -91,6 +122,9 @@ public class EditPasswordActivity extends AppCompatActivity implements View.OnCl
         private EditText edtConfirmPassword;
     }
 
+    /**
+     * Metodo utiliza o intent para ir para a ProfileActivity
+     */
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this,ProfileActivity.class);
