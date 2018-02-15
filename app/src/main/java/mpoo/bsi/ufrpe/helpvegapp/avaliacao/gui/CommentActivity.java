@@ -42,11 +42,9 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
         this.mViewHolder.recyclerView =  findViewById(R.id.commentList);
         this.mViewHolder.floatingActionMenu = findViewById(R.id.floatingMenu);
         this.mViewHolder.floatingActionButtonAdd = findViewById(R.id.btnAddComment);
-        this.mViewHolder.floatingActionButtonRemove = findViewById(R.id.btnRemoveComment);
-        this.mViewHolder.floatingActionButtonEdit = findViewById(R.id.btnEditComment);
+
 
         this.mViewHolder.floatingActionButtonAdd.setOnClickListener(this);
-
         createAdapter();
         createCommentList();
 
@@ -79,8 +77,6 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-
-
     public void openCommentDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater layoutInflater = getLayoutInflater();
@@ -108,12 +104,10 @@ public class CommentActivity extends AppCompatActivity implements View.OnClickLi
     }
 
 
-    private static class ViewHolder{
+    private static class ViewHolder {
         private RecyclerView recyclerView;
         private FloatingActionMenu floatingActionMenu;
         private com.github.clans.fab.FloatingActionButton floatingActionButtonAdd;
-        private com.github.clans.fab.FloatingActionButton floatingActionButtonRemove;
-        private com.github.clans.fab.FloatingActionButton floatingActionButtonEdit;
     }
 
     @Override

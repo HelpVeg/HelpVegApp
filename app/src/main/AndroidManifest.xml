@@ -42,6 +42,7 @@
             android:required="true" />
 
         <activity android:name=".user.gui.PreferencesActivity" />
+        <activity android:name=".event.gui.EventActivity"></activity>
     </application>
 
 </manifest>
