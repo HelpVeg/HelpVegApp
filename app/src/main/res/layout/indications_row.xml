@@ -5,8 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:onClick="moveToRestaurantActivity">
+    android:paddingRight="@dimen/activity_horizontal_margin">
 
 
     <de.hdodenhof.circleimageview.CircleImageView

@@ -28,6 +28,7 @@ public class CommentDAO {
             comment.setUser(new UserBusiness().getUserById(userId));
             int restaurantsId = (cursor.getInt(2));
             comment.setRestaurant(new RestaurantDAO().getRestaurantById(restaurantsId));
+
             comment.setCommentText(cursor.getString(3));
 
             comments.add(comment);
@@ -51,6 +52,29 @@ public class CommentDAO {
         return response;
     }
 
+    public void updateComment(Comment comment) {
+        SQLiteDatabase db = DatabaseHelper.getDb().getWritableDatabase();
+        String where = DatabaseHelper.getColumnCommentUserId() + " = " + Integer.toString(Session.getUserIn().getUserId()) + ";";
+        ContentValues values = new ContentValues();
+
+        values.put(DatabaseHelper.getColumnCommentText(), comment.getCommentText());
+
+        db.update(DatabaseHelper.getTableComments(), values, where, null);
+        db.close();
+    }
+
+    public void deleteComment(){
+        SQLiteDatabase db = DatabaseHelper.getDb().getWritableDatabase();
+
+        String userId = Integer.toString(Session.getUserIn().getUserId());
+        String restaurantId = Integer.toString(Session.getCurrentRestaurant().getRestaurantId());
+
+        String where = QueriesSQL.sqlDeleteComment(userId,restaurantId);
+
+        db.delete(DatabaseHelper.getTableComments(), where, null);
+        db.close();
+    }
+
     public ArrayList<Comment> getCommentsFromUser(){
         SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
         ArrayList<Comment> comments = new ArrayList<>();
@@ -61,9 +85,10 @@ public class CommentDAO {
             comment.setUser(new UserBusiness().getUserById(cursor.getInt(1)));
             comment.setRestaurant(new RestaurantBusiness().getRestaurantFromId(cursor.getInt(2)));
             comment.setCommentText(cursor.getString(3));
-
             comments.add(comment);
         }
+        cursor.close();
+        db.close();
         return comments;
     }
 
@@ -80,7 +105,8 @@ public class CommentDAO {
             comment.setRestaurant(new RestaurantBusiness().getRestaurantFromId(cursor.getInt(2)));
             comment.setCommentText(cursor.getString(3));
         }
-
+        cursor.close();
+        db.close();
         return comment;
     }
 

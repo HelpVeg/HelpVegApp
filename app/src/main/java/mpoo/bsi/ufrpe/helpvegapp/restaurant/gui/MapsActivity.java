@@ -67,7 +67,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mViewHolder.drawer = findViewById(R.id.drawer_layout);
         mViewHolder.toolbar = findViewById(R.id.toolbar);
         mViewHolder.navigationView = findViewById(R.id.nav_view);
-        new RatingBusiness().print();
         checkSession();
         createMenu();
     }
@@ -120,23 +119,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         infoWindowPerso();
         createMarkers();
     }
-
-    /*public void slopeOne(){
-        SlopeOne slopeOne = new SlopeOne();
-        slopeOne.readData(userBusiness.getUserFromSession().getUserId());
-        ArrayList<Integer> listaRecomendacao = slopeOne.getIndicationList();
-
-        int i = 0;
-        while (i != listaRecomendacao.size()){
-            System.out.print(listaRecomendacao.get(i).toString() + " ");
-            i++;
-        }
-        if (listaRecomendacao.isEmpty()){
-            System.out.print("ta vazia");
-        }
-        System.out.println(" ");
-
-    }*/
 
 
     public void infoWindowPerso(){

@@ -4,6 +4,7 @@ package mpoo.bsi.ufrpe.helpvegapp.restaurant.business;
 import android.graphics.Bitmap;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain.SlopeOne;
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
@@ -57,15 +58,12 @@ public class RestaurantBusiness {
         //Criar array com inteiros com id dos restaurantes
         SlopeOne slopeOne = new SlopeOne();
         slopeOne.readData();
-        ArrayList<Integer> indications = slopeOne.indicationList(Session.getUserIn());
-        /*ArrayList<Integer> indications = new ArrayList<>();
-        indications.add(1);
-        indications.add(2);*/
-        ArrayList<Restaurant> listRestaurants = new ArrayList<>();
-        for (int i=0; i < indications.size(); i++){
-            listRestaurants.add(getRestaurantFromId(indications.get(i)));
-        }
+        Set<Integer> indications = slopeOne.getIndicationList(Session.getUserIn().getUserId());
 
+        ArrayList<Restaurant> listRestaurants = new ArrayList<>();;
+        for (Integer i : indications){
+            listRestaurants.add(getRestaurantFromId(i));
+        }
         return listRestaurants;
     }
 

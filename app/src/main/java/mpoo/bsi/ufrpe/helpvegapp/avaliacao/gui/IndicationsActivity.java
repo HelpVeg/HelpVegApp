@@ -6,19 +6,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.view.View;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import mpoo.bsi.ufrpe.helpvegapp.R;
-import mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain.SlopeOne;
 import mpoo.bsi.ufrpe.helpvegapp.infra.MyApp;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.business.RestaurantBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Restaurant;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.gui.MapsActivity;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.gui.RestaurantActivity;
-import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
 
 public class IndicationsActivity extends AppCompatActivity {
 
@@ -40,7 +37,14 @@ public class IndicationsActivity extends AppCompatActivity {
 
     public void createAdapter(){
         listIndications = restaurantBusiness.getAllRestaurantsIndications();
-        indicationsAdapter = new IndicationsAdapter(MyApp.getContext(), listIndications);
+        indicationsAdapter = new IndicationsAdapter(MyApp.getContext(), listIndications, new ItemClickListener() {
+            @Override
+            public void onItemClick(View v, int position) {
+                restaurantBusiness.selectRestaurant(listIndications.get(position));
+                moveToRestaurantActivity();
+            }
+        });
+
     }
 
     public void createIndicationsList(){

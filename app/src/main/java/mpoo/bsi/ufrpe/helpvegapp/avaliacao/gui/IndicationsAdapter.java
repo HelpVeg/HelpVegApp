@@ -1,7 +1,6 @@
 package mpoo.bsi.ufrpe.helpvegapp.avaliacao.gui;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,18 +13,17 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 import mpoo.bsi.ufrpe.helpvegapp.R;
 import mpoo.bsi.ufrpe.helpvegapp.avaliacao.business.RatingBusiness;
-import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
-import mpoo.bsi.ufrpe.helpvegapp.restaurant.business.RestaurantBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Restaurant;
-import mpoo.bsi.ufrpe.helpvegapp.restaurant.gui.RestaurantActivity;
 
 public class IndicationsAdapter extends RecyclerView.Adapter<IndicationsAdapter.ViewHolder>  {
     private List<Restaurant> restaurants;
     private Context context;
+    private ItemClickListener itemClickListener;
 
-    public IndicationsAdapter(Context context, List<Restaurant> restaurants){
+    public IndicationsAdapter(Context context, List<Restaurant> restaurants, ItemClickListener itemClickListener){
         this.restaurants = restaurants;
         this.context = context;
+        this.itemClickListener = itemClickListener;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -46,6 +44,12 @@ public class IndicationsAdapter extends RecyclerView.Adapter<IndicationsAdapter.
     public ViewHolder onCreateViewHolder (ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.indications_row, parent, false);
         final ViewHolder viewHolder = new ViewHolder(itemView);
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemClickListener.onItemClick(v, viewHolder.getPosition());
+            }
+        });
         return viewHolder;
     }
 

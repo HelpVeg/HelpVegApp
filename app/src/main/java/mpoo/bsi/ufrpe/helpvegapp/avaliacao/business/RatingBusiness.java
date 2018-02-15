@@ -55,20 +55,6 @@ public class RatingBusiness {
         return ratingDAO.getRatingFromRestaurantAndUser(restaurantId,userId);
     }
 
-    public void print(){
-        ArrayList<Rating> ratings = ratingDAO.getAllRating();
-        for (int i = 0; i < ratings.size(); i++) {
-            Rating res = ratings.get(i);
-            System.out.println("#" + i + " ID: " + res.getRatingId() +
-                    " User: " + res.getUserRating().getUserEmail() +
-                    ", Restaurant: " + res.getRestaurantRating().getRestaurantName() +
-                    " food: " + String.valueOf(res.getFood()) +
-                    " serv: " + String.valueOf(res.getService()) +
-                    " prec: " + String.valueOf(res.getPrice()) +
-                    " ambi: " + String.valueOf(res.getAmbiance()));
-        }
-        if (ratings.size() == 0) System.out.println("# Não existem registros.");
-    }
 
     public void registerRating(Rating rating){
         rating.setUserRating(Session.getUserIn());
@@ -79,7 +65,6 @@ public class RatingBusiness {
         if (verify!=null){
             rating.setRatingId(verify.getRatingId());
             ratingDAO.updateRating(rating);
-            print();
             return;
         }
         ratingDAO.createRating(rating);
