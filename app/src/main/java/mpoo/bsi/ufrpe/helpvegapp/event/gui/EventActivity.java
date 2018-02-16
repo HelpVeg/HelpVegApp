@@ -20,7 +20,7 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
 
     private ViewHolder mViewHolder = new ViewHolder();
     private EventAdapter eventAdapter;
-    private EventBusiness eventBusiness;
+    private EventBusiness eventBusiness = new EventBusiness();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +33,7 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         this.mViewHolder.deleteEvent = findViewById(R.id.btnDeleteEvent);
 
         this.mViewHolder.editEvent.setOnClickListener(this);
+        this.mViewHolder.deleteEvent.setOnClickListener(this);
 
         returnDataEvent();
 
@@ -43,6 +44,11 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         int id = view.getId();
         if(id == R.id.btnEditEvent){
             openEventDialog();
+        }if(id == R.id.btnDeleteEvent){
+            eventBusiness.deleteCurrentEvent();
+            Intent intent = new Intent(this, ListEventActivity.class);
+            startActivity(intent);
+            finish();
         }
     }
 
@@ -70,15 +76,15 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         eventName.setText(eventBusiness.getEventFromSession().getNameEvent());
         eventDescription.setText(eventBusiness.getEventFromSession().getDescriptionEvent());
 
-        builder.setTitle("Adicione um evento");
-        builder.setPositiveButton("Adicionar evento", new DialogInterface.OnClickListener() {
+        builder.setTitle("Editar evento");
+        builder.setPositiveButton("Editar evento", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 Event event = new Event();
                 event.setUserEvent(new UserBusiness().getUserFromSession());
                 event.setNameEvent(eventName.getText().toString());
                 event.setDescriptionEvent(eventDescription.getText().toString());
+                eventBusiness.updateCurrentEvent(event);
                 confirmEvent(event);
-                eventAdapter.insertItem(event);
             }
         });
         builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -100,5 +106,12 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         Intent intent = new Intent(this,ListEventActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        EventBusiness eventBusiness = new EventBusiness();
+        eventBusiness.getEventFromSession();
     }
 }

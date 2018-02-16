@@ -22,8 +22,8 @@ public class EventBusiness {
     }
 
     public void deleteCurrentEvent(){
-        Session.setCurrentEvent(null);
         new EventDAO().deleteEvent();
+        Session.setCurrentEvent(null);
     }
 
     public ArrayList<Event> getAllEventsFromUser(){

@@ -96,6 +96,7 @@ public class ListEventActivity extends AppCompatActivity implements View.OnClick
                 event.setUserEvent(new UserBusiness().getUserFromSession());
                 event.setNameEvent(eventName.getText().toString());
                 event.setDescriptionEvent(eventDescription.getText().toString());
+                confirmEvent(event);
                 eventAdapter.insertItem(event);
             }
         });

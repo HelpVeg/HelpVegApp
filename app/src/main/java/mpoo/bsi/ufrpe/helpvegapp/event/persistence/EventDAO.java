@@ -40,8 +40,8 @@ public class EventDAO {
     public void updateEvent(Event event){
         SQLiteDatabase db = DatabaseHelper.getDb().getWritableDatabase();
 
-        String userId = Integer.toString(new UserBusiness().getUserFromSession().getUserId());
-        String where = DatabaseHelper.getColumnEventsUserId() + " = " + userId +";";
+        String eventId = Integer.toString(new EventBusiness().getEventFromSession().getIdEvent());
+        String where = DatabaseHelper.getColumnEventsId() + " = " + eventId +";";
 
         ContentValues values = new ContentValues();
 
