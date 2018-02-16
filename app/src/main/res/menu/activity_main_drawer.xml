@@ -13,6 +13,10 @@
             android:icon="@drawable/ic_star_black_24dp"
             android:title="@string/indications"/>
         <item
+            android:id="@+id/navEvent"
+            android:icon="@drawable/ic_event_note_black_24dp"
+            android:title="@string/event"/>
+        <item
             android:id="@+id/navLogout"
             android:icon="@drawable/ic_logout"
             android:title="@string/logout"/>
