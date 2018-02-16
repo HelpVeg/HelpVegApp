@@ -52,4 +52,19 @@ public class Restaurant {
     public void setRestaurantType(EnumRestaurantType restaurantType) {
         this.restaurantType = restaurantType;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null){
+            return false;
+        }
+        final Restaurant other = (Restaurant) obj;
+        return this.getRestaurantId() == other.getRestaurantId();
+    }
+
+    @Override
+    public int hashCode() {
+        return this.getRestaurantId();
+    }
+
 }

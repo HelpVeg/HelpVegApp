@@ -1,6 +1,9 @@
 package mpoo.bsi.ufrpe.helpvegapp.user.domain;
 
 import android.graphics.Bitmap;
+
+import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Restaurant;
+
 /**
  * <h1>User</h1>
  * Classe responsavel pela criacao dos objetos User com seus gets e sets.
@@ -45,6 +48,20 @@ public class User {
     }
     public void setUserPhoto(Bitmap userPhoto){
         this.userPhoto = userPhoto;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null){
+            return false;
+        }
+        final User other = (User) obj;
+        return this.getUserId() == other.getUserId();
+    }
+
+    @Override
+    public int hashCode() {
+        return this.userId;
     }
 
 }

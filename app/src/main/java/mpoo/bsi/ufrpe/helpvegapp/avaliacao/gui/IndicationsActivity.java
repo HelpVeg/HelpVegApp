@@ -11,16 +11,16 @@ import android.view.View;
 import java.util.List;
 
 import mpoo.bsi.ufrpe.helpvegapp.R;
+import mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain.Predict;
 import mpoo.bsi.ufrpe.helpvegapp.infra.MyApp;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.business.RestaurantBusiness;
-import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Restaurant;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.gui.MapsActivity;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.gui.RestaurantActivity;
 
 public class IndicationsActivity extends AppCompatActivity {
 
     private ViewHolder mViewHolder = new ViewHolder();
-    private List<Restaurant> listIndications;
+    private List<Predict> listIndications;
     private RestaurantBusiness restaurantBusiness = new RestaurantBusiness();
     private IndicationsAdapter indicationsAdapter;
 
@@ -40,11 +40,10 @@ public class IndicationsActivity extends AppCompatActivity {
         indicationsAdapter = new IndicationsAdapter(MyApp.getContext(), listIndications, new ItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
-                restaurantBusiness.selectRestaurant(listIndications.get(position));
+                restaurantBusiness.selectRestaurant(listIndications.get(position).getRestaurant());
                 moveToRestaurantActivity();
             }
         });
-
     }
 
     public void createIndicationsList(){

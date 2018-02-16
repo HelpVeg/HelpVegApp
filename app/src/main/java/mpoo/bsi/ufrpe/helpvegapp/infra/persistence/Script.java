@@ -43,19 +43,19 @@ public final class Script {
 
     public static void populateRestaurantTable(SQLiteDatabase db){
 
-        db.execSQL(insertRestaurant +"('Restaurante Da Chita', '-8.048148', '-34.954484', 'VEGANO');");
-        db.execSQL(insertRestaurant +"('Vida Longa', '-8.059153', '-34.882352','VEGANO');");
-        db.execSQL(insertRestaurant +"('Dhuzati Vegetariana Artesanal', '-8.002701', '-34.964109', 'VEGANO');");
-        db.execSQL(insertRestaurant +"('O Vegetariano', '-8.052149 ', '-34.888927', 'VEGETARIANO_E_VEGANO');");
-        db.execSQL(insertRestaurant +"('Cantina Vegetariana', '-8.064793', '-34.929533', 'VEGETARIANO_E_VEGANO');");
-        db.execSQL(insertRestaurant +"('Govinda', '-8.054950', '-34.885912', 'VEGETARIANO_E_VEGANO');");
-        db.execSQL(insertRestaurant +"('Papaya Verde', '-8.045085', '-34.892816' ,'COMUM');");
-        db.execSQL(insertRestaurant +"('Restaurante Véu e Terra', '-8.057843', '-34.886157', 'COMUM');");
+        db.execSQL(insertRestaurant +"('Restaurante Da Chita', '-8.048148', '-34.954484', 'VEGANO');");//1
+        db.execSQL(insertRestaurant +"('Vida Longa', '-8.059153', '-34.882352','VEGANO');");//2
+        db.execSQL(insertRestaurant +"('Dhuzati Comida Artesanal', '-8.002701', '-34.964109', 'VEGANO');");//3
+        db.execSQL(insertRestaurant +"('O Vegetariano', '-8.052149 ', '-34.888927', 'VEGETARIANO_E_VEGANO');");//4
+        db.execSQL(insertRestaurant +"('Cantina Vegetariana', '-8.064793', '-34.929533', 'VEGETARIANO_E_VEGANO');");//5
+        db.execSQL(insertRestaurant +"('Govinda', '-8.054950', '-34.885912', 'VEGETARIANO_E_VEGANO');");//6
+        db.execSQL(insertRestaurant +"('Papaya Verde', '-8.045085', '-34.892816' ,'COMUM');");//7
+        db.execSQL(insertRestaurant +"('Restaurante Véu e Terra', '-8.057843', '-34.886157', 'COMUM');");//8
         db.execSQL(insertRestaurant +"('Udon Cozinha Oriental', '-8.028559', '-34.919384', 'COMUM');");//9
-        db.execSQL(insertRestaurant +"('Pizzeria Vesuvio', '-8.135034', '-34.907661', 'COMUM');");
-        db.execSQL(insertRestaurant +"('Prima Deli', '-8.108943', '-34.890261', 'COMUM');");
+        db.execSQL(insertRestaurant +"('Pizzeria Vesuvio', '-8.135034', '-34.907661', 'COMUM');");//10
+        db.execSQL(insertRestaurant +"('Prima Deli', '-8.108943', '-34.890261', 'COMUM');");//11
         db.execSQL(insertRestaurant +"('Delipizza', '-8.127488', '-34.905711', 'COMUM');");
-        db.execSQL(insertRestaurant +"('Moo Hamburgueria Gourmet', '-8.125372', '-34.900817', 'COMUM');");
+        db.execSQL(insertRestaurant +"('Moo Hamburgueria', '-8.125372', '-34.900817', 'COMUM');");
         db.execSQL(insertRestaurant +"('Markis Place', '-8.052176', '-34.901044', 'COMUM');");
         db.execSQL(insertRestaurant +"('Escalantes Tex Mex', '-8.110006', '-34.894706', 'COMUM');");
         db.execSQL(insertRestaurant +"('Snoubar Rua', '-8.031910', '-34.914225', 'COMUM');");
@@ -80,13 +80,11 @@ public final class Script {
     public static void populateUserTable(SQLiteDatabase db){
         Md5 md5= new Md5();
         String criptPass = md5.encrypt("123456");
-        db.execSQL(insertUsers +"('Antonio', 'toni@gmail.com', '"+ criptPass +  "');");
+        db.execSQL(insertUsers +"('Joao', 'Joao@gmail.com', '"+ criptPass +  "');");
         db.execSQL(insertUsers +"('Junior', 'junior@gmail.com', '"+ criptPass +  "');");
         db.execSQL(insertUsers +"('Isabel', 'isabel@gmail.com', '"+ criptPass +  "');");
-        db.execSQL(insertUsers +"('Gabriel', 'gabriel@gmail.com', '"+ criptPass +  "');");
-        db.execSQL(insertUsers +"('Cicero', 'cicero@gmail.com', '"+ criptPass +  "');");
-        db.execSQL(insertUsers +"('Ana', 'ana@gmail.com', '"+ criptPass +  "');");
-        db.execSQL(insertUsers +"('tio do RU', 'tiodoru@gmail.com', '"+ criptPass +  "');");
+        db.execSQL(insertUsers +"('Antonio', 'toni@gmail.com', '"+ criptPass +  "');");
+        db.execSQL(insertUsers +"('Maria', 'maria@gmail.com', '"+ criptPass +  "');");
     }
 
     public static void populatePreferenceTable(SQLiteDatabase db){
@@ -95,84 +93,56 @@ public final class Script {
         db.execSQL(insertPreferences +"('3', 'COMUM', '5', '3', '3', '4');");
         db.execSQL(insertPreferences +"('4', 'COMUM', '5', '5', '1', '5');");
         db.execSQL(insertPreferences +"('5', 'COMUM', '5', '5', '1', '5');");
-        db.execSQL(insertPreferences +"('6', 'COMUM', '2', '3', '1', '3');");
-        db.execSQL(insertPreferences +"('7', 'COMUM', '5', '4', '1', '3');");
-
     }
 
     public static void populateRatingTable(SQLiteDatabase db){
         db.execSQL(insertRatings +"('1', '1', '2', '1', '3', '2');");
-        db.execSQL(insertRatings +"('1', '2', '4', '2', '5', '2');");
-        db.execSQL(insertRatings +"('1', '3', '2', '5', '1', '5');");
-        db.execSQL(insertRatings +"('1', '4', '4', '3', '2', '1');");
-        db.execSQL(insertRatings +"('1', '5', '1', '5', '3', '3');");
+        db.execSQL(insertRatings +"('1', '3', '4', '2', '5', '2');");
+        db.execSQL(insertRatings +"('1', '5', '2', '5', '1', '5');");
+        db.execSQL(insertRatings +"('1', '7', '4', '3', '2', '1');");
+        db.execSQL(insertRatings +"('1', '9', '1', '5', '3', '3');");
         db.execSQL(insertRatings +"('1', '6', '3', '4', '3', '3');");
-        db.execSQL(insertRatings +"('1', '7', '5', '5', '5', '5');");
-        //db.execSQL(insertRatings +"('1', '8', '1', '1', '1', '1');");
-        //db.execSQL(insertRatings +"('1', '9', '1', '1', '1', '1');");
-        //db.execSQL(insertRatings +"('1', '10', '1', '1', '1', '1');");
+        db.execSQL(insertRatings +"('1', '13', '5', '5', '5', '5');");
+        db.execSQL(insertRatings +"('1', '10', '2', '3', '1', '2');");
+        db.execSQL(insertRatings +"('1', '11', '2', '4', '5', '2');");
+        db.execSQL(insertRatings +"('1', '12', '3', '5', '1', '3');");
 
-        db.execSQL(insertRatings +"('2', '1', '2', '1', '2', '3');");
-        db.execSQL(insertRatings +"('2', '2', '2', '3', '4', '4');");
-        db.execSQL(insertRatings +"('2', '3', '5', '4', '3', '5');");
-        db.execSQL(insertRatings +"('2', '4', '4', '4', '4', '5');");
-        db.execSQL(insertRatings +"('2', '5', '1', '3', '5', '1');");
-        db.execSQL(insertRatings +"('2', '6', '4', '4', '2', '1');");
-        db.execSQL(insertRatings +"('2', '7', '4', '5', '5', '4');");
-        //db.execSQL(insertRatings +"('2', '8', '1', '1', '1', '1');");
-        //db.execSQL(insertRatings +"('2', '9', '1', '1', '1', '1');");
-        //db.execSQL(insertRatings +"('2', '10', '1', '1', '1', '1');");
+        db.execSQL(insertRatings +"('2', '2', '2', '1', '2', '3');");
+        db.execSQL(insertRatings +"('2', '4', '2', '3', '4', '4');");
+        db.execSQL(insertRatings +"('2', '6', '5', '4', '3', '5');");
+        db.execSQL(insertRatings +"('2', '8', '4', '4', '4', '5');");
+        db.execSQL(insertRatings +"('2', '10', '1', '3', '5', '1');");
+        db.execSQL(insertRatings +"('2', '12', '4', '4', '2', '1');");
+        db.execSQL(insertRatings +"('2', '14', '4', '5', '5', '4');");
+        db.execSQL(insertRatings +"('2', '7', '4', '3', '2', '1');");
+        db.execSQL(insertRatings +"('2', '11', '1', '5', '3', '3');");
+        db.execSQL(insertRatings +"('2', '5', '3', '4', '3', '3');");
 
-        db.execSQL(insertRatings +"('3', '1', '4', '2', '1', '2');");
-        db.execSQL(insertRatings +"('3', '2', '5', '3', '4', '4');");
-        db.execSQL(insertRatings +"('3', '3', '4', '5', '1', '5');");
-        db.execSQL(insertRatings +"('3', '4', '3', '2', '3', '4');");
-        db.execSQL(insertRatings +"('3', '5', '5', '1', '3', '5');");
-        db.execSQL(insertRatings +"('3', '6', '1', '2', '3', '2');");
-        db.execSQL(insertRatings +"('3', '7', '5', '4', '5', '5');");
-        //db.execSQL(insertRatings +"('3', '8', '1', '1', '1', '1');");
-        //db.execSQL(insertRatings +"('3', '9', '1', '1', '1', '1');");
-        //db.execSQL(insertRatings +"('3', '10', '1', '1', '1', '1');");
+        db.execSQL(insertRatings +"('3', '3', '4', '2', '1', '2');");
+        db.execSQL(insertRatings +"('3', '5', '5', '3', '4', '4');");
+        db.execSQL(insertRatings +"('3', '7', '4', '5', '1', '5');");
+        db.execSQL(insertRatings +"('3', '9', '3', '2', '3', '4');");
+        db.execSQL(insertRatings +"('3', '11', '5', '1', '3', '5');");
+        db.execSQL(insertRatings +"('3', '13', '1', '2', '3', '2');");
+        db.execSQL(insertRatings +"('3', '15', '5', '4', '5', '5');");
+        db.execSQL(insertRatings +"('3', '1', '2', '3', '4', '4');");
+        db.execSQL(insertRatings +"('3', '8', '5', '4', '3', '5');");
+        db.execSQL(insertRatings +"('3', '4', '4', '4', '4', '5');");
 
-        db.execSQL(insertRatings +"('5', '1', '2', '3', '1', '2');");
-        db.execSQL(insertRatings +"('5', '2', '2', '4', '5', '2');");
-        db.execSQL(insertRatings +"('5', '3', '3', '5', '1', '3');");
-        db.execSQL(insertRatings +"('5', '4', '1', '3', '4', '4');");
-        db.execSQL(insertRatings +"('5', '5', '4', '3', '2', '3');");
-        db.execSQL(insertRatings +"('5', '6', '3', '2', '3', '1');");
-        db.execSQL(insertRatings +"('5', '7', '4', '4', '4', '4');");
-        /*db.execSQL(insertRatings +"('5', '8', '1', '1', '1', '1');");
-        db.execSQL(insertRatings +"('5', '9', '1', '1', '1', '1');");
-        db.execSQL(insertRatings +"('5', '10', '1', '1', '1', '1');");
+        db.execSQL(insertRatings +"('5', '4', '2', '3', '1', '2');");
+        db.execSQL(insertRatings +"('5', '6', '2', '4', '5', '2');");
+        db.execSQL(insertRatings +"('5', '8', '3', '5', '1', '3');");
+        db.execSQL(insertRatings +"('5', '10', '1', '3', '4', '4');");
+        db.execSQL(insertRatings +"('5', '12', '4', '3', '2', '3');");
+        db.execSQL(insertRatings +"('5', '14', '3', '2', '3', '1');");
+        db.execSQL(insertRatings +"('5', '16', '4', '4', '4', '4');");
+        db.execSQL(insertRatings +"('5', '1', '4', '5', '1', '5');");
+        db.execSQL(insertRatings +"('5', '2', '3', '2', '3', '4');");
+        db.execSQL(insertRatings +"('5', '3', '5', '1', '3', '5');");
 
-        db.execSQL(insertRatings +"('7', '1', '2', '2', '2', '2');");
-        db.execSQL(insertRatings +"('7', '2', '2', '2', '2', '2');");
-        db.execSQL(insertRatings +"('7', '3', '5', '5', '5', '5');");
-        db.execSQL(insertRatings +"('7', '4', '1', '1', '1', '1');");
-        db.execSQL(insertRatings +"('7', '5', '1', '1', '1', '1');");
-        db.execSQL(insertRatings +"('7', '6', '1', '1', '1', '1');");
-        db.execSQL(insertRatings +"('7', '7', '1', '1', '1', '1');");
-        db.execSQL(insertRatings +"('7', '8', '1', '1', '1', '1');");
-        db.execSQL(insertRatings +"('7', '9', '1', '1', '1', '1');");
-        db.execSQL(insertRatings +"('7', '10', '1', '1', '1', '1');");
-
-        db.execSQL(insertRatings +"('6', '1', '2', '2', '2', '2');");
-        db.execSQL(insertRatings +"('6', '2', '2', '2', '2', '2');");
-        db.execSQL(insertRatings +"('6', '3', '5', '5', '5', '5');");
-        db.execSQL(insertRatings +"('6', '4', '1', '1', '1', '1');");
-        db.execSQL(insertRatings +"('6', '5', '1', '1', '1', '1');");
-        db.execSQL(insertRatings +"('6', '6', '1', '1', '1', '1');");
-        db.execSQL(insertRatings +"('6', '7', '1', '1', '1', '1');");
-        db.execSQL(insertRatings +"('6', '8', '1', '1', '1', '1');");
-        db.execSQL(insertRatings +"('6', '9', '1', '1', '1', '1');");
-        db.execSQL(insertRatings +"('6', '10', '1', '1', '1', '1');");
-
-
-        db.execSQL(insertRatings +"('4', '7', '2', '2', '2', '2');");
-        db.execSQL(insertRatings +"('4', '8', '2', '2', '2', '2');");
-        db.execSQL(insertRatings +"('4', '10', '1', '1', '1', '1');");
-        db.execSQL(insertRatings +"('4', '9', '5', '5', '5', '5');");
-        db.execSQL(insertRatings +"('4', '10', '1', '1', '1', '1');");*/
+        db.execSQL(insertRatings +"('4', '1', '4', '5', '4', '5');");
+        db.execSQL(insertRatings +"('4', '2', '2', '2', '2', '2');");
+        db.execSQL(insertRatings +"('4', '3', '1', '1', '1', '1');");
     }
 
 }

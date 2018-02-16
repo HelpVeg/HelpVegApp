@@ -12,16 +12,16 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import mpoo.bsi.ufrpe.helpvegapp.R;
-import mpoo.bsi.ufrpe.helpvegapp.avaliacao.business.RatingBusiness;
+import mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain.Predict;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Restaurant;
 
 public class IndicationsAdapter extends RecyclerView.Adapter<IndicationsAdapter.ViewHolder>  {
-    private List<Restaurant> restaurants;
+    private List<Predict> predicts;
     private Context context;
     private ItemClickListener itemClickListener;
 
-    public IndicationsAdapter(Context context, List<Restaurant> restaurants, ItemClickListener itemClickListener){
-        this.restaurants = restaurants;
+    public IndicationsAdapter(Context context, List<Predict> predicts, ItemClickListener itemClickListener){
+        this.predicts = predicts;
         this.context = context;
         this.itemClickListener = itemClickListener;
     }
@@ -56,10 +56,10 @@ public class IndicationsAdapter extends RecyclerView.Adapter<IndicationsAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder myHolder, int position) {
-        Restaurant restaurant = restaurants.get(position);
+        Restaurant restaurant = predicts.get(position).getRestaurant();
         myHolder.restaurantName.setText(restaurant.getRestaurantName());
-        float rate = new RatingBusiness().getRatingGeneral(restaurant.getRestaurantId());
-        myHolder.ratingGeneral.setRating(rate);
+        Double rate = predicts.get(position).getPredict();
+        myHolder.ratingGeneral.setRating(new Float(rate));
         if (restaurant.getRestaurantImages().size() != 0){
             myHolder.restaurantPhoto.setImageBitmap(restaurant.getRestaurantImages().get(0));
         }
@@ -69,7 +69,7 @@ public class IndicationsAdapter extends RecyclerView.Adapter<IndicationsAdapter.
 
     @Override
     public int getItemCount() {
-        return restaurants.size();
+        return predicts.size();
     }
 
 }

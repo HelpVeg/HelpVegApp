@@ -1,130 +1,167 @@
 package mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
+import java.util.Map.Entry;
 
 import mpoo.bsi.ufrpe.helpvegapp.avaliacao.business.RatingBusiness;
-import mpoo.bsi.ufrpe.helpvegapp.restaurant.business.RestaurantBusiness;
+import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Restaurant;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.PreferencesBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.user.domain.Preferences;
 import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
 
+/**
+ * Codigo analisado e adaptado a partir da fonte abaixo
+ *
+ * Daniel Lemire: A simple implementation of the weighted slope one
+ * www.programcreek.com/java-api-examples/index.php?source_dir=HappyResearch-master/happyresearch/src/main/java/happy/research/cf/SlopeOne.java
+ */
 
 public class SlopeOne {
-
-
-
     private UserBusiness userBusiness = new UserBusiness();
-    private RatingBusiness ratingBusiness = new RatingBusiness();
     private PreferencesBusiness preferencesBusiness = new PreferencesBusiness();
-    private RestaurantBusiness restaurantBusiness = new RestaurantBusiness();
+    private RatingBusiness ratingBusiness = new RatingBusiness();
 
-    private Map<Integer, Map<Integer, Double>> variationMatrix = new HashMap<>();
-    private Map<Integer, Map<Integer,Integer>> frequencyMatrix = new HashMap<>();
-    private Map<Integer, HashMap<Integer, Double>> allRatings = new HashMap<>();
-    private Map<Integer, HashMap<Integer, Double>> allPredictions = new HashMap<>();
+    private ArrayList<User> allUsers = userBusiness.getAllUsers();
 
+    private Map<User,Map<Restaurant,Double>> allRatings = new HashMap<>();
+    private Map<Restaurant, Double> userRatings = new HashMap<>();
 
-    private ArrayList<User> allUsers;
-    private ArrayList<Restaurant> allRestaurants;
+    private Map<Restaurant, Map<Restaurant, Double>> variationMatrix = new HashMap<>();
+    private Map<Restaurant, Map<Restaurant, Integer>> frequencyMatrix = new HashMap<>();
+
 
     public SlopeOne(){
-        readData();
+        getAllRatings();
         createVariationMatrix();
-        predict();
     }
 
-    public void readData(){
-        allUsers = userBusiness.getAllUsers();
-        allRestaurants = restaurantBusiness.getAllRestaurants();
+    public ArrayList<Predict> getIndicationList(){
+        Map<Restaurant, Double> predictMaps = predict();
+        ArrayList<Predict> predictList = new ArrayList<>();
+        for(Map.Entry<Restaurant,Double> entry : predictMaps.entrySet()){
+            if (!userRatings.containsKey(entry.getKey())){
+                Predict predict = new Predict();
+                predict.setPredict(entry.getValue());
+                predict.setRestaurant(entry.getKey());
+                predictList.add(predict);
+            }
+        }
+        ArrayList<Predict> sortedPredictList = quickSort(predictList,0,predictList.size()-1);
+        Collections.reverse(sortedPredictList);
+        return sortedPredictList;
+    }
 
-        for (User user: allUsers){
-            HashMap<Integer, Double> ratingsUser = new HashMap<>();
 
+
+    private ArrayList<Predict> quickSort(ArrayList<Predict> predict , int from, int to){
+        if (from < to) {
+            int left = from + 1;
+            int right = to;
+            Predict pivotValue = predict.get(from);
+            while (left <= right) {
+                while (left <= to && pivotValue.getPredict() >= predict.get(left).getPredict()) {
+                    left++;
+                }
+                while (right > from && pivotValue.getPredict() < predict.get(right).getPredict()) {
+                    right--;
+                }
+                if (left < right) {
+                    Collections.swap(predict, left, right);
+                }
+            }
+            Collections.swap(predict, from, left - 1);
+            quickSort(predict, from, right - 1);
+            quickSort(predict, right + 1, to);
+        }
+        return predict;
+    }
+
+    private void getAllRatings(){
+        for(User user: allUsers){
+            HashMap<Restaurant, Double> ratingsUser = new HashMap<>();
             ArrayList<Rating> restaurantsRated = ratingBusiness.getAllRatingsFromUser(user);
             for (Rating rating : restaurantsRated){
-                Preferences preference = preferencesBusiness.getPreferencesFromUser(user);
-
+                Preferences preference = preferencesBusiness.getPreferencesFromUser(userBusiness.getUserFromSession());
                 if (preference == null){
                     preference = new Preferences();
                 }
                 double weightedAverage = rating.getWeightedAverage(preference);
-                ratingsUser.put(rating.getRestaurantRating().getRestaurantId(), weightedAverage);
+                ratingsUser.put(rating.getRestaurantRating(), weightedAverage);
             }
-            allRatings.put(user.getUserId(), ratingsUser);
+            allRatings.put(user, ratingsUser);
         }
+        userRatings = allRatings.get(Session.getUserIn());
     }
 
-    public Set<Integer> getIndicationList(int userId){
-        HashMap<Integer, Double> userPredictions = allPredictions.get(userId);
-        return userPredictions.keySet();
-    }
 
     private void createVariationMatrix() {
-        for (HashMap<Integer, Double> user : allRatings.values()) {
-            for (Map.Entry<Integer, Double> entry : user.entrySet()) {
-                if (!variationMatrix.containsKey(entry.getKey())) {
-                    variationMatrix.put(entry.getKey(), new HashMap<Integer, Double>());
-                    frequencyMatrix.put(entry.getKey(), new HashMap<Integer, Integer>());
+        for (Map<Restaurant, Double> user : allRatings.values()) {
+            for (Entry<Restaurant, Double> entry : user.entrySet()) {
+                Restaurant restaurant = entry.getKey();
+                Double rate = entry.getValue();
+                if (!variationMatrix.containsKey(restaurant)) {
+                    variationMatrix.put(restaurant, new HashMap<Restaurant, Double>());
+                    frequencyMatrix.put(restaurant, new HashMap<Restaurant, Integer>());
                 }
-                for (Map.Entry<Integer, Double> entry2 : user.entrySet()) {
-                    int oldFrequency = 0;
-                    if (frequencyMatrix.get(entry.getKey()).containsKey(entry2.getKey())) {
-                        oldFrequency = frequencyMatrix.get(entry.getKey()).get(entry2.getKey()).intValue();
+                for (Entry<Restaurant, Double> entry2 : user.entrySet()) {
+                    Restaurant restaurant2 = entry2.getKey();
+                    double rate2 = entry2.getValue();
+
+                    int frequency = 0;
+                    if (frequencyMatrix.get(restaurant).containsKey(restaurant2)){
+                        frequency = frequencyMatrix.get(restaurant).get(restaurant2);
                     }
-                    double oldVariation = 0.0;
-                    if (variationMatrix.get(entry.getKey()).containsKey(entry2.getKey())) {
-                        oldVariation = variationMatrix.get(entry.getKey()).get(entry2.getKey()).doubleValue();
+                    double variation = 0.0;
+                    if (variationMatrix.get(restaurant).containsKey(restaurant2)){
+                        variation = variationMatrix.get(restaurant).get(restaurant2);
                     }
-                    double newVariation = entry.getValue() - entry2.getValue();
-                    frequencyMatrix.get(entry.getKey()).put(entry2.getKey(), oldFrequency + 1);
-                    variationMatrix.get(entry.getKey()).put(entry2.getKey(), oldVariation + newVariation);
+                    double newVariation = rate - rate2;
+
+                    frequencyMatrix.get(restaurant).put(restaurant2, frequency + 1);
+                    variationMatrix.get(restaurant).put(restaurant2, variation + newVariation);
                 }
             }
         }
-        for (Integer j : variationMatrix.keySet()) {
-            for (Integer i : variationMatrix.get(j).keySet()) {
-                double oldValue = variationMatrix.get(j).get(i).doubleValue();
-                int count = frequencyMatrix.get(j).get(i).intValue();
-                variationMatrix.get(j).put(i, oldValue / count);
+        for (Restaurant j : variationMatrix.keySet()) {
+            for (Restaurant i : variationMatrix.get(j).keySet()) {
+                Double oldVariation = variationMatrix.get(j).get(i);
+                int frequency = frequencyMatrix.get(j).get(i);
+                variationMatrix.get(j).put(i, oldVariation / frequency);
             }
         }
     }
 
-    private void predict() {
-        HashMap<Integer, Double> predictions = new HashMap<>();
-        HashMap<Integer, Integer> frequencys = new HashMap<>();
-        for (Integer restaurant : variationMatrix.keySet()) {
-            frequencys.put(restaurant, 0);
-            predictions.put(restaurant, 0.0);
+    private Map<Restaurant, Double> predict(){
+        HashMap<Restaurant, Double> predictions = new HashMap<>();
+        HashMap<Restaurant, Integer> frequencies = new HashMap<>();
+        for (Restaurant j : variationMatrix.keySet()) {
+            frequencies.put(j, 0);
+            predictions.put(j, 0.0);
         }
-        for (Map.Entry<Integer, HashMap<Integer, Double>> entry : allRatings.entrySet()) {
-            for (Integer j : entry.getValue().keySet()) {
-                for (Integer k : variationMatrix.keySet()) {
-                    try {
-                        double predictedValue = variationMatrix.get(k).get(j).doubleValue() + entry.getValue().get(j).doubleValue();
-                        double finalValue = predictedValue * frequencyMatrix.get(k).get(j).intValue();
-                        predictions.put(k, predictions.get(k) + finalValue);
-                        frequencys.put(k, frequencys.get(k) + frequencyMatrix.get(k).get(j).intValue());
-                    } catch (NullPointerException e1) {
-                    }
-                }
+        for (Restaurant j : userRatings.keySet()) {
+            for (Restaurant k : variationMatrix.keySet()) {
+                Double newval = (variationMatrix.get(k).get(j) + userRatings.get(j)) * frequencyMatrix.get(k).get(j);
+                predictions.put(k, predictions.get(k) + newval);
+                frequencies.put(k, frequencies.get(k) + frequencyMatrix.get(k).get(j));
             }
-            HashMap<Integer, Double> cleanPredictions = new HashMap<>();
-            for (Integer j : predictions.keySet()) {
-                if (frequencys.get(j) > 0) {
-                    cleanPredictions.put(j, predictions.get(j).doubleValue() / frequencys.get(j).intValue());
-                }
-            }
-            for (Restaurant j : allRestaurants) {
-                cleanPredictions.put(j.getRestaurantId(), entry.getValue().get(j));
-
-            }
-            allPredictions.put(entry.getKey(), cleanPredictions);
         }
+        HashMap<Restaurant, Double> cleanpredictions = new HashMap<>();
+        for (Restaurant j : predictions.keySet()) {
+            if (frequencies.get(j) > 0) {
+                cleanpredictions.put(j, predictions.get(j) / frequencies.get(j));
+            }
+        }
+        for (Restaurant j : userRatings.keySet()) {
+            cleanpredictions.put(j, userRatings.get(j));
+        }
+        return cleanpredictions;
     }
 }
+
+
+
