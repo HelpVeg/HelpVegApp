@@ -34,7 +34,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import mpoo.bsi.ufrpe.helpvegapp.R;
 import mpoo.bsi.ufrpe.helpvegapp.evaluation.gui.IndicationsActivity;
-import mpoo.bsi.ufrpe.helpvegapp.event.gui.EventActivity;
+import mpoo.bsi.ufrpe.helpvegapp.event.gui.ListEventActivity;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.business.RestaurantBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.EnumRestaurantType;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Restaurant;
@@ -291,7 +291,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     public void navigationEvent(){
-        Intent intent = new Intent(this, EventActivity.class);
+        Intent intent = new Intent(this, ListEventActivity.class);
         startActivity(intent);
         finish();
     }

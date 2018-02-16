@@ -19,6 +19,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String DATABASE_NAME = "helpveg.db";
     private static final int DATABASE_VERSION = 8;
 
+
     // ----------------------------- User table and columns -----------------------------
     private static final String TABLE_USER = "user";
     private static final String COLUMN_USER_ID = "user_id";
@@ -71,6 +72,12 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String COLUMN_RATING_PRICE = "rating_price";
     private static final String COLUMN_RATING_AMBIANCE = "rating_ambiance";
 
+    // ---------------------------- Events Table --------------------------------
+    private static final String TABLE_EVENTS = "events";
+    private static final String COLUMN_EVENTS_ID = "events_id";
+    private static final String COLUMN_EVENTS_USER_ID = "events_name";
+    private static final String COLUMN_EVENTS_NAME = "events_user_id";
+    private static final String COLUMN_EVENTS_DESCRIPTION = "events_description";
 
     // ----------------------------- User getters -----------------------------
     public static String getTableUser() {
@@ -235,6 +242,27 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         return COLUMN_RATING_AMBIANCE;
     }
 
+    //------------------------------- Events getters -------------------------------------
+    public static String getTableEvents() {
+        return TABLE_EVENTS;
+    }
+
+    public static String getColumnEventsId() {
+        return COLUMN_EVENTS_ID;
+    }
+
+    public static String getColumnEventsUserId() {
+        return COLUMN_EVENTS_USER_ID;
+    }
+
+    public static String getColumnEventsName() {
+        return COLUMN_EVENTS_NAME;
+    }
+
+    public static String getColumnEventsDescription() {
+        return COLUMN_EVENTS_DESCRIPTION;
+    }
+
     // ----------------------------------------------------------------------------
 
     private DatabaseHelper() {
@@ -250,6 +278,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.execSQL(QueriesSQL.sqlCreateTablePhotosRestaurants());
         db.execSQL(QueriesSQL.sqlCreateTablePreferences());
         db.execSQL(QueriesSQL.sqlCreateTableRating());
+        db.execSQL(QueriesSQL.sqlCreateTableEvents());
         Script.populateRestaurantTable(db);
         Script.populateUserTable(db);
         Script.populatePreferenceTable(db);
@@ -265,6 +294,7 @@ public class DatabaseHelper extends SQLiteOpenHelper{
         db.execSQL(QueriesSQL.sqlDropTableRestaurantPhotos());
         db.execSQL(QueriesSQL.sqlDropTablePreferences());
         db.execSQL(QueriesSQL.sqlDropTableRating());
+        db.execSQL(QueriesSQL.sqlDropTableEvents());
         this.onCreate(db);
     }
 

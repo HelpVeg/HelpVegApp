@@ -77,6 +77,17 @@ public class QueriesSQL {
                 + ");";
     }
 
+    public static String sqlCreateTableEvents(){
+        String sqlCreateTableEvents = "CREATE TABLE IF NOT EXISTS " + DatabaseHelper.getTableEvents() + "("
+                + DatabaseHelper.getColumnEventsId() + " integer primary key autoincrement unique not null, "
+                + DatabaseHelper.getColumnEventsUserId() + " integer not null, "
+                + DatabaseHelper.getColumnEventsName() + " text not null, "
+                + DatabaseHelper.getColumnEventsDescription() + " text not null, "
+                + "foreign key ( " + DatabaseHelper.getColumnEventsUserId() + " ) references " + DatabaseHelper.getTableUser() + " ( " + DatabaseHelper.getColumnUserId() + " )"
+                + ");";
+        return sqlCreateTableEvents;
+    }
+
     public static String sqlDropTablePreferences(){
         return "DROP TABLE IF EXISTS " + DatabaseHelper.getTablePreferences();
     }
@@ -106,6 +117,9 @@ public class QueriesSQL {
         return "DROP TABLE IF EXISTS " + DatabaseHelper.getTableRestaurantPhotos();
     }
 
+    public static String sqlDropTableEvents(){
+        return "DROP TABLE IF EXISTS " + DatabaseHelper.getTableEvents();
+    }
 
     public static String sqlUserFromEmail(){
         return "SELECT * FROM " + DatabaseHelper.getTableUser() + " WHERE " + DatabaseHelper.getColumnUserEmail() + " =?;";
@@ -214,5 +228,14 @@ public class QueriesSQL {
         return "SELECT AVG("+ DatabaseHelper.getColumnRatingAmbiance() +") FROM "
                 + DatabaseHelper.getTableRating() + " WHERE "
                 + DatabaseHelper.getColumnRatingRestaurantId() + "=?";
+    }
+
+    public static String sqlGetAllEvents(){
+        return "SELECT * FROM " + DatabaseHelper.getTableEvents();
+    }
+
+    public static String sqlGetAllEventsFromUser(){
+        return "SELECT * FROM " + DatabaseHelper.getTableEvents() + " WHERE "
+                + DatabaseHelper.getColumnEventsUserId() + "=?";
     }
 }
