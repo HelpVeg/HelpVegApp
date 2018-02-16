@@ -40,8 +40,8 @@ public class EventDAO {
     public void updateEvent(Event event){
         SQLiteDatabase db = DatabaseHelper.getDb().getWritableDatabase();
 
-        String userId = Integer.toString(new UserBusiness().getUserFromSession().getUserId());
-        String where = DatabaseHelper.getColumnEventsUserId() + " = " + userId +";";
+        String eventId = Integer.toString(new EventBusiness().getEventFromSession().getIdEvent());
+        String where = DatabaseHelper.getColumnEventsId() + " = " + eventId +";";
 
         ContentValues values = new ContentValues();
 
@@ -52,10 +52,10 @@ public class EventDAO {
         db.close();
     }
 
-    public void deleteEvent(){
+    public void deleteEvent(Event event){
         SQLiteDatabase db = DatabaseHelper.getDb().getWritableDatabase();
 
-        String eventId = Integer.toString(new EventBusiness().getEventFromSession().getIdEvent());
+        String eventId = Integer.toString(event.getIdEvent());
         String where = DatabaseHelper.getColumnEventsId() + " = " + eventId + ";";
 
         db.delete(DatabaseHelper.getTableEvents(), where, null);

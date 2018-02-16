@@ -7,23 +7,23 @@ import mpoo.bsi.ufrpe.helpvegapp.event.persistence.EventDAO;
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 
 public class EventBusiness {
+    private EventDAO eventDAO = new EventDAO();
 
     public Event getEventFromSession(){
         return Session.getCurrentEvent();
     }
 
     public void insertEvent(Event event){
-        new EventDAO().createEvent(event);
+        eventDAO.createEvent(event);
     }
 
     public void updateCurrentEvent(Event event){
         Session.setCurrentEvent(event);
-        new EventDAO().updateEvent(getEventFromSession());
+        eventDAO.updateEvent(getEventFromSession());
     }
 
-    public void deleteCurrentEvent(){
-        Session.setCurrentEvent(null);
-        new EventDAO().deleteEvent();
+    public void deleteEvent(Event event){
+        eventDAO.deleteEvent(event);
     }
 
     public ArrayList<Event> getAllEventsFromUser(){
@@ -32,7 +32,7 @@ public class EventBusiness {
 
     public ArrayList<Event> getAllEvents(){
 
-        return new EventDAO().getAllEvents();
+        return eventDAO.getAllEvents();
     }
 
     public void selectEvent(Event event){

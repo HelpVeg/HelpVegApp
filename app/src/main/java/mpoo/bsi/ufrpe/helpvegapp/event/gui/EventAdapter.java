@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
@@ -33,6 +34,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             super(view);
             nameEvent = view.findViewById(R.id.eventNameCard);
             descriptionEvent = view.findViewById(R.id.eventDescriptionCard);
+
         }
 
         @Override
@@ -70,6 +72,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         events.add(event);
         notifyItemInserted(getItemCount());
     }
+
 
 }
 

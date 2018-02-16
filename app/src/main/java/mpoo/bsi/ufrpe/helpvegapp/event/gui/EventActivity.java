@@ -19,7 +19,6 @@ import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
 public class EventActivity extends AppCompatActivity implements View.OnClickListener{
 
     private ViewHolder mViewHolder = new ViewHolder();
-    private EventAdapter eventAdapter;
     private EventBusiness eventBusiness = new EventBusiness();
 
     @Override
@@ -33,6 +32,7 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         this.mViewHolder.deleteEvent = findViewById(R.id.btnDeleteEvent);
 
         this.mViewHolder.editEvent.setOnClickListener(this);
+        this.mViewHolder.deleteEvent.setOnClickListener(this);
 
         returnDataEvent();
 
@@ -43,6 +43,12 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         int id = view.getId();
         if(id == R.id.btnEditEvent){
             openEventDialog();
+        }if(id == R.id.btnDeleteEvent){
+            eventBusiness.deleteEvent(eventBusiness.getEventFromSession());
+            Intent intent = new Intent(this, ListEventActivity.class);
+            startActivity(intent);
+            finish();
+
         }
     }
 
@@ -63,22 +69,20 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater layoutInflater = getLayoutInflater();
         View view = layoutInflater.inflate(R.layout.insert_event, null);
-
         final EditText eventName = view.findViewById(R.id.editEventName);
         final EditText eventDescription = view.findViewById(R.id.editEventDescription);
-
         eventName.setText(eventBusiness.getEventFromSession().getNameEvent());
         eventDescription.setText(eventBusiness.getEventFromSession().getDescriptionEvent());
-
-        builder.setTitle("Adicione um evento");
-        builder.setPositiveButton("Adicionar evento", new DialogInterface.OnClickListener() {
+        builder.setTitle("Editar evento");
+        builder.setPositiveButton("Editar evento", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 Event event = new Event();
+                event.setIdEvent(eventBusiness.getEventFromSession().getIdEvent());
                 event.setUserEvent(new UserBusiness().getUserFromSession());
                 event.setNameEvent(eventName.getText().toString());
                 event.setDescriptionEvent(eventDescription.getText().toString());
-                confirmEvent(event);
-                eventAdapter.insertItem(event);
+                eventBusiness.updateCurrentEvent(event);
+                returnDataEvent();
             }
         });
         builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -91,9 +95,6 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         dialog.show();
     }
 
-    public void confirmEvent(Event event){
-        eventBusiness.insertEvent(event);
-    }
 
     @Override
     public void onBackPressed() {
@@ -101,4 +102,12 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         startActivity(intent);
         finish();
     }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        EventBusiness eventBusiness = new EventBusiness();
+        eventBusiness.getEventFromSession();
+    }
 }
+

@@ -50,12 +50,6 @@ public class ListEventActivity extends AppCompatActivity implements View.OnClick
 
     public void createAdapter(){
         listEvents = eventBusiness.getAllEvents();
-        if(listEvents == null){
-            Toast.makeText(this, "null", Toast.LENGTH_SHORT).show();
-        }
-        if(listEvents.isEmpty()){
-            Toast.makeText(this, "vazia", Toast.LENGTH_SHORT).show();
-        }
         eventAdapter = new EventAdapter(MyApp.getContext(), listEvents, new ItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
@@ -63,7 +57,6 @@ public class ListEventActivity extends AppCompatActivity implements View.OnClick
                 moveToEventActivity();
             }
         });
-
     }
 
     public void createEventList(){

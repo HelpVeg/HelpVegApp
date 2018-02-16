@@ -41,7 +41,6 @@
             app:fab_colorNormal="@color/colorPrimary"
             app:fabSize="mini"/>
 
-
     </com.github.clans.fab.FloatingActionMenu>
 
 
