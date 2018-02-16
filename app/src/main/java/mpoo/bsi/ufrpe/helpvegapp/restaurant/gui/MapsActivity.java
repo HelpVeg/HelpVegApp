@@ -37,6 +37,7 @@ import mpoo.bsi.ufrpe.helpvegapp.avaliacao.business.RatingBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain.SlopeOne;
 import mpoo.bsi.ufrpe.helpvegapp.avaliacao.persistence.RatingDAO;
 import mpoo.bsi.ufrpe.helpvegapp.avaliacao.gui.IndicationsActivity;
+import mpoo.bsi.ufrpe.helpvegapp.event.gui.EventActivity;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.business.RestaurantBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.EnumRestaurantType;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Restaurant;
@@ -265,6 +266,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 navigationIndications();
                 break;
             }
+            case R.id.navEvent:{
+                navigationEvent();
+                break;
+            }
         }
         return true;
     }
@@ -284,6 +289,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     public void navigationIndications(){
         Intent intent = new Intent(this, IndicationsActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void navigationEvent(){
+        Intent intent = new Intent(this, EventActivity.class);
         startActivity(intent);
         finish();
     }

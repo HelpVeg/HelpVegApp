@@ -7,7 +7,8 @@
 
     <string name="profile">Perfil</string>
     <string name="logout">Sair</string>
-    <string name="MarkerLegend">Legenda dos marcadores do mapa</string>
+    <string name="indications">Indicações</string>
+    <string name="event">Evento</string>
 
     <string name="btnRegister">Cadastrar</string>
     <string name="btnRegisterLogin">Cadastrar-se</string>
@@ -58,9 +59,14 @@
     <string name="preferenceService">Serviço</string>
     <string name="preferencePlace">Ambiente</string>
     <string name="preferencePrice">Preço</string>
-    <string name="indications">Indicações</string>
-    
+
     <string name="addComment">Adicionar comentário</string>
     <string name="editComment">Editar comentário</string>
     <string name="removeComment">Excluir comentário</string>
+    <string name="addEvent">Adicionar Evento</string>
+
+    <string name="eventDelete">Excluir evento</string>
+    <string name="eventName">Nome do evento</string>
+    <string name="eventDate">Data do evento</string>
+    <string name="eventDescription">Descrição do evento</string>
 </resources>

@@ -46,7 +46,6 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     private static final String COLUMN_COMMENT_RESTAURANTS_ID = "comment_id_restaurant";
     private static final String COLUMN_COMMENT_TEXT= "comment_text";
 
-
     // ------------------------ Comment table ---------------------------------------
     private static final String TABLE_RESTAURANT_PHOTOS = "photos";
     private static final String COLUMN_RESTAURANT_PHOTOS_ID = "photo_id";
