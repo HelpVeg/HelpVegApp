@@ -33,17 +33,19 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="20dp"
         android:fontFamily="sans-serif"
+        android:hint="Insira a descrição aqui"
         android:inputType="text"
         android:maxLines="3"
         android:minLines="1"
         android:scrollHorizontally="true"
-        android:hint="Insira a descrição aqui"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editEventName"/>
+        app:layout_constraintTop_toBottomOf="@+id/editEventName"
+        app:layout_constraintVertical_bias="0.0" />
 
 
 </android.support.constraint.ConstraintLayout>

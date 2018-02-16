@@ -20,7 +20,7 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
 
     private ViewHolder mViewHolder = new ViewHolder();
     private EventAdapter eventAdapter;
-    private EventBusiness eventBusiness;
+    private EventBusiness eventBusiness = new EventBusiness();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

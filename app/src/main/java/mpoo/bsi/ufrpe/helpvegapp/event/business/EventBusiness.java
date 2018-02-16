@@ -31,6 +31,7 @@ public class EventBusiness {
     }
 
     public ArrayList<Event> getAllEvents(){
+
         return new EventDAO().getAllEvents();
     }
 

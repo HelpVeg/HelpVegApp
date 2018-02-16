@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionMenu;
 
@@ -49,6 +50,12 @@ public class ListEventActivity extends AppCompatActivity implements View.OnClick
 
     public void createAdapter(){
         listEvents = eventBusiness.getAllEvents();
+        if(listEvents == null){
+            Toast.makeText(this, "null", Toast.LENGTH_SHORT).show();
+        }
+        if(listEvents.isEmpty()){
+            Toast.makeText(this, "vazia", Toast.LENGTH_SHORT).show();
+        }
         eventAdapter = new EventAdapter(MyApp.getContext(), listEvents, new ItemClickListener() {
             @Override
             public void onItemClick(View v, int position) {
@@ -97,6 +104,7 @@ public class ListEventActivity extends AppCompatActivity implements View.OnClick
                 event.setNameEvent(eventName.getText().toString());
                 event.setDescriptionEvent(eventDescription.getText().toString());
                 eventAdapter.insertItem(event);
+                eventBusiness.insertEvent(event);
             }
         });
         builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
@@ -109,9 +117,7 @@ public class ListEventActivity extends AppCompatActivity implements View.OnClick
         dialog.show();
     }
 
-    public void confirmEvent(Event event){
-        eventBusiness.insertEvent(event);
-    }
+
 
 
     private static class ViewHolder {
