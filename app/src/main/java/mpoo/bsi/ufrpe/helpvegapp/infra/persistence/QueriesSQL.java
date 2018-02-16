@@ -187,34 +187,29 @@ public class QueriesSQL {
                 + DatabaseHelper.getColumnRatingUserId() + "=?;";
     }
 
-
     public static String sqlGetAllRatingsFromUser(){
         return "SELECT * FROM " + DatabaseHelper.getTableRating() + " WHERE "
                 + DatabaseHelper.getColumnRatingUserId() + "=?";
     }
 
-    // Media for Food
     public static String getMediaRatingFood(){
         return "SELECT AVG("+ DatabaseHelper.getColumnRatingFood() +") FROM "
                 + DatabaseHelper.getTableRating() + " WHERE "
                 + DatabaseHelper.getColumnRatingRestaurantId() + "=?";
     }
 
-    // Media for Price
     public static String getMediaRatingPrice(){
         return "SELECT AVG("+ DatabaseHelper.getColumnRatingPrice() +") FROM "
                 + DatabaseHelper.getTableRating() + " WHERE "
                 + DatabaseHelper.getColumnRatingRestaurantId() + "=?";
     }
 
-    // Media for Service
     public static String getMediaRatingService(){
         return "SELECT AVG("+ DatabaseHelper.getColumnRatingService() +") FROM "
                 + DatabaseHelper.getTableRating() + " WHERE "
                 + DatabaseHelper.getColumnRatingRestaurantId() + "=?";
     }
 
-    // Media for Ambiance
     public static String getMediaRatingAmbiance(){
         return "SELECT AVG("+ DatabaseHelper.getColumnRatingAmbiance() +") FROM "
                 + DatabaseHelper.getTableRating() + " WHERE "

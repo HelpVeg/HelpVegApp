@@ -34,6 +34,21 @@ public class RestaurantDAO {
         return images;
     }
 
+    public ArrayList<Restaurant> getRestaurantsFromType(EnumRestaurantType type){
+        SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
+        ArrayList<Restaurant> restaurants = new ArrayList<>();
+        String query = "SELECT * FROM " + DatabaseHelper.getTableRestaurants()
+                + " WHERE " + DatabaseHelper.getColumnRestaurantType() + " =?;";
+        Cursor cursor = db.rawQuery(query,new String[]{type.name()});
+        while (cursor.moveToNext()){
+            Restaurant restaurant = generateRestaurant(cursor);
+            restaurants.add(restaurant);
+        }
+        cursor.close();
+        db.close();
+        return restaurants;
+    }
+
 
     public void insertRestaurantImage(Bitmap bitmap, int restaurantId){
         byte[] byteImage = bitmapToByte(bitmap);
