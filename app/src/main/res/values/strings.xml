@@ -21,7 +21,7 @@
     <string name="btnSave">Salvar</string>
     <string name="btnCancel">Cancelar</string>
     <string name="btnComments">Visualizar comentarios</string>
-    <string name="btnHistoric">Visualizar histórico</string>
+    <string name="btnEvent">Criar eventos</string>
     <string name="btnPreferences">Visualizar preferências</string>
     <string name="btnEditPreference">Editar preferências</string>
     <string name="btnAddRating">Dê a sua nota</string>
@@ -67,6 +67,6 @@
 
     <string name="eventDelete">Excluir evento</string>
     <string name="eventName">Nome do evento</string>
-    <string name="eventDate">Data do evento</string>
     <string name="eventDescription">Descrição do evento</string>
+    <string name="eventEdit">Editar evento</string>
 </resources>
