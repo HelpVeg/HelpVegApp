@@ -1,4 +1,4 @@
-package mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain;
+package mpoo.bsi.ufrpe.helpvegapp.evaluation.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import mpoo.bsi.ufrpe.helpvegapp.avaliacao.business.RatingBusiness;
+import mpoo.bsi.ufrpe.helpvegapp.evaluation.business.RatingBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Restaurant;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.PreferencesBusiness;
@@ -15,8 +15,7 @@ import mpoo.bsi.ufrpe.helpvegapp.user.domain.Preferences;
 import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
 
 /**
- * Codigo analisado e adaptado a partir da fonte abaixo
- *
+ * Codigo adaptado a partir da fonte abaixo:
  * Daniel Lemire: A simple implementation of the weighted slope one
  * www.programcreek.com/java-api-examples/index.php?source_dir=HappyResearch-master/happyresearch/src/main/java/happy/research/cf/SlopeOne.java
  */
@@ -57,7 +56,6 @@ public class SlopeOne {
     }
 
 
-
     private ArrayList<Predict> quickSort(ArrayList<Predict> predict , int from, int to){
         if (from < to) {
             int left = from + 1;
@@ -81,6 +79,8 @@ public class SlopeOne {
         return predict;
     }
 
+
+
     private void getAllRatings(){
         for(User user: allUsers){
             HashMap<Restaurant, Double> ratingsUser = new HashMap<>();
@@ -88,10 +88,11 @@ public class SlopeOne {
             for (Rating rating : restaurantsRated){
                 Preferences preference = preferencesBusiness.getPreferencesFromUser(userBusiness.getUserFromSession());
                 if (preference == null){
-                    preference = new Preferences();
+                    ratingsUser.put(rating.getRestaurantRating(), rating.getGeneral());
+                }else{
+                    double weightedAverage = rating.getWeightedAverage(preference);
+                    ratingsUser.put(rating.getRestaurantRating(), weightedAverage);
                 }
-                double weightedAverage = rating.getWeightedAverage(preference);
-                ratingsUser.put(rating.getRestaurantRating(), weightedAverage);
             }
             allRatings.put(user, ratingsUser);
         }
@@ -145,9 +146,12 @@ public class SlopeOne {
         }
         for (Restaurant j : userRatings.keySet()) {
             for (Restaurant k : variationMatrix.keySet()) {
-                Double newval = (variationMatrix.get(k).get(j) + userRatings.get(j)) * frequencyMatrix.get(k).get(j);
-                predictions.put(k, predictions.get(k) + newval);
-                frequencies.put(k, frequencies.get(k) + frequencyMatrix.get(k).get(j));
+                try{
+                    Double newval = (variationMatrix.get(k).get(j) + userRatings.get(j)) * frequencyMatrix.get(k).get(j);
+                    predictions.put(k, predictions.get(k) + newval);
+                    frequencies.put(k, frequencies.get(k) + frequencyMatrix.get(k).get(j));
+                } catch (NullPointerException e){
+                }
             }
         }
         HashMap<Restaurant, Double> cleanpredictions = new HashMap<>();
@@ -162,6 +166,4 @@ public class SlopeOne {
         return cleanpredictions;
     }
 }
-
-
 

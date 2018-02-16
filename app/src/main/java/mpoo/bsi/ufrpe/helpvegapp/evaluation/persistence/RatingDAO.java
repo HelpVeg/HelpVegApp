@@ -1,4 +1,4 @@
-package mpoo.bsi.ufrpe.helpvegapp.avaliacao.persistence;
+package mpoo.bsi.ufrpe.helpvegapp.evaluation.persistence;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
-import mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain.Rating;
+import mpoo.bsi.ufrpe.helpvegapp.evaluation.domain.Rating;
 import mpoo.bsi.ufrpe.helpvegapp.infra.persistence.DatabaseHelper;
 import mpoo.bsi.ufrpe.helpvegapp.infra.persistence.QueriesSQL;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.business.RestaurantBusiness;

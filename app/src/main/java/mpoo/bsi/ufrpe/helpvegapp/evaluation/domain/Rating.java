@@ -1,4 +1,4 @@
-package mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain;
+package mpoo.bsi.ufrpe.helpvegapp.evaluation.domain;
 
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Restaurant;
 import mpoo.bsi.ufrpe.helpvegapp.user.domain.Preferences;

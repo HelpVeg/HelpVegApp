@@ -1,4 +1,4 @@
-package mpoo.bsi.ufrpe.helpvegapp.avaliacao.gui;
+package mpoo.bsi.ufrpe.helpvegapp.evaluation.gui;
 
 import android.view.View;
 

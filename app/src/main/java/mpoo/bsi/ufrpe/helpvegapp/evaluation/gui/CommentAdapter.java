@@ -1,4 +1,4 @@
-package mpoo.bsi.ufrpe.helpvegapp.avaliacao.gui;
+package mpoo.bsi.ufrpe.helpvegapp.evaluation.gui;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -6,13 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import mpoo.bsi.ufrpe.helpvegapp.R;
-import mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain.Comment;
+import mpoo.bsi.ufrpe.helpvegapp.evaluation.domain.Comment;
 
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder>  {

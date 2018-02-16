@@ -42,7 +42,6 @@ public final class Script {
             + ") VALUES ";
 
     public static void populateRestaurantTable(SQLiteDatabase db){
-
         db.execSQL(insertRestaurant +"('Restaurante Da Chita', '-8.048148', '-34.954484', 'VEGANO');");//1
         db.execSQL(insertRestaurant +"('Vida Longa', '-8.059153', '-34.882352','VEGANO');");//2
         db.execSQL(insertRestaurant +"('Dhuzati Comida Artesanal', '-8.002701', '-34.964109', 'VEGANO');");//3
@@ -80,7 +79,7 @@ public final class Script {
     public static void populateUserTable(SQLiteDatabase db){
         Md5 md5= new Md5();
         String criptPass = md5.encrypt("123456");
-        db.execSQL(insertUsers +"('Joao', 'Joao@gmail.com', '"+ criptPass +  "');");
+        db.execSQL(insertUsers +"('Joao', 'joao@gmail.com', '"+ criptPass +  "');");
         db.execSQL(insertUsers +"('Junior', 'junior@gmail.com', '"+ criptPass +  "');");
         db.execSQL(insertUsers +"('Isabel', 'isabel@gmail.com', '"+ criptPass +  "');");
         db.execSQL(insertUsers +"('Antonio', 'toni@gmail.com', '"+ criptPass +  "');");
@@ -129,6 +128,10 @@ public final class Script {
         db.execSQL(insertRatings +"('3', '8', '5', '4', '3', '5');");
         db.execSQL(insertRatings +"('3', '4', '4', '4', '4', '5');");
 
+        db.execSQL(insertRatings +"('4', '1', '4', '5', '4', '5');");
+        db.execSQL(insertRatings +"('4', '2', '2', '2', '2', '2');");
+        db.execSQL(insertRatings +"('4', '3', '1', '1', '1', '1');");
+
         db.execSQL(insertRatings +"('5', '4', '2', '3', '1', '2');");
         db.execSQL(insertRatings +"('5', '6', '2', '4', '5', '2');");
         db.execSQL(insertRatings +"('5', '8', '3', '5', '1', '3');");
@@ -140,9 +143,7 @@ public final class Script {
         db.execSQL(insertRatings +"('5', '2', '3', '2', '3', '4');");
         db.execSQL(insertRatings +"('5', '3', '5', '1', '3', '5');");
 
-        db.execSQL(insertRatings +"('4', '1', '4', '5', '4', '5');");
-        db.execSQL(insertRatings +"('4', '2', '2', '2', '2', '2');");
-        db.execSQL(insertRatings +"('4', '3', '1', '1', '1', '1');");
+
     }
 
 }

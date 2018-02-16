@@ -1,9 +1,9 @@
-package mpoo.bsi.ufrpe.helpvegapp.avaliacao.business;
+package mpoo.bsi.ufrpe.helpvegapp.evaluation.business;
 
 import java.util.ArrayList;
 
-import mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain.Rating;
-import mpoo.bsi.ufrpe.helpvegapp.avaliacao.persistence.RatingDAO;
+import mpoo.bsi.ufrpe.helpvegapp.evaluation.domain.Rating;
+import mpoo.bsi.ufrpe.helpvegapp.evaluation.persistence.RatingDAO;
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
 

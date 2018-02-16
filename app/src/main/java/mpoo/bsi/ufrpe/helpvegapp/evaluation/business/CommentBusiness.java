@@ -1,10 +1,10 @@
-package mpoo.bsi.ufrpe.helpvegapp.avaliacao.business;
+package mpoo.bsi.ufrpe.helpvegapp.evaluation.business;
 
 import java.util.ArrayList;
 
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
-import mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain.Comment;
-import mpoo.bsi.ufrpe.helpvegapp.avaliacao.persistence.CommentDAO;
+import mpoo.bsi.ufrpe.helpvegapp.evaluation.domain.Comment;
+import mpoo.bsi.ufrpe.helpvegapp.evaluation.persistence.CommentDAO;
 
 public class CommentBusiness {
 

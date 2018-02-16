@@ -14,9 +14,9 @@ import android.widget.Toast;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import mpoo.bsi.ufrpe.helpvegapp.R;
-import mpoo.bsi.ufrpe.helpvegapp.avaliacao.business.RatingBusiness;
-import mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain.Rating;
-import mpoo.bsi.ufrpe.helpvegapp.avaliacao.gui.CommentActivity;
+import mpoo.bsi.ufrpe.helpvegapp.evaluation.business.RatingBusiness;
+import mpoo.bsi.ufrpe.helpvegapp.evaluation.domain.Rating;
+import mpoo.bsi.ufrpe.helpvegapp.evaluation.gui.CommentActivity;
 import mpoo.bsi.ufrpe.helpvegapp.infra.MyApp;
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.business.RestaurantBusiness;

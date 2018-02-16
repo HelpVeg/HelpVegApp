@@ -5,8 +5,8 @@ import android.graphics.Bitmap;
 
 import java.util.ArrayList;
 
-import mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain.Predict;
-import mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain.SlopeOne;
+import mpoo.bsi.ufrpe.helpvegapp.evaluation.domain.Predict;
+import mpoo.bsi.ufrpe.helpvegapp.evaluation.domain.SlopeOne;
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Restaurant;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.persistence.RestaurantDAO;

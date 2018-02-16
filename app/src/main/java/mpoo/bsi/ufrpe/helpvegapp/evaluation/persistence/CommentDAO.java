@@ -1,4 +1,4 @@
-package mpoo.bsi.ufrpe.helpvegapp.avaliacao.persistence;
+package mpoo.bsi.ufrpe.helpvegapp.evaluation.persistence;
 
 import android.content.ContentValues;
 import android.database.Cursor;
@@ -10,7 +10,7 @@ import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
 import mpoo.bsi.ufrpe.helpvegapp.infra.persistence.DatabaseHelper;
 import mpoo.bsi.ufrpe.helpvegapp.infra.persistence.QueriesSQL;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.business.RestaurantBusiness;
-import mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain.Comment;
+import mpoo.bsi.ufrpe.helpvegapp.evaluation.domain.Comment;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.persistence.RestaurantDAO;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
 

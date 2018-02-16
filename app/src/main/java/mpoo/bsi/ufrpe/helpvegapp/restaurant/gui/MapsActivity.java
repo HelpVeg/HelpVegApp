@@ -33,10 +33,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 import mpoo.bsi.ufrpe.helpvegapp.R;
-import mpoo.bsi.ufrpe.helpvegapp.avaliacao.business.RatingBusiness;
-import mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain.SlopeOne;
-import mpoo.bsi.ufrpe.helpvegapp.avaliacao.persistence.RatingDAO;
-import mpoo.bsi.ufrpe.helpvegapp.avaliacao.gui.IndicationsActivity;
+import mpoo.bsi.ufrpe.helpvegapp.evaluation.gui.IndicationsActivity;
 import mpoo.bsi.ufrpe.helpvegapp.event.gui.EventActivity;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.business.RestaurantBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.EnumRestaurantType;

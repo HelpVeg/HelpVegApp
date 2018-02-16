@@ -1,4 +1,4 @@
-package mpoo.bsi.ufrpe.helpvegapp.avaliacao.gui;
+package mpoo.bsi.ufrpe.helpvegapp.evaluation.gui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,7 @@ import android.view.View;
 import java.util.List;
 
 import mpoo.bsi.ufrpe.helpvegapp.R;
-import mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain.Predict;
+import mpoo.bsi.ufrpe.helpvegapp.evaluation.domain.Predict;
 import mpoo.bsi.ufrpe.helpvegapp.infra.MyApp;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.business.RestaurantBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.gui.MapsActivity;

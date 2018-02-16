@@ -1,8 +1,7 @@
-package mpoo.bsi.ufrpe.helpvegapp.avaliacao.gui;
+package mpoo.bsi.ufrpe.helpvegapp.evaluation.gui;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,19 +11,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.TextView;
 
 import com.github.clans.fab.FloatingActionMenu;
 
 import java.util.List;
 
 import mpoo.bsi.ufrpe.helpvegapp.R;
-import mpoo.bsi.ufrpe.helpvegapp.avaliacao.persistence.CommentDAO;
 import mpoo.bsi.ufrpe.helpvegapp.infra.MyApp;
 import mpoo.bsi.ufrpe.helpvegapp.infra.Session;
-import mpoo.bsi.ufrpe.helpvegapp.avaliacao.business.CommentBusiness;
-import mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain.Comment;
+import mpoo.bsi.ufrpe.helpvegapp.evaluation.business.CommentBusiness;
+import mpoo.bsi.ufrpe.helpvegapp.evaluation.domain.Comment;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.gui.RestaurantActivity;
 
 public class CommentActivity extends AppCompatActivity implements View.OnClickListener {

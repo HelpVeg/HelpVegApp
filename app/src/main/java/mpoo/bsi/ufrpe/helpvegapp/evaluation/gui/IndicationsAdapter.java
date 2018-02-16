@@ -1,4 +1,4 @@
-package mpoo.bsi.ufrpe.helpvegapp.avaliacao.gui;
+package mpoo.bsi.ufrpe.helpvegapp.evaluation.gui;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +12,7 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import mpoo.bsi.ufrpe.helpvegapp.R;
-import mpoo.bsi.ufrpe.helpvegapp.avaliacao.domain.Predict;
+import mpoo.bsi.ufrpe.helpvegapp.evaluation.domain.Predict;
 import mpoo.bsi.ufrpe.helpvegapp.restaurant.domain.Restaurant;
 
 public class IndicationsAdapter extends RecyclerView.Adapter<IndicationsAdapter.ViewHolder>  {
