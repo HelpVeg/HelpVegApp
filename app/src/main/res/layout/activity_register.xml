@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginRight="30dp"
+    android:layout_marginLeft="30dp"
+    tools:context="mpoo.bsi.ufrpe.helpvegapp.user.gui.RegisterActivity">
+
+    <ImageView
+        android:layout_width="212dp"
+        android:layout_height="173dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/name_logo" />
+
+    <EditText
+        android:id="@+id/registerName"
+        android:layout_width="317dp"
+        android:layout_height="56dp"
+        android:hint="@string/name"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/registerEmail"
+        android:layout_width="317dp"
+        android:layout_height="56dp"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress" />
+
+
+    <EditText
+        android:id="@+id/registerPass"
+        android:layout_width="317dp"
+        android:layout_height="56dp"
+        android:hint="@string/password"
+        android:inputType="textPassword" />
+
+    <EditText
+        android:id="@+id/registerConfirmPass"
+        android:layout_width="317dp"
+        android:layout_height="56dp"
+        android:hint="@string/confirmPassword"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/registerBtnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:text="@string/btnRegister"
+        android:textColor="@color/colorTextPrimary"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"/>
+
+    <TextView
+        android:id="@+id/registerNavLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_gravity="center"
+        android:text="@string/navLogin"
+        android:layout_marginTop="15dp"
+        android:textSize="16sp"
+        android:onClick="navLogin"/>
+
+</LinearLayout>

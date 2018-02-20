@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="mpoo.bsi.ufrpe.helpvegapp.user.gui.EditProfileActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="475dp"
+        android:orientation="vertical">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/ImgProfile"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/user_default"
+            android:scaleType="centerCrop" />
+
+        <EditText
+            android:id="@+id/EditProfileName"
+            android:layout_width="317dp"
+            android:layout_height="56dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="Nome"
+            android:inputType="textPersonName"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium.Inverse" />
+
+        <EditText
+            android:id="@+id/EditProfileEmail"
+            android:layout_width="317dp"
+            android:layout_height="56dp"
+            android:layout_gravity="center_horizontal"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textPersonName" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="121dp"
+
+        android:animateLayoutChanges="false"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/EditProfileBtnSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimary"
+            android:text="@string/btnSave"
+            android:textAlignment="center"
+            android:textColor="@color/colorTextPrimary" />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,72 @@
+<resources>
+    <string name="app_name">HelpVeg</string>
+    <string name="password">Senha</string>
+    <string name="name">Nome</string>
+    <string name="email">Email</string>
+    <string name="confirmPassword">Confirmação de senha</string>
+
+    <string name="profile">Perfil</string>
+    <string name="logout">Sair</string>
+    <string name="indications">Indicações</string>
+    <string name="event">Eventos</string>
+
+    <string name="btnRegister">Cadastrar</string>
+    <string name="btnRegisterLogin">Cadastrar-se</string>
+    <string name="btnLogin">Entrar</string>
+    <string name="btnEditPassword">Alterar Senha</string>
+    <string name="navLogin">Já possui cadastro? Faça o login aqui</string>
+    <string name="navRegister">Não possui conta? Cadastre-se</string>
+    <string name="btnEditProfile">Editar perfil</string>
+    <string name="btnLogout">Sair</string>
+    <string name="btnSave">Salvar</string>
+    <string name="btnCancel">Cancelar</string>
+    <string name="btnComments">Visualizar comentarios</string>
+    <string name="btnEvent">Criar eventos</string>
+    <string name="btnPreferences">Visualizar preferências</string>
+    <string name="btnEditPreference">Editar preferências</string>
+    <string name="btnAddRating">Dê a sua nota</string>
+
+    <string name="toastUpdateSuccessful">Cadastro alterado com sucesso</string>
+    <string name="toastUpdatePasswordSuccessful">Senha alterada com sucesso</string>
+    <string name="toastRegisterSuccessful">Cadastro realizado com sucesso</string>
+    <string name="toastRegisterFailed">E-mail já cadastrado</string>
+    <string name="toastLoginSuccessful">Login efetuado com sucesso</string>
+    <string name="toastLoginFailed">Não foi possível efetuar o login</string>
+    <string name="toastBlankFieldName">Nome inválido</string>
+    <string name="toastBlankFieldEmail">Email inválido</string>
+    <string name="toastBlankFieldPassword">Senha inválida</string>
+    <string name="toastWrongFieldPassword">Senhas não coincidem</string>
+    <string name="toastUpdatePreferences">Suas preferencias foram atualizadas</string>
+    <string name="toastUpdateRating">Avaliação registrada</string>
+
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <string name="navigationDrawerOpen">Open navigation drawer</string>
+    <string name="navigationDrawerClose">Close navigation drawer</string>
+
+    <string name="nameRestaurant">Nome do restaurante</string>
+    <string name="typeRestaurant">Tipo do restaurante</string>
+
+    <string name="food">Comida </string>
+    <string name="service">Serviço </string>
+    <string name="place">Ambiente </string>
+    <string name="price">Preço </string>
+
+    <string name="preferenceTopText">Preferências</string>
+    <string name="preferenceGeneral">Indique a média geral para o restaurante</string>
+    <string name="preferenceFood">Comida</string>
+    <string name="preferenceService">Serviço</string>
+    <string name="preferencePlace">Ambiente</string>
+    <string name="preferencePrice">Preço</string>
+
+    <string name="addComment">Adicionar comentário</string>
+    <string name="editComment">Editar comentário</string>
+    <string name="removeComment">Excluir comentário</string>
+    <string name="addEvent">Adicionar Evento</string>
+
+    <string name="eventDelete">Excluir evento</string>
+    <string name="eventName">Nome do evento</string>
+    <string name="eventDescription">Descrição do evento</string>
+    <string name="eventEdit">Editar evento</string>
+</resources>
