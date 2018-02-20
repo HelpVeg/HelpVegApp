@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.provider.ContactsContract;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -15,8 +14,15 @@ import mpoo.bsi.ufrpe.helpvegapp.infra.persistence.DatabaseHelper;
 import mpoo.bsi.ufrpe.helpvegapp.infra.persistence.QueriesSQL;
 import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
 
+/**
+ * <h1>UserDAO</h1>
+ * Classe responsavel pelo usuario
+ */
 public class UserDAO{
-
+    /**
+     * Metodo createUser cria o usuario
+     * @param user usuario a ser inserido
+     */
     public boolean createUser(User user) {
         SQLiteDatabase db = DatabaseHelper.getDb().getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -30,7 +36,11 @@ public class UserDAO{
         return response;
     }
 
-    public User generateUser(Cursor cursor) {
+    /**
+     * O metodo generateUser seta os dados do usuario no banco
+     * @return o objeto usuario
+     */
+    private User generateUser(Cursor cursor) {
         User user = new User();
         user.setUserId(cursor.getInt(0));
         user.setUserName(cursor.getString(1));
@@ -42,6 +52,10 @@ public class UserDAO{
         return user;
     }
 
+    /**
+     * Metodo para atualizar os dados do usuario no banco
+     * @param user
+     */
 
     public void updateUser(User user) {
         SQLiteDatabase db = DatabaseHelper.getDb().getWritableDatabase();
@@ -58,7 +72,10 @@ public class UserDAO{
         db.close();
     }
 
-
+    /**
+     * Metodo para pegar todos os usuarios
+     * @return Retorna uma lista com todos os usuarios
+     */
     public ArrayList<User> getAllUsers() {
 
         SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
@@ -73,7 +90,6 @@ public class UserDAO{
                 user.setUserName(cursor.getString(1));
                 user.setUserEmail(cursor.getString(2));
                 user.setUserPassword(cursor.getString(3));
-                //user.setUserPhoto()
                 users.add(user);
             } while (cursor.moveToNext());
         }
@@ -83,7 +99,11 @@ public class UserDAO{
         return users;
     }
 
-
+    /**
+     * Metodo responsável por pegar um unico usuario utilizando seu id
+     * @param user_id id do usuario
+     * @return Retorna o usuario que possui o id passado como parametro
+     */
     public User getSingleUser(int user_id) {
         SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
         User user = null;
@@ -110,7 +130,12 @@ public class UserDAO{
         return user;
     }
 
-
+    /**
+     * Retorna o usuario que possui o email e senha dos paramentros
+     * @param email email do usuario
+     * @param pass senha do usuario
+     * @return Retorna o objeto usuario
+     */
     public User getLoginUser(String email, String pass){
 
         SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
@@ -126,6 +151,10 @@ public class UserDAO{
         return user;
     }
 
+    /**
+     * O metodo insere um usuario na tabela usuario logado
+     * @param user usuario
+     */
     public void insertLoggedUser(User user){
         SQLiteDatabase db = DatabaseHelper.getDb().getWritableDatabase();
 
@@ -137,6 +166,10 @@ public class UserDAO{
         db.insert(DatabaseHelper.getTableUserLogged(), null, values);
     }
 
+    /**
+     * O metodo retorna o usuario logado
+     * @return retorna o usuario
+     */
     public User getLoggedUser(){
         SQLiteDatabase db = DatabaseHelper.getDb().getReadableDatabase();
         User user = null;
@@ -151,26 +184,27 @@ public class UserDAO{
         return user;
     }
 
+    /**
+     * Metodo remove o usuario logado
+     */
     public void removeLoggedUser(){
         SQLiteDatabase db = DatabaseHelper.getDb().getWritableDatabase();
         db.delete(DatabaseHelper.getTableUserLogged(), null, null);
         db.close();
     }
 
-    public Bitmap byteToBitmap(byte[] byteArray){
+    private Bitmap byteToBitmap(byte[] byteArray){
         if(byteArray != null){
-            Bitmap bitmap = BitmapFactory.decodeByteArray(byteArray , 0, byteArray.length);
-            return bitmap;
+            return BitmapFactory.decodeByteArray(byteArray , 0, byteArray.length);
         }
         return null;
     }
 
-    public byte[] bitmapToByte(Bitmap bitmap){
+    private byte[] bitmapToByte(Bitmap bitmap){
         if (bitmap!=null){
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
-            byte[] byteArray = stream.toByteArray();
-            return byteArray;
+            return stream.toByteArray();
         }
         return null;
     }

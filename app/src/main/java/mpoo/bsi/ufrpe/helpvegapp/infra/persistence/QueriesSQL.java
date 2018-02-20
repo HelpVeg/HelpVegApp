@@ -4,93 +4,238 @@ package mpoo.bsi.ufrpe.helpvegapp.infra.persistence;
 public class QueriesSQL {
 
     public static String sqlCreateTableUser(){
-        String sqlCreateTableUser = "CREATE TABLE IF NOT EXISTS " + DatabaseHelper.getTableUser() + "("
+        return "CREATE TABLE IF NOT EXISTS " + DatabaseHelper.getTableUser() + "("
                 + DatabaseHelper.getColumnUserId() + " integer primary key autoincrement unique not null, "
                 + DatabaseHelper.getColumnUserName() + " text not null, "
                 + DatabaseHelper.getColumnUserEmail() + " text unique not null, "
                 + DatabaseHelper.getColumnUserPass() + " text not null, "
                 + DatabaseHelper.getColumnUserPhoto() + " blob"
                 + ");";
-        return (sqlCreateTableUser);
     }
 
     public static String sqlUserLogged(){
-        String sqlUserLogged = "CREATE TABLE IF NOT EXISTS " + DatabaseHelper.getTableUserLogged() + "("
+        return "CREATE TABLE IF NOT EXISTS " + DatabaseHelper.getTableUserLogged() + "("
                 + DatabaseHelper.getColumnUserLoggedId() + " integer primary key autoincrement unique not null, "
                 + "foreign key ( " + DatabaseHelper.getColumnUserLoggedId() + " ) references " + DatabaseHelper.getTableUser() + " ( " + DatabaseHelper.getColumnUserId() + " )"
                 + ")";
-        return (sqlUserLogged);
     }
 
     public static String sqlCreateTableRestaurant(){
-        String sqlCreateTableRestaurant = "CREATE TABLE IF NOT EXISTS " + DatabaseHelper.getTableRestaurants() + "("
+        return "CREATE TABLE IF NOT EXISTS " + DatabaseHelper.getTableRestaurants() + "("
                 + DatabaseHelper.getColumnRestaurantId() + " integer primary key autoincrement unique not null, "
                 + DatabaseHelper.getColumnRestaurantName() + " text not null, "
-                //+ DatabaseHelper.getColumnRestaurantImage() + " blob, "
                 + DatabaseHelper.getColumnRestaurantLat() + " integer not null, "
                 + DatabaseHelper.getColumnRestaurantLong() + " integer not null, "
                 + DatabaseHelper.getColumnRestaurantType() + " text not null"
                 + ");";
-        return sqlCreateTableRestaurant;
     }
 
     public static String sqlCreateTableComments(){
-        String sqlCreateTableComment = "CREATE TABLE IF NOT EXISTS " + DatabaseHelper.getTableComments() + "("
+        return  "CREATE TABLE IF NOT EXISTS " + DatabaseHelper.getTableComments() + "("
                 + DatabaseHelper.getColumnCommentId() + " integer primary key autoincrement unique not null, "
                 + DatabaseHelper.getColumnCommentUserId() + " integer not null, "
                 + DatabaseHelper.getColumnCommentRestaurantsId() + " integer not null, "
-                + DatabaseHelper.getColumnCommentText() + "text not null"
+                + DatabaseHelper.getColumnCommentText() + " text not null, "
+                + "foreign key ( " + DatabaseHelper.getColumnCommentUserId() + " ) references " + DatabaseHelper.getTableUser() + " ( " + DatabaseHelper.getColumnUserId() + " )"
                 + ");";
-        return sqlCreateTableComment;
+    }
+
+    public static String sqlCreateTablePhotosRestaurants(){
+        return  "CREATE TABLE IF NOT EXISTS " + DatabaseHelper.getTableRestaurantPhotos() + "("
+                + DatabaseHelper.getColumnRestaurantPhotosId() + " integer primary key autoincrement unique not null, "
+                + DatabaseHelper.getColumnPhoto() + " blob, "
+                + DatabaseHelper.getColumnRestaurantId() + " integer not null, "
+                + "foreign key ( " + DatabaseHelper.getColumnRestaurantId() + " ) references " + DatabaseHelper.getTableRestaurants() + " ( " + DatabaseHelper.getColumnRestaurantId() + " )"
+                +");";
+    }
+
+
+    public static String sqlCreateTablePreferences(){
+        return  "CREATE TABLE IF NOT EXISTS " + DatabaseHelper.getTablePreferences() + "("
+                + DatabaseHelper.getColumnPreferencesId() + " integer primary key autoincrement unique not null, "
+                + DatabaseHelper.getColumnPreferencesUserId() + " integer unique not null, "
+                + DatabaseHelper.getColumnPreferencesType() + " text not null, "
+                + DatabaseHelper.getColumnPreferencesFood() + " real not null, "
+                + DatabaseHelper.getColumnPreferencesPrice() + " real not null, "
+                + DatabaseHelper.getColumnPreferencesService() + " real not null, "
+                + DatabaseHelper.getColumnPreferencesAmbiance() + " real not null, "
+                + "foreign key ( " + DatabaseHelper.getColumnPreferencesUserId() + " ) references " + DatabaseHelper.getTableUser() + " ( " + DatabaseHelper.getColumnUserId() + " )"
+                + ");";
+    }
+
+    public static String sqlCreateTableRating(){
+        return  "CREATE TABLE IF NOT EXISTS " + DatabaseHelper.getTableRating() + "("
+                + DatabaseHelper.getColumnRatingId() + " integer primary key autoincrement unique not null, "
+                + DatabaseHelper.getColumnRatingUserId() + " integer not null, "
+                + DatabaseHelper.getColumnRatingRestaurantId() + " integer not null, "
+                + DatabaseHelper.getColumnRatingFood() + " real not null, "
+                + DatabaseHelper.getColumnRatingPrice() + " real not null, "
+                + DatabaseHelper.getColumnRatingService() + " real not null, "
+                + DatabaseHelper.getColumnRatingAmbiance() + " real not null, "
+                + "foreign key ( " + DatabaseHelper.getColumnRatingUserId() + " ) references " + DatabaseHelper.getTableUser() + " ( " + DatabaseHelper.getColumnUserId() + " ), "
+                + "foreign key ( " + DatabaseHelper.getColumnRatingRestaurantId() + " ) references " + DatabaseHelper.getTableRestaurants() + " ( " + DatabaseHelper.getColumnRestaurantId() + " )"
+                + ");";
+    }
+
+    public static String sqlCreateTableEvents(){
+        String sqlCreateTableEvents = "CREATE TABLE IF NOT EXISTS " + DatabaseHelper.getTableEvents() + "("
+                + DatabaseHelper.getColumnEventsId() + " integer primary key autoincrement unique not null, "
+                + DatabaseHelper.getColumnEventsUserId() + " integer not null, "
+                + DatabaseHelper.getColumnEventsName() + " text not null, "
+                + DatabaseHelper.getColumnEventsDescription() + " text not null, "
+                + "foreign key ( " + DatabaseHelper.getColumnEventsUserId() + " ) references " + DatabaseHelper.getTableUser() + " ( " + DatabaseHelper.getColumnUserId() + " )"
+                + ");";
+        return sqlCreateTableEvents;
+    }
+
+    public static String sqlDropTablePreferences(){
+        return "DROP TABLE IF EXISTS " + DatabaseHelper.getTablePreferences();
+    }
+
+    public static String sqlDropTableRating(){
+        return "DROP TABLE IF EXISTS " + DatabaseHelper.getTableRating();
     }
 
 
     public static String sqlDropTableUser(){
-        String sqlDropTableUser = "DROP TABLE IF EXISTS " + DatabaseHelper.getTableUser();
-        return (sqlDropTableUser);
+        return "DROP TABLE IF EXISTS " + DatabaseHelper.getTableUser();
     }
 
     public static String sqlDropTableUserLogged(){
-        String sqlDropTableUserLogged = "DROP TABLE IF EXISTS " + DatabaseHelper.getTableUserLogged();
-        return (sqlDropTableUserLogged);
+        return "DROP TABLE IF EXISTS " + DatabaseHelper.getTableUserLogged();
     }
 
     public static String sqlDropTableRestaurants(){
-        String sqlDropTableRestaurants = "DROP TABLE IF EXISTS " + DatabaseHelper.getTableRestaurants();
-        return sqlDropTableRestaurants;
+        return "DROP TABLE IF EXISTS " + DatabaseHelper.getTableRestaurants();
+    }
+
+    public static String sqlDropTableComments(){
+        return "DROP TABLE IF EXISTS " + DatabaseHelper.getTableComments();
+    }
+
+    public static String sqlDropTableRestaurantPhotos(){
+        return "DROP TABLE IF EXISTS " + DatabaseHelper.getTableRestaurantPhotos();
+    }
+
+    public static String sqlDropTableEvents(){
+        return "DROP TABLE IF EXISTS " + DatabaseHelper.getTableEvents();
     }
 
     public static String sqlUserFromEmail(){
-        String sqlUserFromEmail = "SELECT * FROM " + DatabaseHelper.getTableUser() + " WHERE " + DatabaseHelper.getColumnUserEmail() + " =?;";
-        return (sqlUserFromEmail);
+        return "SELECT * FROM " + DatabaseHelper.getTableUser() + " WHERE " + DatabaseHelper.getColumnUserEmail() + " =?;";
     }
 
     public static String sqlUserFromId(){
-        String sqlUserFromId =  "SELECT * FROM " + DatabaseHelper.getTableUser() + " WHERE " + DatabaseHelper.getColumnUserId() + " =?;";
-        return (sqlUserFromId);
+        return "SELECT * FROM " + DatabaseHelper.getTableUser() + " WHERE " + DatabaseHelper.getColumnUserId() + " =?;";
     }
 
     public static String sqlUserFromEmailAndPass() {
-        String sqlUserFromEmailAndPass =
-                "SELECT * FROM " + DatabaseHelper.getTableUser() + " WHERE "
-                        + DatabaseHelper.getColumnUserEmail() + " =? AND "
-                        + DatabaseHelper.getColumnUserPass() + " =?;";
-        return (sqlUserFromEmailAndPass);
+        return "SELECT * FROM " + DatabaseHelper.getTableUser() + " WHERE "
+                + DatabaseHelper.getColumnUserEmail() + " =? AND "
+                + DatabaseHelper.getColumnUserPass() + " =?;";
     }
 
+    /* -------------------------------------- Comments --------------------------------------------- */
+
+    public static String sqlCommentFromUser(){
+        return "SELECT * FROM " + DatabaseHelper.getTableComments() + " WHERE "
+            + DatabaseHelper.getColumnCommentUserId() + " =?";
+    }
+
+    public static String sqlCommentFromRestaurant(){
+        return "SELECT * FROM " + DatabaseHelper.getTableComments() + " WHERE "
+            + DatabaseHelper.getColumnCommentRestaurantsId() + " =?";
+    }
+
+    public static String sqlCommentFromUserAndRestaurant(){
+        return "SELECT * FROM " + DatabaseHelper.getTableComments() + " WHERE "
+            + DatabaseHelper.getColumnCommentUserId() + " =? AND "
+            + DatabaseHelper.getColumnCommentRestaurantsId() + " =?";
+    }
+
+    public static String sqlDeleteComment(String userId, String restaurantId){
+        return DatabaseHelper.getColumnCommentUserId() + " = " + userId + " AND "
+                + DatabaseHelper.getColumnCommentRestaurantsId() + " = " + restaurantId + ";";
+    }
+
+    /* ----------------------------------------------------------------------------------------------------- */
+
     public static String sqlSearchFromLoggedUser() {
-        String sqlSearchFromLoggedUser =
-                "SELECT " + DatabaseHelper.getColumnUserLoggedId() + " FROM " + DatabaseHelper.getTableUserLogged() + ";";
-        return (sqlSearchFromLoggedUser);
+        return "SELECT " + DatabaseHelper.getColumnUserLoggedId() + " FROM " + DatabaseHelper.getTableUserLogged() + ";";
     }
 
     public static String sqlGetAllUsers(){
-        String sqlGetAllUsers = "SELECT * FROM " + DatabaseHelper.getTableUser();
-        return sqlGetAllUsers;
+        return "SELECT * FROM " + DatabaseHelper.getTableUser();
     }
 
-    public static String getAllRestaurants(){
-        String sqlGetAllRestaurants = "SELECT * FROM " + DatabaseHelper.getTableRestaurants();
-        return sqlGetAllRestaurants;
+    public static String sqlGetAllRestaurants(){
+        return "SELECT * FROM " + DatabaseHelper.getTableRestaurants();
+    }
+
+    public static String sqlGetAllPreferences(){
+        return "SELECT * FROM " + DatabaseHelper.getTablePreferences();
+    }
+
+    public static String sqlGetAllRating(){
+        return "SELECT * FROM " + DatabaseHelper.getTableRating();
+    }
+
+    public static String sqlGetAllImagesFromRestaurants(){
+        return "SELECT * FROM " + DatabaseHelper.getTableRestaurantPhotos() + " WHERE "
+                + DatabaseHelper.getColumnRestaurantId() + " =?";
+    }
+
+    public static String sqlGetRestaurantFromId(){
+        return "SELECT * FROM " + DatabaseHelper.getTableRestaurants() + " WHERE "
+                + DatabaseHelper.getColumnRestaurantId() + " =?";
+    }
+
+    public static String getPreferencesFromUser(){
+        return "SELECT * FROM " + DatabaseHelper.getTablePreferences() + " WHERE "
+                + DatabaseHelper.getColumnPreferencesUserId() + " =?";
+    }
+
+    public static String sqlGetRatingFromRestaurantAndUser(){
+        return "SELECT * FROM " + DatabaseHelper.getTableRating() + " WHERE "
+                + DatabaseHelper.getColumnRatingRestaurantId() + "=? AND "
+                + DatabaseHelper.getColumnRatingUserId() + "=?;";
+    }
+
+    public static String sqlGetAllRatingsFromUser(){
+        return "SELECT * FROM " + DatabaseHelper.getTableRating() + " WHERE "
+                + DatabaseHelper.getColumnRatingUserId() + "=?";
+    }
+
+    public static String getMediaRatingFood(){
+        return "SELECT AVG("+ DatabaseHelper.getColumnRatingFood() +") FROM "
+                + DatabaseHelper.getTableRating() + " WHERE "
+                + DatabaseHelper.getColumnRatingRestaurantId() + "=?";
+    }
+
+    public static String getMediaRatingPrice(){
+        return "SELECT AVG("+ DatabaseHelper.getColumnRatingPrice() +") FROM "
+                + DatabaseHelper.getTableRating() + " WHERE "
+                + DatabaseHelper.getColumnRatingRestaurantId() + "=?";
+    }
+
+    public static String getMediaRatingService(){
+        return "SELECT AVG("+ DatabaseHelper.getColumnRatingService() +") FROM "
+                + DatabaseHelper.getTableRating() + " WHERE "
+                + DatabaseHelper.getColumnRatingRestaurantId() + "=?";
+    }
+
+    public static String getMediaRatingAmbiance(){
+        return "SELECT AVG("+ DatabaseHelper.getColumnRatingAmbiance() +") FROM "
+                + DatabaseHelper.getTableRating() + " WHERE "
+                + DatabaseHelper.getColumnRatingRestaurantId() + "=?";
+    }
+
+    public static String sqlGetAllEvents(){
+        return "SELECT * FROM " + DatabaseHelper.getTableEvents();
+    }
+
+    public static String sqlGetAllEventsFromUser(){
+        return "SELECT * FROM " + DatabaseHelper.getTableEvents() + " WHERE "
+                + DatabaseHelper.getColumnEventsUserId() + "=?";
     }
 }

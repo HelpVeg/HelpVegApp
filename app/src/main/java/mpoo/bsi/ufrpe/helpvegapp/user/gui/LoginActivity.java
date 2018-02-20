@@ -10,22 +10,30 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import mpoo.bsi.ufrpe.helpvegapp.R;
-import mpoo.bsi.ufrpe.helpvegapp.restaurant.business.RestaurantBusiness;
+import mpoo.bsi.ufrpe.helpvegapp.restaurant.gui.MapsActivity;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.Md5;
 import mpoo.bsi.ufrpe.helpvegapp.user.business.UserBusiness;
 import mpoo.bsi.ufrpe.helpvegapp.user.domain.User;
-import mpoo.bsi.ufrpe.helpvegapp.user.persistence.UserDAO;
+/**
+ * <h1>LoginActivity</h1>
+ * Acitvity responsavel por implementar a funcionalidade de login.
+ */
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
     private ViewHolder mViewHolder = new ViewHolder();
     Md5 md5 = new Md5();
 
+    /**
+     * O metodo onCreate() seta o layout: activity_login e setar os
+     * EditTexts e Buttons do layout para cada atributo da classe
+     * @see LoginActivity#checkSession()
+     * @param savedInstanceState Um objeto da classe Bundle que contem o estado anterior da activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        new RestaurantBusiness().viewRestaurants();
         checkSession();
 
         this.mViewHolder.editEmail = findViewById(R.id.loginEmail);
@@ -37,6 +45,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         this.mViewHolder.navToRegister.setOnClickListener(this);
     }
 
+    /**
+     * O metodo recupera o usuario da sessao e inicia o maps
+     */
+
     public void checkSession(){
         UserBusiness userBusiness = new UserBusiness();
         if (userBusiness.recoverSession()){
@@ -46,6 +58,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    /**
+     * O método onClick() recebe o id recebido pela view que é comparado com os ids do botao register e navRegister
+     * caso o id seja igual ao do botao de registrar é iniciado a MapsActivity, se for igual ao navRegister
+     * é iniciada a RegisterActivity
+     * @param view  Recebe o que foi observado na view
+     */
     @Override
     public void onClick(View view) {
         int id = view.getId();
@@ -62,6 +80,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             finish();
         }
     }
+
+    /**
+     *O metodo login() verifica valida os campos com o metodo validateFields(), criptografa a senha inserida
+     * no editText e verifica se o email inserido no editText e a senha ja criptografada estao corretas.
+     * @return Se o login foi efetuado com sucesso e retornado true, senao e retornado falso para login invalido
+     */
 
     public boolean login(){
         boolean loginFiedls = false;
@@ -82,6 +106,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         return loginFiedls;
     }
 
+    /**
+     * O metodo validateFields() recebe o email e password do editText e verifica se os campos estao vazios
+     * @return Retorna true se os campos estiverem preenchidos, e falso se algum dos campos estiver vazio
+     */
     public boolean validateFields(){
         String email = mViewHolder.editEmail.getText().toString();
         String password = mViewHolder.editPassword.getText().toString();

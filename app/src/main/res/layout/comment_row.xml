@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageProfileCard"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_margin="8dp"
+        android:src="@mipmap/user_default"
+        android:padding="8dp" />
+
+    <TextView
+        android:id="@+id/nameProfileCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageProfileCard"
+        android:layout_marginTop="13dp"
+        android:layout_toEndOf="@+id/imageProfileCard"
+        android:text="name"
+        android:textAllCaps="true"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/commentCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/nameProfileCard"
+        android:layout_below="@+id/nameProfileCard"
+        android:layout_marginTop="10dp"
+        android:text="comment" />
+
+</RelativeLayout>
+
+

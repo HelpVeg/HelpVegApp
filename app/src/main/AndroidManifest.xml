@@ -2,11 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="mpoo.bsi.ufrpe.helpvegapp">
 
-    <!--
-         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
-         Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality. 
-    -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="com.example.barcodelibrary.permission.MAPS_RECEIVE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -31,14 +26,12 @@
         <activity android:name=".user.gui.RegisterActivity" />
         <activity android:name=".user.gui.ProfileActivity" />
         <activity android:name=".user.gui.EditProfileActivity" />
-        <!--
-             The API key for Google Maps-based APIs is defined as a string resource.
-             (See the file "res/values/google_maps_api.xml").
-             Note that the API key is linked to the encryption key used to sign the APK.
-             You need a different API key for each encryption key, including the release key that is used to
-             sign the APK for publishing.
-             You can define the keys for the debug and release targets in src/debug/ and src/release/. 
-        -->
+        <activity android:name=".restaurant.gui.RestaurantActivity" />
+        <activity android:name=".restaurant.gui.MapsActivity" />
+        <activity android:name=".user.gui.EditPasswordActivity" />
+        <activity android:name=".evaluation.gui.CommentActivity" />
+        <activity android:name=".restaurant.gui.GalleryActivity" />
+        <activity android:name=".evaluation.gui.IndicationsActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -48,10 +41,9 @@
             android:name="com.google.android.maps"
             android:required="true" />
 
-        <activity
-            android:name=".user.gui.MapsActivity"
-            android:label="@string/title_activity_maps" />
-        <activity android:name=".user.gui.EditPasswordActivity"></activity>
+        <activity android:name=".user.gui.PreferencesActivity" />
+        <activity android:name=".event.gui.ListEventActivity" />
+        <activity android:name=".event.gui.EventActivity" />
     </application>
 
 </manifest>
