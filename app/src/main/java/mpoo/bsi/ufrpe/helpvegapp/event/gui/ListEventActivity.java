@@ -11,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionMenu;
 
@@ -96,8 +95,8 @@ public class ListEventActivity extends AppCompatActivity implements View.OnClick
                 event.setUserEvent(new UserBusiness().getUserFromSession());
                 event.setNameEvent(eventName.getText().toString());
                 event.setDescriptionEvent(eventDescription.getText().toString());
-                eventAdapter.insertItem(event);
                 eventBusiness.insertEvent(event);
+                eventAdapter.insertItem(event);
             }
         });
         builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {

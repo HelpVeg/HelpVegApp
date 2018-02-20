@@ -75,8 +75,8 @@ public class DatabaseHelper extends SQLiteOpenHelper{
     // ---------------------------- Events Table --------------------------------
     private static final String TABLE_EVENTS = "events";
     private static final String COLUMN_EVENTS_ID = "events_id";
-    private static final String COLUMN_EVENTS_USER_ID = "events_name";
-    private static final String COLUMN_EVENTS_NAME = "events_user_id";
+    private static final String COLUMN_EVENTS_USER_ID = "events_user_id";
+    private static final String COLUMN_EVENTS_NAME = "events_name";
     private static final String COLUMN_EVENTS_DESCRIPTION = "events_description";
 
     // ----------------------------- User getters -----------------------------

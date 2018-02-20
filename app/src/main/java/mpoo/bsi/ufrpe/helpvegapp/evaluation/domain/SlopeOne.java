@@ -50,36 +50,10 @@ public class SlopeOne {
                 predictList.add(predict);
             }
         }
-        ArrayList<Predict> sortedPredictList = quickSort(predictList,0,predictList.size()-1);
-        Collections.reverse(sortedPredictList);
-        return sortedPredictList;
+        Collections.sort(predictList);
+        Collections.reverse(predictList);
+        return predictList;
     }
-
-
-    private ArrayList<Predict> quickSort(ArrayList<Predict> predict , int from, int to){
-        if (from < to) {
-            int left = from + 1;
-            int right = to;
-            Predict pivotValue = predict.get(from);
-            while (left <= right) {
-                while (left <= to && pivotValue.getPredict() >= predict.get(left).getPredict()) {
-                    left++;
-                }
-                while (right > from && pivotValue.getPredict() < predict.get(right).getPredict()) {
-                    right--;
-                }
-                if (left < right) {
-                    Collections.swap(predict, left, right);
-                }
-            }
-            Collections.swap(predict, from, left - 1);
-            quickSort(predict, from, right - 1);
-            quickSort(predict, right + 1, to);
-        }
-        return predict;
-    }
-
-
 
     private void getAllRatings(){
         for(User user: allUsers){
