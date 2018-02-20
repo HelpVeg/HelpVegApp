@@ -43,12 +43,12 @@ public class EventActivity extends AppCompatActivity implements View.OnClickList
         int id = view.getId();
         if(id == R.id.btnEditEvent){
             openEventDialog();
-        }if(id == R.id.btnDeleteEvent){
+        }
+        if(id == R.id.btnDeleteEvent){
             eventBusiness.deleteEvent(eventBusiness.getEventFromSession());
             Intent intent = new Intent(this, ListEventActivity.class);
             startActivity(intent);
             finish();
-
         }
     }
 
